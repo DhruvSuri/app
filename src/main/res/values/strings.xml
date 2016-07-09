@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">azazte</string>
+        <string name="title_activity_main">MainActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="google_app_id">527444607031</string>
+
+
+    <string name="action_settings">Settings</string>
+      <string name="newsinfo">In March 2013 Cyprus made global headlines as a result of the
+    unprecedented bail-out agreement with the “Troika” (European Commission, European Central Bank
+    and the International Monetary Fund) in an attempt to avoid a disorderly default. In spite of
+    the challenges created by this agreement " </string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+
+          <item>Call Us</item>
+          <item>Mail</item>
+
+        <item>Instructions</item>
+        <item>Tell A Friend</item>
+        <item> Rate This App</item>
+        <item>About Us</item>
+        <item>Notifications</item>
+    </string-array>
+
+
+        <string name="title_activity_about_">About_Activity</string>
+
+
+
+
+    <string name="about">
+      We cater to your need to stay updated in the select domains of Economy, Finance, Business, Tax and Law in 70 words!
+We curate, summarise and simplify, latest updates from your trusted economy and related news sources in under 70 words.
+Now save your time and effort while you learn to save your money.
+Stay up to speed with the latest developments in these domains.
+Allocate your time and attention to relevant, sharp and quality content.
+    </string>
+    <string name="second">Choose 5 minutes from your day to visit Azazte and you are "updated, informed, educated"
+Life is simple and so is Azazte!</string>
+    <string name="last">Happy Reading!</string>
+    </resources>
+
+
+

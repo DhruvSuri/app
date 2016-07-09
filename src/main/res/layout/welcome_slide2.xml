@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#41172a">
+    <!--
+<LinearLayout
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_centerInParent="true"
+  android:gravity="center_horizontal"
+  android:orientation="vertical"
+  android:id="@+id/linearLayout2">
+
+  <ImageView
+      android:layout_width="80dp"
+      android:layout_height="120dp"
+      android:src="@drawable/trusted" />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Trusted"
+      android:textColor="@android:color/white"
+      android:textSize="@dimen/slide_title"
+      android:textStyle="bold" />
+
+</LinearLayout>
+
+<TextView
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:textAppearance="?android:attr/textAppearanceMedium"
+  android:text="Selected from popular, reliable, established and widely read sources"
+  android:id="@+id/textView11"
+  android:layout_below="@+id/linearLayout2"
+  android:layout_centerHorizontal="true"
+  android:textColor="#ffffff"
+  android:gravity="center_horizontal"
+  android:padding="5dp" />
+-->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView6"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/screen3" />
+</RelativeLayout>
