@@ -20,6 +20,10 @@
         android:orderInCategory="100" app:showAsAction="never"
         android:checkable="true" />
 
+    <item android:icon="@drawable/bell" android:id="@+id/newUi" android:title="new UI"
+        android:orderInCategory="100" app:showAsAction="never"
+        android:checkable="true" />
+
 
     <item
         android:title="Help Us Improve"

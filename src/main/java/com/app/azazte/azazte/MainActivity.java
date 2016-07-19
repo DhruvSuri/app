@@ -201,6 +201,11 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(i);
                                 Drawer.closeDrawers();
                                 return true;
+                            case R.id.newUi:
+                                Intent intent = new Intent(getBaseContext(), NewUI.class);
+                                startActivity(intent);
+                                Drawer.closeDrawers();
+                                return true;
                             case R.id.taf:
                                 Intent taf = new Intent();
                                 taf.setAction(Intent.ACTION_SEND);
