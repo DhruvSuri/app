@@ -19,6 +19,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.app.azazte.azazte.Beans.NewsCard;
+import com.app.azazte.azazte.animation.DepthTransform;
+import com.app.azazte.azazte.animation.ZoomTransformer;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.NewscardFragment;
 
@@ -39,7 +41,12 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
+
+
         setContentView(R.layout.activity_new_ui);
+
+
 
         setupViewPager();
     }
@@ -47,8 +54,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     private void setupViewPager() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager.setPageTransformer(true, new DepthTransform());
         setupViewPager(viewPager);
-
 
     }
 

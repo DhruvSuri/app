@@ -3,7 +3,9 @@
     android:alpha="20"
     style="@style/Base.TextAppearance.AppCompat.Body1"
     android:id="@+id/newsc"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="5dp"
+    android:background="#000">
 
 
     <LinearLayout
@@ -14,7 +16,7 @@
         android:id="@+id/top"
         android:visibility="gone"
         android:layout_alignParentTop="true"
-        android:background="#343230">
+        android:background="@drawable/curved">
 
         <ImageView
             android:layout_width="35dp"
@@ -48,7 +50,6 @@
         android:layout_height="270dp"
         android:id="@+id/imageView2"
         android:src="@drawable/image1"
-        android:background="#000000"
         android:scaleType="fitXY"
         android:layout_below="@+id/top"
         android:padding="8dp"
@@ -73,7 +74,7 @@
         android:padding="10dp"
         android:textSize="25sp"
         android:typeface="sans"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView2"
@@ -99,7 +100,8 @@
         android:paddingRight="4dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="5dp"
+        android:textColor="#ffffff" />
 
     <ImageButton
         android:layout_width="30dp"
@@ -116,7 +118,8 @@
         android:layout_marginBottom="5dp"
         android:cropToPadding="false"
         android:padding="2dp"
-        android:elevation="0dp" />
+        android:elevation="0dp"
+        android:contentDescription="share" />
 
 
     <TextView
@@ -128,7 +131,7 @@
         android:textColor="#c94144"
         android:textSize="14sp"
         android:paddingLeft="10dp"
-        android:layout_below="@+id/playstore"
+        android:layout_below="@+id/newstxt"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"></TextView>
 
@@ -177,28 +180,6 @@
         android:layout_alignRight="@+id/author"
         android:layout_alignEnd="@+id/author" />
 
-    <ImageButton
-        android:layout_width="75dp"
-        android:layout_height="25dp"
-        android:id="@+id/playstore"
-        android:src="@drawable/playstore"
-        android:scaleType="fitXY"
-        android:background="#00ffffff"
-        android:visibility="invisible"
-        android:layout_alignRight="@+id/bookmark"
-        android:layout_alignEnd="@+id/bookmark"
-        android:layout_below="@+id/impact_box" />
-
-
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:id="@+id/heart"
-        android:src="@drawable/heart"
-        android:scaleType="fitXY"
-        android:visibility="visible"
-        android:layout_alignTop="@+id/moreAt"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -209,9 +190,9 @@
         android:textColor="#0c0c0c"
         android:textSize="12sp"
         android:paddingLeft="10dp"
-        android:layout_alignBottom="@+id/playstore"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></TextView>
+        android:layout_below="@+id/newsSource"
+        android:layout_alignRight="@+id/date"
+        android:layout_alignEnd="@+id/date"></TextView>
 
     <TextView
         android:layout_width="wrap_content"
@@ -219,20 +200,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="75"
         android:id="@+id/likes"
-        android:layout_alignBottom="@+id/heart"
-        android:layout_toRightOf="@+id/heart"
         android:layout_marginBottom="4dp"
-        android:visibility="gone" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Discuss"
-        android:id="@+id/discuss"
-        android:layout_alignBottom="@+id/heart"
-        android:layout_alignRight="@+id/share"
-        android:layout_alignEnd="@+id/share" />
+        android:visibility="gone"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

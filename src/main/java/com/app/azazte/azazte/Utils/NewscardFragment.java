@@ -1,5 +1,6 @@
 package com.app.azazte.azazte.Utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.azazte.azazte.Beans.NewsCard;
@@ -36,6 +42,8 @@ public class NewscardFragment extends Fragment {
     private String mParam2;
 
     NewsCard newsCard;
+
+    Animation slideup;
 
     private OnFragmentInteractionListener mListener;
 
@@ -78,17 +86,27 @@ public class NewscardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
+        slideup = AnimationUtils.loadAnimation(getContext()   ,
+                R.anim.slidedown);
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
         TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.date);
         TextView author = (TextView) inflate.findViewById(R.id.author);
-
+        ImageView option = (ImageView) inflate.findViewById(R.id.options);
         newshead.setText(newsCard.newsHead);
         newstxt.setText(newsCard.newsBody);
         newsSource.setText(newsCard.newsSourceName);
         date.setText(newsCard.date);
         author.setText(newsCard.author);
+
+
+        option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOverLay();
+            }
+        });
 
         return inflate;
 
@@ -132,4 +150,25 @@ public class NewscardFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void showOverLay() {
+
+        final Dialog dialog = new Dialog(getContext(),R.style.DialogAnimation);
+
+        dialog.setContentView(R.layout.option_dialog);
+        //   final ImageView help = (ImageView) dialog.findViewById(R.id.help);
+        final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.overlay_layout);
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+
 }
