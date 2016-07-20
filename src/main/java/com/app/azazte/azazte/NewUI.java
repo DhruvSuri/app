@@ -73,14 +73,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         adapter.addFrag(new NewscardFragment(), "");
       viewPager.setAdapter(adapter);
 
-
-
-
-
-
-
-
-
     }
 
 
