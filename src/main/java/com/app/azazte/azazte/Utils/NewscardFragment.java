@@ -35,26 +35,17 @@ public class NewscardFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    NewsCard newsCard;
+
     private OnFragmentInteractionListener mListener;
 
     public NewscardFragment() {
         // Required empty public constructor
     }
 
-    public NewscardFragment(String id) {
-
-
-        this.id = id ;
-
-
-
+    public NewscardFragment(NewsCard newsCard) {
+        this.newsCard = newsCard;
     }
-
-
-
-
-
-
 
     /**
      * Use this factory method to create a new instance of
@@ -86,26 +77,20 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
+        TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
+        TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
+        TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
+        TextView date = (TextView) inflate.findViewById(R.id.date);
+        TextView author = (TextView) inflate.findViewById(R.id.author);
 
+        newshead.setText(newsCard.newsHead);
+        newstxt.setText(newsCard.newsBody);
+        newsSource.setText(newsCard.newsSourceName);
+        date.setText(newsCard.date);
+        author.setText(newsCard.author);
 
-     //  NewsCard newsCard = Connector.getInstance().getNewsById(id);
-
-     //  TextView newshead = (TextView) getView().findViewById(R.id.headtxt);
-     //  TextView newstxt = (TextView) getView().findViewById(R.id.newstxt);
-     //  TextView newsSource = (TextView) getView().findViewById(R.id.newsSource);
-     //  TextView date = (TextView) getView().findViewById(R.id.date);
-     //  TextView impact = (TextView) getView().findViewById(R.id.impactTxt);
-     //  TextView author = (TextView) getView().findViewById(R.id.author);
-
-     //  newshead.setText(newsCard.newsHead);
-     //  newstxt.setText(newsCard.newsBody);
-     //  newsSource.setText(newsCard.newsSourceName);
-     //  date.setText(newsCard.date);
-     //  impact.setText(newsCard.impact);
-     //  author.setText(newsCard.author);
-
-        return inflater.inflate(R.layout.fragment_newscard, container, false);
+        return inflate;
 
     }
 
@@ -138,7 +123,7 @@ public class NewscardFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

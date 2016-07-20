@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.app.azazte.azazte.Beans.NewsCard;
+import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.NewscardFragment;
 
 import java.util.ArrayList;
@@ -28,30 +30,18 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private ViewPagerAdapter adapter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_new_ui);
 
         setupViewPager();
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -66,21 +56,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-
-
-      adapter.addFrag(new NewscardFragment(), "");
-        adapter.addFrag(new NewscardFragment(), "");
-        adapter.addFrag(new NewscardFragment(), "");
-      viewPager.setAdapter(adapter);
-
-
-
-
-
-
-
-
-
+        ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
+        for (NewsCard newsCard : allNews) {
+            adapter.addFrag(new NewscardFragment(newsCard));
+        }
+        viewPager.setAdapter(adapter);
     }
 
 
@@ -92,7 +72,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+        private final List<NewsCard> mFragmentTitleList = new ArrayList<>();
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
@@ -108,14 +88,14 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             return mFragmentList.size();
         }
 
-        public void addFrag(Fragment fragment, String title) {
+        public void addFrag(Fragment fragment) {
             mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+            //mFragmentTitleList.add(newsCard);
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            return mFragmentTitleList.get(position);
+//        }
     }
 }

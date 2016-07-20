@@ -35,7 +35,7 @@
             android:id="@+id/topTxt"
             android:textColor="#ffffff"
             android:textSize="12sp"
-            android:padding="1dp"
+            android:padding="10dp"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
             android:visibility="visible"
@@ -51,9 +51,9 @@
         android:background="#000000"
         android:scaleType="fitXY"
         android:layout_below="@+id/top"
+        android:padding="8dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:elevation="0dp" />
+        android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="0dp"
@@ -70,7 +70,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="This is news heading in two line"
         android:id="@+id/headtxt"
-        android:padding="2dp"
+        android:padding="10dp"
         android:textSize="25sp"
         android:typeface="sans"
         android:textColor="#000000"
@@ -78,10 +78,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView2"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="2dp"
-        android:paddingTop="0dp"
-        android:layout_marginTop="2dp" />
+        android:paddingRight="5dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -203,34 +200,6 @@
         android:layout_alignTop="@+id/moreAt"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/newstxt"
-        android:id="@+id/impact_box"
-        android:visibility="visible">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="&quot;To bring greater transparency .The income tax databy Delhi released has become the talk&quot;"
-            android:id="@+id/impactTxt"
-            android:textColor="#ffffff"
-            android:background="@drawable/bar2"
-            android:textSize="11sp"
-            android:gravity="center_horizontal"
-            android:elevation="10dp"
-            android:visibility="visible"
-            android:typeface="serif"
-            android:textStyle="bold|italic"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp" />
-
-    </LinearLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -267,6 +236,3 @@
 
 
 </RelativeLayout>
-
-
-
