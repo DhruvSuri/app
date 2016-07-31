@@ -12,14 +12,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.azazte.azazte.Beans.NewsCard;
 
-import com.app.azazte.azazte.Database.Connector;
-
+import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
@@ -33,7 +31,7 @@ public class NewscardFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     Picasso picasso;
 
-    public NewscardFragment(NewsCard newsCard,Context applicationContext) {
+    public NewscardFragment(NewsCard newsCard, Context applicationContext) {
         this.newsCard = newsCard;
     }
 
@@ -45,11 +43,11 @@ public class NewscardFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
-        slideup = AnimationUtils.loadAnimation(getContext()   ,
-                R.anim.slidedown);
+        slideup = AnimationUtils.loadAnimation(getContext(),
+                R.anim.slideup);
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
         TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
@@ -58,7 +56,7 @@ public class NewscardFragment extends Fragment {
         ImageView option = (ImageView) inflate.findViewById(R.id.options);
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
 
-        setImageIntoView(picasso,image,newsCard.imageUrl);
+        setImageIntoView(picasso, image, newsCard.imageUrl);
         newshead.setText(newsCard.newsHead);
         newstxt.setText(newsCard.newsBody);
         newsSource.setText(newsCard.newsSourceName);
@@ -66,11 +64,19 @@ public class NewscardFragment extends Fragment {
         author.setText(newsCard.author);
 
 
+        newstxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((NewUI) getActivity()).showTopBar();
 
+            }
+        });
         option.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showOverLay();
+
+                showOptionsOverLay();
+
             }
         });
 
@@ -107,7 +113,7 @@ public class NewscardFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
@@ -117,13 +123,16 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showOverLay() {
+    public void showOptionsOverLay() {
 
-        final Dialog dialog = new Dialog(getContext(),R.style.DialogAnimation);
+        final Dialog dialog = new Dialog(getContext(), R.style.DialogAnimation);
 
         dialog.setContentView(R.layout.option_dialog);
-        //   final ImageView help = (ImageView) dialog.findViewById(R.id.help);
-        final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.overlay_layout);
+        final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
+        RelativeLayout tray = (RelativeLayout) dialog.findViewById(R.id.overlay_layout);
+
+        tray.startAnimation(slideup);
+
 
         layout.setOnClickListener(new View.OnClickListener() {
             @Override

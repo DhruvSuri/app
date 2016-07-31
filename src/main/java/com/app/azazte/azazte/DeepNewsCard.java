@@ -26,7 +26,7 @@ public class DeepNewsCard extends AppCompatActivity {
 
 
         slide = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.slidedown);
+                R.anim.fadein);
 
         Intent myIntent = getIntent();
         String deepNewsid = myIntent.getStringExtra("id");

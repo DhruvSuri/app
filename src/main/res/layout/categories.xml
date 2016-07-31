@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e2000000"
+    android:id="@+id/bottom_sheet"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <GridLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:id="@+id/categories"
+        android:layout_height="wrap_content"
+        android:background="#00e14242"
+        android:rowCount="4"
+        android:columnCount="2"
+        android:layout_margin="30dp"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#60eb4949">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:id="@+id/bookmark"
+                android:src="@drawable/bookmark"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#8300bcd4">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:id="@+id/rulings"
+                android:src="@drawable/news"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#6c009688">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:id="@+id/law"
+                android:src="@drawable/news"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#694caf50">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:id="@+id/finace"
+                android:src="@drawable/news"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#81ffee58">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:id="@+id/tax"
+                android:src="@drawable/news"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#71e91e63">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:id="@+id/business"
+                android:src="@drawable/news"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#46607d8b">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:id="@+id/economy"
+                android:src="@drawable/news"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#773f51b5">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:id="@+id/allNews"
+                android:src="@drawable/news"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+
+    </GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Categories"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/categories"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

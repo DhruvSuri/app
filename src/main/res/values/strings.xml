@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">azazte</string>
-        <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">MainActivity</string>
 
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -16,7 +16,7 @@
     and the International Monetary Fund) in an attempt to avoid a disorderly default. In spite of
     the challenges created by this agreement " </string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
@@ -31,12 +31,11 @@
     <string name="drawer_close">Close</string>
 
 
-
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
 
-          <item>Call Us</item>
-          <item>Mail</item>
+        <item>Call Us</item>
+        <item>Mail</item>
 
         <item>Instructions</item>
         <item>Tell A Friend</item>
@@ -46,7 +45,7 @@
     </string-array>
 
 
-        <string name="title_activity_about_">About_Activity</string>
+    <string name="title_activity_about_">About_Activity</string>
 
 
 
@@ -61,7 +60,7 @@ Allocate your time and attention to relevant, sharp and quality content.
     <string name="second">Choose 5 minutes from your day to visit Azazte and you are "updated, informed, educated"
 Life is simple and so is Azazte!</string>
     <string name="last">Happy Reading!</string>
-    </resources>
+</resources>
 
 
 

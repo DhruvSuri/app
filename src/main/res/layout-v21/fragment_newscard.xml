@@ -18,7 +18,7 @@
 
         <ImageView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="240dp"
         android:id="@+id/imageView2"
         android:src="@drawable/image1"
         android:scaleType="fitXY"
@@ -82,7 +82,8 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/likes"
         android:layout_toEndOf="@+id/likes"
-        android:paddingLeft="5dp"></TextView>
+        android:paddingLeft="7dp"
+        android:paddingBottom="3dp"></TextView>
 
     <TextView
         android:layout_width="80dp"
@@ -129,12 +130,12 @@
         android:text="More At : "
         android:id="@+id/moreAt"
         android:textColor="#797979"
-        android:textSize="12sp"
+        android:textSize="8sp"
         android:layout_above="@+id/newsSource"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
         android:layout_alignLeft="@+id/newsSource"
-        android:paddingLeft="5dp"></TextView>
+        android:paddingLeft="7dp"></TextView>
 
     <TextView
         android:layout_width="wrap_content"
@@ -175,13 +176,13 @@
             android:background="#616161"
             android:layout_width = "match_parent"
             android:layout_height="1dp"
-            android:layout_alignTop="@+id/author"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_above="@+id/author"
+            android:layout_alignLeft="@+id/relativeLayout"
+            android:layout_alignStart="@+id/relativeLayout" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/options"
             android:src="@drawable/more"
             android:scaleType="fitXY"

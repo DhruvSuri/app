@@ -17,7 +17,7 @@ public class DepthTransform implements ViewPager.PageTransformer {
             view.setAlpha(0);
 
         } else if (position <= 0) { // [-1,0]
-            // Use the default slidedown transition when moving to the left page
+            // Use the default fadein transition when moving to the left page
             view.setAlpha(1);
             view.setTranslationX(0);
             view.setScaleX(1);
@@ -27,7 +27,7 @@ public class DepthTransform implements ViewPager.PageTransformer {
             // Fade the page out.
             view.setAlpha(1 - position);
 
-            // Counteract the default slidedown transition
+            // Counteract the default fadein transition
             view.setTranslationX(pageWidth * -position);
 
             // Scale the page down (between MIN_SCALE and 1)

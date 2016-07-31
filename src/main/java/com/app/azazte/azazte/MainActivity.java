@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             //For commit the changes, Use either editor.commit(); or  editor.apply();.
             editor.commit();
 
-            //showOverLay();
+            //showOptionsOverLay();
         }
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);

@@ -19,7 +19,7 @@ public class ZoomTransformer implements ViewPager.PageTransformer {
             view.setAlpha(0);
 
         } else if (position <= 1) { // [-1,1]
-            // Modify the default slidedown transition to shrink the page as well
+            // Modify the default fadein transition to shrink the page as well
             float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
             float vertMargin = pageHeight * (1 - scaleFactor) / 2;
             float horzMargin = pageWidth * (1 - scaleFactor) / 2;

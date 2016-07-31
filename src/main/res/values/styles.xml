@@ -32,7 +32,7 @@
 
     <style name="DialogAnim">
         <item name="android:windowEnterAnimation">@anim/slideup</item>
-        <item name="android:windowExitAnimation">@anim/slidedown</item>
+        <item name="android:windowExitAnimation">@anim/fadein</item>
     </style>
 
 

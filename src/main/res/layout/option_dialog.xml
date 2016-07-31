@@ -2,8 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#93000000"
-    android:id="@+id/overlay_layout">
+    android:background="#a1000000"
+    android:id="@+id/parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/overlay_layout">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="60dp"
@@ -69,5 +73,6 @@
             android:background="#00ffffff" />
 
     </LinearLayout>
+        </RelativeLayout>
 
 </RelativeLayout>
