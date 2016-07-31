@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
 
         //ParseUtils.registerParse(this);
-        ParseAnalytics.trackAppOpenedInBackground(this.getIntent());
+        //ParseAnalytics.trackAppOpenedInBackground(this.getIntent());
         Connector.connector = new Connector(this);
         azUtils.setPicassoInstance(this);
         BookmarksFetcher.indexBookmarks();

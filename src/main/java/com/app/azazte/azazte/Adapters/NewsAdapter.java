@@ -46,8 +46,6 @@ public class NewsAdapter extends ArrayAdapter<NewsCard> {
         this.data = objects;
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
         picasso = new Picasso.Builder(context).build();
-        //picasso.setIndicatorsEnabled(true);
-        //picasso.setLoggingEnabled(true);
     }
 
 

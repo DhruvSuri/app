@@ -2,6 +2,7 @@ package com.app.azazte.azazte.Utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,65 +21,26 @@ import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 
 import com.app.azazte.azazte.R;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link NewscardFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link NewscardFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NewscardFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    public String id = null;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     NewsCard newsCard;
 
     Animation slideup;
 
     private OnFragmentInteractionListener mListener;
+    Picasso picasso;
 
-    public NewscardFragment() {
-        // Required empty public constructor
-    }
-
-    public NewscardFragment(NewsCard newsCard) {
+    public NewscardFragment(NewsCard newsCard,Context applicationContext) {
         this.newsCard = newsCard;
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewscardFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static NewscardFragment newInstance(String param1, String param2) {
-        NewscardFragment fragment = new NewscardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -94,11 +56,15 @@ public class NewscardFragment extends Fragment {
         TextView date = (TextView) inflate.findViewById(R.id.date);
         TextView author = (TextView) inflate.findViewById(R.id.author);
         ImageView option = (ImageView) inflate.findViewById(R.id.options);
+        ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
+
+        setImageIntoView(picasso,image,newsCard.imageUrl);
         newshead.setText(newsCard.newsHead);
         newstxt.setText(newsCard.newsBody);
         newsSource.setText(newsCard.newsSourceName);
         date.setText(newsCard.date);
         author.setText(newsCard.author);
+
 
 
         option.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +134,19 @@ public class NewscardFragment extends Fragment {
         });
 
         dialog.show();
+    }
+
+    private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
+
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Picasso.with(imageView.getContext().getApplicationContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.placeholder)
+                    .config(Bitmap.Config.RGB_565)
+                    .into(imageView);
+            //picasso.load(imageUrl).noFade().placeholder(R.drawable.placeholder).resize(300, 300).into(imageView);
+            //picasso.getSnapshot().dump();
+        }
     }
 
 

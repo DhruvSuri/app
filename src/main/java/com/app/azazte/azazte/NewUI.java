@@ -25,6 +25,7 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.NewscardFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
@@ -64,8 +65,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
+        Collections.reverse(allNews);
         for (NewsCard newsCard : allNews) {
-            adapter.addFrag(new NewscardFragment(newsCard));
+            adapter.addFrag(new NewscardFragment(newsCard,this.getApplicationContext()));
         }
         viewPager.setAdapter(adapter);
     }
