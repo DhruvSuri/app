@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             //throw new RuntimeException();
         } catch (Exception e) {
             //  Crashlytics.log("error");
-            emailAddress = "SoSorryNotFound";
+            emailAddress = "SoSorryNotFound ";
         }
 
         MixPanelUtils.track("Logged into main activity");
