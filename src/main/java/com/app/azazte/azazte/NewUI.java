@@ -37,6 +37,7 @@ import java.util.List;
 public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
 
     private ViewPagerAdapter adapter;
+    private ViewPager viewPager;
     private BottomSheetBehavior categoriesSheet;
     public RelativeLayout topBar;
     Animation fadeIn;
@@ -76,7 +77,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         });
 
 
-        setupViewPager();
+        setupViewPager(0);
     }
 
     private void setListeners() {
@@ -92,52 +93,44 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         allNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupNewsCards(adapter,0);
+                setupViewPager(0);
             }
         });
 
-        business.setOnClickListener(new View.OnClickListener(){
+        business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupNewsCards(adapter,1);
+                setupViewPager(1);
             }
         });
 
-        tax.setOnClickListener(new View.OnClickListener(){
+        tax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupNewsCards(adapter,2);
+                setupViewPager(2);
             }
         });
 
+        law.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupViewPager(3);
+            }
+        });
     }
 
 
-    private void setupViewPager() {
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-
-        viewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    private void setupViewPager(int category) {
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setPageTransformer(true, new DepthTransform());
-        setupViewPager(viewPager);
-
-    }
-
-
-    private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        setupNewsCards(adapter,0);
+        setupNewsCards(adapter, category);
         viewPager.setAdapter(adapter);
     }
 
     private void setupNewsCards(ViewPagerAdapter adapter, int category) {
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
         //Assuming we got the right category
-
         Collections.reverse(allNews);
         for (NewsCard newsCard : allNews) {
             int cardCategory;
@@ -146,10 +139,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             } catch (Exception e) {
                 cardCategory = 0;
             }
-            if (category == cardCategory){
+            if (category == cardCategory || category == 0) {
                 adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
             }
         }
+        adapter.notifyDataSetChanged();
     }
 
 
