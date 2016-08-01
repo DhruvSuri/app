@@ -80,13 +80,13 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     }
 
     private void setListeners() {
-        ImageView allNews = (ImageView) findViewById(R.id.allNews);
+        ImageView allNews = (ImageView) findViewById(R.id.allnews);
         ImageView business = (ImageView) findViewById(R.id.business);
         ImageView tax = (ImageView) findViewById(R.id.tax);
         ImageView law = (ImageView) findViewById(R.id.law);
-        ImageView finace = (ImageView) findViewById(R.id.finace);
+        ImageView finace = (ImageView) findViewById(R.id.finance);
         ImageView economy = (ImageView) findViewById(R.id.economy);
-        ImageView rulings = (ImageView) findViewById(R.id.rulings);
+        ImageView global = (ImageView) findViewById(R.id.global);
         ImageView bookmark = (ImageView) findViewById(R.id.bookmark);
 
         allNews.setOnClickListener(new View.OnClickListener() {
@@ -156,15 +156,17 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public void showTopBar() {
         if (topBar.getVisibility() == View.INVISIBLE) {
             topBar.setVisibility(View.VISIBLE);
+            topBar.startAnimation(fadeIn);
             topBar.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    topBar.startAnimation(fadeOut);
                     topBar.setVisibility(View.INVISIBLE);
                 }
-            },5000);
-            //topBar.startAnimation(fadeIn);
+            },10000);
+
         } else {
-            //topBar.startAnimation(fadeOut);
+         topBar.startAnimation(fadeOut);
             topBar.setVisibility(View.INVISIBLE);
         }
     }
@@ -198,9 +200,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             mFragmentList.add(fragment);
             //mFragmentTitleList.add(newsCard);
         }
-
-//        @Override
-//        public CharSequence getPageTitle(int position) {
+  //     @Override
+        // public CharSequence getPageTitle(int position) {
 //            return mFragmentTitleList.get(position);
 //        }
     }

@@ -22,7 +22,7 @@
         android:background="#9b000000"
         android:elevation="10dp"
         android:padding="5dp"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <ImageView
             android:layout_width="30dp"

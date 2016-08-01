@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e2000000"
+    android:background="#c3000000"
     android:id="@+id/bottom_sheet"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
@@ -13,11 +13,11 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:id="@+id/categories"
         android:layout_height="wrap_content"
-        android:background="#00e14242"
         android:rowCount="4"
         android:columnCount="2"
-        android:layout_margin="30dp"
-        android:layout_centerInParent="true">
+        android:layout_margin="50dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/round">
 
         <LinearLayout
             android:orientation="vertical"
@@ -28,15 +28,26 @@
             android:layout_columnSpan="1"
             android:padding="10dp"
             android:layout_columnWeight="1"
-            android:background="#60eb4949">
+            android:background="#60eb4949"
+            android:layout_rowWeight="1">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="80dp"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
                 android:id="@+id/bookmark"
-                android:src="@drawable/bookmark"
+                android:src="@drawable/bookmark2"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Bookmarks"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,13 +61,24 @@
             android:layout_columnWeight="1"
             android:background="#8300bcd4">
 
+
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:id="@+id/rulings"
-                android:src="@drawable/news"
+                android:layout_width="45dp"
+                android:layout_height="50dp"
+                android:id="@+id/global"
+                android:src="@drawable/global"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Global"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,13 +92,24 @@
             android:layout_columnWeight="1"
             android:background="#6c009688">
 
+
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:id="@+id/law"
-                android:src="@drawable/news"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/business"
+                android:src="@drawable/business"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Business &amp; Finance"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,13 +123,24 @@
             android:layout_columnWeight="1"
             android:background="#694caf50">
 
+
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:id="@+id/finace"
-                android:src="@drawable/news"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/finance"
+                android:src="@drawable/money"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="My Finance"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -110,13 +154,24 @@
             android:layout_columnWeight="1"
             android:background="#81ffee58">
 
+
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:id="@+id/tax"
-                android:src="@drawable/news"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/law"
+                android:src="@drawable/law"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Law"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -130,13 +185,24 @@
             android:layout_columnWeight="1"
             android:background="#71e91e63">
 
+
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:id="@+id/business"
-                android:src="@drawable/news"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/economy"
+                android:src="@drawable/economy"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Economy"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -151,12 +217,22 @@
             android:background="#46607d8b">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:id="@+id/economy"
-                android:src="@drawable/news"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:id="@+id/tax"
+                android:src="@drawable/tax"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Tax"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -170,13 +246,25 @@
             android:layout_columnWeight="1"
             android:background="#773f51b5">
 
+
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:id="@+id/allNews"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/allnews"
                 android:src="@drawable/news"
                 android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="All News"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
