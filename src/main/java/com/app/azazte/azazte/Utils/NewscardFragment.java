@@ -1,32 +1,45 @@
 package com.app.azazte.azazte.Utils;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.app.azazte.azazte.AzazteWebView;
 import com.app.azazte.azazte.Beans.NewsCard;
 
+import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Fetcher.BookmarksFetcher;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
+
+import static xdroid.core.Global.getContext;
+import static xdroid.core.Global.getResources;
 
 public class NewscardFragment extends Fragment {
 
     NewsCard newsCard;
 
     Animation slideup;
+    Animation slidedown;
 
     private OnFragmentInteractionListener mListener;
     Picasso picasso;
@@ -46,15 +59,26 @@ public class NewscardFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
+        View trayIcons = inflater.inflate(R.layout.option_dialog, container, false);
         slideup = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slideup);
+        slidedown = AnimationUtils.loadAnimation(getContext(),
+                R.anim.slidedown);
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
         TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.date);
+        TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
         ImageView option = (ImageView) inflate.findViewById(R.id.options);
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
+        final ImageView bookmark = (ImageView) inflate.findViewById(R.id.bookmark);
+
+        //option tray buttons
+        ImageButton share =(ImageButton) trayIcons.findViewById(R.id.share);
+        ImageButton whatsapp =(ImageButton) trayIcons.findViewById(R.id.whatsapp);
+        ImageButton facebook =(ImageButton) trayIcons.findViewById(R.id.facebook);
+        ImageButton twiter =(ImageButton) trayIcons.findViewById(R.id.twiter);
 
         setImageIntoView(picasso, image, newsCard.imageUrl);
         newshead.setText(newsCard.newsHead);
@@ -62,6 +86,66 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName);
         date.setText(newsCard.date);
         author.setText(newsCard.author);
+
+
+     moreAt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                MixPanelUtils.track(MixPanelUtils.ON_MORE_AT + newsCard.newsHead);
+                String url = newsCard.newsSourceUrl;
+                Intent intent = new Intent(getContext(), AzazteWebView.class);
+                intent.putExtra("url", url);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+
+
+            }
+        });
+
+        newsSource.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MixPanelUtils.track(MixPanelUtils.ON_MORE_AT + newsCard.newsHead);
+                String url = newsCard.newsSourceUrl;
+                Intent intent = new Intent(getContext(), AzazteWebView.class);
+                intent.putExtra("url", url);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+
+            }
+        });
+
+
+        bookmark.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+            @Override
+            public void onClick(View v) {
+                MixPanelUtils.track(MixPanelUtils.BOOKMARK + newsCard.newsHead);
+
+
+                if (!BookmarksFetcher.bookmarkSet.contains(newsCard.id)) {
+
+                    bookmark.setImageDrawable(getResources().getDrawable(R.drawable.bookmark));
+
+
+                    BookmarksFetcher.bookmarkSet.add(newsCard.id);
+                    Connector.connector.setBookmarked(newsCard.id);
+                } else {
+                    //  cardView.setCardBackgroundColor(255);
+
+
+                    bookmark.setImageDrawable(getResources().getDrawable(R.drawable.notbookmark));
+                    Connector.connector.unsetBookmarked(newsCard.id);
+                    //headView.setTextColor(getContext().getColor(R.color.colorPrimary));
+                    BookmarksFetcher.bookmarkSet.remove(newsCard.id);
+                    newsCard.isBookmarked = 0;
+                }
+               // BookmarksFetcher.refresh();
+            }
+        });
+
+
 
 
         newstxt.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +167,8 @@ public class NewscardFragment extends Fragment {
         return inflate;
 
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -129,15 +215,16 @@ public class NewscardFragment extends Fragment {
 
         dialog.setContentView(R.layout.option_dialog);
         final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
-        RelativeLayout tray = (RelativeLayout) dialog.findViewById(R.id.overlay_layout);
+        final RelativeLayout tray = (RelativeLayout) dialog.findViewById(R.id.overlay_layout);
 
         tray.startAnimation(slideup);
-
 
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                tray.startAnimation(slidedown);
+                tray.setVisibility(View.INVISIBLE);
                 dialog.dismiss();
             }
         });

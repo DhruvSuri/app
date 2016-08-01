@@ -148,20 +148,20 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
 
     public void showTopBar() {
-        if (topBar.getVisibility() == View.INVISIBLE) {
+        if (topBar.getVisibility() == View.GONE) {
             topBar.setVisibility(View.VISIBLE);
             topBar.startAnimation(fadeIn);
             topBar.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     topBar.startAnimation(fadeOut);
-                    topBar.setVisibility(View.INVISIBLE);
+                    topBar.setVisibility(View.GONE);
                 }
             },10000);
 
         } else {
          topBar.startAnimation(fadeOut);
-            topBar.setVisibility(View.INVISIBLE);
+            topBar.setVisibility(View.GONE);
         }
     }
 
