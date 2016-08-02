@@ -70,7 +70,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
-        setupViewPager(getIntent().getIntExtra("category",0));
+        setupViewPager(getIntent().getIntExtra("category", 0));
     }
 
     private void setListeners() {
@@ -174,20 +174,20 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
 
     public void showTopBar() {
-        if (topBar.getVisibility() == View.INVISIBLE) {
+        if (topBar.getVisibility() == View.GONE) {
             topBar.setVisibility(View.VISIBLE);
             topBar.startAnimation(fadeIn);
             topBar.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     topBar.startAnimation(fadeOut);
-                    topBar.setVisibility(View.INVISIBLE);
+                    topBar.setVisibility(View.GONE);
                 }
             }, 10000);
 
         } else {
             topBar.startAnimation(fadeOut);
-            topBar.setVisibility(View.INVISIBLE);
+            topBar.setVisibility(View.GONE);
         }
     }
 
@@ -232,7 +232,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         // TODO Auto-generated method stub
         super.onRestart();
         Intent intent = new Intent(this, NewUI.class);
-        intent.putExtra("category",categoryChosen);
+        intent.putExtra("category", categoryChosen);
         startActivity(intent);
         finish();
     }

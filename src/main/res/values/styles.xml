@@ -27,13 +27,9 @@
 
 
     <style name="DialogAnimation" parent="@android:style/Theme.Translucent.NoTitleBar">
-        <item name="android:windowAnimationStyle">@style/DialogAnim</item>
+
     </style>
 
-    <style name="DialogAnim">
-        <item name="android:windowEnterAnimation">@anim/slideup</item>
-        <item name="android:windowExitAnimation">@anim/fadein</item>
-    </style>
 
 
 
