@@ -2,47 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#41172a">
-    <!--
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+    android:background="#e605b3ce">
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="@dimen/img_width_height"
-                android:src="@drawable/news" />
+    <ImageView
+        android:layout_width="230dp"
+        android:layout_height="300dp"
+        android:src="@drawable/intro3"
+        android:scaleType="fitXY"
+        android:id="@+id/imageView5"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Relevant"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/slide_title"
-                android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:paddingLeft="@dimen/desc_padding"
-                android:paddingRight="@dimen/desc_padding"
-                android:text="Presented to be to the purpose"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/slide_desc"
-                android:id="@+id/rel" />
-
-        </LinearLayout>
-         -->
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView7"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/screen1" />
 </RelativeLayout>

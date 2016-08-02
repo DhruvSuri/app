@@ -70,7 +70,7 @@ public class NewscardFragment extends Fragment {
         TextView date = (TextView) inflate.findViewById(R.id.date);
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
-        ImageView option = (ImageView) inflate.findViewById(R.id.options);
+        ImageButton option = (ImageButton) inflate.findViewById(R.id.options);
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
         final ImageView bookmark = (ImageView) inflate.findViewById(R.id.bookmark);
 

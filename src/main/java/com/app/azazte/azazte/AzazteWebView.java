@@ -29,14 +29,14 @@ public class AzazteWebView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.pullinleft, R.anim.hold);
+       // overridePendingTransition(R.anim.pullinleft, R.anim.hold);
         setContentView(R.layout.activity_web_view);
         fab = (FloatingActionButton) findViewById(R.id.fab);
 //fab.setBackgroundColor(getColor(R.color.colorPrimaryDark));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                overridePendingTransition(R.anim.hold, R.anim.pullinright);
+
                 finish();
             }
         });
@@ -92,13 +92,22 @@ public class AzazteWebView extends AppCompatActivity {
 
     }
 
+
+
+
     @Override
     protected void onPause() {
         // Whenever this activity is paused (i.e. looses focus because another activity is started etc)
         // Override how this activity is animated out of view
         // The new activity is kept still and this activity is pushed out to the left
-        overridePendingTransition(R.anim.hold, R.anim.pullinright);
+      //  overridePendingTransition(R.anim.hold, R.anim.pullinright);
         super.onPause();
     }
 
+
+    @Override
+    public void finish() {
+
+        super.finish();
+    }
 }

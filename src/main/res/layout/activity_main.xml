@@ -1,27 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/DrawerLayout"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:elevation="7dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#242729"
+    android:layout_gravity="center"
+    android:id="@+id/lin_lay"
+    android:gravity="center"
+    android:orientation="vertical" >
 
-
-    <include layout="@layout/include_main"/>
-
-
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/logo">
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/menu_main"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:layout_centerInParent="true">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="FinSh"
+            android:id="@+id/textView8"
+            android:textSize="60sp"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
+        <ProgressBar android:indeterminate="true"
+        android:layout_width="40dp" android:layout_height="40dp"
+        android:id="@+id/marker_progress" style="?android:attr/progressBarStyle"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:backgroundTint="#ffffff"
+        android:progressBackgroundTint="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_alignBottom="@+id/textView8"
+            android:layout_toRightOf="@+id/textView8"
+            android:layout_marginBottom="2dp" />
 
-
-</android.support.v4.widget.DrawerLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="ts"
+            android:id="@+id/textView9"
+            android:textSize="60sp"
+            android:textColor="#ffffff"
+            android:layout_alignTop="@+id/textView8"
+            android:layout_toRightOf="@+id/marker_progress"
+            android:layout_toEndOf="@+id/marker_progress" />
+</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

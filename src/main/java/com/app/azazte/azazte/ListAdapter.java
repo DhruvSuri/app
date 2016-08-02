@@ -24,7 +24,6 @@ import com.app.azazte.azazte.Fetcher.BookmarksFetcher;
 import com.app.azazte.azazte.Fetcher.ImageFetcher;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.azUtils;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -86,15 +85,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 myViewHolder.itemView.findViewById(R.id.impact_box).setVisibility(View.VISIBLE);
                 if (sentiment == -1) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        myViewHolder.impactText.setBackground(ContextCompat.getDrawable(this.tabFragment.getContext(), R.drawable.bar3));
+                        myViewHolder.impactText.setBackground(ContextCompat.getDrawable(this.tabFragment.getContext(), R.drawable.greenbar));
                     } else {
-                        myViewHolder.impactText.setBackgroundDrawable(ContextCompat.getDrawable(this.tabFragment.getContext(), R.drawable.bar3));
+                        myViewHolder.impactText.setBackgroundDrawable(ContextCompat.getDrawable(this.tabFragment.getContext(), R.drawable.greenbar));
                     }
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        myViewHolder.impactText.setBackground(ContextCompat.getDrawable(this.tabFragment.getContext(), R.drawable.bar2));
+                        myViewHolder.impactText.setBackground(ContextCompat.getDrawable(this.tabFragment.getContext(), R.drawable.redbar));
                     } else {
-                        myViewHolder.impactText.setBackgroundDrawable(ContextCompat.getDrawable(this.tabFragment.getContext(), R.drawable.bar2));
+                        myViewHolder.impactText.setBackgroundDrawable(ContextCompat.getDrawable(this.tabFragment.getContext(), R.drawable.redbar));
                     }
                 }
             } else {
@@ -187,10 +186,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             public void onClick(View v) {
                 MixPanelUtils.track(MixPanelUtils.COMMENT);
                 String deepNewsid = String.valueOf(newsCard.id);
-                Intent i = new Intent(tabFragment.getContext(), DeepNewsCardActivity.class);
-                i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                i.putExtra("id", deepNewsid);
-                tabFragment.startActivity(i);
+             //   Intent i = new Intent(tabFragment.getContext(), DeepNewsCardActivity.class);
+             //   i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+               // i.putExtra("id", deepNewsid);
+                //tabFragment.startActivity(i);
             }
         });
 
@@ -199,10 +198,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             public void onClick(View v) {
                 MixPanelUtils.track(MixPanelUtils.COMMENT);
                 String deepNewsid = String.valueOf(newsCard.id);
-                Intent i = new Intent(tabFragment.getContext(), DeepNewsCardActivity.class);
-                i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                i.putExtra("id", deepNewsid);
-                tabFragment.startActivity(i);
+              //  Intent i = new Intent(tabFragment.getContext(), DeepNewsCardActivity.class);
+               // i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+               // i.putExtra("id", deepNewsid);
+               // tabFragment.startActivity(i);
             }
         });
 

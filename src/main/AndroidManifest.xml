@@ -62,10 +62,6 @@
             android:name=".MainActivity"
             android:label="azazte"
             android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".DeepNewsCardActivity"
-            android:label="azazte"
-            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".AzazteWebView"
@@ -102,5 +98,12 @@
             android:label="@string/title_activity_about_"></activity>
         <activity android:name=".NewUI"></activity>
     </application>
+
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true" />
 
 </manifest>

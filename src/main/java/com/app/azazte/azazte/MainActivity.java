@@ -3,10 +3,9 @@ package com.app.azazte.azazte;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
@@ -24,20 +23,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Fetcher.BookmarksFetcher;
 import com.app.azazte.azazte.Fetcher.ImageFetcher;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
-import com.app.azazte.azazte.Utils.Categories;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
-import com.app.azazte.azazte.Utils.ParseUtils;
-import com.app.azazte.azazte.Utils.SharedPreferencesUtils;
 import com.app.azazte.azazte.Utils.azUtils;
 import com.crashlytics.android.Crashlytics;
-import com.parse.ParseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,71 +52,104 @@ public class MainActivity extends AppCompatActivity {
     private ViewPagerAdapter adapter;
     private Toolbar mToolbar;
 
+    Thread splashTread;
+
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        Window window = getWindow();
+        window.setFormat(PixelFormat.RGBA_8888);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         init();
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         setContentView(R.layout.activity_main);
 
-        setupToolbar();
 
-        View BottomSheet = findViewById(R.id.bottom_sheet);
-        categorySheet = BottomSheetBehavior.from(BottomSheet);
-        CategorySheet();
+
+        StartSplashScreen();
+
+
+
+    //    setupToolbar();
+
+    //    View BottomSheet = findViewById(R.id.bottom_sheet);
+    //    categorySheet = BottomSheetBehavior.from(BottomSheet);
+    //    CategorySheet();
         //   categorySheet.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-        setupViewPager();
-        Categories.filterNewsByCategories();
+    //    setupViewPager();
+     // Categories.filterNewsByCategories();
+
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
 
+        //   SharedPreferences shaPreferences = getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
+    //   SharedPreferencesUtils.sharedPreferences = shaPreferences;
+    //   if (shaPreferences.getBoolean("second", true)) {
+    //       SharedPreferences sharedPreferences = shaPreferences;
+    //       final SharedPreferences.Editor editor = sharedPreferences.edit();
+    //       editor.putBoolean("second", false);
+    //       //For commit the changes, Use either editor.commit(); or  editor.apply();.
+    //       editor.commit();
 
-        SharedPreferences shaPreferences = getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
-        SharedPreferencesUtils.sharedPreferences = shaPreferences;
-        if (shaPreferences.getBoolean("second", true)) {
-            SharedPreferences sharedPreferences = shaPreferences;
-            final SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("second", false);
-            //For commit the changes, Use either editor.commit(); or  editor.apply();.
-            editor.commit();
+    //       //showOptionsOverLay();
+    //   }
 
-            //showOptionsOverLay();
-        }
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        setupDrawerContent(navigationView);
-
-        Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);        // Drawer object Assigned to the view
-        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, mToolbar, R.string.skip, R.string.start) {
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
-                // open I am not going to put anything here)
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                // Code here will execute once drawer is closed
-            }
-
-
-        }; // Drawer Toggle Object Made
-        Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
+                 // Finally we set the drawer toggle sync State
 
 
     }
 
+    private void StartSplashScreen() {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        anim.reset();
+        LinearLayout l=(LinearLayout) findViewById(R.id.lin_lay);
+        l.clearAnimation();
+        l.startAnimation(anim);
 
-    void CategorySheet() {
 
+
+        anim = AnimationUtils.loadAnimation(this, R.anim.translate);
+        anim.reset();
+        RelativeLayout iv = (RelativeLayout) findViewById(R.id.logo);
+        iv.clearAnimation();
+        iv.startAnimation(anim);
+
+        splashTread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    int waited = 0;
+                    // Splash screen pause time
+                    while (waited < 3500) {
+                        sleep(100);
+                        waited += 100;
+                    }
+                    Intent intent = new Intent(MainActivity.this,
+                            NewUI.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
+                    MainActivity.this.finish();
+                } catch (InterruptedException e) {
+                    // do nothing
+                } finally {
+                    MainActivity.this.finish();
+                }
+
+            }
+        };
+        splashTread.start();
 
     }
+
+
+
 
     private void init() {
 
@@ -154,109 +186,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    private void setupViewPager() {
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-    }
-
-    private void setupToolbar() {
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-
-        getSupportActionBar().setTitle("azazte");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new TabFragment(0), "ALL NEWS");
-        adapter.addFrag(new TabFragment(1), "Economy");
-        adapter.addFrag(new TabFragment(2), "Business & Finance");
-        adapter.addFrag(new TabFragment(3), "Tax");
-        adapter.addFrag(new TabFragment(4), "My Finance");
-        adapter.addFrag(new TabFragment(5), "Law & Regulatory");
-        adapter.addFrag(new TabFragment(6), "Rulings");
-        adapter.addFrag(new BookmarkFragment(), "Bookmarks");
-
-
-        viewPager.setAdapter(adapter);
-    }
-
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
-                        switch (menuItem.getItemId()) {
-                            case R.id.aboutUs:
-                                Intent i = new Intent(getBaseContext(), About_Activity.class);
-                                startActivity(i);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.newUi:
-                                Intent intent = new Intent(getBaseContext(), NewUI.class);
-                                startActivity(intent);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.taf:
-                                Intent taf = new Intent();
-                                taf.setAction(Intent.ACTION_SEND);
-                                taf.putExtra(Intent.EXTRA_TEXT, "Daily updates on Economy, Finance, Business, Tax & Law in 70 words!\n" +
-                                        "Download app: https://goo.gl/BjupvI");
-                                taf.setType("text/plain");
-                                startActivity(Intent.createChooser(taf, "Invite A Friend"));
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.rta:
-                                Intent rate = new Intent(Intent.ACTION_VIEW);
-                                rate.setData(Uri.parse("market://details?id=" + getPackageName()));
-                                startActivity(rate);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.help:
-                                Drawer.closeDrawers();
-                                showOverLay();
-                                return true;
-                            case R.id.callus:
-                                Intent out = new Intent(Intent.ACTION_DIAL);
-                                out.setData(Uri.parse("tel:" + Uri.encode("9810076493")));
-                                startActivity(out);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.feedback:
-                                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                                sendIntent.setType("plain/text");
-                                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
-                                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Azazte app");
-                                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                                startActivity(sendIntent);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.notification:
-
-
-                                return true;
-
-                            case R.id.book:
-                                Drawer.closeDrawers();
-                                viewpager.setCurrentItem(8, true);
-                                return true;
-
-                            default:
-                                return this.onNavigationItemSelected(menuItem);
-                        }
-                    }
-                });
-    }
 
     public void showOverLay() {
 

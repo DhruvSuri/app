@@ -6,12 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
+
+    <!--
+    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/DrawerLayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:elevation="7dp"> -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:showIn="@layout/activity_welcome">
+    tools:showIn="@layout/activity_welcome"
+    android:background="#000000">
 
 
     <RelativeLayout
@@ -22,13 +32,14 @@
         android:background="#9b000000"
         android:elevation="10dp"
         android:padding="5dp"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:layout_margin="5dp">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/imageView16"
-            android:src="@drawable/ic_logo_icon" />
+            android:id="@+id/menubutton"
+            android:src="@drawable/ic_menu" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +50,7 @@
             android:textColor="#ffffff"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/imageView16" />
+            android:layout_toRightOf="@+id/menubutton" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -52,9 +63,34 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@drawable/curved" />
+
 
 </RelativeLayout>
 
+
+
+
+
+
+
+<!--
+
+
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/menu_main"/>
+    </android.support.v4.widget.DrawerLayout>
+-->
+
     <include layout="@layout/categories"/>
+
 </android.support.design.widget.CoordinatorLayout>

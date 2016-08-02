@@ -60,7 +60,9 @@ public class ApiExecutor {
                     List<NewsCard> newsCardList = newsCardWrapper.newsCardList;
                     Connector.getInstance().saveNewsInDb(newsCardList);
                 }
-                Categories.filterNewsByCategories();
+
+                //Categories.filterNewsByCategories();
+
                 azUtils.refreshFragment();
                 if (swipe != null) {
                     swipe.setRefreshing(false);

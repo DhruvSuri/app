@@ -13,7 +13,7 @@
         android:orderInCategory="100" app:showAsAction="never" />
 
 
-    <item android:icon="@drawable/about1" android:id="@+id/aboutUs" android:title="About Us"
+    <item android:icon="@drawable/about" android:id="@+id/aboutUs" android:title="About Us"
         android:orderInCategory="100" app:showAsAction="never" />
 
     <item android:icon="@drawable/bell" android:id="@+id/notification" android:title="Turn off Notification"
@@ -42,7 +42,7 @@
         </menu>
     </item>
 
-    <item android:icon="@drawable/bookicon"
+    <item android:icon="@drawable/bookmark"
         android:id="@+id/book"
         android:title="Bookmarks"
         app:showAsAction="never"/>

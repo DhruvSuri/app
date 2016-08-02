@@ -2,124 +2,174 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#41172a">
-    <!--
+    android:background="#00a381">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:src="@drawable/intro1"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="20dp" />
+
+
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="wrap_content"
+        android:id="@+id/categories"
+        android:layout_height="wrap_content"
+        android:rowCount="4"
+        android:columnCount="2"
+        android:background="@drawable/round"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp">
+
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout">
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#6c009688"
+            android:id="@+id/linearLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout6"
+            android:layout_toLeftOf="@+id/linearLayout4"
+            android:layout_toStartOf="@+id/linearLayout4">
+
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="120dp"
-                android:src="@drawable/fast" />
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/business"
+                android:src="@drawable/business"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quick"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/slide_title"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:paddingLeft="@dimen/desc_padding"
-                android:paddingRight="@dimen/desc_padding"
-                android:text="Speedy summaries on"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/slide_desc"
-                android:gravity="center_horizontal"
-                android:id="@+id/newjk" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="* Economy"
-                    android:id="@+id/textView6"
-                    android:layout_below="@+id/linearLayout"
-                    android:layout_alignLeft="@+id/linearLayout"
-                    android:layout_alignStart="@+id/linearLayout"
-                    android:layout_marginTop="39dp"
-                    android:textColor="#ffffff" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="* Tax"
-                    android:id="@+id/textView7"
-                    android:textColor="#ffffff"
-                    android:layout_alignTop="@+id/textView6"
-                    android:layout_toRightOf="@+id/textView6"
-                    android:layout_toEndOf="@+id/textView6"
-                    android:layout_marginLeft="48dp"
-                    android:layout_marginStart="48dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="* Business"
-                    android:id="@+id/textView8"
-                    android:textColor="#ffffff"
-                    android:layout_below="@+id/textView6"
-                    android:layout_alignLeft="@+id/textView6"
-                    android:layout_alignStart="@+id/textView6" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="* Finance"
-                    android:id="@+id/textView8"
-                    android:textColor="#ffffff"
-                    android:layout_alignTop="@+id/textView10"
-                    android:layout_alignLeft="@+id/textView6" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="* Law"
-                    android:id="@+id/textView9"
-                    android:textColor="#ffffff"
-                    android:layout_alignLeft="@+id/textView7"
-                    android:layout_below="@+id/textView7" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="* Money"
-                    android:id="@+id/textView10"
-                    android:textColor="#ffffff"
-                    android:layout_alignEnd="@+id/linearLayout"
-                    android:layout_below="@+id/textView9"
-                    android:layout_alignLeft="@+id/textView9" />
-            </RelativeLayout>
-
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Business &amp; Finance"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
         </LinearLayout>
 
-        -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#694caf50"
+            android:id="@+id/linearLayout4"
+            android:layout_below="@+id/linearLayout3"
+            android:layout_alignRight="@+id/linearLayout3"
+            android:layout_alignEnd="@+id/linearLayout3"
+            android:layout_alignLeft="@+id/linearLayout3"
+            android:layout_alignStart="@+id/linearLayout3">
+
+
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView5"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/screen2" />
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/finance"
+                android:src="@drawable/money"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Money"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#71e91e63"
+            android:id="@+id/linearLayout6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/linearLayout3">
+
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/economy"
+                android:src="@drawable/economy"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Economy"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#46607d8b"
+            android:id="@+id/linearLayout3"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:id="@+id/tax"
+                android:src="@drawable/tax"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Tax"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
 </RelativeLayout>

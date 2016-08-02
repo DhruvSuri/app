@@ -1,151 +1,147 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     android:background="@drawable/curved"
-    android:layout_margin="5dp">
+    android:padding="2dp">
 
     <RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:alpha="20"
-    style="@style/Base.TextAppearance.AppCompat.Body1"
-    android:id="@+id/newsc"
+        android:layout_height="match_parent"
+        android:alpha="20"
+        android:id="@+id/newsc"
 
 
-        >
+        android:background="@drawable/curved">
 
 
         <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:id="@+id/imageView2"
-        android:src="@drawable/image1"
-        android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:id="@+id/imageView2"
+            android:src="@drawable/image1"
+            android:scaleType="fitXY"
             android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true" />
 
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/newstxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/newstxt"
 
-        android:text="@string/newsinfo"
-        android:textSize="14sp"
-        android:typeface="serif"
-        android:textIsSelectable="false"
-        android:singleLine="false"
-        android:lineSpacingExtra="5dp"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-            android:textColor="#323232"
-            android:maxLines="10"
-            android:padding="5dp"
-            android:minLines="6"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="2dp" />
+            android:text="@string/newsinfo"
+            android:textSize="15sp"
+            android:typeface="normal"
+            android:textIsSelectable="false"
+            android:singleLine="false"
+            android:lineSpacingExtra="3dp"
+            android:layout_below="@+id/imageView2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:textColor="#464646"
+            android:minLines="10"
+            android:layout_above="@+id/separator"
+            android:paddingLeft="3dp"
+            android:paddingTop="3dp"
+            android:paddingRight="3dp" />
 
         <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:id="@+id/share"
-        android:src="@drawable/share2"
-        android:scaleType="fitXY"
-        android:background="#00ffffff"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="18dp"
-        android:layout_below="@+id/imageView2"
-        android:layout_marginTop="-20dp"
-        android:layout_marginBottom="5dp"
-        android:cropToPadding="false"
-        android:padding="2dp"
-        android:elevation="0dp"
-        android:contentDescription="share"
-        android:visibility="invisible" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/share"
+            android:src="@drawable/share2"
+            android:scaleType="fitXY"
+            android:background="#00ffffff"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="18dp"
+            android:layout_below="@+id/imageView2"
+            android:layout_marginTop="-20dp"
+            android:layout_marginBottom="5dp"
+            android:cropToPadding="false"
+            android:padding="2dp"
+            android:elevation="0dp"
+            android:contentDescription="share"
+            android:visibility="invisible" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="news source name"
-        android:id="@+id/newsSource"
-        android:textColor="#f72328"
-        android:textSize="14sp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/likes"
-        android:layout_toEndOf="@+id/likes"
-        android:paddingLeft="7dp"
-        android:paddingBottom="3dp"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="news source name"
+            android:id="@+id/newsSource"
+            android:textColor="#f72328"
+            android:textSize="14sp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/likes"
+            android:layout_toEndOf="@+id/likes"
+            android:paddingLeft="7dp"
+            android:paddingBottom="3dp"></TextView>
 
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="15dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Jun 24, 2016"
-        android:id="@+id/date"
-        android:textColor="#797979"
-        android:textSize="8dp"
-        android:gravity="end"
-        android:layout_alignBottom="@+id/newsSource"
-        android:layout_alignRight="@+id/author"
-        android:layout_alignEnd="@+id/author"></TextView>
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Jun 24, 2016"
+            android:id="@+id/date"
+            android:textColor="#797979"
+            android:textSize="8dp"
+            android:gravity="end"
+            android:layout_alignBottom="@+id/newsSource"
+            android:layout_alignRight="@+id/author"
+            android:layout_alignEnd="@+id/author"></TextView>
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Anjali Jain"
-        android:id="@+id/author"
-        android:textColor="#797979"
-        android:textSize="8dp"
-        android:gravity="center_vertical|end"
-        android:layout_above="@+id/date"
-        android:layout_alignRight="@+id/newstxt"
-        android:layout_alignEnd="@+id/newstxt" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Anjali Jain"
+            android:id="@+id/author"
+            android:textColor="#797979"
+            android:textSize="8dp"
+            android:gravity="center_vertical|end"
+            android:layout_above="@+id/date"
+            android:layout_alignRight="@+id/newstxt"
+            android:layout_alignEnd="@+id/newstxt"
+            android:layout_marginRight="5dp" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:id="@+id/bookmark"
-        android:scaleType="fitXY"
-        android:src="@drawable/notbookmark"
-        android:elevation="20dp"
-        android:layout_below="@+id/likes"
-        android:layout_alignLeft="@+id/share"
-        android:layout_alignStart="@+id/share" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/bookmark"
+            android:scaleType="fitXY"
+            android:src="@drawable/notbookmark"
+            android:elevation="20dp"
+            android:layout_below="@+id/likes"
+            android:layout_alignLeft="@+id/share"
+            android:layout_alignStart="@+id/share" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="More At : "
-        android:id="@+id/moreAt"
-        android:textColor="#797979"
-        android:textSize="8sp"
-        android:layout_above="@+id/newsSource"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="true"
-        android:layout_alignLeft="@+id/newsSource"
-        android:paddingLeft="7dp"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="More At : "
+            android:id="@+id/moreAt"
+            android:textColor="#797979"
+            android:textSize="8sp"
+            android:layout_above="@+id/newsSource"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:layout_alignLeft="@+id/newsSource"
+            android:paddingLeft="7dp"></TextView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="75"
-        android:id="@+id/likes"
-        android:layout_marginBottom="4dp"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="75"
+            android:id="@+id/likes"
+            android:layout_marginBottom="4dp"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -153,22 +149,37 @@
             android:layout_alignBottom="@+id/imageView2"
             android:layout_toRightOf="@+id/likes"
             android:layout_toEndOf="@+id/likes"
-            android:background="#9a000000"
+            android:background="#bd000000"
             android:padding="2dp"
-            android:layout_margin="3dp"
             android:id="@+id/relativeLayout">
 
             <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="This is news heading in two line "
-            android:id="@+id/headtxt"
-                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="This is news heading in two line "
+                android:id="@+id/headtxt"
+                android:textSize="17sp"
                 android:textColor="#ffffff"
                 android:textAlignment="center"
                 android:padding="2dp"
-                android:outlineProvider="paddedBounds" />
+                android:outlineProvider="paddedBounds"
+                android:minLines="2"
+                android:layout_toLeftOf="@+id/options"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/options"
+                android:scaleType="fitXY"
+                android:elevation="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="3dp"
+                android:background="@android:drawable/ic_menu_sort_by_size" />
 
         </RelativeLayout>
 
@@ -178,20 +189,10 @@
             android:layout_height="1dp"
             android:layout_above="@+id/author"
             android:layout_alignLeft="@+id/relativeLayout"
-            android:layout_alignStart="@+id/relativeLayout" />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/options"
-            android:src="@drawable/more"
-            android:scaleType="fitXY"
-            android:layout_alignBottom="@+id/share"
-            android:layout_alignRight="@+id/share"
-            android:layout_alignEnd="@+id/share"
-            android:elevation="5dp" />
+            android:layout_alignStart="@+id/relativeLayout"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
 
     </RelativeLayout>
-    </LinearLayout>
-
+</LinearLayout>

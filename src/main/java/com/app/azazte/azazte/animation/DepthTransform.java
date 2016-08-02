@@ -16,6 +16,7 @@ public class DepthTransform implements ViewPager.PageTransformer {
             // This page is way off-screen to the left.
             view.setAlpha(0);
 
+
         } else if (position <= 0) { // [-1,0]
             // Use the default fadein transition when moving to the left page
             view.setAlpha(1);

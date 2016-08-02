@@ -1,38 +1,30 @@
 package com.app.azazte.azazte;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.animation.DepthTransform;
-import com.app.azazte.azazte.animation.ZoomTransformer;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.NewscardFragment;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
@@ -44,6 +36,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     Animation fadeIn;
     Animation fadeOut;
     public int categoryChosen;
+    DrawerLayout Drawer;
+    ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +65,23 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
         setupViewPager(getIntent().getIntExtra("category", 0));
+
+
+    //    setSideNavigationBar();
+
+
+
+
+
+    }
+
+    private void setSideNavigationBar() {
+
+     //  NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+     //  setupDrawerContent(navigationView);
+
+     //  Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
+
     }
 
     private void setListeners() {
@@ -82,6 +93,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView economy = (ImageView) findViewById(R.id.economy);
         ImageView global = (ImageView) findViewById(R.id.global);
         ImageView bookmark = (ImageView) findViewById(R.id.bookmark);
+        ImageView menuButton = (ImageView) findViewById(R.id.menubutton);
+
+
+
+        //categories listeners
 
         allNews.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +159,17 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 setupViewPager(6);
                 categoryChosen = 6;
                 onRestart();
+            }
+        });
+
+
+        //Top bar listeners
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            //    Drawer.openDrawer(Gravity.LEFT);
+
             }
         });
     }
@@ -235,6 +262,76 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         intent.putExtra("category", categoryChosen);
         startActivity(intent);
         finish();
+    }
+
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                       // ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
+                        switch (menuItem.getItemId()) {
+                            case R.id.aboutUs:
+                                Intent i = new Intent(getBaseContext(), About_Activity.class);
+                                startActivity(i);
+                                Drawer.closeDrawers();
+                                return true;
+                            case R.id.newUi:
+                                Intent intent = new Intent(getBaseContext(), NewUI.class);
+                                startActivity(intent);
+                                Drawer.closeDrawers();
+                                return true;
+                            case R.id.taf:
+                                Intent taf = new Intent();
+                                taf.setAction(Intent.ACTION_SEND);
+                                taf.putExtra(Intent.EXTRA_TEXT, "Daily updates on Economy, Finance, Business, Tax & Law in 70 words!\n" +
+                                        "Download app: https://goo.gl/BjupvI");
+                                taf.setType("text/plain");
+                                startActivity(Intent.createChooser(taf, "Invite A Friend"));
+                                Drawer.closeDrawers();
+                                return true;
+                            case R.id.rta:
+                                Intent rate = new Intent(Intent.ACTION_VIEW);
+                                rate.setData(Uri.parse("market://details?id=" + getPackageName()));
+                                startActivity(rate);
+                                Drawer.closeDrawers();
+                                return true;
+                            case R.id.help:
+                                Drawer.closeDrawers();
+                                //showOverLay();
+                                return true;
+                            case R.id.callus:
+                                Intent out = new Intent(Intent.ACTION_DIAL);
+                                out.setData(Uri.parse("tel:" + Uri.encode("9810076493")));
+                                startActivity(out);
+                                Drawer.closeDrawers();
+                                return true;
+                            case R.id.feedback:
+                                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                                sendIntent.setType("plain/text");
+                                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
+                                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Azazte app");
+                                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                                startActivity(sendIntent);
+                                Drawer.closeDrawers();
+                                return true;
+                            case R.id.notification:
+
+
+                                return true;
+
+                            case R.id.book:
+                                Drawer.closeDrawers();
+                                //viewpager.setCurrentItem(8, true);
+                                return true;
+
+                            default:
+                                return this.onNavigationItemSelected(menuItem);
+                        }
+                    }
+                });
     }
 
 
