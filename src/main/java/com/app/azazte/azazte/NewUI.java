@@ -1,6 +1,7 @@
 package com.app.azazte.azazte;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -42,16 +43,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public RelativeLayout topBar;
     Animation fadeIn;
     Animation fadeOut;
-
+    public int categoryChosen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_new_ui);
 
@@ -72,12 +68,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
-
             }
         });
-
-
-        setupViewPager(0);
+        setupViewPager(getIntent().getIntExtra("category",0));
     }
 
     private void setListeners() {
@@ -94,27 +87,62 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 setupViewPager(0);
+                categoryChosen = 0;
+                onRestart();
+            }
+        });
+
+        economy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupViewPager(1);
+                categoryChosen = 1;
+                onRestart();
             }
         });
 
         business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(1);
+                setupViewPager(2);
+                categoryChosen = 2;
+                onRestart();
             }
         });
 
         tax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(2);
+                setupViewPager(3);
+                categoryChosen = 3;
+                onRestart();
+            }
+        });
+
+        finace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupViewPager(4);
+                categoryChosen = 4;
+                onRestart();
             }
         });
 
         law.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(3);
+                setupViewPager(5);
+                categoryChosen = 5;
+                onRestart();
+            }
+        });
+
+        global.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupViewPager(6);
+                categoryChosen = 6;
+                onRestart();
             }
         });
     }
@@ -126,12 +154,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         setupNewsCards(adapter, category);
         viewPager.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void setupNewsCards(ViewPagerAdapter adapter, int category) {
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
-        //Assuming we got the right category
-        Collections.reverse(allNews);
         for (NewsCard newsCard : allNews) {
             int cardCategory;
             try {
@@ -143,7 +170,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
             }
         }
-        adapter.notifyDataSetChanged();
     }
 
 
@@ -157,10 +183,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                     topBar.startAnimation(fadeOut);
                     topBar.setVisibility(View.INVISIBLE);
                 }
-            },10000);
+            }, 10000);
 
         } else {
-         topBar.startAnimation(fadeOut);
+            topBar.startAnimation(fadeOut);
             topBar.setVisibility(View.INVISIBLE);
         }
     }
@@ -194,10 +220,21 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             mFragmentList.add(fragment);
             //mFragmentTitleList.add(newsCard);
         }
-  //     @Override
+        //     @Override
         // public CharSequence getPageTitle(int position) {
 //            return mFragmentTitleList.get(position);
 //        }
+    }
+
+    @Override
+    protected void onRestart() {
+
+        // TODO Auto-generated method stub
+        super.onRestart();
+        Intent intent = new Intent(this, NewUI.class);
+        intent.putExtra("category",categoryChosen);
+        startActivity(intent);
+        finish();
     }
 
 

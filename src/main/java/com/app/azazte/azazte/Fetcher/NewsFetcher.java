@@ -40,7 +40,7 @@ public class NewsFetcher extends AsyncTask {
     List<NewsCard> inMemoryNews;
     NewsAdapter cardArrayAdapter;
     SwipeRefreshLayout swipe;
-    int lastFetchedId;
+    String lastFetchedId;
     GoogleCloudMessaging gcmObject;
     ConnectivityUtils connectivityUtilsInstance;
     SharedPreferences sharedPreferences;
@@ -86,7 +86,7 @@ public class NewsFetcher extends AsyncTask {
         HttpClient client = new DefaultHttpClient();
         HttpGet request;
         sharedPreferences = newsFragmentActivity.getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
-        lastFetchedId = sharedPreferences.getInt(LAST_FETCHED_ID, 0);
+        lastFetchedId = sharedPreferences.getString(LAST_FETCHED_ID, "");
         if (MainActivity.emailAddress == null || MainActivity.emailAddress.isEmpty()) {
             MainActivity.emailAddress = "notFound";
         }
@@ -141,7 +141,7 @@ public class NewsFetcher extends AsyncTask {
         }
         lastFetchedId = newsCards.get(0).id;
         final SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(LAST_FETCHED_ID, lastFetchedId);
+        editor.putString(LAST_FETCHED_ID, lastFetchedId);
         editor.apply();
         swipe.setRefreshing(false);
     }
@@ -149,7 +149,7 @@ public class NewsFetcher extends AsyncTask {
     public void fetchNews() {
         Toaster.toast("Fetching news");
         sharedPreferences = newsFragmentActivity.getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
-        lastFetchedId = sharedPreferences.getInt(LAST_FETCHED_ID, 0);
+        lastFetchedId = sharedPreferences.getString(LAST_FETCHED_ID, "");
         if (MainActivity.emailAddress == null || MainActivity.emailAddress.isEmpty()) {
             MainActivity.emailAddress = "notFound";
         }

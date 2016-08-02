@@ -22,7 +22,7 @@ import xdroid.toaster.Toaster;
  * Created by sprinklr on 14/05/16.
  */
 public class ApiExecutor {
-    public static final String BASE_URL = "http://www.azazte.com/";
+    public static final String BASE_URL = "http://aws.azazte.com";
     private static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -44,7 +44,7 @@ public class ApiExecutor {
     }
 
     public void getNews(String email, final SwipeRefreshLayout swipe) {
-        final Call<NewsCardWrapper> newsCardWrapperCall = azazteApiService.getNews(500);
+        final Call<NewsCardWrapper> newsCardWrapperCall = azazteApiService.getNews(0, 200);
         newsCardWrapperCall.enqueue(new Callback<NewsCardWrapper>() {
 
 
@@ -52,7 +52,7 @@ public class ApiExecutor {
             public void onResponse(Call<NewsCardWrapper> call, Response<NewsCardWrapper> response) {
                 final NewsCardWrapper newsCardWrapper = response.body();
 
-                if (newsCardWrapper == null){
+                if (newsCardWrapper == null) {
                     return;
                 }
 

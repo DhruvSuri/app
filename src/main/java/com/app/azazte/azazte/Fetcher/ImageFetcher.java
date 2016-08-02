@@ -83,7 +83,7 @@ public class ImageFetcher extends AsyncTask<String, Void, Bitmap> {
         return mIcon11;
     }
 
-    public static String storeImageInMemory(int id, Bitmap bitmap) {
+    public static String storeImageInMemory(String id, Bitmap bitmap) {
 
         //imageMap.put(id, bitmap);
         String memoryImageUrl = id + "_azazte_image.png";
@@ -101,7 +101,7 @@ public class ImageFetcher extends AsyncTask<String, Void, Bitmap> {
         return null;
     }
 
-    public static String storeImageInSharedPreferences(int id, Bitmap bitmap) {
+    public static String storeImageInSharedPreferences(String id, Bitmap bitmap) {
 
         //imageMap.put(id, bitmap);
         SharedPreferences.Editor editor = SharedPreferencesUtils.sharedPreferences.edit();
@@ -112,7 +112,7 @@ public class ImageFetcher extends AsyncTask<String, Void, Bitmap> {
         return null;
     }
 
-    public static void storeImageURLInDb(int id, String memoryImageUrl) {
+    public static void storeImageURLInDb(String id, String memoryImageUrl) {
         Connector connector = Connector.getInstance();
         connector.insertImageUrl(id, memoryImageUrl);
     }
