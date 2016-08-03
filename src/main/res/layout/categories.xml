@@ -5,9 +5,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c3000000"
+    android:background="#f7000000"
     android:id="@+id/bottom_sheet"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:elevation="20dp"
+    android:touchscreenBlocksFocus="false">
 
     <RelativeLayout
         android:orientation="vertical" android:layout_width="wrap_content"
@@ -15,12 +17,16 @@
         android:layout_height="wrap_content"
         android:rowCount="4"
         android:columnCount="2"
-        android:background="@drawable/round"
         android:layout_alignParentRight="false"
         android:layout_alignParentEnd="false"
         android:layout_alignParentStart="false"
-        android:layout_centerInParent="true"
-        android:layout_margin="50dp">
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView4"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round">
 
         <LinearLayout
             android:orientation="vertical"
@@ -34,8 +40,7 @@
             android:background="#60eb4949"
             android:layout_rowWeight="1"
             android:id="@+id/linearLayout2"
-            android:layout_below="@+id/linearLayout5"
-            android:layout_toRightOf="@+id/linearLayout5"
+            android:layout_below="@+id/linearLayout8"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
@@ -72,8 +77,8 @@
             android:layout_below="@+id/linearLayout6"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/linearLayout4"
-            android:layout_toStartOf="@+id/linearLayout4">
+            android:layout_toStartOf="@+id/linearLayout6"
+            android:layout_toLeftOf="@+id/linearLayout6">
 
 
             <ImageView
@@ -110,8 +115,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_toLeftOf="@+id/linearLayout8"
-            android:layout_toStartOf="@+id/linearLayout8"
-            android:layout_alignBottom="@+id/linearLayout2">
+            android:layout_toStartOf="@+id/linearLayout8">
 
 
             <ImageView
@@ -137,43 +141,6 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:layout_columnSpan="1"
-            android:padding="10dp"
-            android:layout_columnWeight="1"
-            android:background="#694caf50"
-            android:id="@+id/linearLayout4"
-            android:layout_below="@+id/linearLayout3"
-            android:layout_alignRight="@+id/linearLayout3"
-            android:layout_alignEnd="@+id/linearLayout3"
-            android:layout_alignLeft="@+id/linearLayout3"
-            android:layout_alignStart="@+id/linearLayout3">
-
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:id="@+id/finance"
-                android:src="@drawable/money"
-                android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="My Finance"
-                android:id="@+id/textView6"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#ffffff"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_column="1"
             android:layout_columnSpan="1"
@@ -181,11 +148,11 @@
             android:layout_columnWeight="1"
             android:background="#81ffee58"
             android:layout_below="@+id/linearLayout6"
-            android:layout_alignLeft="@+id/linearLayout4"
-            android:layout_alignStart="@+id/linearLayout4"
             android:id="@+id/linearLayout8"
-            android:layout_alignRight="@+id/linearLayout4"
-            android:layout_alignEnd="@+id/linearLayout4">
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/linearLayout6"
+            android:layout_toEndOf="@+id/linearLayout6">
 
 
             <ImageView
@@ -218,9 +185,8 @@
             android:layout_columnWeight="1"
             android:background="#71e91e63"
             android:id="@+id/linearLayout6"
-            android:layout_below="@+id/linearLayout7"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/linearLayout7"
             android:layout_toLeftOf="@+id/linearLayout3"
             android:layout_toStartOf="@+id/linearLayout3">
 
@@ -246,7 +212,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="1"
@@ -257,7 +223,7 @@
             android:id="@+id/linearLayout3"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentEnd="false">
 
             <ImageView
                 android:layout_width="60dp"
@@ -280,7 +246,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="0"
@@ -289,9 +255,9 @@
             android:layout_columnWeight="1"
             android:background="#773f51b5"
             android:id="@+id/linearLayout7"
-            android:layout_toLeftOf="@+id/linearLayout3"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_alignBottom="@+id/linearLayout3">
 
 
             <ImageView
@@ -315,6 +281,44 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#694caf50"
+            android:id="@+id/linearLayout4"
+            android:layout_below="@+id/linearLayout6"
+            android:layout_alignLeft="@+id/linearLayout6"
+            android:layout_alignStart="@+id/linearLayout6"
+            android:layout_alignRight="@+id/linearLayout6"
+            android:layout_alignEnd="@+id/linearLayout6"
+            android:layout_above="@+id/linearLayout">
+
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/finance"
+                android:src="@drawable/money"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="My Finance"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
 
     </RelativeLayout>
 
@@ -325,7 +329,309 @@
         android:text="Categories"
         android:id="@+id/textView4"
         android:textColor="#ffffff"
-        android:layout_above="@+id/categories"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/categories"
+        android:layout_alignStart="@+id/categories"
+        android:layout_marginTop="10dp"
+        android:textStyle="italic"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha=".5"
+        android:background="@android:color/white"
+        android:layout_below="@+id/categories"
+        android:layout_margin="20dp"
+        android:id="@+id/view2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Settings"
+        android:id="@+id/textView12"
+        android:textColor="#ffffff"
+        android:layout_alignTop="@+id/view2"
+        android:layout_alignLeft="@+id/linearLayout12"
+        android:layout_alignStart="@+id/linearLayout12"
+        android:textStyle="italic"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp" />
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView12"
+        android:id="@+id/linearLayout12"
+        android:weightSum="1"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/round">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#46607d8b"
+            android:id="@+id/linearLayout14"
+            android:layout_alignEnd="@+id/linearLayout3"
+            android:layout_alignStart="@+id/linearLayout3">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView7"
+                android:src="@drawable/privacy"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Privacy"
+                android:id="@+id/textView14"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#71e91e63"
+            android:id="@+id/linearLayout11"
+            android:layout_alignEnd="@+id/linearLayout3"
+            android:layout_alignStart="@+id/linearLayout3" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView4"
+                android:src="@drawable/about"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="About"
+                android:id="@+id/textView11"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#46607d8b"
+            android:id="@+id/linearLayout10"
+            android:layout_alignEnd="@+id/linearLayout3"
+            android:layout_alignStart="@+id/linearLayout3" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView3"
+                android:src="@drawable/tell"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Invite A Friend"
+                android:id="@+id/textView10"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#6c009688"
+            android:id="@+id/linearLayout9"
+            android:layout_alignEnd="@+id/linearLayout3"
+            android:layout_alignStart="@+id/linearLayout3" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView"
+                android:src="@drawable/help"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Instructions"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Bugs, hugs and suggestions"
+        android:id="@+id/textView19"
+        android:textColor="#ffffff"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:layout_below="@+id/linearLayout12"
+        android:layout_alignLeft="@+id/linearLayout12"
+        android:layout_alignStart="@+id/linearLayout12" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout19"
+        android:weightSum="1"
+        android:layout_below="@+id/textView19"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignLeft="@+id/textView19"
+        android:layout_alignStart="@+id/textView19"
+        android:background="@drawable/round"
+        android:layout_alignRight="@+id/linearLayout12"
+        android:layout_alignEnd="@+id/linearLayout12">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#46607d8b"
+            android:id="@+id/linearLayout15"
+            android:layout_alignEnd="@+id/linearLayout3"
+            android:layout_alignStart="@+id/linearLayout3" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView8"
+                android:src="@drawable/call"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Call Us"
+                android:id="@+id/textView15"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#6c009688"
+            android:id="@+id/linearLayout17"
+            android:layout_alignBottom="@+id/linearLayout19"
+            android:layout_alignRight="@+id/linearLayout12"
+            android:layout_alignEnd="@+id/linearLayout12"
+            android:layout_toEndOf="@+id/linearLayout19">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView10"
+                android:src="@drawable/write"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Write for Us"
+                android:id="@+id/textView17"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:padding="10dp"
+            android:layout_columnWeight="1"
+            android:background="#71e91e63"
+            android:id="@+id/linearLayout16"
+            android:layout_alignEnd="@+id/linearLayout3"
+            android:layout_alignStart="@+id/linearLayout3" >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageView9"
+                android:src="@drawable/mail"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Mail"
+                android:id="@+id/textView16"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
