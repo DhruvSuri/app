@@ -5,9 +5,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Beans.NewsCardWrapper;
 import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Event.MessageEvent;
 import com.app.azazte.azazte.MainActivity;
+import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.Utils.Categories;
 import com.app.azazte.azazte.Utils.azUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -63,7 +67,8 @@ public class ApiExecutor {
 
                 //Categories.filterNewsByCategories();
 
-                azUtils.refreshFragment();
+                //azUtils.refreshFragment();
+                EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
                 if (swipe != null) {
                     swipe.setRefreshing(false);
                 }

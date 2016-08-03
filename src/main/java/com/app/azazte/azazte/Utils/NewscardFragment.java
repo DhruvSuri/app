@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -30,6 +31,9 @@ import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 import static xdroid.core.Global.getContext;
 import static xdroid.core.Global.getResources;
@@ -58,7 +62,7 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
+        final View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
         View trayIcons = inflater.inflate(R.layout.option_dialog, container, false);
         slideup = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slideup);
@@ -73,12 +77,13 @@ public class NewscardFragment extends Fragment {
         ImageButton option = (ImageButton) inflate.findViewById(R.id.options);
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
         final ImageView bookmark = (ImageView) inflate.findViewById(R.id.bookmark);
+        View share = (ImageButton) inflate.findViewById(R.id.share);
 
         //option tray buttons
-        ImageButton share =(ImageButton) trayIcons.findViewById(R.id.share);
-        ImageButton whatsapp =(ImageButton) trayIcons.findViewById(R.id.whatsapp);
-        ImageButton facebook =(ImageButton) trayIcons.findViewById(R.id.facebook);
-        ImageButton twiter =(ImageButton) trayIcons.findViewById(R.id.twiter);
+        //ImageButton share = (ImageButton) trayIcons.findViewById(R.id.share);
+        ImageButton whatsapp = (ImageButton) trayIcons.findViewById(R.id.whatsapp);
+        ImageButton facebook = (ImageButton) trayIcons.findViewById(R.id.facebook);
+        ImageButton twiter = (ImageButton) trayIcons.findViewById(R.id.twiter);
 
         setImageIntoView(picasso, image, newsCard.imageUrl);
         newshead.setText(newsCard.newsHead);
@@ -88,7 +93,7 @@ public class NewscardFragment extends Fragment {
         author.setText(newsCard.author);
 
 
-     moreAt.setOnClickListener(new View.OnClickListener() {
+        moreAt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -141,11 +146,9 @@ public class NewscardFragment extends Fragment {
                     BookmarksFetcher.bookmarkSet.remove(newsCard.id);
                     newsCard.isBookmarked = 0;
                 }
-               // BookmarksFetcher.refresh();
+                // BookmarksFetcher.refresh();
             }
         });
-
-
 
 
         newstxt.setOnClickListener(new View.OnClickListener() {
@@ -164,10 +167,54 @@ public class NewscardFragment extends Fragment {
             }
         });
 
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inflate.setDrawingCacheEnabled(true);
+
+                Bitmap bitmap = inflate.getDrawingCache();
+                File root = Environment.getExternalStorageDirectory();
+                File cachePath = new File(root.getAbsolutePath() + "/DCIM/Camera/image.jpg");
+                try {
+                    cachePath.createNewFile();
+                    FileOutputStream ostream = new FileOutputStream(cachePath);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
+                    ostream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("image/*");
+                share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(cachePath));
+                startActivity(Intent.createChooser(share, "Share via"));
+
+            }
+        });
+
         return inflate;
 
     }
 
+    private void shareBitmap(Bitmap bitmap, String fileName) {
+        try {
+            File file = new File(getContext().getCacheDir(), fileName + ".png");
+            FileOutputStream fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
+            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.setType("image/png");
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -199,7 +246,7 @@ public class NewscardFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
