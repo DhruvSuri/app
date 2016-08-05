@@ -31,15 +31,16 @@
         android:id="@+id/topBar"
         android:background="#9b000000"
         android:elevation="10dp"
-        android:padding="5dp"
         android:visibility="visible"
-        android:layout_margin="5dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/menubutton"
-            android:src="@drawable/ic_menu" />
+            android:src="@android:drawable/ic_dialog_dialer"
+            android:layout_centerVertical="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,24 +49,36 @@
             android:text="All News"
             android:id="@+id/textView5"
             android:textColor="#ffffff"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/menubutton" />
+            android:layout_toRightOf="@+id/menubutton"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/categoriesButton"
+            android:src="@drawable/top"
+            android:layout_alignParentRight="false"
+            android:layout_margin="5dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/categoriesButton" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/categoriesButton"
-            android:src="@android:drawable/ic_dialog_dialer"
-            android:layout_alignParentRight="true" />
+            android:src="@drawable/ic_settings"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:background="@drawable/curved" />
+        android:background="#ffffff"
+        />
 
 
 </RelativeLayout>

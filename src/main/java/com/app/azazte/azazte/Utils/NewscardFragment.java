@@ -73,6 +73,7 @@ public class NewscardFragment extends Fragment {
         ImageButton option = (ImageButton) inflate.findViewById(R.id.options);
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
         final ImageView bookmark = (ImageView) inflate.findViewById(R.id.bookmark);
+        RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
 
         //option tray buttons
         ImageButton share =(ImageButton) trayIcons.findViewById(R.id.share);
@@ -86,6 +87,17 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName);
         date.setText(newsCard.date);
         author.setText(newsCard.author);
+
+
+
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((NewUI) getActivity()).showTopBar();
+
+            }
+        });
 
 
      moreAt.setOnClickListener(new View.OnClickListener() {

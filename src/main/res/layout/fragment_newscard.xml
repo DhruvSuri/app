@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/curved"
     android:padding="2dp">
 
     <RelativeLayout android:layout_width="match_parent"
@@ -21,8 +20,8 @@
             android:id="@+id/imageView2"
             android:src="@drawable/image1"
             android:scaleType="fitXY"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false" />
 
 
         <TextView
@@ -115,9 +114,8 @@
             android:scaleType="fitXY"
             android:src="@drawable/notbookmark"
             android:elevation="20dp"
-            android:layout_below="@+id/likes"
-            android:layout_alignLeft="@+id/share"
-            android:layout_alignStart="@+id/share" />
+            android:layout_alignStart="@+id/share"
+            android:visibility="invisible" />
 
 
         <TextView
@@ -150,9 +148,9 @@
             android:layout_alignBottom="@+id/imageView2"
             android:layout_toRightOf="@+id/likes"
             android:layout_toEndOf="@+id/likes"
-            android:background="#bd000000"
-            android:padding="2dp"
-            android:id="@+id/relativeLayout">
+            android:background="#7d000000"
+            android:id="@+id/header"
+            android:layout_alignParentTop="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -160,27 +158,17 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="This is news heading in two line "
                 android:id="@+id/headtxt"
-                android:textSize="17sp"
+                android:textSize="22sp"
                 android:textColor="#ffffff"
                 android:textAlignment="center"
                 android:padding="2dp"
                 android:outlineProvider="paddedBounds"
                 android:minLines="2"
-                android:layout_toLeftOf="@+id/options"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/options"
-                android:scaleType="fitXY"
-                android:elevation="10dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="3dp"
-                android:background="@android:drawable/ic_menu_sort_by_size" />
+                android:textStyle="bold"
+                android:layout_alignParentBottom="false"
+                android:layout_marginBottom="45dp"
+                android:gravity="center_horizontal"
+                android:layout_centerInParent="true" />
 
         </RelativeLayout>
 
@@ -193,6 +181,16 @@
             android:layout_alignStart="@+id/relativeLayout"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/options"
+            android:scaleType="fitXY"
+            android:elevation="10dp"
+            android:background="@android:drawable/ic_menu_sort_by_size"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
 
 
     </RelativeLayout>

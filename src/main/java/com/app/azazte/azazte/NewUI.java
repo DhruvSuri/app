@@ -96,6 +96,20 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView menuButton = (ImageView) findViewById(R.id.menubutton);
 
 
+        //settings items
+
+     //   ImageView privacy = (ImageView) findViewById(R.id.privacy);
+     //   ImageView about = (ImageView) findViewById(R.id.about);
+     //   ImageView invite = (ImageView) findViewById(R.id.invite);
+     //   ImageView help = (ImageView) findViewById(R.id.help);
+     //   ImageView call = (ImageView) findViewById(R.id.call);
+     //   ImageView write = (ImageView) findViewById(R.id.write);
+     //   ImageView mail = (ImageView) findViewById(R.id.mail);
+
+
+
+
+
 
         //categories listeners
 
@@ -161,6 +175,13 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 onRestart();
             }
         });
+
+
+        //setting listners
+
+
+
+
 
 
         //Top bar listeners
