@@ -131,17 +131,16 @@ public class MainActivity extends AppCompatActivity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(MainActivity.this,
+                    Intent intent = new Intent(getApplicationContext(),
                             NewUI.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     MainActivity.this.finish();
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     // do nothing
                 } finally {
                     MainActivity.this.finish();
                 }
-
             }
         };
         splashTread.start();
@@ -149,12 +148,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     private void init() {
-
-        //ParseUtils.registerParse(this);
-        //ParseAnalytics.trackAppOpenedInBackground(this.getIntent());
         Connector.connector = new Connector(this);
         azUtils.setPicassoInstance(this);
         BookmarksFetcher.indexBookmarks();
@@ -213,19 +207,11 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_about_, menu);
         return super.onCreateOptionsMenu(menu);
-        // Inflate the menu; this adds items to the action bar if it is present.
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
 
         switch (id) {
 
@@ -255,8 +241,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //action bar refreshing animation
-
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -280,12 +264,10 @@ public class MainActivity extends AppCompatActivity {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
     }
-
 }
 

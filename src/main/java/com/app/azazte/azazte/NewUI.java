@@ -20,12 +20,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.app.azazte.azazte.Beans.NewsCard;
+import com.app.azazte.azazte.Event.MessageEvent;
 import com.app.azazte.azazte.animation.DepthTransform;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.NewscardFragment;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import xdroid.toaster.Toaster;
 
 public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
 
@@ -35,14 +42,31 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public RelativeLayout topBar;
     Animation fadeIn;
     Animation fadeOut;
-    public int categoryChosen;
+    public static int categoryChosen;
     DrawerLayout Drawer;
-    ActionBarDrawerToggle mDrawerToggle;
+    public static NewUI instance;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        Toaster.toast("got the following event" + event.message);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        instance = this;
         setContentView(R.layout.activity_new_ui);
 
         fadeIn = AnimationUtils.loadAnimation(getApplicationContext(),
@@ -65,14 +89,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
         setupViewPager(getIntent().getIntExtra("category", 0));
-
-
-    //    setSideNavigationBar();
-
-
-
-
-
     }
 
     private void setSideNavigationBar() {
@@ -196,7 +212,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     }
 
 
-    private void setupViewPager(int category) {
+    public void setupViewPager(int category) {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setPageTransformer(true, new DepthTransform());
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -222,20 +238,20 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
 
     public void showTopBar() {
-        if (topBar.getVisibility() == View.GONE) {
+        if (topBar.getVisibility() == View.INVISIBLE) {
             topBar.setVisibility(View.VISIBLE);
             topBar.startAnimation(fadeIn);
             topBar.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     topBar.startAnimation(fadeOut);
-                    topBar.setVisibility(View.GONE);
+                    topBar.setVisibility(View.INVISIBLE);
                 }
             }, 10000);
 
         } else {
             topBar.startAnimation(fadeOut);
-            topBar.setVisibility(View.GONE);
+            topBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -268,10 +284,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             mFragmentList.add(fragment);
             //mFragmentTitleList.add(newsCard);
         }
-        //     @Override
-        // public CharSequence getPageTitle(int position) {
-//            return mFragmentTitleList.get(position);
-//        }
     }
 
     @Override
