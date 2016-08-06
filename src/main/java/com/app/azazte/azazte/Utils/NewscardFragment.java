@@ -3,13 +3,11 @@ package com.app.azazte.azazte.Utils;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,11 +26,7 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Fetcher.BookmarksFetcher;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
-
-import static xdroid.core.Global.getContext;
-import static xdroid.core.Global.getResources;
 
 public class NewscardFragment extends Fragment {
 
@@ -72,7 +66,7 @@ public class NewscardFragment extends Fragment {
         TextView author = (TextView) inflate.findViewById(R.id.author);
         ImageButton option = (ImageButton) inflate.findViewById(R.id.options);
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
-        final ImageView bookmark = (ImageView) inflate.findViewById(R.id.bookmark);
+        final ImageView bookmark = (ImageView) inflate.findViewById(R.id.write);
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
 
         //option tray buttons

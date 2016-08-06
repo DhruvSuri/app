@@ -145,7 +145,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:id="@+id/bookmark"
+                android:id="@+id/write"
                 android:scaleType="fitXY"
                 android:src="@drawable/bookmark"
                 android:layout_alignBottom="@+id/comment"

@@ -196,7 +196,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/bookmark"
+                android:id="@+id/write"
                 android:scaleType="fitXY"
                 android:src="@drawable/notbookmark"
                 android:elevation="20dp"
@@ -213,8 +213,8 @@
                 android:background="#00ffffff"
                 android:visibility="invisible"
                 android:layout_alignTop="@+id/comment"
-                android:layout_alignRight="@+id/bookmark"
-                android:layout_alignEnd="@+id/bookmark" />
+                android:layout_alignRight="@+id/write"
+                android:layout_alignEnd="@+id/write" />
 
 
 

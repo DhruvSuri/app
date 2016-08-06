@@ -9,21 +9,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Event.MessageEvent;
 import com.app.azazte.azazte.animation.DepthTransform;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.NewscardFragment;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -39,6 +41,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
     private BottomSheetBehavior categoriesSheet;
+    public RelativeLayout settingsDrawer;
     public RelativeLayout topBar;
     Animation fadeIn;
     Animation fadeOut;
@@ -75,12 +78,18 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 R.anim.fadeout);
 
         RelativeLayout bottomSheet = (RelativeLayout) findViewById(R.id.bottom_sheet);
+
+    settingsDrawer = (RelativeLayout) findViewById(R.id.settingsdrawers);
+
+
+
+
         topBar = (RelativeLayout) findViewById(R.id.topBar);
 
         setListeners();
         categoriesSheet = BottomSheetBehavior.from(bottomSheet);
 
-        ImageView categoriesButton = (ImageView) findViewById(R.id.categoriesButton);
+        ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
 
         categoriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +117,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView finace = (ImageView) findViewById(R.id.finance);
         ImageView economy = (ImageView) findViewById(R.id.economy);
         ImageView global = (ImageView) findViewById(R.id.global);
-        ImageView bookmark = (ImageView) findViewById(R.id.bookmark);
-        ImageView menuButton = (ImageView) findViewById(R.id.menubutton);
+       // final View bookmarkLine = (View) findViewById(R.id.bookmarkLine);
+        final ImageView settings = (ImageView) findViewById(R.id.settings);
+
+        TextView newsHead = (TextView) findViewById(R.id.headtxt);
 
 
         //settings items
@@ -128,6 +139,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
 
         //categories listeners
+
+
+
 
         allNews.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,10 +216,31 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
         //Top bar listeners
 
-        menuButton.setOnClickListener(new View.OnClickListener() {
+       settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //    Drawer.openDrawer(Gravity.LEFT);
+
+                if (settingsDrawer.getVisibility() == View.GONE) {
+                    settingsDrawer.setVisibility(View.VISIBLE);
+
+                    settingsDrawer.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            settingsDrawer.setVisibility(View.GONE);
+                            settingsDrawer.setClickable(false);
+                        }
+                    }, 10000);
+
+                } else {
+
+                    settingsDrawer.setVisibility(View.GONE);
+                    settingsDrawer.setClickable(false);
+                }
+
+
+
+
 
             }
         });
@@ -238,20 +273,20 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
 
     public void showTopBar() {
-        if (topBar.getVisibility() == View.INVISIBLE) {
+        if (topBar.getVisibility() == View.GONE) {
             topBar.setVisibility(View.VISIBLE);
             topBar.startAnimation(fadeIn);
             topBar.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     topBar.startAnimation(fadeOut);
-                    topBar.setVisibility(View.INVISIBLE);
+                    topBar.setVisibility(View.GONE);
                 }
             }, 10000);
 
         } else {
             topBar.startAnimation(fadeOut);
-            topBar.setVisibility(View.INVISIBLE);
+            topBar.setVisibility(View.GONE);
         }
     }
 

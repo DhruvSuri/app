@@ -15,6 +15,9 @@
         android:layout_width="match_parent"
         android:fitsSystemWindows="true"
         android:elevation="7dp"> -->
+
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,6 +25,8 @@
     android:layout_height="match_parent"
     tools:showIn="@layout/activity_welcome"
     android:background="#000000">
+
+    <include layout="@layout/settings"/>
 
 
     <RelativeLayout
@@ -38,7 +43,7 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:id="@+id/menubutton"
+            android:id="@+id/categories"
             android:src="@android:drawable/ic_dialog_dialer"
             android:layout_centerVertical="true" />
 
@@ -49,24 +54,27 @@
             android:text="All News"
             android:id="@+id/textView5"
             android:textColor="#ffffff"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/menubutton"
             android:textSize="18sp"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/categories"
+            android:layout_toRightOf="@+id/categories"
+            android:layout_marginLeft="5dp" />
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:id="@+id/categoriesButton"
+            android:id="@+id/top"
             android:src="@drawable/top"
-            android:layout_alignParentRight="false"
-            android:layout_margin="5dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/categoriesButton" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toLeftOf="@+id/settings"
+            android:layout_toStartOf="@+id/settings" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:id="@+id/categoriesButton"
+            android:id="@+id/settings"
             android:src="@drawable/ic_settings"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"

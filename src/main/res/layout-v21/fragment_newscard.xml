@@ -124,7 +124,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/bookmark"
+            android:id="@+id/write"
             android:scaleType="fitXY"
             android:src="@drawable/notbookmark"
             android:elevation="20dp"
@@ -260,6 +260,13 @@
 
 
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#42DD91"
+            android:id="@+id/bookmarkLine"
+            android:layout_below="@+id/header"
+            android:visibility="visible" />
 
         <ImageButton
             android:layout_width="40dp"

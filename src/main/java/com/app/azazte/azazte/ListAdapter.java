@@ -292,7 +292,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                   dateView = (TextView) itemView.findViewById(R.id.date);
                   share = (ImageView) itemView.findViewById(R.id.share);
                   newsImage = (ImageView) itemView.findViewById(R.id.imageView2);
-                  bookmark = (ImageView) itemView.findViewById(R.id.bookmark);
+                  bookmark = (ImageView) itemView.findViewById(R.id.write);
                   moreAt = (TextView) itemView.findViewById(R.id.moreAt);
                   impactText = (TextView) itemView.findViewById(R.id.impactTxt);
                   discuss = (TextView) itemView.findViewById(R.id.discuss);
@@ -318,7 +318,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         //  row.findViewById(R.id.moreAt).setVisibility(View.INVISIBLE);
         //  row.findViewById(R.id.newsSource).setVisibility(View.INVISIBLE);
         row.findViewById(R.id.share).setVisibility(View.INVISIBLE);
-        row.findViewById(R.id.bookmark).setVisibility(View.INVISIBLE);
+        row.findViewById(R.id.write).setVisibility(View.INVISIBLE);
         row.findViewById(R.id.discuss).setVisibility(View.INVISIBLE);
         row.findViewById(R.id.comment).setVisibility(View.INVISIBLE);
         row.findViewById(R.id.heart).setVisibility(View.INVISIBLE);
@@ -331,7 +331,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         //  row.findViewById(R.id.moreAt).setVisibility(View.VISIBLE);
         //  row.findViewById(R.id.newsSource).setVisibility(View.VISIBLE);
         row.findViewById(R.id.share).setVisibility(View.VISIBLE);
-        row.findViewById(R.id.bookmark).setVisibility(View.VISIBLE);
+        row.findViewById(R.id.write).setVisibility(View.VISIBLE);
         row.findViewById(R.id.discuss).setVisibility(View.VISIBLE);
         row.findViewById(R.id.comment).setVisibility(View.VISIBLE);
         row.findViewById(R.id.heart).setVisibility(View.VISIBLE);
