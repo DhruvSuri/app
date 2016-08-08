@@ -103,6 +103,8 @@
                     android:text="@string/impact"
                     android:textSize="15sp"
                     android:typeface="normal"
+
+
                     android:textIsSelectable="false"
                     android:singleLine="false"
                     android:lineSpacingExtra="3dp"
@@ -119,17 +121,6 @@
 
             </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>
-
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/write"
-            android:scaleType="fitXY"
-            android:src="@drawable/notbookmark"
-            android:elevation="20dp"
-            android:layout_alignStart="@+id/share"
-            android:visibility="invisible" />
 
 
         <RelativeLayout
@@ -264,7 +255,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#42DD91"
-            android:id="@+id/view2"
+            android:id="@+id/bookmarkLine"
             android:layout_below="@+id/header"
             android:visibility="visible" />
 
