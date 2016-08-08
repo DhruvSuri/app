@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -45,7 +46,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public RelativeLayout topBar;
     Animation fadeIn;
     Animation fadeOut;
-    public static int categoryChosen;
+    public static Integer categoryChosen;
+    public static String categoryChosenString;
     DrawerLayout Drawer;
     public static NewUI instance;
 
@@ -71,7 +73,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         super.onCreate(savedInstanceState);
         instance = this;
         setContentView(R.layout.activity_new_ui);
-
         fadeIn = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fadein);
         fadeOut = AnimationUtils.loadAnimation(getApplicationContext(),
@@ -79,9 +80,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
         RelativeLayout bottomSheet = (RelativeLayout) findViewById(R.id.bottom_sheet);
 
-    settingsDrawer = (RelativeLayout) findViewById(R.id.settingsdrawers);
-
-
+        settingsDrawer = (RelativeLayout) findViewById(R.id.settingsdrawers);
 
 
         topBar = (RelativeLayout) findViewById(R.id.topBar);
@@ -97,15 +96,22 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
-        setupViewPager(getIntent().getIntExtra("category", 0));
+        int category = getIntent().getIntExtra("category", 0);
+        TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
+        if (category == 0) {
+            setupViewPager(category);
+            categoriesText.setText("All News");
+        } else {
+            categoriesText.setText(getIntent().getStringExtra("categoryChosenString"));
+        }
     }
 
     private void setSideNavigationBar() {
 
-     //  NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-     //  setupDrawerContent(navigationView);
+        //  NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //  setupDrawerContent(navigationView);
 
-     //  Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
+        //  Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
 
     }
 
@@ -117,30 +123,22 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView finace = (ImageView) findViewById(R.id.finance);
         ImageView economy = (ImageView) findViewById(R.id.economy);
         ImageView global = (ImageView) findViewById(R.id.global);
-       // final View bookmarkLine = (View) findViewById(R.id.bookmarkLine);
+        ImageView bookmark = (ImageView) findViewById(R.id.bookmark);
         final ImageView settings = (ImageView) findViewById(R.id.settings);
-
-        TextView newsHead = (TextView) findViewById(R.id.headtxt);
 
 
         //settings items
 
-     //   ImageView privacy = (ImageView) findViewById(R.id.privacy);
-     //   ImageView about = (ImageView) findViewById(R.id.about);
-     //   ImageView invite = (ImageView) findViewById(R.id.invite);
-     //   ImageView help = (ImageView) findViewById(R.id.help);
-     //   ImageView call = (ImageView) findViewById(R.id.call);
-     //   ImageView write = (ImageView) findViewById(R.id.write);
-     //   ImageView mail = (ImageView) findViewById(R.id.mail);
-
-
-
-
+        //   ImageView privacy = (ImageView) findViewById(R.id.privacy);
+        //   ImageView about = (ImageView) findViewById(R.id.about);
+        //   ImageView invite = (ImageView) findViewById(R.id.invite);
+        //   ImageView help = (ImageView) findViewById(R.id.help);
+        //   ImageView call = (ImageView) findViewById(R.id.call);
+        //   ImageView write = (ImageView) findViewById(R.id.write);
+        //   ImageView mail = (ImageView) findViewById(R.id.mail);
 
 
         //categories listeners
-
-
 
 
         allNews.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +146,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 setupViewPager(0);
                 categoryChosen = 0;
+                categoryChosenString = "All News";
                 onRestart();
             }
         });
@@ -157,6 +156,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 setupViewPager(1);
                 categoryChosen = 1;
+                categoryChosenString = "Economy";
                 onRestart();
             }
         });
@@ -166,6 +166,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 setupViewPager(2);
                 categoryChosen = 2;
+                categoryChosenString = "Business";
                 onRestart();
             }
         });
@@ -175,6 +176,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 setupViewPager(3);
                 categoryChosen = 3;
+                categoryChosenString = "Tax";
                 onRestart();
             }
         });
@@ -184,6 +186,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 setupViewPager(4);
                 categoryChosen = 4;
+                categoryChosenString = "Finance";
                 onRestart();
             }
         });
@@ -193,6 +196,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 setupViewPager(5);
                 categoryChosen = 5;
+                categoryChosenString = "Law";
                 onRestart();
             }
         });
@@ -202,21 +206,22 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 setupViewPager(6);
                 categoryChosen = 6;
+                categoryChosenString = "Global";
                 onRestart();
             }
         });
 
+        bookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setupViewPager(-1);
+                categoryChosen = -1;
+                categoryChosenString = "Bookmarks";
+                onRestart();
+            }
+        });
 
-        //setting listners
-
-
-
-
-
-
-        //Top bar listeners
-
-       settings.setOnClickListener(new View.OnClickListener() {
+        settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -231,7 +236,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                             settingsDrawer.setClickable(false);
                         }
                     }, 10000);
-
                 } else {
 
                     settingsDrawer.setVisibility(View.GONE);
@@ -239,15 +243,12 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 }
 
 
-
-
-
             }
         });
     }
 
 
-    public void setupViewPager(int category) {
+    public void setupViewPager(Integer category) {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setPageTransformer(true, new DepthTransform());
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -256,7 +257,15 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         adapter.notifyDataSetChanged();
     }
 
-    private void setupNewsCards(ViewPagerAdapter adapter, int category) {
+    private void setupNewsCards(ViewPagerAdapter adapter, Integer category) {
+        if (category == -1) {
+            ArrayList<NewsCard> allBookmarks = Connector.getInstance().getAllBookmarks();
+            for (NewsCard newsCard : allBookmarks) {
+                adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
+            }
+            return;
+        }
+
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
         for (NewsCard newsCard : allNews) {
             int cardCategory;
@@ -328,6 +337,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         super.onRestart();
         Intent intent = new Intent(this, NewUI.class);
         intent.putExtra("category", categoryChosen);
+        intent.putExtra("categoryChosenString", categoryChosenString);
         startActivity(intent);
         finish();
     }
@@ -338,7 +348,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                       // ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
+                        // ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
                         switch (menuItem.getItemId()) {
                             case R.id.aboutUs:
                                 Intent i = new Intent(getBaseContext(), About_Activity.class);

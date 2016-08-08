@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -68,12 +69,9 @@ public class NewscardFragment extends Fragment {
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
         final ImageView bookmark = (ImageView) inflate.findViewById(R.id.write);
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
+        TextView impact = (TextView) inflate.findViewById(R.id.impact);
+        final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
 
-        //option tray buttons
-        ImageButton share =(ImageButton) trayIcons.findViewById(R.id.share);
-        ImageButton whatsapp =(ImageButton) trayIcons.findViewById(R.id.whatsapp);
-        ImageButton facebook =(ImageButton) trayIcons.findViewById(R.id.facebook);
-        ImageButton twiter =(ImageButton) trayIcons.findViewById(R.id.twiter);
 
         setImageIntoView(picasso, image, newsCard.imageUrl);
         newshead.setText(newsCard.newsHead);
@@ -81,20 +79,40 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName);
         date.setText(newsCard.date);
         author.setText(newsCard.author);
+        impact.setText(newsCard.impact);
+        if (newsCard.isBookmarked == 1){
+            bookmarkView.setBackgroundColor(Color.parseColor("#42DD91"));
+        }else{
+            bookmarkView.setBackgroundColor(255);
+        }
 
 
 
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 ((NewUI) getActivity()).showTopBar();
-
             }
         });
 
 
-     moreAt.setOnClickListener(new View.OnClickListener() {
+        newshead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (newsCard.isBookmarked == 0) {
+                    Connector.getInstance().setBookmarked(newsCard.id);
+                    newsCard.isBookmarked = 1;
+                    bookmarkView.setBackgroundColor(Color.parseColor("#42DD91"));
+                } else {
+                    Connector.getInstance().unsetBookmarked(newsCard.id);
+                    newsCard.isBookmarked = 0;
+                    bookmarkView.setBackgroundColor(255);
+                }
+            }
+        });
+
+
+        moreAt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -122,38 +140,6 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-
-        bookmark.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-            @Override
-            public void onClick(View v) {
-                MixPanelUtils.track(MixPanelUtils.BOOKMARK + newsCard.newsHead);
-
-
-                if (!BookmarksFetcher.bookmarkSet.contains(newsCard.id)) {
-
-                    bookmark.setImageDrawable(getResources().getDrawable(R.drawable.bookmark));
-
-
-                    BookmarksFetcher.bookmarkSet.add(newsCard.id);
-                    Connector.connector.setBookmarked(newsCard.id);
-                } else {
-                    //  cardView.setCardBackgroundColor(255);
-
-
-                    bookmark.setImageDrawable(getResources().getDrawable(R.drawable.notbookmark));
-                    Connector.connector.unsetBookmarked(newsCard.id);
-                    //headView.setTextColor(getContext().getColor(R.color.colorPrimary));
-                    BookmarksFetcher.bookmarkSet.remove(newsCard.id);
-                    newsCard.isBookmarked = 0;
-                }
-               // BookmarksFetcher.refresh();
-            }
-        });
-
-
-
-
         newstxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,7 +159,6 @@ public class NewscardFragment extends Fragment {
         return inflate;
 
     }
-
 
 
     // TODO: Rename method, update argument and hook method into UI event
