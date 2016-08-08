@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -41,7 +40,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
     private BottomSheetBehavior categoriesSheet;
-    public RelativeLayout settingsDrawer;
+    private BottomSheetBehavior settingsDrawer;
+
     public RelativeLayout topBar;
     Animation fadeIn;
     Animation fadeOut;
@@ -79,7 +79,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
         RelativeLayout bottomSheet = (RelativeLayout) findViewById(R.id.bottom_sheet);
 
-    settingsDrawer = (RelativeLayout) findViewById(R.id.settingsdrawers);
+        RelativeLayout settingssheet = (RelativeLayout) findViewById(R.id.settingsdrawers);
+
+
 
 
 
@@ -87,7 +89,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         topBar = (RelativeLayout) findViewById(R.id.topBar);
 
         setListeners();
+        setSettingsListeners();
         categoriesSheet = BottomSheetBehavior.from(bottomSheet);
+        settingsDrawer = BottomSheetBehavior.from(settingssheet);
 
         ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
 
@@ -100,6 +104,152 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         setupViewPager(getIntent().getIntExtra("category", 0));
     }
 
+    private void setSettingsListeners() {
+        final ImageView notification = (ImageView) findViewById(R.id.notification);
+        final ImageView image = (ImageView) findViewById(R.id.noimage);
+        final ImageView twilight = (ImageView) findViewById(R.id.night);
+        ImageView privacy = (ImageView) findViewById(R.id.privacy);
+        ImageView rate = (ImageView) findViewById(R.id.rate);
+        ImageView about = (ImageView) findViewById(R.id.about);
+        ImageView invite = (ImageView) findViewById(R.id.invite);
+        ImageView shareApp = (ImageView) findViewById(R.id.shareApp);
+        ImageView write = (ImageView) findViewById(R.id.write);
+        ImageView feedback = (ImageView) findViewById(R.id.feedback);
+        ImageView contactUs = (ImageView) findViewById(R.id.mailus);
+
+
+
+
+
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+                notification.setImageResource(R.drawable.bellon);
+            }
+        });
+
+
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                image.setImageResource(R.drawable.imageon);
+            }
+        });
+
+        twilight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                twilight.setImageResource(R.drawable.lighton);
+            }
+        });
+
+
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent rate = new Intent(Intent.ACTION_VIEW);
+                rate.setData(Uri.parse("market://details?id=" + getPackageName()));
+                startActivity(rate);
+
+            }
+        });
+
+
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), About_Activity.class);
+                startActivity(i);
+
+
+            }
+        });
+
+
+        invite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent taf = new Intent();
+                taf.setAction(Intent.ACTION_SEND);
+                taf.putExtra(Intent.EXTRA_TEXT, "Daily updates on Economy, Finance, Business, Tax & Law in 70 words!\n" +
+                        "Download app: https://goo.gl/BjupvI");
+                taf.setType("text/plain");
+                startActivity(Intent.createChooser(taf, "Invite A Friend"));
+
+            }
+        });
+
+        shareApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });
+
+        write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setType("plain/text");
+                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Azazte app");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(sendIntent);
+
+            }
+        });
+
+        contactUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setType("plain/text");
+                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Write your query here");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(sendIntent);
+
+            }
+        });
+
+
+
+
+
+
+    }
+
     private void setSideNavigationBar() {
 
      //  NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -110,6 +260,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     }
 
     private void setListeners() {
+
         ImageView allNews = (ImageView) findViewById(R.id.allnews);
         ImageView business = (ImageView) findViewById(R.id.business);
         ImageView tax = (ImageView) findViewById(R.id.tax);
@@ -220,25 +371,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
 
-                if (settingsDrawer.getVisibility() == View.GONE) {
-                    settingsDrawer.setVisibility(View.VISIBLE);
-
-                    settingsDrawer.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            settingsDrawer.setVisibility(View.GONE);
-                            settingsDrawer.setClickable(false);
-                        }
-                    }, 10000);
-
-                } else {
-
-                    settingsDrawer.setVisibility(View.GONE);
-                    settingsDrawer.setClickable(false);
-                }
-
-
+                settingsDrawer.setState(BottomSheetBehavior.STATE_EXPANDED);
 
 
 

@@ -22,14 +22,11 @@
             android:src="@drawable/image1"
             android:scaleType="fitXY" />
 
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:padding="0dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/header">
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_below="@+id/header">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +52,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/newstxt"
-                    android:id="@+id/linearLayout13">
+                    android:id="@+id/linearLayout13"
+                    android:visibility="visible">
 
                     <View
                         android:layout_width="20dp"
@@ -68,7 +66,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:visibility="visible" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -77,7 +76,8 @@
                         android:text="IMPACT"
                         android:id="@+id/textView18"
                         android:typeface="serif"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:visibility="visible" />
 
                     <View
                         android:layout_width="match_parent"
@@ -90,10 +90,18 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:visibility="visible" />
                 </LinearLayout>
             <!-- Content -->
 
+
+                <RelativeLayout
+                    android:id="@+id/impactLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearLayout13"
+                    android:layout_marginTop="5dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,19 +114,21 @@
             android:textIsSelectable="false"
             android:singleLine="false"
             android:lineSpacingExtra="3dp"
-            android:textColor="#2a2a2a"
+            android:textColor="#141414"
             android:paddingLeft="10dp"
             android:paddingTop="3dp"
             android:paddingRight="10dp"
             android:background="#ffffff"
-            android:textStyle="italic"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/linearLayout13"
-            android:paddingBottom="20dp" />
+
+            android:paddingBottom="20dp"
+            android:layout_alignParentTop="true"
+            android:textStyle="normal" />
 
 
+</RelativeLayout>
             </RelativeLayout>
-        </android.support.v4.widget.NestedScrollView>
+
 
 
         <ImageView
@@ -213,27 +223,33 @@
 
             <RelativeLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/headtxt"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:id="@+id/relativeLayout2">
 
-                <TextView
+                <RelativeLayout
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Anjali Jain"
-                    android:id="@+id/author"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:visibility="visible"
-                    android:paddingRight="10dp"
-                    android:layout_below="@+id/headtxt"
-                    android:layout_toLeftOf="@+id/date"
-                    android:layout_toStartOf="@+id/date" />
+                    android:layout_centerHorizontal="true">
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Anjali Jain"
+                        android:id="@+id/author"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp"
+                        android:visibility="visible"
+                        android:paddingRight="10dp"
+                        android:layout_toEndOf="@+id/newsSource"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="false" />
+
+                    <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -243,7 +259,7 @@
                     android:layout_toRightOf="@+id/author"
                     android:textSize="10sp" />
 
-                <TextView
+                    <TextView
                     android:layout_width="80dp"
                     android:layout_height="15dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
@@ -253,9 +269,12 @@
                     android:textSize="10sp"
                     android:visibility="visible"
                     android:paddingRight="10dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center_horizontal"></TextView>
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentEnd="false"
+                        android:layout_toRightOf="@+id/textView20"
+                        android:layout_marginLeft="5dp"></TextView>
+                    </RelativeLayout>
             </RelativeLayout>
 
 

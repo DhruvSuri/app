@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#ca000000"
     android:id="@+id/settingsdrawers"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
    android:layout_gravity=""
     android:elevation="20dp"
     android:touchscreenBlocksFocus="false"
-    android:visibility="gone"
     android:contextClickable="true">
 
     <RelativeLayout
@@ -18,24 +18,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:touchscreenBlocksFocus="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="15dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:paddingBottom="5dp"
         android:paddingTop="10dp"
-        android:layout_marginTop="60dp">
+        android:layout_below="@+id/textView33">
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:id="@+id/write"
             android:src="@drawable/write"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/invite"
-            android:layout_alignLeft="@+id/about"
-            android:layout_alignStart="@+id/about" />
+            android:layout_alignStart="@+id/about"
+            android:layout_below="@+id/textView27"
+            android:layout_marginTop="30dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,93 +41,92 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Notifications"
             android:id="@+id/textView22"
-            android:layout_below="@+id/notification"
-            android:layout_alignLeft="@+id/notification"
-            android:layout_alignStart="@+id/notification"
-            android:layout_alignRight="@+id/notification"
-            android:layout_alignEnd="@+id/notification"
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
+            android:maxLines="1"
+            android:layout_below="@+id/notification"
+            android:layout_alignRight="@+id/notification"
+            android:layout_alignEnd="@+id/notification"
             android:textSize="12sp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:id="@+id/rate"
             android:src="@drawable/rate"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/image"
+            android:layout_below="@+id/view2"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="36dp" />
+            android:layout_marginTop="20dp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:id="@+id/about"
             android:src="@drawable/about"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/rate"
-            android:layout_alignLeft="@+id/night"
-            android:layout_alignStart="@+id/night" />
+            android:layout_alignStart="@+id/night"
+            android:layout_below="@+id/view2"
+            android:layout_marginTop="20dp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:id="@+id/night"
             android:src="@drawable/lightoff"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:id="@+id/privacy"
             android:src="@drawable/privacy"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/rate"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view2"
+            android:layout_marginTop="20dp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:id="@+id/image"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:id="@+id/noimage"
             android:src="@drawable/image"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/night"
-            android:layout_alignLeft="@+id/rate"
-            android:layout_alignStart="@+id/rate" />
+            android:layout_alignStart="@+id/rate"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:id="@+id/invite"
-            android:src="@drawable/tell"
+            android:src="@drawable/invite"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/privacy"
-            android:layout_alignLeft="@+id/privacy"
+            android:layout_below="@+id/textView25"
             android:layout_alignStart="@+id/privacy"
-            android:layout_marginTop="31dp" />
+            android:layout_marginTop="30dp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:id="@+id/shareApp"
-            android:src="@drawable/share2"
+            android:src="@drawable/share"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/invite"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textView26"
+            android:layout_marginTop="30dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,20 +137,22 @@
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
             android:layout_below="@+id/write"
+            android:layout_alignBottom="@+id/textView29"
             android:layout_alignLeft="@+id/write"
             android:layout_alignStart="@+id/write"
             android:textSize="12sp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:id="@+id/notification"
             android:src="@drawable/bell"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -164,10 +163,10 @@
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
             android:layout_alignTop="@+id/textView22"
-            android:layout_alignLeft="@+id/image"
-            android:layout_alignStart="@+id/image"
-            android:layout_alignRight="@+id/image"
-            android:layout_alignEnd="@+id/image"
+            android:layout_alignLeft="@+id/noimage"
+            android:layout_alignStart="@+id/noimage"
+            android:layout_alignRight="@+id/noimage"
+            android:layout_alignEnd="@+id/noimage"
             android:textSize="12sp" />
 
         <TextView
@@ -258,72 +257,46 @@
             android:layout_below="@+id/shareApp"
             android:layout_alignLeft="@+id/shareApp"
             android:layout_alignStart="@+id/shareApp"
-            android:layout_alignRight="@+id/shareApp"
-            android:layout_alignEnd="@+id/shareApp"
             android:textSize="12sp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:id="@+id/feedback"
             android:src="@drawable/feed"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/callus"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="false" />
+            android:layout_toRightOf="@+id/textView28"
+            android:layout_toEndOf="@+id/textView28"
+            android:layout_below="@+id/textView29"
+            android:layout_marginTop="30dp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:id="@+id/callus"
-            android:src="@drawable/call"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/textView23"
-            android:layout_alignLeft="@+id/textView29"
-            android:layout_alignStart="@+id/textView29" />
-
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:id="@+id/mailus"
             android:src="@drawable/mailus"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
             android:layout_below="@+id/textView23"
-            android:layout_alignLeft="@+id/textView23"
-            android:layout_alignStart="@+id/textView23" />
+            android:layout_toRightOf="@+id/shareApp"
+            android:layout_toEndOf="@+id/shareApp"
+            android:layout_marginTop="30dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Call us"
-            android:id="@+id/textView10"
-            android:textColor="#ffffff"
-            android:gravity="center_horizontal"
-            android:layout_below="@+id/callus"
-            android:layout_alignLeft="@+id/callus"
-            android:layout_alignStart="@+id/callus"
-            android:layout_alignRight="@+id/callus"
-            android:layout_alignEnd="@+id/callus"
-            android:textSize="12sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Mail us"
+            android:text="Contact Us"
             android:id="@+id/textView11"
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
             android:layout_below="@+id/mailus"
             android:layout_alignLeft="@+id/mailus"
             android:layout_alignStart="@+id/mailus"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:layout_toLeftOf="@+id/textView23"
+            android:layout_toStartOf="@+id/textView23" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -333,14 +306,46 @@
             android:id="@+id/textView"
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:layout_alignRight="@+id/feedback"
+            android:layout_alignEnd="@+id/feedback"
             android:textSize="12sp"
             android:layout_below="@+id/feedback"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/feedback"
-            android:layout_alignEnd="@+id/feedback" />
+            android:layout_alignLeft="@+id/feedback"
+            android:layout_alignStart="@+id/feedback" />
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ffffffff"
+            android:id="@+id/view2"
+            android:visibility="visible"
+            android:layout_below="@+id/textView21"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Settings"
+        android:id="@+id/textView33"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ffffffff"
+        android:id="@+id/view2"
+        android:visibility="visible"
+        android:layout_alignParentTop="true" />
 
 
 </RelativeLayout>
