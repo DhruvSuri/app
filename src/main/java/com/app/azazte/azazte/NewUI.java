@@ -78,18 +78,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 R.anim.fadein);
         fadeOut = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fadeout);
-
         RelativeLayout bottomSheet = (RelativeLayout) findViewById(R.id.bottom_sheet);
-
         RelativeLayout settingssheet = (RelativeLayout) findViewById(R.id.settingsdrawers);
-
-
-
-
         topBar = (RelativeLayout) findViewById(R.id.topBar);
-
         setListeners();
-        setSettingsListeners();
+        setListeners();
         categoriesSheet = BottomSheetBehavior.from(bottomSheet);
         settingsDrawer = BottomSheetBehavior.from(settingssheet);
 
@@ -102,168 +95,14 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
         int category = getIntent().getIntExtra("category", 0);
+        int newsPostion = getIntent().getIntExtra("newsPostion", 0);
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         if (category == 0) {
-            setupViewPager(category);
             categoriesText.setText("All News");
         } else {
             categoriesText.setText(getIntent().getStringExtra("categoryChosenString"));
         }
-    }
-
-    private void setSettingsListeners() {
-        final ImageView notification = (ImageView) findViewById(R.id.notification);
-        final ImageView image = (ImageView) findViewById(R.id.noimage);
-        final ImageView twilight = (ImageView) findViewById(R.id.night);
-        ImageView privacy = (ImageView) findViewById(R.id.privacy);
-        ImageView rate = (ImageView) findViewById(R.id.rate);
-        ImageView about = (ImageView) findViewById(R.id.about);
-        ImageView invite = (ImageView) findViewById(R.id.invite);
-        ImageView shareApp = (ImageView) findViewById(R.id.shareApp);
-        ImageView write = (ImageView) findViewById(R.id.write);
-        ImageView feedback = (ImageView) findViewById(R.id.feedback);
-        ImageView contactUs = (ImageView) findViewById(R.id.mailus);
-
-
-
-
-
-
-        notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-
-                notification.setImageResource(R.drawable.bellon);
-            }
-        });
-
-
-
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                image.setImageResource(R.drawable.imageon);
-            }
-        });
-
-        twilight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                twilight.setImageResource(R.drawable.lighton);
-            }
-        });
-
-
-        privacy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        rate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent rate = new Intent(Intent.ACTION_VIEW);
-                rate.setData(Uri.parse("market://details?id=" + getPackageName()));
-                startActivity(rate);
-
-            }
-        });
-
-
-
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), About_Activity.class);
-                startActivity(i);
-
-
-            }
-        });
-
-
-        invite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent taf = new Intent();
-                taf.setAction(Intent.ACTION_SEND);
-                taf.putExtra(Intent.EXTRA_TEXT, "Daily updates on Economy, Finance, Business, Tax & Law in 70 words!\n" +
-                        "Download app: https://goo.gl/BjupvI");
-                taf.setType("text/plain");
-                startActivity(Intent.createChooser(taf, "Invite A Friend"));
-
-            }
-        });
-
-        shareApp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-            }
-        });
-
-        write.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                sendIntent.setType("plain/text");
-                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Azazte app");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                startActivity(sendIntent);
-
-            }
-        });
-
-        contactUs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                sendIntent.setType("plain/text");
-                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Write your query here");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                startActivity(sendIntent);
-
-            }
-        });
-
-
-
-
-
-
-    }
-
-    private void setSideNavigationBar() {
-
-        //  NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //  setupDrawerContent(navigationView);
-
-        //  Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-
+        setupViewPager(category);
     }
 
     private void setListeners() {
@@ -380,7 +219,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 settingsDrawer.setState(BottomSheetBehavior.STATE_EXPANDED);
 
 
-
             }
         });
     }
@@ -446,7 +284,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<NewsCard> mFragmentTitleList = new ArrayList<>();
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);

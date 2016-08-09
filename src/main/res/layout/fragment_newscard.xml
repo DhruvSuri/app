@@ -189,7 +189,7 @@
             <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:id="@+id/imageButton"
+                android:id="@+id/shareNews"
                 android:src="@drawable/share2"
                 android:scaleType="fitXY"
                 android:background="#00ffffff"
@@ -239,7 +239,7 @@
                     android:layout_height="15dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Jun 24, 2016"
-                    android:id="@+id/date"
+                    android:id="@+id/dateText"
                     android:textColor="#ffffff"
                     android:textSize="10sp"
                     android:visibility="visible"

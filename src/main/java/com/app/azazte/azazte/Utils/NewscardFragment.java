@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -28,6 +29,9 @@ import com.app.azazte.azazte.Fetcher.BookmarksFetcher;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class NewscardFragment extends Fragment {
 
@@ -53,7 +57,7 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
+        final View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
         View trayIcons = inflater.inflate(R.layout.option_dialog, container, false);
         slideup = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slideup);
@@ -62,7 +66,7 @@ public class NewscardFragment extends Fragment {
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
         TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
-        TextView date = (TextView) inflate.findViewById(R.id.date);
+        TextView date = (TextView) inflate.findViewById(R.id.dateText);
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
         ImageButton option = (ImageButton) inflate.findViewById(R.id.options);
@@ -71,7 +75,7 @@ public class NewscardFragment extends Fragment {
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         TextView impact = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
-
+        ImageButton shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
 
         setImageIntoView(picasso, image, newsCard.imageUrl);
         newshead.setText(newsCard.newsHead);
@@ -80,13 +84,11 @@ public class NewscardFragment extends Fragment {
         date.setText(newsCard.date);
         author.setText(newsCard.author);
         impact.setText(newsCard.impact);
-        if (newsCard.isBookmarked == 1){
+        if (newsCard.isBookmarked == 1) {
             bookmarkView.setBackgroundColor(Color.parseColor("#42DD91"));
-        }else{
+        } else {
             bookmarkView.setBackgroundColor(255);
         }
-
-
 
         header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +96,6 @@ public class NewscardFragment extends Fragment {
                 ((NewUI) getActivity()).showTopBar();
             }
         });
-
 
         newshead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,15 +116,12 @@ public class NewscardFragment extends Fragment {
         moreAt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 MixPanelUtils.track(MixPanelUtils.ON_MORE_AT + newsCard.newsHead);
                 String url = newsCard.newsSourceUrl;
                 Intent intent = new Intent(getContext(), AzazteWebView.class);
                 intent.putExtra("url", url);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
-
-
             }
         });
 
@@ -136,7 +134,6 @@ public class NewscardFragment extends Fragment {
                 intent.putExtra("url", url);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
-
             }
         });
 
@@ -147,25 +144,49 @@ public class NewscardFragment extends Fragment {
 
             }
         });
-        option.setOnClickListener(new View.OnClickListener() {
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                showOptionsOverLay();
-
+            public void onClick(View view) {
+                shareBitmap(inflate, newsCard.id);
             }
         });
 
+        option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOptionsOverLay();
+            }
+        });
         return inflate;
-
     }
-
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    private void shareBitmap(View view, String fileName) {
+        try {
+            view.buildDrawingCache(true);
+            Bitmap bitmap = view.getDrawingCache();
+            File file = new File(getContext().getCacheDir(), fileName + ".png");
+            FileOutputStream fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
+            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.setType("image/png");
+            startActivity(Intent.createChooser(intent,"finup"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -190,7 +211,7 @@ public class NewscardFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
@@ -224,7 +245,6 @@ public class NewscardFragment extends Fragment {
     }
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
-
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Picasso.with(imageView.getContext().getApplicationContext())
                     .load(imageUrl)
