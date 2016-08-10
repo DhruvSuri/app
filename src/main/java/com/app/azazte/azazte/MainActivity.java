@@ -65,43 +65,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         init();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
-
-
-
+        ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
         StartSplashScreen();
 
 
+        //    setupToolbar();
 
-    //    setupToolbar();
-
-    //    View BottomSheet = findViewById(R.id.bottom_sheet);
-    //    categorySheet = BottomSheetBehavior.from(BottomSheet);
-    //    CategorySheet();
+        //    View BottomSheet = findViewById(R.id.bottom_sheet);
+        //    categorySheet = BottomSheetBehavior.from(BottomSheet);
+        //    CategorySheet();
         //   categorySheet.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-    //    setupViewPager();
-     // Categories.filterNewsByCategories();
+        //    setupViewPager();
+        // Categories.filterNewsByCategories();
 
-        ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
 
         //   SharedPreferences shaPreferences = getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
-    //   SharedPreferencesUtils.sharedPreferences = shaPreferences;
-    //   if (shaPreferences.getBoolean("second", true)) {
-    //       SharedPreferences sharedPreferences = shaPreferences;
-    //       final SharedPreferences.Editor editor = sharedPreferences.edit();
-    //       editor.putBoolean("second", false);
-    //       //For commit the changes, Use either editor.commit(); or  editor.apply();.
-    //       editor.commit();
+        //   SharedPreferencesUtils.sharedPreferences = shaPreferences;
+        //   if (shaPreferences.getBoolean("second", true)) {
+        //       SharedPreferences sharedPreferences = shaPreferences;
+        //       final SharedPreferences.Editor editor = sharedPreferences.edit();
+        //       editor.putBoolean("second", false);
+        //       //For commit the changes, Use either editor.commit(); or  editor.apply();.
+        //       editor.commit();
 
-    //       //showOptionsOverLay();
-    //   }
+        //       //showOptionsOverLay();
+        //   }
 
-                 // Finally we set the drawer toggle sync State
+        // Finally we set the drawer toggle sync State
 
 
     }
@@ -109,10 +103,9 @@ public class MainActivity extends AppCompatActivity {
     private void StartSplashScreen() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         anim.reset();
-        LinearLayout l=(LinearLayout) findViewById(R.id.lin_lay);
+        LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
         l.startAnimation(anim);
-
 
 
         anim = AnimationUtils.loadAnimation(this, R.anim.translate);
@@ -151,8 +144,6 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         Connector.connector = new Connector(this);
         azUtils.setPicassoInstance(this);
-        BookmarksFetcher.indexBookmarks();
-        new ImageFetcher(this);
         MixPanelUtils.init(this);
         MixPanelUtils.setGCM();
         emailAddress = "";
@@ -264,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
+
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);

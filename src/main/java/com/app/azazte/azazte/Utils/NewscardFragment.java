@@ -58,7 +58,6 @@ public class NewscardFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
-        View trayIcons = inflater.inflate(R.layout.option_dialog, container, false);
         slideup = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slideup);
         slidedown = AnimationUtils.loadAnimation(getContext(),
@@ -171,6 +170,7 @@ public class NewscardFragment extends Fragment {
     private void shareBitmap(View view, String fileName) {
         try {
             view.buildDrawingCache(true);
+            view.setDrawingCacheEnabled(true);
             Bitmap bitmap = view.getDrawingCache();
             File file = new File(getContext().getCacheDir(), fileName + ".png");
             FileOutputStream fOut = new FileOutputStream(file);

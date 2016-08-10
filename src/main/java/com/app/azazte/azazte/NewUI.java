@@ -42,7 +42,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
     private BottomSheetBehavior categoriesSheet;
-    private BottomSheetBehavior settingsDrawer;
+    private BottomSheetBehavior settingSheet;
 
     public RelativeLayout topBar;
     Animation fadeIn;
@@ -66,7 +66,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        Toaster.toast("got the following event" + event.message);
+        //Toaster.toast("got the following event" + event.message);
     }
 
     @Override
@@ -78,22 +78,14 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 R.anim.fadein);
         fadeOut = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fadeout);
-        RelativeLayout bottomSheet = (RelativeLayout) findViewById(R.id.bottom_sheet);
-        RelativeLayout settingssheet = (RelativeLayout) findViewById(R.id.settingsdrawers);
+        RelativeLayout categoriesLayout = (RelativeLayout) findViewById(R.id.bottom_sheet);
+        RelativeLayout settingsLayout = (RelativeLayout) findViewById(R.id.settings_sheet);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         setListeners();
         setListeners();
-        categoriesSheet = BottomSheetBehavior.from(bottomSheet);
-        settingsDrawer = BottomSheetBehavior.from(settingssheet);
+        categoriesSheet = BottomSheetBehavior.from(categoriesLayout);
+        settingSheet = BottomSheetBehavior.from(settingsLayout);
 
-        ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
-
-        categoriesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-        });
         int category = getIntent().getIntExtra("category", 0);
         int newsPostion = getIntent().getIntExtra("newsPostion", 0);
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
@@ -115,7 +107,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView economy = (ImageView) findViewById(R.id.economy);
         ImageView global = (ImageView) findViewById(R.id.global);
         ImageView bookmark = (ImageView) findViewById(R.id.bookmark);
-        final ImageView settings = (ImageView) findViewById(R.id.settings);
+        ImageView settings = (ImageView) findViewById(R.id.settings);
+        ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
 
 
         //settings items
@@ -215,10 +208,16 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                categoriesSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                settingSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
 
-                settingsDrawer.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-
+        categoriesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
     }
