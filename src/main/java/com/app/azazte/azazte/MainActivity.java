@@ -3,6 +3,7 @@ package com.app.azazte.azazte;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
@@ -38,9 +39,18 @@ import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.azUtils;
 import com.crashlytics.android.Crashlytics;
 
+import org.acra.ACRA;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
+
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Handler;
 
+@ReportsCrashes(
+        mailTo = "notification@azazte.com",
+        mode = ReportingInteractionMode.TOAST
+)
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,11 +74,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
         init();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.activity_main);
+
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
+
         StartSplashScreen();
 
 
@@ -110,33 +121,21 @@ public class MainActivity extends AppCompatActivity {
 
         anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
-        RelativeLayout iv = (RelativeLayout) findViewById(R.id.logo);
-        iv.clearAnimation();
-        iv.startAnimation(anim);
+        RelativeLayout logo = (RelativeLayout) findViewById(R.id.logo);
+        logo.clearAnimation();
+        logo.startAnimation(anim);
 
-        splashTread = new Thread() {
+        new Handler().postDelayed(new Runnable() {
+
             @Override
             public void run() {
-                try {
-                    int waited = 0;
-                    // Splash screen pause time
-                    while (waited < 3500) {
-                        sleep(100);
-                        waited += 100;
-                    }
-                    Intent intent = new Intent(getApplicationContext(),
-                            NewUI.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
-                    MainActivity.this.finish();
-                } catch (Exception e) {
-                    // do nothing
-                } finally {
-                    MainActivity.this.finish();
-                }
+                Intent intent = new Intent(getApplicationContext(),
+                        NewUI.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+                MainActivity.this.finish();
             }
-        };
-        splashTread.start();
+        }, 3000);
 
     }
 
@@ -145,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Connector.connector = new Connector(this);
         azUtils.setPicassoInstance(this);
         MixPanelUtils.init(this);
+        ACRA.init(this.getApplication());
         MixPanelUtils.setGCM();
         emailAddress = "";
         //setContentView(R.layout.activity_splash_screen);
