@@ -36,7 +36,7 @@ public class Connector extends SQLiteOpenHelper {
     public static Connector connector;
 
     public Connector(Context context) {
-        super(context.getApplicationContext(), DATABASE_NAME, null, 3);
+        super(context.getApplicationContext(), DATABASE_NAME, null, 4);
     }
 
     @Override
@@ -175,6 +175,8 @@ public class Connector extends SQLiteOpenHelper {
     }
 
     public void saveNewsInDb(List<NewsCard> newsCards) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM news");
         for (NewsCard newsCard : newsCards) {
             connector.insertNews(newsCard);
         }

@@ -64,10 +64,6 @@ public class ApiExecutor {
                     List<NewsCard> newsCardList = newsCardWrapper.newsCardList;
                     Connector.getInstance().saveNewsInDb(newsCardList);
                 }
-
-                //Categories.filterNewsByCategories();
-
-                //azUtils.refreshFragment();
                 EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
                 if (swipe != null) {
                     swipe.setRefreshing(false);

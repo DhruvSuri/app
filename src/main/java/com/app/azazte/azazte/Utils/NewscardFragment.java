@@ -171,6 +171,7 @@ public class NewscardFragment extends Fragment {
     private void shareBitmap(View view, String fileName) {
         try {
             view.buildDrawingCache(true);
+            view.setDrawingCacheEnabled(true);
             Bitmap bitmap = view.getDrawingCache();
             File file = new File(getContext().getCacheDir(), fileName + ".png");
             FileOutputStream fOut = new FileOutputStream(file);
