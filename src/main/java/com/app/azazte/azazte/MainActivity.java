@@ -3,6 +3,7 @@ package com.app.azazte.azazte;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
@@ -38,9 +39,18 @@ import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.azUtils;
 import com.crashlytics.android.Crashlytics;
 
+import org.acra.ACRA;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
+
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Handler;
 
+@ReportsCrashes(
+        mailTo = "notification@azazte.com",
+        mode = ReportingInteractionMode.TOAST
+)
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,44 +74,39 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
+        setContentView(R.layout.activity_main);
         init();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.activity_main);
 
-
+        ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
 
         StartSplashScreen();
 
 
+        //    setupToolbar();
 
-    //    setupToolbar();
-
-    //    View BottomSheet = findViewById(R.id.bottom_sheet);
-    //    categorySheet = BottomSheetBehavior.from(BottomSheet);
-    //    CategorySheet();
+        //    View BottomSheet = findViewById(R.id.bottom_sheet);
+        //    categorySheet = BottomSheetBehavior.from(BottomSheet);
+        //    CategorySheet();
         //   categorySheet.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-    //    setupViewPager();
-     // Categories.filterNewsByCategories();
+        //    setupViewPager();
+        // Categories.filterNewsByCategories();
 
-        ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
 
         //   SharedPreferences shaPreferences = getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
-    //   SharedPreferencesUtils.sharedPreferences = shaPreferences;
-    //   if (shaPreferences.getBoolean("second", true)) {
-    //       SharedPreferences sharedPreferences = shaPreferences;
-    //       final SharedPreferences.Editor editor = sharedPreferences.edit();
-    //       editor.putBoolean("second", false);
-    //       //For commit the changes, Use either editor.commit(); or  editor.apply();.
-    //       editor.commit();
+        //   SharedPreferencesUtils.sharedPreferences = shaPreferences;
+        //   if (shaPreferences.getBoolean("second", true)) {
+        //       SharedPreferences sharedPreferences = shaPreferences;
+        //       final SharedPreferences.Editor editor = sharedPreferences.edit();
+        //       editor.putBoolean("second", false);
+        //       //For commit the changes, Use either editor.commit(); or  editor.apply();.
+        //       editor.commit();
 
-    //       //showOptionsOverLay();
-    //   }
+        //       //showOptionsOverLay();
+        //   }
 
-                 // Finally we set the drawer toggle sync State
+        // Finally we set the drawer toggle sync State
 
 
     }
@@ -109,41 +114,28 @@ public class MainActivity extends AppCompatActivity {
     private void StartSplashScreen() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         anim.reset();
-        LinearLayout l=(LinearLayout) findViewById(R.id.lin_lay);
+        LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
         l.startAnimation(anim);
 
 
-
         anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
-        RelativeLayout iv = (RelativeLayout) findViewById(R.id.logo);
-        iv.clearAnimation();
-        iv.startAnimation(anim);
+        RelativeLayout logo = (RelativeLayout) findViewById(R.id.logo);
+        logo.clearAnimation();
+        logo.startAnimation(anim);
 
-        splashTread = new Thread() {
+        new Handler().postDelayed(new Runnable() {
+
             @Override
             public void run() {
-                try {
-                    int waited = 0;
-                    // Splash screen pause time
-                    while (waited < 3500) {
-                        sleep(100);
-                        waited += 100;
-                    }
-                    Intent intent = new Intent(getApplicationContext(),
-                            NewUI.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
-                    MainActivity.this.finish();
-                } catch (Exception e) {
-                    // do nothing
-                } finally {
-                    MainActivity.this.finish();
-                }
+                Intent intent = new Intent(getApplicationContext(),
+                        NewUI.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+                MainActivity.this.finish();
             }
-        };
-        splashTread.start();
+        }, 3000);
 
     }
 
@@ -151,9 +143,8 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         Connector.connector = new Connector(this);
         azUtils.setPicassoInstance(this);
-        BookmarksFetcher.indexBookmarks();
-        new ImageFetcher(this);
         MixPanelUtils.init(this);
+        ACRA.init(this.getApplication());
         MixPanelUtils.setGCM();
         emailAddress = "";
         //setContentView(R.layout.activity_splash_screen);
@@ -264,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
+
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
