@@ -39,7 +39,7 @@
                     android:layout_alignParentLeft="false"
 
                     android:layout_alignParentStart="false"
-                    android:textColor="#131313"
+                    android:textColor="#515151"
                     android:layout_marginBottom="5dp"
                     android:lineSpacingExtra="3dp"
                     android:paddingLeft="10dp"

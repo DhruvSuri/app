@@ -28,10 +28,13 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Fetcher.BookmarksFetcher;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
+
+import xdroid.toaster.Toaster;
 
 public class NewscardFragment extends Fragment {
 
@@ -50,8 +53,6 @@ public class NewscardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -72,17 +73,23 @@ public class NewscardFragment extends Fragment {
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
         final ImageView bookmark = (ImageView) inflate.findViewById(R.id.write);
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
-        TextView impact = (TextView) inflate.findViewById(R.id.impact);
+        TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
         ImageButton shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
-
+        View impactLayout = inflate.findViewById(R.id.linearLayout13);
+        MixPanelUtils.trackNews(newsCard.newsHead.trim());
         setImageIntoView(picasso, image, newsCard.imageUrl);
-        newshead.setText(newsCard.newsHead);
-        newstxt.setText(newsCard.newsBody);
-        newsSource.setText(newsCard.newsSourceName);
-        date.setText(newsCard.date);
-        author.setText(newsCard.author);
-        impact.setText(newsCard.impact);
+        newshead.setText(newsCard.newsHead.trim());
+        newstxt.setText(newsCard.newsBody.trim());
+        newsSource.setText(newsCard.newsSourceName.trim());
+        date.setText(newsCard.date.trim());
+        author.setText(newsCard.author.trim());
+        if (newsCard.impact.isEmpty()) {
+            hideImpact(impactLayout, impactText);
+        } else {
+            impactText.setText(newsCard.impact.trim());
+        }
+
         if (newsCard.isBookmarked == 1) {
             bookmarkView.setBackgroundColor(Color.parseColor("#42DD91"));
         } else {
@@ -103,10 +110,12 @@ public class NewscardFragment extends Fragment {
                     Connector.getInstance().setBookmarked(newsCard.id);
                     newsCard.isBookmarked = 1;
                     bookmarkView.setBackgroundColor(Color.parseColor("#42DD91"));
+                    Toaster.toast("Added to your Library");
                 } else {
                     Connector.getInstance().unsetBookmarked(newsCard.id);
                     newsCard.isBookmarked = 0;
                     bookmarkView.setBackgroundColor(255);
+                    Toaster.toast("Removed from your Library");
                 }
             }
         });
@@ -183,11 +192,15 @@ public class NewscardFragment extends Fragment {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
             intent.setType("image/png");
-            startActivity(Intent.createChooser(intent,"finup"));
+            startActivity(Intent.createChooser(intent, "finup"));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public void hideImpact(View impactLayout, TextView impactText) {
+        impactLayout.setVisibility(View.INVISIBLE);
+        impactText.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -212,7 +225,7 @@ public class NewscardFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

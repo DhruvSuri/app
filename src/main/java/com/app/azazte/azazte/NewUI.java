@@ -2,6 +2,7 @@ package com.app.azazte.azazte;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,9 +11,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -22,11 +20,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.azazte.azazte.Beans.NewsCard;
-import com.app.azazte.azazte.Event.MessageEvent;
-import com.app.azazte.azazte.animation.DepthTransform;
 import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Event.MessageEvent;
+import com.app.azazte.azazte.GCM.GCMIntentService;
+import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.NewscardFragment;
-
+import com.app.azazte.azazte.animation.DepthTransform;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,8 +33,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import xdroid.toaster.Toaster;
 
 public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
 
@@ -73,6 +70,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         instance = this;
+        String categoryName;
         setContentView(R.layout.activity_new_ui);
         fadeIn = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fadein);
@@ -87,14 +85,17 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         settingSheet = BottomSheetBehavior.from(settingsLayout);
 
         int category = getIntent().getIntExtra("category", 0);
-        int newsPostion = getIntent().getIntExtra("newsPostion", 0);
+        int newsPostion = getIntent().getIntExtra(GCMIntentService.ID, 0);
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         if (category == 0) {
-            categoriesText.setText("All News");
+            categoryName = "All News";
         } else {
-            categoriesText.setText(getIntent().getStringExtra("categoryChosenString"));
+            categoryName = getIntent().getStringExtra("categoryChosenString");
         }
+        categoriesText.setText(categoryName);
+        MixPanelUtils.trackCategories(categoryName);
         setupViewPager(category);
+        viewPager.setCurrentItem(newsPostion, true);
     }
 
     private void setListeners() {
@@ -266,7 +267,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                     topBar.startAnimation(fadeOut);
                     topBar.setVisibility(View.GONE);
                 }
-            }, 10000);
+            }, 5000);
 
         } else {
             topBar.startAnimation(fadeOut);
