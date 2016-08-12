@@ -110,6 +110,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView bookmark = (ImageView) findViewById(R.id.bookmark);
         ImageView settings = (ImageView) findViewById(R.id.settings);
         ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
+        final ImageView topRefreshButton = (ImageView) findViewById(R.id.top_refresh);
 
 
         //settings items
@@ -221,12 +222,37 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
+
+
+        topRefreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(viewPager.getCurrentItem()==1){
+
+                    refresh();
+
+                }
+
+                else {
+
+                    viewPager.setCurrentItem(1,true);
+
+                }
+
+            }
+        });
+
+    }
+
+    private void refresh() {
     }
 
 
     public void setupViewPager(Integer category) {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setPageTransformer(true, new DepthTransform());
+
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         setupNewsCards(adapter, category);
         viewPager.setAdapter(adapter);

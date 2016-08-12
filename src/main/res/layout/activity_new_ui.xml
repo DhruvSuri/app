@@ -60,15 +60,16 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:id="@+id/top"
-            android:src="@drawable/top"
+            android:id="@+id/top_refresh"
+            android:src="@drawable/refresh"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_toLeftOf="@+id/settings"
             android:layout_toStartOf="@+id/settings"
-            android:visibility="invisible" />
+            android:visibility="visible"
+            android:layout_marginRight="5dp" />
 
         <ImageView
             android:layout_width="25dp"

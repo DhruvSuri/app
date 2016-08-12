@@ -34,19 +34,19 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="false"
 
-                    android:layout_alignParentStart="false"
-                    android:textColor="#131313"
-                    android:layout_marginBottom="5dp"
-                    android:lineSpacingExtra="3dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="15dp"
-                    android:singleLine="false"
-                    android:text="@string/newsinfo"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textIsSelectable="false"
-                    android:textSize="15sp"
-                    android:typeface="sans" />
+                android:layout_alignParentStart="false"
+                android:layout_marginBottom="5dp"
+                android:lineSpacingExtra="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp"
+                android:singleLine="false"
+                android:text="@string/newsinfo"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#464646"
+                android:textIsSelectable="false"
+                android:textSize="15sp"
+                android:typeface="sans" />
 
             <LinearLayout
                 android:id="@+id/linearLayout13"
