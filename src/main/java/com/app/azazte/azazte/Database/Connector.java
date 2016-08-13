@@ -100,7 +100,6 @@ public class Connector extends SQLiteOpenHelper {
         return true;
     }
 
-
     public int getData(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery("select * from news where id=\"" + id + "\"", null);
@@ -126,7 +125,6 @@ public class Connector extends SQLiteOpenHelper {
     }
 
     public NewsCard getNewsById(String id) {
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from news where id=" + id, null);
         res.moveToFirst();
@@ -176,9 +174,13 @@ public class Connector extends SQLiteOpenHelper {
 
     public void saveNewsInDb(List<NewsCard> newsCards) {
         SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<NewsCard> allBookmarks = Connector.getInstance().getAllBookmarks();
         db.execSQL("DELETE FROM news");
         for (NewsCard newsCard : newsCards) {
             connector.insertNews(newsCard);
+        }
+        for (NewsCard newsCard : allBookmarks) {
+            setBookmarked(newsCard.id);
         }
     }
 }
