@@ -57,7 +57,7 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        final View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
+        final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         slideup = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slideup);
         slidedown = AnimationUtils.loadAnimation(getContext(),
@@ -256,6 +256,7 @@ public class NewscardFragment extends Fragment {
             //picasso.getSnapshot().dump();
         }
     }
+
 
 
 }
