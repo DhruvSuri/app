@@ -2,6 +2,7 @@ package com.app.azazte.azazte;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
@@ -24,6 +25,9 @@ import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.azUtils;
 import com.crashlytics.android.Crashlytics;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class MainActivity extends AppCompatActivity {
 
     public static String emailAddress = "";
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CalligraphyConfig.initDefault("fonts/HelveticaNeue.tff");
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         init();
@@ -125,6 +130,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 
     public static void setRefreshActionButtonState(final boolean refresh) {

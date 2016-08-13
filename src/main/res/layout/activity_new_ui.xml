@@ -55,7 +55,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/categories"
-            android:textStyle="bold"
             android:layout_alignParentBottom="false" />
         <ImageView
             android:layout_width="25dp"
