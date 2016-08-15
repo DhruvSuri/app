@@ -1,5 +1,6 @@
 package com.app.azazte.azazte;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,6 +25,7 @@ import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.MessageEvent;
 import com.app.azazte.azazte.GCM.GCMIntentService;
+import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.NewscardFragment;
 import com.app.azazte.azazte.animation.DepthTransform;
@@ -34,22 +37,24 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import xdroid.toaster.Toaster;
+
 public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
 
-    private ViewPagerAdapter adapter;
-    private ViewPager viewPager;
-    private BottomSheetBehavior categoriesSheet;
-    public  RelativeLayout nightFilter;
-    private BottomSheetBehavior settingSheet;
-
+    public static Integer categoryChosen;
+    public static String categoryChosenString;
+    public static NewUI instance;
     public RelativeLayout topBar;
 
     Animation fadeIn;
     Animation fadeOut;
-    public static Integer categoryChosen;
-    public static String categoryChosenString;
     DrawerLayout Drawer;
-    public static NewUI instance;
+    private ViewPagerAdapter adapter;
+    private ViewPager viewPager;
+    private BottomSheetBehavior categoriesSheet;
+    private BottomSheetBehavior settingSheet;
 
     @Override
     public void onStart() {
@@ -65,12 +70,14 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        //Toaster.toast("got the following event" + event.message);
+        Toaster.toast("Refreshed News");
+        onRestart();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CalligraphyConfig.initDefault("fonts/HelveticaNeue.tff");
         instance = this;
         String categoryName;
         setContentView(R.layout.activity_new_ui);
@@ -81,9 +88,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         RelativeLayout categoriesLayout = (RelativeLayout) findViewById(R.id.bottom_sheet);
         RelativeLayout settingsLayout = (RelativeLayout) findViewById(R.id.settings_sheet);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
-        nightFilter = (RelativeLayout) findViewById(R.id.nightUI);
 
-        setListeners();
+
+
         setListeners();
         categoriesSheet = BottomSheetBehavior.from(categoriesLayout);
         settingSheet = BottomSheetBehavior.from(settingsLayout);
@@ -115,6 +122,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView settings = (ImageView) findViewById(R.id.settings);
         ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
         final ImageView topRefreshButton = (ImageView) findViewById(R.id.top_refresh);
+        TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
 
 
 
@@ -127,7 +135,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         allNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(0);
+                //setupViewPager(0);
                 categoryChosen = 0;
                 categoryChosenString = "All News";
                 onRestart();
@@ -137,7 +145,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         economy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(1);
+                //setupViewPager(1);
                 categoryChosen = 1;
                 categoryChosenString = "Economy";
                 onRestart();
@@ -147,7 +155,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(2);
+                //setupViewPager(2);
                 categoryChosen = 2;
                 categoryChosenString = "Business";
                 onRestart();
@@ -157,7 +165,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         tax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(3);
+                //setupViewPager(3);
                 categoryChosen = 3;
                 categoryChosenString = "Tax";
                 onRestart();
@@ -167,7 +175,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         finace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(4);
+                //setupViewPager(4);
                 categoryChosen = 4;
                 categoryChosenString = "Finance";
                 onRestart();
@@ -177,7 +185,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         law.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(5);
+                //setupViewPager(5);
                 categoryChosen = 5;
                 categoryChosenString = "Law";
                 onRestart();
@@ -187,7 +195,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         global.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupViewPager(6);
+                //setupViewPager(6);
                 categoryChosen = 6;
                 categoryChosenString = "Global";
                 onRestart();
@@ -197,7 +205,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setupViewPager(-1);
+                //setupViewPager(-1);
                 categoryChosen = -1;
                 categoryChosenString = "Bookmarks";
                 onRestart();
@@ -359,36 +367,36 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
 
 
+        categoriesText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+
 
         topRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(viewPager.getCurrentItem()==1){
-
+                if (viewPager.getCurrentItem() == 0) {
                     refresh();
-
+                } else {
+                    viewPager.setCurrentItem(0, true);
                 }
-
-                else {
-
-                    viewPager.setCurrentItem(1,true);
-
-                }
-
             }
         });
-
     }
 
     private void refresh() {
+        Toaster.toast("Hold on! refreshing");
+        ApiExecutor.getInstance().getNews(null, null);
     }
 
 
     public void setupViewPager(Integer category) {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setPageTransformer(true, new DepthTransform());
-
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         setupNewsCards(adapter, category);
         viewPager.setAdapter(adapter);
@@ -449,6 +457,33 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
+
+    @Override
+    protected void onRestart() {
+        // TODO Auto-generated method stub
+        super.onRestart();
+        Intent intent = new Intent(this, NewUI.class);
+        intent.putExtra("category", categoryChosen);
+        intent.putExtra("categoryChosenString", categoryChosenString);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        // Unregister
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+
+
+
+
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -472,23 +507,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             //mFragmentTitleList.add(newsCard);
         }
     }
-
-    @Override
-    protected void onRestart() {
-
-        // TODO Auto-generated method stub
-        super.onRestart();
-        Intent intent = new Intent(this, NewUI.class);
-        intent.putExtra("category", categoryChosen);
-        intent.putExtra("categoryChosenString", categoryChosenString);
-        startActivity(intent);
-        finish();
-    }
-
-
-
-
-
 
 
 }

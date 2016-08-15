@@ -55,20 +55,14 @@ public class ApiExecutor {
             @Override
             public void onResponse(Call<NewsCardWrapper> call, Response<NewsCardWrapper> response) {
                 final NewsCardWrapper newsCardWrapper = response.body();
-
                 if (newsCardWrapper == null) {
                     return;
                 }
-
                 if (newsCardWrapper.newsCardList.size() > 0) {
                     List<NewsCard> newsCardList = newsCardWrapper.newsCardList;
                     Connector.getInstance().saveNewsInDb(newsCardList);
                 }
                 EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
-                if (swipe != null) {
-                    swipe.setRefreshing(false);
-                }
-                MainActivity.setRefreshActionButtonState(false);
             }
 
             @Override

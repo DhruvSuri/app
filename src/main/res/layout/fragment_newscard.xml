@@ -163,7 +163,6 @@
                 android:layout_alignParentBottom="false"
                 android:layout_centerInParent="true"
                 android:gravity="center_horizontal"
-                android:minLines="2"
                 android:outlineProvider="paddedBounds"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -187,6 +186,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ebebeb"
                 android:textSize="10sp"
+                fontPath="fonts/Roboto-Bold.ttf"
                 android:visibility="visible"></TextView>
 
             <TextView

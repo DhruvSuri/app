@@ -173,7 +173,6 @@
                 android:layout_alignParentBottom="false"
                 android:layout_centerInParent="true"
                 android:gravity="center_horizontal"
-                android:minLines="2"
                 android:outlineProvider="paddedBounds"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"

@@ -25,11 +25,14 @@ import com.app.azazte.azazte.AzazteWebView;
 import com.app.azazte.azazte.Beans.NewsCard;
 
 import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Event.MessageEvent;
 import com.app.azazte.azazte.Fetcher.BookmarksFetcher;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,7 +45,7 @@ public class NewscardFragment extends Fragment {
 
     Animation slideup;
     Animation slidedown;
-  ImageButton shareButton ;
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -78,7 +81,7 @@ public class NewscardFragment extends Fragment {
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
-        shareButton  = (ImageButton) inflate.findViewById(R.id.shareNews);
+        final ImageButton shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
         View impactLayout = inflate.findViewById(R.id.linearLayout13);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
         setImageIntoView(picasso, image, newsCard.imageUrl);
@@ -200,16 +203,10 @@ public class NewscardFragment extends Fragment {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
             intent.setType("image/png");
-
             startActivity(Intent.createChooser(intent, "finup"));
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
     }
 
     public void hideImpact(View impactLayout, TextView impactText) {
@@ -234,16 +231,6 @@ public class NewscardFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -288,6 +275,6 @@ public class NewscardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        shareButton.setClickable(true);
+        //shareButton.setClickable(true);
     }
 }
