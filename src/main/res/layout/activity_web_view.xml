@@ -43,10 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_revert"
+        android:src="@drawable/back"
         android:layout_alignParentEnd="false"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        app:backgroundTint="@color/colorPrimary" />
+        app:backgroundTint="@color/bg_screen3" />
 
 </RelativeLayout>

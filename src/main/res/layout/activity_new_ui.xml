@@ -55,11 +55,10 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/categories"
-            android:textStyle="bold"
             android:layout_alignParentBottom="false" />
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:id="@+id/top_refresh"
             android:src="@drawable/refresh"
             android:layout_centerVertical="true"
@@ -69,7 +68,7 @@
             android:layout_toLeftOf="@+id/settings"
             android:layout_toStartOf="@+id/settings"
             android:visibility="visible"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="10dp" />
 
         <ImageView
             android:layout_width="25dp"
@@ -78,7 +77,8 @@
             android:src="@drawable/ic_settings"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:padding="2dp" />
     </RelativeLayout>
 
 

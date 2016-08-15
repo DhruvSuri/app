@@ -29,9 +29,8 @@ public class MixPanelUtils {
     public static final String COMPANY_LAW = "COMPANY_LAW";
     public static final String ECONOMY_FINANCE = "ECONOMY_FINANCE";
     public static final String REGULATORY = "REGULATORY";
-    public static final String OTHERS = "OTHERS";
-    public static final String COMMENT = "COMMENT";
-    public static final String HEART = "HEART";
+    public static final String CATEGORY = "CATEGORY : ";
+    public static final String NEWS = "NEWS : ";
 
     public static MixpanelAPI mixpanelAPI;
     public static Context mixPanelContext;
@@ -41,7 +40,6 @@ public class MixPanelUtils {
             mixpanelAPI = MixpanelAPI.getInstance(context, APP_KEY);
             mixPanelContext = context;
         } catch (Exception e) {
-            Log.d("init", "init: initialization failed");
             Crashlytics.log("initialization failed" + e.getMessage());
         }
     }
@@ -64,6 +62,22 @@ public class MixPanelUtils {
         } catch (Exception e) {
             Log.d("", "track: faield to track" + s);
             Crashlytics.log("failed : tracking failed for mixpanel : " + s + "  " + e.getMessage());
+        }
+    }
+
+    public static void trackCategories(String categoryName) {
+        try {
+            mixpanelAPI.track(CATEGORY + categoryName);
+        } catch (Exception e) {
+            Crashlytics.log("failed : tracking failed for mixpanel : " + categoryName + "  " + e.getMessage());
+        }
+    }
+
+    public static void trackNews(String newsHeadline){
+        try {
+            mixpanelAPI.track(NEWS + newsHeadline);
+        } catch (Exception e) {
+            Crashlytics.log("failed : tracking failed for mixpanel : " + newsHeadline + "  " + e.getMessage());
         }
     }
 
@@ -95,7 +109,6 @@ public class MixPanelUtils {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     String msg = "";
-
                     try {
                         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(mixPanelContext);
                         String regId = gcm.register(GCMUtils.SENDER_ID);
@@ -108,8 +121,6 @@ public class MixPanelUtils {
                 }
             }.execute();
         } catch (Exception ignored) {
-
         }
-
     }
 }

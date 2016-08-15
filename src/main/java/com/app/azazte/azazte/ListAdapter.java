@@ -181,40 +181,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         });
 
 
-        myViewHolder.comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MixPanelUtils.track(MixPanelUtils.COMMENT);
-                String deepNewsid = String.valueOf(newsCard.id);
-             //   Intent i = new Intent(tabFragment.getContext(), DeepNewsCardActivity.class);
-             //   i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-               // i.putExtra("id", deepNewsid);
-                //tabFragment.startActivity(i);
-            }
-        });
-
-        myViewHolder.discuss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MixPanelUtils.track(MixPanelUtils.COMMENT);
-                String deepNewsid = String.valueOf(newsCard.id);
-              //  Intent i = new Intent(tabFragment.getContext(), DeepNewsCardActivity.class);
-               // i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-               // i.putExtra("id", deepNewsid);
-               // tabFragment.startActivity(i);
-            }
-        });
-
-        myViewHolder.heart.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                MixPanelUtils.track(MixPanelUtils.HEART);
-                Toaster.toast("Coming Soon");
-
-            }
-        });
-
 
        myViewHolder.share.setOnClickListener(new View.OnClickListener() {
            @Override

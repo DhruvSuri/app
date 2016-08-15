@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.MessageEvent;
+import com.app.azazte.azazte.GCM.GCMIntentService;
+import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.NewscardFragment;
 import com.app.azazte.azazte.animation.DepthTransform;
 
@@ -37,9 +39,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
     private BottomSheetBehavior categoriesSheet;
+    public  RelativeLayout nightFilter;
     private BottomSheetBehavior settingSheet;
 
     public RelativeLayout topBar;
+
     Animation fadeIn;
     Animation fadeOut;
     public static Integer categoryChosen;
@@ -68,6 +72,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         instance = this;
+        String categoryName;
         setContentView(R.layout.activity_new_ui);
         fadeIn = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fadein);
@@ -76,22 +81,25 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         RelativeLayout categoriesLayout = (RelativeLayout) findViewById(R.id.bottom_sheet);
         RelativeLayout settingsLayout = (RelativeLayout) findViewById(R.id.settings_sheet);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
+        nightFilter = (RelativeLayout) findViewById(R.id.nightUI);
+
         setListeners();
         setListeners();
         categoriesSheet = BottomSheetBehavior.from(categoriesLayout);
         settingSheet = BottomSheetBehavior.from(settingsLayout);
 
         int category = getIntent().getIntExtra("category", 0);
-        int newsPostion = getIntent().getIntExtra("newsPostion", 0);
+        int newsPostion = getIntent().getIntExtra(GCMIntentService.ID, 0);
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         if (category == 0) {
-            categoriesText.setText("All News");
+            categoryName = "All News";
         } else {
-            categoriesText.setText(getIntent().getStringExtra("categoryChosenString"));
+            categoryName = getIntent().getStringExtra("categoryChosenString");
         }
+        categoriesText.setText(categoryName);
+        MixPanelUtils.trackCategories(categoryName);
         setupViewPager(category);
-
-
+        viewPager.setCurrentItem(newsPostion, true);
     }
 
     private void setListeners() {
@@ -107,6 +115,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView settings = (ImageView) findViewById(R.id.settings);
         ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
         final ImageView topRefreshButton = (ImageView) findViewById(R.id.top_refresh);
+
 
 
 
@@ -206,8 +215,14 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         categoriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if(categoriesSheet.getState()==BottomSheetBehavior.STATE_COLLAPSED) {
+                    settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                }
+                else {
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
             }
         });
 
@@ -216,13 +231,13 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
         //settings items
 
-        ImageView privacy = (ImageView) findViewById(R.id.privacy);
+        ImageView shareApp = (ImageView) findViewById(R.id.privacy);
         ImageView about = (ImageView) findViewById(R.id.about);
         ImageView notification = (ImageView) findViewById(R.id.notification);
         ImageView noImage = (ImageView) findViewById(R.id.noimage);
         ImageView nightMode = (ImageView) findViewById(R.id.night);
-        ImageView invite = (ImageView) findViewById(R.id.invite);
-        ImageView shareApp = (ImageView) findViewById(R.id.shareApp);
+
+        ImageView privacy = (ImageView) findViewById(R.id.shareApp);
         ImageView rate = (ImageView) findViewById(R.id.rate);
         ImageView mailUs = (ImageView) findViewById(R.id.mailus);
         ImageView write = (ImageView) findViewById(R.id.write);
@@ -249,18 +264,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         });
 
 
-        invite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent taf = new Intent();
-                taf.setAction(Intent.ACTION_SEND);
-                taf.putExtra(Intent.EXTRA_TEXT, "Daily updates on Economy, Finance, Business, Tax & Law in 70 words!\n" +
-                        "Download app: https://goo.gl/BjupvI");
-                taf.setType("text/plain");
-                startActivity(Intent.createChooser(taf, "Invite A Friend"));
 
-            }
-        });
 
 
         rate.setOnClickListener(new View.OnClickListener() {
@@ -337,6 +341,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         nightMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
 
             }
@@ -425,7 +430,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                     topBar.setVisibility(View.GONE);
                     topBar.clearAnimation();
                 }
-            }, 10000);
+            }, 5000);
 
         } else {
             topBar.startAnimation(fadeOut);
@@ -433,6 +438,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             topBar.setVisibility(View.GONE);
         }
     }
+
+
+
+
 
 
     @Override
@@ -477,12 +486,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     }
 
 
-
-    void nightMode(){
-
-
-
-    }
 
 
 
