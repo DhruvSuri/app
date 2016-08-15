@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.app.azazte.azazte.Beans.FCMRequestDTO;
 import com.app.azazte.azazte.GCM.GCMUtils;
+import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
@@ -46,13 +49,18 @@ public class MixPanelUtils {
 
     public static void setIdentity(String emailAddress) {
         try {
-            String id = Build.BRAND + "_" + Build.SERIAL + "_" + Build.ID;
+            String id = getUniqueId();
             mixpanelAPI.identify(id);
             mixpanelAPI.getPeople().identify(id);
             mixpanelAPI.getPeople().set("$email", emailAddress);
         } catch (Exception e) {
             Crashlytics.log("Failed : setting identity for mixpanel" + e.getMessage());
         }
+    }
+
+    @NonNull
+    private static String getUniqueId() {
+        return Build.BRAND + "_" + Build.SERIAL + "_" + Build.ID;
     }
 
 
@@ -91,7 +99,7 @@ public class MixPanelUtils {
 
     public static void setGCM() {
         try {
-            String id = Build.BRAND + "_" + Build.SERIAL + "_" + Build.ID;
+            String id = getUniqueId();
             mixpanelAPI.getPeople().identify(id);
             mixpanelAPI.getPeople().initPushHandling(GCMUtils.SENDER_ID);
         } catch (Exception e) {
@@ -114,6 +122,7 @@ public class MixPanelUtils {
                         String regId = gcm.register(GCMUtils.SENDER_ID);
                         mixpanelAPI.getPeople().set("ADF", regId);
                         mixpanelAPI.getPeople().setPushRegistrationId(regId);
+                        ApiExecutor.getInstance().sendIdToServer(new FCMRequestDTO(getUniqueId(),regId));
                     } catch (IOException ex) {
                         msg = "Error :" + ex.getMessage();
                     }
