@@ -20,10 +20,11 @@
         android:layout_below="@+id/textView33"
         android:layout_marginBottom="15dp"
         android:paddingBottom="5dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
         android:paddingTop="10dp"
-        android:touchscreenBlocksFocus="true">
+        android:touchscreenBlocksFocus="true"
+        android:id="@+id/relativeLayout3">
 
         <ImageView
             android:id="@+id/write"
@@ -32,7 +33,7 @@
             android:layout_alignStart="@+id/about"
             android:layout_below="@+id/textView27"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:scaleType="fitXY"
             android:src="@drawable/write" />
 
@@ -57,7 +58,7 @@
             android:layout_below="@+id/view2"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:scaleType="fitXY"
             android:src="@drawable/rate" />
 
@@ -68,7 +69,7 @@
             android:layout_alignStart="@+id/night"
             android:layout_below="@+id/view2"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:scaleType="fitXY"
             android:src="@drawable/about" />
 
@@ -92,9 +93,9 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/view2"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:scaleType="fitXY"
-            android:src="@drawable/privacy" />
+            android:src="@drawable/share" />
 
         <ImageView
             android:id="@+id/noimage"
@@ -108,26 +109,16 @@
             android:src="@drawable/image" />
 
         <ImageView
-            android:id="@+id/invite"
-            android:layout_width="62dp"
-            android:layout_height="62dp"
-            android:layout_alignStart="@+id/privacy"
-            android:layout_below="@+id/textView25"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/invite" />
-
-        <ImageView
             android:id="@+id/shareApp"
             android:layout_width="62dp"
             android:layout_height="62dp"
-            android:layout_below="@+id/textView26"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/share" />
+            android:src="@drawable/privacy"
+            android:layout_alignLeft="@+id/textView26"
+            android:layout_alignStart="@+id/textView26"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/textView26" />
 
         <TextView
             android:id="@+id/textView23"
@@ -195,7 +186,7 @@
             android:layout_alignStart="@+id/privacy"
             android:layout_below="@+id/privacy"
             android:gravity="center_horizontal"
-            android:text="Privacy"
+            android:text="Share app"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff"
             android:textSize="12sp" />
@@ -233,56 +224,44 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/textView28"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/invite"
-            android:layout_alignLeft="@+id/invite"
-            android:layout_alignRight="@+id/invite"
-            android:layout_alignStart="@+id/invite"
-            android:layout_below="@+id/invite"
-            android:gravity="center_horizontal"
-            android:text="Invite"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#ffffff"
-            android:textSize="12sp" />
-
-        <TextView
             android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/shareApp"
             android:layout_alignStart="@+id/shareApp"
-            android:layout_below="@+id/shareApp"
             android:gravity="center_horizontal"
-            android:text="Share App"
+            android:text="Privacy"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:layout_below="@+id/shareApp"
+            android:layout_alignRight="@+id/shareApp"
+            android:layout_alignEnd="@+id/shareApp" />
 
         <ImageView
             android:id="@+id/feedback"
             android:layout_width="62dp"
             android:layout_height="62dp"
-            android:layout_below="@+id/textView29"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_toEndOf="@+id/textView28"
-            android:layout_toRightOf="@+id/textView28"
             android:scaleType="fitXY"
-            android:src="@drawable/feed" />
+            android:src="@drawable/feed"
+            android:layout_above="@+id/textView29"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp" />
 
         <ImageView
             android:id="@+id/mailus"
             android:layout_width="62dp"
             android:layout_height="62dp"
-            android:layout_below="@+id/textView23"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_toEndOf="@+id/shareApp"
-            android:layout_toRightOf="@+id/shareApp"
             android:scaleType="fitXY"
-            android:src="@drawable/mailus" />
+            android:src="@drawable/mailus"
+            android:layout_alignParentBottom="false"
+            android:layout_alignLeft="@+id/textView29"
+            android:layout_alignStart="@+id/textView29"
+            android:layout_below="@+id/textView29"
+            android:layout_marginTop="25dp" />
 
         <TextView
             android:id="@+id/textView11"
@@ -290,14 +269,15 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/mailus"
             android:layout_alignStart="@+id/mailus"
-            android:layout_below="@+id/mailus"
-            android:layout_toLeftOf="@+id/textView23"
             android:layout_toStartOf="@+id/textView23"
             android:gravity="center_horizontal"
-            android:text="Contact Us"
+            android:text="Contact us"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:layout_below="@+id/mailus"
+            android:layout_alignRight="@+id/mailus"
+            android:layout_alignEnd="@+id/mailus" />
 
         <TextView
             android:id="@+id/textView"
@@ -325,20 +305,20 @@
             android:layout_marginTop="30dp"
             android:background="#ffffffff"
             android:visibility="visible" />
+
     </RelativeLayout>
 
     <TextView
         android:id="@+id/textView33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:text="Settings"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/imageView7"
+        android:layout_centerHorizontal="true" />
 
     <View
         android:id="@+id/view2"
@@ -346,7 +326,18 @@
         android:layout_height="2dp"
         android:layout_alignParentTop="true"
         android:background="#ffffffff"
-        android:visibility="visible" />
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/imageView7"
+        android:src="@drawable/down"
+        android:layout_below="@+id/view2"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp" />
 
 
 </RelativeLayout>

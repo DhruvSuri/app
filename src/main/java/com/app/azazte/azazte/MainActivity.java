@@ -43,16 +43,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getIntent();
+         String id = this.getIntent().getStringExtra("id");
         CalligraphyConfig.initDefault("fonts/HelveticaNeue.tff");
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         init();
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
-        StartSplashScreen();
+        StartSplashScreen(id);
     }
 
-    private void StartSplashScreen() {
+    private void StartSplashScreen(final String id) {
         //animate();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),
                         NewUI.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("id",id);
+
                 startActivity(intent);
                 MainActivity.this.finish();
             }

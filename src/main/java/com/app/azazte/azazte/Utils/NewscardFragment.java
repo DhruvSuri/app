@@ -46,6 +46,8 @@ public class NewscardFragment extends Fragment {
     Animation slideup;
     Animation slidedown;
 
+
+
     private OnFragmentInteractionListener mListener;
     Picasso picasso;
 
@@ -61,7 +63,7 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        final View inflate = inflater.inflate(R.layout.fragment_newscard, container, false);
+        final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         slideup = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slideup);
         slidedown = AnimationUtils.loadAnimation(getContext(),
@@ -75,10 +77,11 @@ public class NewscardFragment extends Fragment {
         ImageButton option = (ImageButton) inflate.findViewById(R.id.options);
         ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
         final ImageView bookmark = (ImageView) inflate.findViewById(R.id.write);
+
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
-        ImageButton shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
+        final ImageButton shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
         View impactLayout = inflate.findViewById(R.id.linearLayout13);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
         setImageIntoView(picasso, image, newsCard.imageUrl);
@@ -159,7 +162,10 @@ public class NewscardFragment extends Fragment {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 shareBitmap(inflate, newsCard.id);
+                shareButton.setClickable(false);
+
             }
         });
 
@@ -181,6 +187,7 @@ public class NewscardFragment extends Fragment {
 
     private void shareBitmap(View view, String fileName) {
         try {
+
             view.setDrawingCacheEnabled(true);
             view.buildDrawingCache(true);
             view.setDrawingCacheEnabled(true);
@@ -191,6 +198,7 @@ public class NewscardFragment extends Fragment {
             fOut.flush();
             fOut.close();
             file.setReadable(true, false);
+
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
@@ -264,4 +272,9 @@ public class NewscardFragment extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //shareButton.setClickable(true);
+    }
 }

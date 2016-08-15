@@ -47,6 +47,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public static String categoryChosenString;
     public static NewUI instance;
     public RelativeLayout topBar;
+
     Animation fadeIn;
     Animation fadeOut;
     DrawerLayout Drawer;
@@ -87,7 +88,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         RelativeLayout categoriesLayout = (RelativeLayout) findViewById(R.id.bottom_sheet);
         RelativeLayout settingsLayout = (RelativeLayout) findViewById(R.id.settings_sheet);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
-        setListeners();
+
+
+
         setListeners();
         categoriesSheet = BottomSheetBehavior.from(categoriesLayout);
         settingSheet = BottomSheetBehavior.from(settingsLayout);
@@ -122,15 +125,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
 
 
-        //settings items
 
-        //   ImageView privacy = (ImageView) findViewById(R.id.privacy);
-        //   ImageView about = (ImageView) findViewById(R.id.about);
-        //   ImageView invite = (ImageView) findViewById(R.id.invite);
-        //   ImageView help = (ImageView) findViewById(R.id.help);
-        //   ImageView call = (ImageView) findViewById(R.id.call);
-        //   ImageView write = (ImageView) findViewById(R.id.write);
-        //   ImageView mail = (ImageView) findViewById(R.id.mail);
+
 
 
         //categories listeners
@@ -227,10 +223,149 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         categoriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if(categoriesSheet.getState()==BottomSheetBehavior.STATE_COLLAPSED) {
+                    settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                }
+                else {
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
             }
         });
+
+
+
+
+        //settings items
+
+        ImageView shareApp = (ImageView) findViewById(R.id.privacy);
+        ImageView about = (ImageView) findViewById(R.id.about);
+        ImageView notification = (ImageView) findViewById(R.id.notification);
+        ImageView noImage = (ImageView) findViewById(R.id.noimage);
+        ImageView nightMode = (ImageView) findViewById(R.id.night);
+
+        ImageView privacy = (ImageView) findViewById(R.id.shareApp);
+        ImageView rate = (ImageView) findViewById(R.id.rate);
+        ImageView mailUs = (ImageView) findViewById(R.id.mailus);
+        ImageView write = (ImageView) findViewById(R.id.write);
+        ImageView feedback = (ImageView) findViewById(R.id.feedback);
+
+
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), About_Activity.class);
+                startActivity(i);
+
+
+
+            }
+        });
+
+
+
+
+
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rate = new Intent(Intent.ACTION_VIEW);
+                rate.setData(Uri.parse("market://details?id=" + getPackageName()));
+                startActivity(rate);
+
+            }
+        });
+
+
+        shareApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+
+        write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setType("plain/text");
+                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Azazte app");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(sendIntent);
+
+
+            }
+        });
+
+
+        mailUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+
+        noImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+        nightMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
 
         categoriesText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,14 +436,20 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 public void run() {
                     topBar.startAnimation(fadeOut);
                     topBar.setVisibility(View.GONE);
+                    topBar.clearAnimation();
                 }
             }, 5000);
 
         } else {
             topBar.startAnimation(fadeOut);
+            topBar.clearAnimation();
             topBar.setVisibility(View.GONE);
         }
     }
+
+
+
+
 
 
     @Override
@@ -339,74 +480,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         super.onDestroy();
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
-                        switch (menuItem.getItemId()) {
-                            case R.id.aboutUs:
-                                Intent i = new Intent(getBaseContext(), About_Activity.class);
-                                startActivity(i);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.newUi:
-                                Intent intent = new Intent(getBaseContext(), NewUI.class);
-                                startActivity(intent);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.taf:
-                                Intent taf = new Intent();
-                                taf.setAction(Intent.ACTION_SEND);
-                                taf.putExtra(Intent.EXTRA_TEXT, "Daily updates on Economy, Finance, Business, Tax & Law in 70 words!\n" +
-                                        "Download app: https://goo.gl/BjupvI");
-                                taf.setType("text/plain");
-                                startActivity(Intent.createChooser(taf, "Invite A Friend"));
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.rta:
-                                Intent rate = new Intent(Intent.ACTION_VIEW);
-                                rate.setData(Uri.parse("market://details?id=" + getPackageName()));
-                                startActivity(rate);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.help:
-                                Drawer.closeDrawers();
-                                //showOverLay();
-                                return true;
-                            case R.id.callus:
-                                Intent out = new Intent(Intent.ACTION_DIAL);
-                                out.setData(Uri.parse("tel:" + Uri.encode("9810076493")));
-                                startActivity(out);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.feedback:
-                                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                                sendIntent.setType("plain/text");
-                                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
-                                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Azazte app");
-                                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                                startActivity(sendIntent);
-                                Drawer.closeDrawers();
-                                return true;
-                            case R.id.notification:
 
 
-                                return true;
 
-                            case R.id.book:
-                                Drawer.closeDrawers();
-                                //viewpager.setCurrentItem(8, true);
-                                return true;
-
-                            default:
-                                return this.onNavigationItemSelected(menuItem);
-                        }
-                    }
-                });
-    }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
