@@ -2,6 +2,8 @@ package com.app.azazte.azazte.Utils.Api;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
+import com.app.azazte.azazte.Beans.FCMRequestDTO;
+import com.app.azazte.azazte.Beans.FCMServerResponse;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Beans.NewsCardWrapper;
 import com.app.azazte.azazte.Database.Connector;
@@ -61,13 +63,13 @@ public class ApiExecutor {
                 if (newsCardWrapper.newsCardList.size() > 0) {
                     List<NewsCard> newsCardList = newsCardWrapper.newsCardList;
                     Connector.getInstance().saveNewsInDb(newsCardList);
+                    EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
                 }
-                EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
             }
 
             @Override
             public void onFailure(Call<NewsCardWrapper> call, Throwable t) {
-                Toaster.toast("Failed to fetch news");
+                //Toaster.toast("Failed to fetch news");
 
                 if (swipe != null) {
                     swipe.setRefreshing(false);
@@ -75,5 +77,21 @@ public class ApiExecutor {
                 MainActivity.setRefreshActionButtonState(false);
             }
         });
+    }
+
+    public FCMServerResponse sendIdToServer(FCMRequestDTO requestDTO){
+        Call<FCMServerResponse> call = azazteApiService.saveFCMId(requestDTO);
+        call.enqueue(new Callback<FCMServerResponse>() {
+            @Override
+            public void onResponse(Call<FCMServerResponse> call, Response<FCMServerResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<FCMServerResponse> call, Throwable t) {
+
+            }
+        });
+        return null;
     }
 }
