@@ -41,12 +41,16 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import xdroid.toaster.Toaster;
 
+
+
 public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
 
     public static Integer categoryChosen;
     public static String categoryChosenString;
     public static NewUI instance;
     public RelativeLayout topBar;
+    public RelativeLayout twilightFilter;
+    public ImageView twilight;
 
     Animation fadeIn;
     Animation fadeOut;
@@ -88,9 +92,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         RelativeLayout categoriesLayout = (RelativeLayout) findViewById(R.id.bottom_sheet);
         RelativeLayout settingsLayout = (RelativeLayout) findViewById(R.id.settings_sheet);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
-
-
-
+        twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
         setListeners();
         categoriesSheet = BottomSheetBehavior.from(categoriesLayout);
         settingSheet = BottomSheetBehavior.from(settingsLayout);
@@ -240,10 +242,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         //settings items
 
         ImageView shareApp = (ImageView) findViewById(R.id.privacy);
-        ImageView about = (ImageView) findViewById(R.id.about);
+        final ImageView about = (ImageView) findViewById(R.id.about);
         ImageView notification = (ImageView) findViewById(R.id.notification);
         ImageView noImage = (ImageView) findViewById(R.id.noimage);
-        ImageView nightMode = (ImageView) findViewById(R.id.night);
+        twilight = (ImageView) findViewById(R.id.night);
 
         ImageView privacy = (ImageView) findViewById(R.id.shareApp);
         ImageView rate = (ImageView) findViewById(R.id.rate);
@@ -256,6 +258,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(getBaseContext(), AzazteWebView.class);
+                intent.putExtra("url", getString(R.string.privacy));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
 
             }
         });
@@ -263,9 +270,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), About_Activity.class);
-                startActivity(i);
-
+                Intent intent = new Intent(getBaseContext(), AzazteWebView.class);
+                intent.putExtra("url", getString(R.string.about_us));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
 
             }
@@ -289,8 +297,12 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         shareApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                Intent shareAppIntent = new Intent();
+                shareAppIntent.setAction(Intent.ACTION_SEND);
+                shareAppIntent.putExtra(Intent.EXTRA_TEXT, "Need to manage your finances but the technicalities make you stress.?\n Finup : Decoding business, finance and technology in 30 second reads.\n" +
+                        "Download app: https://goo.gl/BjupvI");
+                shareAppIntent.setType("text/plain");
+                startActivity(Intent.createChooser(shareAppIntent, "Spread A Word"));
             }
         });
 
@@ -298,6 +310,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), AzazteWebView.class);
+                intent.putExtra("url", getString(R.string.write_us));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
 
             }
@@ -307,13 +323,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                sendIntent.setType("plain/text");
-                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Azazte app");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                startActivity(sendIntent);
+                Intent intent = new Intent(getBaseContext(), AzazteWebView.class);
+                intent.putExtra("url", getString(R.string.feedback_url));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
 
             }
@@ -323,6 +336,13 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         mailUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setType("plain/text");
+                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(sendIntent);
 
 
             }
@@ -346,12 +366,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
 
-        nightMode.setOnClickListener(new View.OnClickListener() {
+        twilight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
+                twilightMode();
             }
         });
 
@@ -387,6 +405,19 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
     }
+
+    public  void twilightMode(){
+        if(twilightFilter.getVisibility()==View.INVISIBLE) {
+            twilightFilter.setVisibility(View.VISIBLE);
+            twilight.setImageResource(R.drawable.lighton);
+
+        }
+        else {
+            twilightFilter.setVisibility(View.INVISIBLE);
+            twilight.setImageResource(R.drawable.lightoff);
+        }
+    }
+
 
     private void refresh() {
         Toaster.toast("Hold on! refreshing");

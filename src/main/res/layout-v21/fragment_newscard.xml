@@ -15,16 +15,7 @@
         android:background="#ffffff">
 
 
-        <RelativeLayout
-            android:id="@+id/nightUI"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="false"
-            android:background="#45d22323"
-            android:elevation="20dp"
-            android:visibility="invisible" />
+
 
         <ImageView
             android:id="@+id/imageView2"
