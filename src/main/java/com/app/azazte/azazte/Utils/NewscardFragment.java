@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,8 @@ public class NewscardFragment extends Fragment {
 
     Animation slideup;
     Animation slidedown;
+    ImageButton shareButton;
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -79,7 +82,7 @@ public class NewscardFragment extends Fragment {
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
-        final ImageButton shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
+        shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
         View impactLayout = inflate.findViewById(R.id.linearLayout13);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
         setImageIntoView(picasso, image, newsCard.imageUrl);
@@ -169,6 +172,14 @@ public class NewscardFragment extends Fragment {
         });
 
         newstxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((NewUI) getActivity()).showTopBar();
+
+            }
+        });
+
+        impactText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((NewUI) getActivity()).showTopBar();
@@ -317,10 +328,13 @@ public class NewscardFragment extends Fragment {
     }
 
 
+
+
+
     @Override
     public void onResume() {
         super.onResume();
-        //shareButton.setClickable(true);
+        shareButton.setClickable(true);
     }
 
 }
