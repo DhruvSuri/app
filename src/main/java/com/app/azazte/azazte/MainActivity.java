@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         String id = this.getIntent().getStringExtra("id");
+        String id = this.getIntent().getStringExtra("id");
         CalligraphyConfig.initDefault("fonts/HelveticaNeue.tff");
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),
                         NewUI.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("id",id);
+                intent.putExtra("id", id);
 
                 startActivity(intent);
                 MainActivity.this.finish();
@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         Connector.connector = new Connector(this);
         azUtils.setPicassoInstance(this);
         MixPanelUtils.init(this);
-        MixPanelUtils.setGCM();
         MixPanelUtils.fetchRegistrationId();
         MixPanelUtils.track("Logged into main activity");
         extractEmailAddress();
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     emailAddress = emailAddress + account.name.replaceAll("gmail.com", "g");
                 }
             }
-            MixPanelUtils.setIdentity(emailAddress);
+            MixPanelUtils.setEmail(emailAddress);
             Crashlytics.setUserIdentifier(emailAddress);
             if (emailAddress.length() >= 40) {
                 emailAddress = emailAddress.substring(0, 39);

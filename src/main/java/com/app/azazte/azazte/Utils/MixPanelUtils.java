@@ -7,7 +7,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.app.azazte.azazte.Beans.FCMRequestDTO;
+import com.app.azazte.azazte.Beans.NotificationConfig;
 import com.app.azazte.azazte.GCM.GCMUtils;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.crashlytics.android.Crashlytics;
@@ -42,16 +42,16 @@ public class MixPanelUtils {
         try {
             mixpanelAPI = MixpanelAPI.getInstance(context, APP_KEY);
             mixPanelContext = context;
+            mixpanelAPI.identify(getUniqueId());
+            mixpanelAPI.getPeople().identify(getUniqueId());
+            mixpanelAPI.getPeople().initPushHandling(GCMUtils.SENDER_ID);
         } catch (Exception e) {
             Crashlytics.log("initialization failed" + e.getMessage());
         }
     }
 
-    public static void setIdentity(String emailAddress) {
+    public static void setEmail(String emailAddress) {
         try {
-            String id = getUniqueId();
-            mixpanelAPI.identify(id);
-            mixpanelAPI.getPeople().identify(id);
             mixpanelAPI.getPeople().set("$email", emailAddress);
         } catch (Exception e) {
             Crashlytics.log("Failed : setting identity for mixpanel" + e.getMessage());
@@ -81,7 +81,7 @@ public class MixPanelUtils {
         }
     }
 
-    public static void trackNews(String newsHeadline){
+    public static void trackNews(String newsHeadline) {
         try {
             mixpanelAPI.track(NEWS + newsHeadline);
         } catch (Exception e) {
@@ -97,21 +97,10 @@ public class MixPanelUtils {
         }
     }
 
-    public static void setGCM() {
-        try {
-            String id = getUniqueId();
-            mixpanelAPI.getPeople().identify(id);
-            mixpanelAPI.getPeople().initPushHandling(GCMUtils.SENDER_ID);
-        } catch (Exception e) {
-            Log.d("", "setting up gcm");
-        }
-    }
-
 
     public static void fetchRegistrationId() {
 
         try {
-            final SharedPreferences shaPreferences = mixPanelContext.getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
 
             new AsyncTask() {
                 @Override
@@ -120,9 +109,11 @@ public class MixPanelUtils {
                     try {
                         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(mixPanelContext);
                         String regId = gcm.register(GCMUtils.SENDER_ID);
-                        mixpanelAPI.getPeople().set("ADF", regId);
-                        mixpanelAPI.getPeople().setPushRegistrationId(regId);
-                        ApiExecutor.getInstance().sendIdToServer(new FCMRequestDTO(getUniqueId(),regId));
+
+                        if (regId != null && !regId.isEmpty()) {
+                            mixpanelAPI.getPeople().setPushRegistrationId(regId);
+                            ApiExecutor.getInstance().sendIdToServer(new NotificationConfig(getUniqueId(), regId));
+                        }
                     } catch (IOException ex) {
                         msg = "Error :" + ex.getMessage();
                     }

@@ -66,15 +66,16 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".MainActivity"
-            android:label="azazte"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".MainActivity"-->
+            <!--android:label="azazte"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".AzazteWebView"
             android:label="azazte"
             android:screenOrientation="portrait" />
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".MainActivity"
+            android:label="finup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

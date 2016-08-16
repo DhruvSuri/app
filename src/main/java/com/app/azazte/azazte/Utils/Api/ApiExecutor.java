@@ -1,17 +1,14 @@
 package com.app.azazte.azazte.Utils.Api;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 
-import com.app.azazte.azazte.Beans.FCMRequestDTO;
+import com.app.azazte.azazte.Beans.NotificationConfig;
 import com.app.azazte.azazte.Beans.FCMServerResponse;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Beans.NewsCardWrapper;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.MessageEvent;
-import com.app.azazte.azazte.MainActivity;
-import com.app.azazte.azazte.NewUI;
-import com.app.azazte.azazte.Utils.Categories;
-import com.app.azazte.azazte.Utils.azUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -63,24 +60,25 @@ public class ApiExecutor {
                 if (newsCardWrapper.newsCardList.size() > 0) {
                     List<NewsCard> newsCardList = newsCardWrapper.newsCardList;
                     Connector.getInstance().saveNewsInDb(newsCardList);
+                    Toaster.toast("Refreshed News");
                     EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
                 }
             }
 
             @Override
             public void onFailure(Call<NewsCardWrapper> call, Throwable t) {
-                //Toaster.toast("Failed to fetch news");
-
-                if (swipe != null) {
-                    swipe.setRefreshing(false);
-                }
-                MainActivity.setRefreshActionButtonState(false);
+                Toaster.toast("Failed to fetch news");
+                EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
+//                if (swipe != null) {
+//                    swipe.setRefreshing(false);
+//                }
+//                MainActivity.setRefreshActionButtonState(false);
             }
         });
     }
 
-    public FCMServerResponse sendIdToServer(FCMRequestDTO requestDTO){
-        Call<FCMServerResponse> call = azazteApiService.saveFCMId(requestDTO);
+    public FCMServerResponse sendIdToServer(NotificationConfig config){
+        Call<FCMServerResponse> call = azazteApiService.saveFCMId(config);
         call.enqueue(new Callback<FCMServerResponse>() {
             @Override
             public void onResponse(Call<FCMServerResponse> call, Response<FCMServerResponse> response) {

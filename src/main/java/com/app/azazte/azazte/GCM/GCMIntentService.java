@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 public class GCMIntentService extends IntentService {
     public static int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
-    public static String FINUP = "finUP";
+    public static String FINUP = "finup";
     public static String ID = "id";
 
     public GCMIntentService() {

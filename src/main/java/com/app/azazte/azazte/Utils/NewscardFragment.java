@@ -1,19 +1,20 @@
 package com.app.azazte.azazte.Utils;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -23,16 +24,10 @@ import android.widget.TextView;
 
 import com.app.azazte.azazte.AzazteWebView;
 import com.app.azazte.azazte.Beans.NewsCard;
-
 import com.app.azazte.azazte.Database.Connector;
-import com.app.azazte.azazte.Event.MessageEvent;
-import com.app.azazte.azazte.Fetcher.BookmarksFetcher;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.squareup.picasso.Picasso;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,7 +40,6 @@ public class NewscardFragment extends Fragment {
 
     Animation slideup;
     Animation slidedown;
-
 
 
     private OnFragmentInteractionListener mListener;
@@ -69,17 +63,21 @@ public class NewscardFragment extends Fragment {
         slidedown = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slidedown);
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
-        TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
+        final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
         ImageButton option = (ImageButton) inflate.findViewById(R.id.options);
-        ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
-        final ImageView bookmark = (ImageView) inflate.findViewById(R.id.write);
+        final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
+
+        try {
+            setImageDisplayHeight(image, null);
+        } catch (Exception ignored) {
+        }
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
-        TextView impactText = (TextView) inflate.findViewById(R.id.impact);
+        final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
         final ImageButton shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
         View impactLayout = inflate.findViewById(R.id.linearLayout13);
@@ -101,6 +99,25 @@ public class NewscardFragment extends Fragment {
         } else {
             bookmarkView.setBackgroundColor(255);
         }
+
+
+//        newstxt.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                final int bodyHeight = newstxt.getMeasuredHeight();
+//                if (impactText.getVisibility() == View.INVISIBLE){
+//                    setImageDisplayHeight(image, bodyHeight);
+//                }
+//                impactText.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        int impactHeight = impactText.getMeasuredHeight();
+//                        setImageDisplayHeight(image, bodyHeight + impactHeight);
+//                    }
+//                });
+//            }
+//        });
+
 
         header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,10 +195,38 @@ public class NewscardFragment extends Fragment {
         return inflate;
     }
 
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    private void setImageDisplayHeight(ImageView image, Integer textHeight) {
+        Display d = ((WindowManager) this.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            d.getRealMetrics(realDisplayMetrics);
+        }
+
+        int realHeight = realDisplayMetrics.heightPixels;
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        d.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+
+        //int spaceAvailableForImage = displayHeight - textHeight;
+        //image.getLayoutParams().height = (spaceAvailableForImage * 70)/100;
+
+        int ratio = (realHeight - displayHeight) * 100 / realHeight;
+        if (ratio > 4) {
+            int realImageHeight = image.getLayoutParams().height;
+            int reduction = (realImageHeight * ratio) / 100;
+            image.getLayoutParams().height = realImageHeight - reduction;
+            //Toaster.toast("reduced percentage : " + ratio + " and reduced height " + reduction);
         }
     }
 
@@ -277,4 +322,5 @@ public class NewscardFragment extends Fragment {
         super.onResume();
         //shareButton.setClickable(true);
     }
+
 }

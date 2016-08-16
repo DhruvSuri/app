@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
-    android:background="#242729"
+    android:background="#3c4144"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -12,29 +12,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:text="fin"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#ffffff"
-            android:textSize="60sp"
-            android:typeface="normal" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textView8"
-            android:layout_toRightOf="@+id/textView8"
-            android:text="UP"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#2dd573"
-            android:textSize="60sp" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="&quot;An investment in knowledge pays the best interest&quot;"
+        android:id="@+id/textView28"
+        android:textColor="#fefefe"
+        android:textSize="22dp"
+        android:textAlignment="inherit"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="130dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Benjamin Franklin"
+        android:id="@+id/textView8"
+        android:layout_gravity="right"
+        android:textColor="#fefefe"
+        android:layout_marginRight="25dp"
+        android:textSize="15dp" />
 
 </LinearLayout>
