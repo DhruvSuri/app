@@ -144,7 +144,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/bell" />
+            android:src="@drawable/bellon" />
 
         <TextView
             android:id="@+id/textView21"

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ import com.app.azazte.azazte.AzazteWebView;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.NewUI;
+import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
 import com.squareup.picasso.Picasso;
 
@@ -42,7 +42,6 @@ public class NewscardFragment extends Fragment {
     Animation slideup;
     Animation slidedown;
     ImageButton shareButton;
-
 
 
     private OnFragmentInteractionListener mListener;
@@ -317,6 +316,9 @@ public class NewscardFragment extends Fragment {
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
         if (imageUrl != null && !imageUrl.isEmpty()) {
+            if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
+                return;
+            }
             Picasso.with(imageView.getContext().getApplicationContext())
                     .load(imageUrl)
                     .placeholder(R.drawable.placeholder)
@@ -326,9 +328,6 @@ public class NewscardFragment extends Fragment {
             //picasso.getSnapshot().dump();
         }
     }
-
-
-
 
 
     @Override

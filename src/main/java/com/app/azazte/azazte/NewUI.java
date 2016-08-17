@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -38,7 +37,6 @@ import java.util.List;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import xdroid.toaster.Toaster;
-
 
 
 public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
@@ -94,6 +92,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         RelativeLayout settingsLayout = (RelativeLayout) findViewById(R.id.settings_sheet);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
+        findViewById(R.id.notification);
         setListeners();
         categoriesSheet = BottomSheetBehavior.from(categoriesLayout);
         settingSheet = BottomSheetBehavior.from(settingsLayout);
@@ -132,9 +131,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView tax = (ImageView) findViewById(R.id.tax);
         ImageView law = (ImageView) findViewById(R.id.law);
         ImageView finace = (ImageView) findViewById(R.id.finance);
+        ImageView money = (ImageView) findViewById(R.id.money);
         ImageView economy = (ImageView) findViewById(R.id.economy);
         ImageView global = (ImageView) findViewById(R.id.global);
-        ImageView bookmark = (ImageView) findViewById(R.id.bookmark);
+        ImageView myLibrary = (ImageView) findViewById(R.id.bookmark);
         ImageView settings = (ImageView) findViewById(R.id.settings);
         ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
         final ImageView topRefreshButton = (ImageView) findViewById(R.id.top_refresh);
@@ -184,7 +184,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
 
-        tax.setOnClickListener(new View.OnClickListener() {
+        money.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //setupViewPager(3);
@@ -194,7 +194,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
 
-        tax.setOnClickListener(new View.OnClickListener() {
+        global.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //setupViewPager(3);
@@ -214,8 +214,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
 
-
-
         law.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,7 +225,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         });
 
 
-        bookmark.setOnClickListener(new View.OnClickListener() {
+        myLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //setupViewPager(-1);
@@ -263,8 +261,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
         ImageView shareApp = (ImageView) findViewById(R.id.privacy);
         final ImageView about = (ImageView) findViewById(R.id.about);
-        ImageView notification = (ImageView) findViewById(R.id.notification);
-        ImageView noImage = (ImageView) findViewById(R.id.noimage);
+        final ImageView notification = (ImageView) findViewById(R.id.notification);
+        final ImageView imageView = (ImageView) findViewById(R.id.noimage);
         twilight = (ImageView) findViewById(R.id.night);
 
         ImageView privacy = (ImageView) findViewById(R.id.shareApp);
@@ -365,11 +363,18 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         });
 
 
-        noImage.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                int drawable;
+                if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
+                    PrefManager.getInstance().setImageOn();
+                    drawable = R.drawable.imageon;
+                } else {
+                    PrefManager.getInstance().setImageOff();
+                    drawable = R.drawable.image;
+                }
+                imageView.setImageResource(drawable);
             }
         });
 
@@ -377,8 +382,15 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                int drawable;
+                if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
+                    PrefManager.getInstance().setNotificationOn();
+                    drawable = R.drawable.bellon;
+                } else {
+                    PrefManager.getInstance().setNotificationOff();
+                    drawable = R.drawable.bell;
+                }
+                notification.setImageResource(drawable);
             }
         });
 
@@ -411,13 +423,12 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         });
     }
 
-    public  void twilightMode(){
-        if(twilightFilter.getVisibility()==View.INVISIBLE) {
+    public void twilightMode() {
+        if (twilightFilter.getVisibility() == View.INVISIBLE) {
             twilightFilter.setVisibility(View.VISIBLE);
             twilight.setImageResource(R.drawable.lighton);
 
-        }
-        else {
+        } else {
             twilightFilter.setVisibility(View.INVISIBLE);
             twilight.setImageResource(R.drawable.lightoff);
         }

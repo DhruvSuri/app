@@ -34,7 +34,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.app.azazte.azazte"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 13
         versionName "3.0"

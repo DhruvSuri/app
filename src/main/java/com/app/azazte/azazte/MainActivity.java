@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         CalligraphyConfig.initDefault("fonts/HelveticaNeue.tff");
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        init();
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
+        init();
         StartSplashScreen(id);
     }
 
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                         NewUI.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.putExtra("id", id);
-
                 startActivity(intent);
                 MainActivity.this.finish();
             }
@@ -88,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         Connector.connector = new Connector(this);
         azUtils.setPicassoInstance(this);
         MixPanelUtils.init(this);
+        PrefManager.init(this);
         MixPanelUtils.fetchRegistrationId();
         MixPanelUtils.track("Logged into main activity");
         extractEmailAddress();

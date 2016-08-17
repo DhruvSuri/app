@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.support.v7.app.NotificationCompat;
 
 import com.app.azazte.azazte.Beans.NotificationObject;
 import com.app.azazte.azazte.MainActivity;
+import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -37,8 +37,8 @@ public class GCMIntentService extends IntentService {
             return;
         }
         try {
-            SharedPreferences shaPreferences = getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
-            if (!shaPreferences.getBoolean("notification", true)) {
+            PrefManager.init(this.getApplicationContext());
+            if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
                 MixPanelUtils.track(MixPanelUtils.NOTIFICATION + "TURNED_OFF_NOTIFICATIONS");
                 GcmBroadcastReceiver.completeWakefulIntent(intent);
                 return;
