@@ -169,17 +169,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(2);
                 categoryChosen = 2;
-                categoryChosenString = "Business";
-                onRestart();
-            }
-        });
-
-        tax.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //setupViewPager(3);
-                categoryChosen = 3;
-                categoryChosenString = "Tax";
+                categoryChosenString = "Deals";
                 onRestart();
             }
         });
@@ -188,38 +178,61 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 //setupViewPager(4);
-                categoryChosen = 4;
+                categoryChosen = 3;
                 categoryChosenString = "Finance";
                 onRestart();
             }
         });
 
-        law.setOnClickListener(new View.OnClickListener() {
+        tax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setupViewPager(5);
-                categoryChosen = 5;
-                categoryChosenString = "Law";
+                //setupViewPager(3);
+                categoryChosen = 4;
+                categoryChosenString = "Money";
                 onRestart();
             }
         });
 
-        global.setOnClickListener(new View.OnClickListener() {
+        tax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setupViewPager(6);
-                categoryChosen = 6;
+                //setupViewPager(3);
+                categoryChosen = 5;
                 categoryChosenString = "Global";
                 onRestart();
             }
         });
+
+        tax.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setupViewPager(3);
+                categoryChosen = 6;
+                categoryChosenString = "Tax";
+                onRestart();
+            }
+        });
+
+
+
+        law.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setupViewPager(5);
+                categoryChosen = 7;
+                categoryChosenString = "Startup";
+                onRestart();
+            }
+        });
+
 
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //setupViewPager(-1);
                 categoryChosen = -1;
-                categoryChosenString = "Bookmarks";
+                categoryChosenString = "My Library";
                 onRestart();
             }
         });

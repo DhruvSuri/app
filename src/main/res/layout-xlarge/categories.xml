@@ -149,7 +149,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/bookmark" />
+            android:src="@drawable/library" />
 
         <TextView
             android:id="@+id/textView12"
@@ -210,7 +210,7 @@
             android:layout_alignStart="@+id/bookmark"
             android:layout_below="@+id/bookmark"
             android:gravity="center_horizontal"
-            android:text="Bookmarks"
+            android:text="My Library"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff" />
 
