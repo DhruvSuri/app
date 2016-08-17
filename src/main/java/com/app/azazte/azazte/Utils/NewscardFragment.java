@@ -315,7 +315,7 @@ public class NewscardFragment extends Fragment {
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
         if (imageUrl != null && !imageUrl.isEmpty()) {
             if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
-                return;
+                imageUrl = "";
             }
             Picasso.with(imageView.getContext().getApplicationContext())
                     .load(imageUrl)

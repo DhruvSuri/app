@@ -1,5 +1,6 @@
 package com.app.azazte.azazte;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -109,6 +111,24 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         MixPanelUtils.trackCategories(categoryName);
         setupViewPager(category);
         viewPager.setCurrentItem(newsPostion, true);
+
+        if (PrefManager.getInstance().isFirstTimeLaunch()) {
+            showOverLay();
+            PrefManager.getInstance().setFirstTimeLaunch(false);
+        }
+    }
+
+    public void showOverLay() {
+        final Dialog dialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar);
+        dialog.setContentView(R.layout.help_overlay);
+        final LinearLayout layout = (LinearLayout) dialog.findViewById(R.id.overlayLayout);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private int getNewsPosition(Intent intent) {

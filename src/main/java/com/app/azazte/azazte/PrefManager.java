@@ -77,4 +77,6 @@ public class PrefManager {
     public String getImageState() {
         return pref.getString(KEY_IMAGE, IMAGE_STATE_ON);
     }
+
+
 }
