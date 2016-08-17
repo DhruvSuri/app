@@ -42,6 +42,7 @@ public class NewscardFragment extends Fragment {
     Animation slideup;
     Animation slidedown;
     ImageButton shareButton;
+    RelativeLayout brand;
 
 
     private OnFragmentInteractionListener mListener;
@@ -70,7 +71,7 @@ public class NewscardFragment extends Fragment {
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
-        ImageButton option = (ImageButton) inflate.findViewById(R.id.options);
+
         final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
 
         try {
@@ -82,6 +83,7 @@ public class NewscardFragment extends Fragment {
         final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
         shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
+        brand = (RelativeLayout) inflate.findViewById(R.id.brand);
         View impactLayout = inflate.findViewById(R.id.linearLayout13);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
         setImageIntoView(picasso, image, newsCard.imageUrl);
@@ -97,7 +99,7 @@ public class NewscardFragment extends Fragment {
         }
 
         if (newsCard.isBookmarked == 1) {
-            bookmarkView.setBackgroundColor(Color.parseColor("#42DD91"));
+            bookmarkView.setBackgroundColor(Color.parseColor("#2ce3e6"));
         } else {
             bookmarkView.setBackgroundColor(255);
         }
@@ -134,7 +136,7 @@ public class NewscardFragment extends Fragment {
                 if (newsCard.isBookmarked == 0) {
                     Connector.getInstance().setBookmarked(newsCard.id);
                     newsCard.isBookmarked = 1;
-                    bookmarkView.setBackgroundColor(Color.parseColor("#42DD91"));
+                    bookmarkView.setBackgroundColor(Color.parseColor("#2ce3e6"));
                     Toaster.toast("Added to your Library");
                 } else {
                     Connector.getInstance().unsetBookmarked(newsCard.id);
@@ -189,19 +191,14 @@ public class NewscardFragment extends Fragment {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showBrand();
                 shareBitmap(inflate, newsCard.id);
                 shareButton.setClickable(false);
-
+                hideBrand();
             }
         });
 
-        option.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showOptionsOverLay();
-            }
-        });
+
         return inflate;
     }
 
@@ -242,6 +239,7 @@ public class NewscardFragment extends Fragment {
 
     private void shareBitmap(View view, String fileName) {
         try {
+
 
             view.setDrawingCacheEnabled(true);
             view.buildDrawingCache(true);
@@ -335,5 +333,16 @@ public class NewscardFragment extends Fragment {
         super.onResume();
         shareButton.setClickable(true);
     }
+
+    public void showBrand(){
+        shareButton.setVisibility(View.INVISIBLE);
+        brand.setVisibility(View.VISIBLE);
+    }
+
+    public void hideBrand(){
+        shareButton.setVisibility(View.VISIBLE);
+        brand.setVisibility(View.GONE);
+    }
+
 
 }
