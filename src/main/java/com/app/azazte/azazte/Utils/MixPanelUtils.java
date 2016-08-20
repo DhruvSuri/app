@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.app.azazte.azazte.Beans.NotificationConfig;
 import com.app.azazte.azazte.GCM.GCMUtils;
+import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
@@ -29,9 +32,8 @@ public class MixPanelUtils {
     public static final String COMPANY_LAW = "COMPANY_LAW";
     public static final String ECONOMY_FINANCE = "ECONOMY_FINANCE";
     public static final String REGULATORY = "REGULATORY";
-    public static final String OTHERS = "OTHERS";
-    public static final String COMMENT = "COMMENT";
-    public static final String HEART = "HEART";
+    public static final String CATEGORY = "CATEGORY : ";
+    public static final String NEWS = "NEWS : ";
 
     public static MixpanelAPI mixpanelAPI;
     public static Context mixPanelContext;
@@ -40,21 +42,25 @@ public class MixPanelUtils {
         try {
             mixpanelAPI = MixpanelAPI.getInstance(context, APP_KEY);
             mixPanelContext = context;
+            mixpanelAPI.identify(getUniqueId());
+            mixpanelAPI.getPeople().identify(getUniqueId());
+            mixpanelAPI.getPeople().initPushHandling(GCMUtils.SENDER_ID);
         } catch (Exception e) {
-            Log.d("init", "init: initialization failed");
             Crashlytics.log("initialization failed" + e.getMessage());
         }
     }
 
-    public static void setIdentity(String emailAddress) {
+    public static void setEmail(String emailAddress) {
         try {
-            String id = Build.BRAND + "_" + Build.SERIAL + "_" + Build.ID;
-            mixpanelAPI.identify(id);
-            mixpanelAPI.getPeople().identify(id);
             mixpanelAPI.getPeople().set("$email", emailAddress);
         } catch (Exception e) {
             Crashlytics.log("Failed : setting identity for mixpanel" + e.getMessage());
         }
+    }
+
+    @NonNull
+    private static String getUniqueId() {
+        return Build.BRAND + "_" + Build.SERIAL + "_" + Build.ID;
     }
 
 
@@ -67,6 +73,22 @@ public class MixPanelUtils {
         }
     }
 
+    public static void trackCategories(String categoryName) {
+        try {
+            mixpanelAPI.track(CATEGORY + categoryName);
+        } catch (Exception e) {
+            Crashlytics.log("failed : tracking failed for mixpanel : " + categoryName + "  " + e.getMessage());
+        }
+    }
+
+    public static void trackNews(String newsHeadline) {
+        try {
+            mixpanelAPI.track(NEWS + newsHeadline);
+        } catch (Exception e) {
+            Crashlytics.log("failed : tracking failed for mixpanel : " + newsHeadline + "  " + e.getMessage());
+        }
+    }
+
     public static void timeEvent(String s) {
         try {
             mixpanelAPI.timeEvent(s);
@@ -75,32 +97,23 @@ public class MixPanelUtils {
         }
     }
 
-    public static void setGCM() {
-        try {
-            String id = Build.BRAND + "_" + Build.SERIAL + "_" + Build.ID;
-            mixpanelAPI.getPeople().identify(id);
-            mixpanelAPI.getPeople().initPushHandling(GCMUtils.SENDER_ID);
-        } catch (Exception e) {
-            Log.d("", "setting up gcm");
-        }
-    }
-
 
     public static void fetchRegistrationId() {
 
         try {
-            final SharedPreferences shaPreferences = mixPanelContext.getSharedPreferences("ShaPreferences", Context.MODE_PRIVATE);
 
             new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     String msg = "";
-
                     try {
                         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(mixPanelContext);
                         String regId = gcm.register(GCMUtils.SENDER_ID);
-                        mixpanelAPI.getPeople().set("ADF", regId);
-                        mixpanelAPI.getPeople().setPushRegistrationId(regId);
+
+                        if (regId != null && !regId.isEmpty()) {
+                            mixpanelAPI.getPeople().setPushRegistrationId(regId);
+                            ApiExecutor.getInstance().sendIdToServer(new NotificationConfig(getUniqueId(), regId));
+                        }
                     } catch (IOException ex) {
                         msg = "Error :" + ex.getMessage();
                     }
@@ -108,8 +121,6 @@ public class MixPanelUtils {
                 }
             }.execute();
         } catch (Exception ignored) {
-
         }
-
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.azazte.azazte" >
+    package="com.app.azazte.azazte">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,8 +8,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission
         android:name="android.permission.GET_ACCOUNTS"
         android:required="true" />
@@ -20,16 +18,25 @@
 
     <uses-permission android:name="com.app.azazte.azazte.permission.C2D_MESSAGE" />
 
+
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
     <application
-        android:name=".StarterApplication"
         android:allowBackup="true"
-        android:icon="@drawable/round_logo"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/MyMaterialTheme" >
+        android:debuggable="true"
+        android:theme="@style/MyMaterialTheme">
         <receiver
             android:name=".GCM.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -46,11 +53,11 @@
         <!-- android:label="@string/title_activity_signup" -->
         <!-- android:theme="@style/MyMaterialTheme"></activity> -->
 
-
+        <service android:name="com.parse.PushService" />
         <service android:name="com.parse.PushService" />
 
-        <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
@@ -59,25 +66,16 @@
             </intent-filter>
         </receiver>
 
-
-
-
-        <activity
-            android:name=".MainActivity"
-            android:label="azazte"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".DeepNewsCardActivity"
-            android:label="azazte"
-            android:screenOrientation="portrait" >
-        </activity>
+        <!--<activity-->
+            <!--android:name=".MainActivity"-->
+            <!--android:label="azazte"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".AzazteWebView"
             android:label="azazte"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name=".WelcomeActivity" >
+            android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity"
+            android:label="finup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,14 +97,14 @@
         <meta-data
             android:name="com.mixpanel.android.MPConfig.EnableDebugLogging"
             android:value="true" />
-
-        <meta-data android:name="com.parse.push.gcm_sender_id"
-            android:value="id:527444607031"/>
+        <meta-data
+            android:name="com.parse.push.gcm_sender_id"
+            android:value="id:527444607031" />
 
         <activity
             android:name=".About_Activity"
-            android:label="@string/title_activity_about_" >
-        </activity>
+            android:label="@string/title_activity_about_" />
+        <activity android:name=".NewUI" />
     </application>
 
 </manifest>

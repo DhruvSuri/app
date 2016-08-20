@@ -36,13 +36,13 @@ public class Connector extends SQLiteOpenHelper {
     public static Connector connector;
 
     public Connector(Context context) {
-        super(context.getApplicationContext(), DATABASE_NAME, null, 2);
+        super(context.getApplicationContext(), DATABASE_NAME, null, 4);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        db.execSQL("create table news (id integer primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,place text,category text,isBookmarked integer,author text,impact text,sentiment integer)");
+        db.execSQL("create table news (id text primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,place text,category text,isBookmarked integer,author text,impact text,sentiment integer)");
     }
 
     @Override
@@ -76,34 +76,33 @@ public class Connector extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertImageUrl(int id, String imageUrl) {
+    public boolean insertImageUrl(String id, String imageUrl) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(NEWS_COLUMN_MEMORY_IMAGE_URL, imageUrl);
-        db.update("news", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        db.update("news", contentValues, "id = ? ", new String[]{id});
         return true;
     }
 
-    public boolean setBookmarked(int id) {
+    public boolean setBookmarked(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(NEWS_COLUMN_IS_BOOKMARKED, 1);
-        db.update("news", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        db.update("news", contentValues, "id = ? ", new String[]{id});
         return true;
     }
 
-    public boolean unsetBookmarked(int id) {
+    public boolean unsetBookmarked(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(NEWS_COLUMN_IS_BOOKMARKED, 0);
-        db.update("news", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        db.update("news", contentValues, "id = ? ", new String[]{id});
         return true;
     }
 
-
-    public int getData(int id) {
+    public int getData(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from news where id=" + id + "", null);
+        Cursor res =  db.rawQuery("select * from news where id=\"" + id + "\"", null);
         final int count = res.getCount();
         res.close();
         return count;
@@ -126,7 +125,6 @@ public class Connector extends SQLiteOpenHelper {
     }
 
     public NewsCard getNewsById(String id) {
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from news where id=" + id, null);
         res.moveToFirst();
@@ -137,7 +135,7 @@ public class Connector extends SQLiteOpenHelper {
 
     private NewsCard fillNewsCard(Cursor res) {
         NewsCard newsCard = new NewsCard();
-        newsCard.id = res.getInt(res.getColumnIndex(NEWS_COLUMN_ID));
+        newsCard.id = res.getString(res.getColumnIndex(NEWS_COLUMN_ID));
         newsCard.newsHead = res.getString(res.getColumnIndex(NEWS_COLUMN_HEADING));
         newsCard.newsBody = res.getString(res.getColumnIndex(NEWS_COLUMN_BODY));
         newsCard.newsSourceUrl = res.getString(res.getColumnIndex(NEWS_COLUMN_SOURCE_URL));
@@ -175,8 +173,14 @@ public class Connector extends SQLiteOpenHelper {
     }
 
     public void saveNewsInDb(List<NewsCard> newsCards) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<NewsCard> allBookmarks = Connector.getInstance().getAllBookmarks();
+        db.execSQL("DELETE FROM news");
         for (NewsCard newsCard : newsCards) {
             connector.insertNews(newsCard);
+        }
+        for (NewsCard newsCard : allBookmarks) {
+            setBookmarked(newsCard.id);
         }
     }
 }

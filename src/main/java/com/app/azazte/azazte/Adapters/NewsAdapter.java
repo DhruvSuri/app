@@ -46,8 +46,6 @@ public class NewsAdapter extends ArrayAdapter<NewsCard> {
         this.data = objects;
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
         picasso = new Picasso.Builder(context).build();
-        //picasso.setIndicatorsEnabled(true);
-        //picasso.setLoggingEnabled(true);
     }
 
 
@@ -67,7 +65,7 @@ public class NewsAdapter extends ArrayAdapter<NewsCard> {
         final ImageButton share = (ImageButton) row.findViewById(R.id.share);
         final ImageView imageView = (ImageView) row.findViewById(R.id.imageView2);
         final ImageView dummyImageView = (ImageView) row.findViewById(R.id.dummyImageForCache);
-        final ImageView bookmark = (ImageView) row.findViewById(R.id.bookmark);
+        final ImageView bookmark = (ImageView) row.findViewById(R.id.write);
         TextView sourceView = (TextView) row.findViewById(R.id.newsSource);
         TextView date = (TextView) row.findViewById(R.id.date);
 
@@ -235,7 +233,7 @@ Intent intent = new Intent(getContext(), AzazteWebView.class);
       //  row.findViewById(R.id.moreAt).setVisibility(View.INVISIBLE);
       //  row.findViewById(R.id.newsSource).setVisibility(View.INVISIBLE);
         row.findViewById(R.id.share).setVisibility(View.INVISIBLE);
-        row.findViewById(R.id.bookmark).setVisibility(View.INVISIBLE);
+        row.findViewById(R.id.write).setVisibility(View.INVISIBLE);
     }
 
     public void disableShare(View row) {
@@ -245,6 +243,6 @@ Intent intent = new Intent(getContext(), AzazteWebView.class);
       //  row.findViewById(R.id.moreAt).setVisibility(View.VISIBLE);
       //  row.findViewById(R.id.newsSource).setVisibility(View.VISIBLE);
         row.findViewById(R.id.share).setVisibility(View.VISIBLE);
-        row.findViewById(R.id.bookmark).setVisibility(View.VISIBLE);
+        row.findViewById(R.id.write).setVisibility(View.VISIBLE);
     }
 }

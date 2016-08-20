@@ -135,7 +135,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
-                android:background="@drawable/bar"
+
                 android:gravity="center_vertical"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="false"
@@ -145,9 +145,9 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:id="@+id/bookmark"
+                android:id="@+id/write"
                 android:scaleType="fitXY"
-                android:src="@drawable/book"
+                android:src="@drawable/bookmark"
                 android:layout_alignBottom="@+id/comment"
                 android:layout_alignLeft="@+id/playstore"
                 android:layout_alignStart="@+id/playstore" />

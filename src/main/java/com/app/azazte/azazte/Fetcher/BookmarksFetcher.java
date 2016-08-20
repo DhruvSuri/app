@@ -20,7 +20,7 @@ import java.util.Set;
 public class BookmarksFetcher extends AsyncTask {
     private static NewsAdapter newsAdapter;
     private static Connector connector;
-    public static Set<Integer> bookmarkSet = new HashSet<>();
+    public static Set<String> bookmarkSet = new HashSet<>();
 
     public BookmarksFetcher(NewsAdapter newsAdapter, Connector connector) {
         this.connector = connector;

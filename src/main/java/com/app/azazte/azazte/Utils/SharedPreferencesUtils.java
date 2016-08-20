@@ -8,9 +8,14 @@ import android.content.SharedPreferences;
 public class SharedPreferencesUtils {
     public static SharedPreferences sharedPreferences;
 
+
     public static void storePref(String key, String value) {
         final SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString(key, value);
         edit.apply();
+    }
+
+    public static void saveForImage(){
+
     }
 }
