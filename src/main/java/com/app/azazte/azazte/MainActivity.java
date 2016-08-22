@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void extractEmailAddress() {
         try {
+            emailAddress = "";
             Account[] accounts = AccountManager.get(getApplicationContext()).getAccounts();
             for (Account account : accounts) {
                 if (account.name.contains(".com")) {

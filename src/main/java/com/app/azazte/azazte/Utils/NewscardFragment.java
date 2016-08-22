@@ -104,6 +104,8 @@ public class NewscardFragment extends Fragment {
             bookmarkView.setBackgroundColor(255);
         }
 
+        hideBrand();
+
 
 //        newstxt.post(new Runnable() {
 //            @Override
@@ -255,6 +257,8 @@ public class NewscardFragment extends Fragment {
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.putExtra(Intent.EXTRA_TEXT, "Know the impact of business, economy and finance on your wallet. All In 30 seconds! ?\n Finup : Decoding business, finance and technology in 30 second reads.\n" +
+                    "Download finup: http://bit.ly/29Gnkgl");
             intent.setType("image/png");
             startActivity(Intent.createChooser(intent, "finup"));
         } catch (Exception e) {
@@ -315,13 +319,15 @@ public class NewscardFragment extends Fragment {
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
         if (imageUrl != null && !imageUrl.isEmpty()) {
             if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
-                imageUrl = "";
+                imageView.setImageResource(R.drawable.placeholder);
+            } else {
+                Picasso.with(imageView.getContext().getApplicationContext())
+                        .load(imageUrl)
+                        .placeholder(R.drawable.placeholder)
+                        .config(Bitmap.Config.RGB_565)
+                        .into(imageView);
             }
-            Picasso.with(imageView.getContext().getApplicationContext())
-                    .load(imageUrl)
-                    .placeholder(R.drawable.placeholder)
-                    .config(Bitmap.Config.RGB_565)
-                    .into(imageView);
+
             //picasso.load(imageUrl).noFade().placeholder(R.drawable.placeholder).resize(300, 300).into(imageView);
             //picasso.getSnapshot().dump();
         }
@@ -334,14 +340,14 @@ public class NewscardFragment extends Fragment {
         shareButton.setClickable(true);
     }
 
-    public void showBrand(){
+    public void showBrand() {
         shareButton.setVisibility(View.INVISIBLE);
         brand.setVisibility(View.VISIBLE);
     }
 
-    public void hideBrand(){
+    public void hideBrand() {
         shareButton.setVisibility(View.VISIBLE);
-        brand.setVisibility(View.GONE);
+        brand.setVisibility(View.INVISIBLE);
     }
 
 
