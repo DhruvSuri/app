@@ -333,8 +333,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 Intent shareAppIntent = new Intent();
                 shareAppIntent.setAction(Intent.ACTION_SEND);
-                shareAppIntent.putExtra(Intent.EXTRA_TEXT, "Need to manage your finances but the technicalities make you stress.?\n Finup : Decoding business, finance and technology in 30 second reads.\n" +
-                        "Download app: https://goo.gl/BjupvI");
+                shareAppIntent.putExtra(Intent.EXTRA_TEXT, "Need to manage your finances but the technicalities make you sweat ?\n Finup : Decoding business, finance and technology in 30 second reads.\n" +
+                        "Download finup: https://goo.gl/BjupvI");
                 shareAppIntent.setType("text/plain");
                 startActivity(Intent.createChooser(shareAppIntent, "Spread A Word"));
             }
@@ -425,8 +425,13 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         categoriesText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if (categoriesSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                    settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                } else {
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
             }
         });
 

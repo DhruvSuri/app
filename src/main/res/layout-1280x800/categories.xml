@@ -137,7 +137,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/law" />
+            android:src="@drawable/startuplogo" />
 
         <ImageView
             android:id="@+id/bookmark"
@@ -221,7 +221,7 @@
             android:layout_below="@+id/law"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
-            android:text="Law"
+            android:text="Startups"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff" />
 
@@ -263,7 +263,7 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/business"
             android:gravity="center_horizontal"
-            android:text="Business"
+            android:text="Deals"
 
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff" />
