@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -79,6 +81,7 @@ public class NewscardFragment extends Fragment {
 
     public void inflateView(final View inflate) {
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
+
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
@@ -92,6 +95,8 @@ public class NewscardFragment extends Fragment {
             setImageDisplayHeight(image, null);
         } catch (Exception ignored) {
         }
+
+        setupbubblelistners(inflate);
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
@@ -190,6 +195,64 @@ public class NewscardFragment extends Fragment {
         });
     }
 
+    private void setupbubblelistners(View inflate) {
+
+        Button q1 = (Button) inflate.findViewById(R.id.q1);
+        Button q2 = (Button) inflate.findViewById(R.id.q2);
+        Button q3 = (Button) inflate.findViewById(R.id.q3);
+        Button q4 = (Button) inflate.findViewById(R.id.q4);
+        Button q5 = (Button) inflate.findViewById(R.id.q5);
+
+
+
+
+        q1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+        q2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+        q3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+        q4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+        q5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -277,6 +340,22 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    public void showquestiondialog() {
+
+        final Dialog dialog = new Dialog(getContext(), R.style.DialogAnimation);
+
+        dialog.setContentView(R.layout.questiondialog);
+        final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
 
