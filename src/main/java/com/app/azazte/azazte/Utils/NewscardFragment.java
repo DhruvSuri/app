@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,6 +30,7 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
+
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -65,7 +68,11 @@ public class NewscardFragment extends Fragment {
                 R.anim.slideup);
         slidedown = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slidedown);
+
+
+
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
+
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
@@ -78,6 +85,8 @@ public class NewscardFragment extends Fragment {
             setImageDisplayHeight(image, null);
         } catch (Exception ignored) {
         }
+
+        setupbubblelistners(inflate);
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
@@ -204,6 +213,64 @@ public class NewscardFragment extends Fragment {
         return inflate;
     }
 
+    private void setupbubblelistners(View inflate) {
+
+        Button q1 = (Button) inflate.findViewById(R.id.q1);
+        Button q2 = (Button) inflate.findViewById(R.id.q2);
+        Button q3 = (Button) inflate.findViewById(R.id.q3);
+        Button q4 = (Button) inflate.findViewById(R.id.q4);
+        Button q5 = (Button) inflate.findViewById(R.id.q5);
+
+
+
+
+        q1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+        q2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+        q3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+        q4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+        q5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog();
+
+            }
+        });
+
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -293,22 +360,16 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showOptionsOverLay() {
+    public void showquestiondialog() {
 
         final Dialog dialog = new Dialog(getContext(), R.style.DialogAnimation);
 
-        dialog.setContentView(R.layout.option_dialog);
+        dialog.setContentView(R.layout.questiondialog);
         final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
-        final RelativeLayout tray = (RelativeLayout) dialog.findViewById(R.id.overlay_layout);
-
-        tray.startAnimation(slideup);
-
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                tray.startAnimation(slidedown);
-                tray.setVisibility(View.INVISIBLE);
                 dialog.dismiss();
             }
         });
