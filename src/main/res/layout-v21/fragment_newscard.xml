@@ -326,7 +326,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:id="@+id/bottombar"
@@ -346,8 +346,8 @@
                     android:padding="3dp">
 
                     <Button
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:text="company revenue"
                         android:id="@+id/q1"
                         android:background="@drawable/circle"
@@ -358,11 +358,11 @@
                         android:layout_marginLeft="10dp"
                         android:minLines="2"
                         android:gravity="center"
-                        android:backgroundTint="#FFFFFF"
+                        android:backgroundTint="#7883c887"
                         android:textColor="#000" />
                     <Button
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:text="Who is Ceo ?"
                         android:id="@+id/q2"
                         android:background="@drawable/circle"
@@ -373,11 +373,11 @@
                         android:layout_marginLeft="10dp"
                         android:minLines="2"
                         android:gravity="center"
-                        android:backgroundTint="#FFFFFF"
+                        android:backgroundTint="#8230c9db"
                         android:textColor="#000" />
                     <Button
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:text="How much worth"
                         android:id="@+id/q3"
                         android:background="@drawable/circle"
@@ -388,11 +388,11 @@
                         android:layout_marginLeft="10dp"
                         android:minLines="2"
                         android:gravity="center"
-                        android:backgroundTint="#FFFFFF"
+                        android:backgroundTint="#63c476"
                         android:textColor="#000" />
                     <Button
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:text="What is GST ?"
                         android:id="@+id/q4"
                         android:background="@drawable/circle"
@@ -403,11 +403,11 @@
                         android:layout_marginLeft="10dp"
                         android:minLines="2"
                         android:gravity="center"
-                        android:backgroundTint="#FFFFFF"
+                        android:backgroundTint="#f78c82"
                         android:textColor="#000" />
                     <Button
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:text="similar companies"
                         android:id="@+id/q5"
                         android:background="@drawable/circle"
@@ -418,7 +418,87 @@
                         android:layout_marginLeft="10dp"
                         android:minLines="2"
                         android:gravity="center"
-                        android:backgroundTint="#FFFFFF"
+                        android:backgroundTint="#5fb4f5"
+                        android:textColor="#000" />
+
+                    <Button
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:text="similar companies"
+                        android:id="@+id/q6"
+                        android:background="@drawable/circle"
+                        android:layout_centerVertical="true"
+                        android:textSize="10dp"
+                        android:elevation="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:minLines="2"
+                        android:gravity="center"
+                        android:backgroundTint="#EE9A49"
+                        android:textColor="#000" />
+
+                    <Button
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:text="similar companies"
+                        android:id="@+id/q7"
+                        android:background="@drawable/circle"
+                        android:layout_centerVertical="true"
+                        android:textSize="10dp"
+                        android:elevation="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:minLines="2"
+                        android:gravity="center"
+                        android:backgroundTint="#9F79EE"
+                        android:textColor="#000" />
+
+                    <Button
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:text="similar companies"
+                        android:id="@+id/q8"
+                        android:background="@drawable/circle"
+                        android:layout_centerVertical="true"
+                        android:textSize="10dp"
+                        android:elevation="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:minLines="2"
+                        android:gravity="center"
+                        android:backgroundTint="#759EF0"
+                        android:textColor="#000" />
+
+                    <Button
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:text="similar companies"
+                        android:id="@+id/q9"
+                        android:background="@drawable/circle"
+                        android:layout_centerVertical="true"
+                        android:textSize="10dp"
+                        android:elevation="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:minLines="2"
+                        android:gravity="center"
+                        android:backgroundTint="#19E6A1"
+                        android:textColor="#000" />
+
+                    <Button
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:text="similar companies"
+                        android:id="@+id/q10"
+                        android:background="@drawable/circle"
+                        android:layout_centerVertical="true"
+                        android:textSize="10dp"
+                        android:elevation="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:minLines="2"
+                        android:gravity="center"
+                        android:backgroundTint="#9DD926"
                         android:textColor="#000" />
 
                 </LinearLayout>
