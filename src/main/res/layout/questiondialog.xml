@@ -20,22 +20,12 @@
             android:id="@+id/relativeLayout4"
             android:elevation="50dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/imageView9"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@android:drawable/ic_menu_help"
-                android:backgroundTint="#ffffff"
-                android:layout_marginTop="5dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Company revenue "
-                android:id="@+id/textView36"
+                android:id="@+id/bubbleQuestion"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
                 android:textSize="25dp"
@@ -56,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="$232 mn in 2015.90% coming from US."
-                android:id="@+id/textView37"
+                android:id="@+id/bubbleAnswer"
                 android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"

@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -197,20 +196,33 @@ public class NewscardFragment extends Fragment {
 
     private void setupbubblelistners(View inflate) {
 
-        Button q1 = (Button) inflate.findViewById(R.id.q1);
-        Button q2 = (Button) inflate.findViewById(R.id.q2);
-        Button q3 = (Button) inflate.findViewById(R.id.q3);
-        Button q4 = (Button) inflate.findViewById(R.id.q4);
-        Button q5 = (Button) inflate.findViewById(R.id.q5);
+        final Button q1 = (Button) inflate.findViewById(R.id.q1);
+        q1.setText("Back ground ?");
+        final Button q2 = (Button) inflate.findViewById(R.id.q2);
+        q2.setText("Similar deals ?");
+        final Button q3 = (Button) inflate.findViewById(R.id.q3);
+        q3.setText("Annual Revenue ?");
+        final Button q4 = (Button) inflate.findViewById(R.id.q4);
+        q4.setText("Indian Ad Market ?");
+        final Button q5 = (Button) inflate.findViewById(R.id.q5);
+        q5.setText("Funding ?");
+        final Button q6 = (Button) inflate.findViewById(R.id.q6);
+        q6.setText("Why such valuation ?");
+        final Button q7 = (Button) inflate.findViewById(R.id.q7);
+        q7.setText("Why bought ?");
+        final Button q8 = (Button) infla
 
-
+        te.findViewById(R.id.q8);
+        q8.setText("Startup billion aires ?");
+        final Button q9 = (Button) inflate.findViewById(R.id.q9);
+        q9.setText("Headquaters ?");
 
 
         q1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog();
+                showquestiondialog("Background", "Turakhia brothers (Divyank aged 34 and Bhavin aged 36) are the classic nerds-turn-billionaire story. They turned web entrepreneurs in their teens.");
 
             }
         });
@@ -219,7 +231,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog();
+                showquestiondialog("Similar deals", "Admob by Google's  at $750Mn and MoPub by Twitter at $350Mn");
 
             }
         });
@@ -228,7 +240,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog();
+                showquestiondialog("Annual Revenue", "$450 Mn (90% from USA)");
 
             }
         });
@@ -237,7 +249,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog();
+                showquestiondialog("Indian Ad Market", "$7.61 Billion in 2016");
 
             }
         });
@@ -246,7 +258,43 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog();
+                showquestiondialog("Funding", "Bootstrapped");
+
+            }
+        });
+
+        q6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+
+            }
+        });
+
+        q7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts");
+
+            }
+        });
+
+        q8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders");
+
+            }
+        });
+
+        q9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Headquaters", "Global - Dubai.US - New York");
 
             }
         });
@@ -340,16 +388,20 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showquestiondialog() {
+    public void showquestiondialog(String question, String answer) {
 
         final Dialog dialog = new Dialog(getContext(), R.style.DialogAnimation);
 
         dialog.setContentView(R.layout.questiondialog);
+
+        TextView questionView = (TextView) dialog.findViewById(R.id.bubbleQuestion);
+        questionView.setText(question);
+        TextView answerView = (TextView) dialog.findViewById(R.id.bubbleAnswer);
+        answerView.setText(answer);
         final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dialog.dismiss();
             }
         });
