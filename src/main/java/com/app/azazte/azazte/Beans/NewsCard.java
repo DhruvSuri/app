@@ -16,6 +16,7 @@ public class NewsCard {
     public String category;
     public String author;
     public String impact;
+    public String impactLabel;
     public String sentiment;
 
 

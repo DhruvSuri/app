@@ -71,6 +71,7 @@ public class NewscardFragment extends Fragment {
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
+        TextView impactLabel = (TextView) inflate.findViewById(R.id.textView18);
 
         final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
 
@@ -92,6 +93,7 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName.trim());
         date.setText(newsCard.date.trim());
         author.setText(newsCard.author.trim());
+        impactLabel.setText(newsCard.impactLabel);
         if (newsCard.impact.isEmpty()) {
             hideImpact(impactLayout, impactText);
         } else {
