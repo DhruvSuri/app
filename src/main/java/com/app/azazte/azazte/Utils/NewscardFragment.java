@@ -24,15 +24,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.azazte.azazte.AzazteWebView;
+import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
+import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import xdroid.toaster.Toaster;
 
@@ -44,6 +53,7 @@ public class NewscardFragment extends Fragment {
     Animation slidedown;
     ImageButton shareButton;
     RelativeLayout brand;
+    private View inflateHolder;
 
 
     private OnFragmentInteractionListener mListener;
@@ -54,6 +64,18 @@ public class NewscardFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -61,7 +83,9 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+        ApiExecutor.getInstance().fetchBubbles(newsCard.id);
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
+        inflateHolder = inflate;
         slideup = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slideup);
         slidedown = AnimationUtils.loadAnimation(getContext(),
@@ -83,8 +107,6 @@ public class NewscardFragment extends Fragment {
         } catch (Exception ignored) {
         }
 
-        setupbubblelistners(inflate);
-
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
@@ -98,6 +120,7 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName.trim());
         date.setText(newsCard.date.trim());
         author.setText(newsCard.author.trim());
+
         if (newsCard.impact.isEmpty()) {
             hideImpact(impactLayout, impactText);
         } else {
@@ -206,39 +229,48 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-
+        setupBubbleListners(inflateHolder, newsCard.id);
         return inflate;
     }
 
-    private void setupbubblelistners(View inflate) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(BubbleEvent event) {
+        //List<Bubble> bubbleList = event.getBubbleList();
+        //setupbubblelistners(inflateHolder, bubbleList);
+    }
 
+    private void setupBubbleListners(View inflate, String id) {
+        final List<Bubble> bubbleList = Connector.getInstance().getBubbles(id);
+        if (bubbleList.size() == 0)
+            return;
+        if (bubbleList.size() < 5){
+            fillBubblesDummyData(bubbleList);
+        }
         final Button q1 = (Button) inflate.findViewById(R.id.q1);
-        q1.setText("Back ground ?");
+        q1.setText(bubbleList.get(0).getQuestion());
         final Button q2 = (Button) inflate.findViewById(R.id.q2);
-        q2.setText("Similar deals ?");
+        q2.setText(bubbleList.get(1).getQuestion());
         final Button q3 = (Button) inflate.findViewById(R.id.q3);
-        q3.setText("Annual Revenue ?");
+        q3.setText(bubbleList.get(2).getQuestion());
         final Button q4 = (Button) inflate.findViewById(R.id.q4);
-        q4.setText("Indian Ad Market ?");
+        q4.setText(bubbleList.get(3).getQuestion());
         final Button q5 = (Button) inflate.findViewById(R.id.q5);
-        q5.setText("Funding ?");
-        final Button q6 = (Button) inflate.findViewById(R.id.q6);
-        q6.setText("Why such valuation ?");
-        final Button q7 = (Button) inflate.findViewById(R.id.q7);
-        q7.setText("Why bought ?");
-        final Button q8 = (Button) infla
-
-        te.findViewById(R.id.q8);
-        q8.setText("Startup billion aires ?");
-        final Button q9 = (Button) inflate.findViewById(R.id.q9);
-        q9.setText("Headquaters ?");
+        q5.setText(bubbleList.get(4).getQuestion());
+//        final Button q6 = (Button) inflate.findViewById(R.id.q6);
+//        q6.setText("Why such valuation ?");
+//        final Button q7 = (Button) inflate.findViewById(R.id.q7);
+//        q7.setText("Why bought ?");
+//        final Button q8 = (Button) inflate.findViewById(R.id.q8);
+//        q8.setText("Startup billion aires ?");
+//        final Button q9 = (Button) inflate.findViewById(R.id.q9);
+//        q9.setText("Headquaters ?");
 
 
         q1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Background", "Turakhia brothers (Divyank aged 34 and Bhavin aged 36) are the classic nerds-turn-billionaire story. They turned web entrepreneurs in their teens.");
+                showquestiondialog(bubbleList.get(0).getQuestion(), bubbleList.get(0).getAnswer());
 
             }
         });
@@ -247,7 +279,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Similar deals", "Admob by Google's  at $750Mn and MoPub by Twitter at $350Mn");
+                showquestiondialog(bubbleList.get(1).getQuestion(), bubbleList.get(1).getAnswer());
 
             }
         });
@@ -256,7 +288,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Annual Revenue", "$450 Mn (90% from USA)");
+                showquestiondialog(bubbleList.get(2).getQuestion(), bubbleList.get(2).getAnswer());
 
             }
         });
@@ -265,7 +297,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Indian Ad Market", "$7.61 Billion in 2016");
+                showquestiondialog(bubbleList.get(3).getQuestion(), bubbleList.get(3).getAnswer());
 
             }
         });
@@ -274,47 +306,55 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Funding", "Bootstrapped");
+                showquestiondialog(bubbleList.get(4).getQuestion(), bubbleList.get(4).getAnswer());
 
             }
         });
 
-        q6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        q6.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+//
+//            }
+//        });
+//
+//        q7.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts");
+//
+//            }
+//        });
+//
+//        q8.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders");
+//
+//            }
+//        });
+//
+//        q9.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog("Headquaters", "Global - Dubai.US - New York");
+//
+//            }
+//        });
 
-                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+    }
 
-            }
-        });
-
-        q7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts");
-
-            }
-        });
-
-        q8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders");
-
-            }
-        });
-
-        q9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog("Headquaters", "Global - Dubai.US - New York");
-
-            }
-        });
-
+    private void fillBubblesDummyData(List<Bubble> bubbleList) {
+        bubbleList.add(new Bubble());
+        bubbleList.add(new Bubble());
+        bubbleList.add(new Bubble());
+        bubbleList.add(new Bubble());
+        bubbleList.add(new Bubble());
     }
 
 
