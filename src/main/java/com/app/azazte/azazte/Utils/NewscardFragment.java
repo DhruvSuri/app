@@ -24,15 +24,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.azazte.azazte.AzazteWebView;
+import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
+import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import xdroid.toaster.Toaster;
 
@@ -44,6 +52,7 @@ public class NewscardFragment extends Fragment {
     Animation slidedown;
     ImageButton shareButton;
     RelativeLayout brand;
+    private View inflateHolder;
 
 
     private OnFragmentInteractionListener mListener;
@@ -51,6 +60,18 @@ public class NewscardFragment extends Fragment {
 
     public NewscardFragment(NewsCard newsCard, Context applicationContext) {
         this.newsCard = newsCard;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     @Override
@@ -62,6 +83,7 @@ public class NewscardFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
+        inflateHolder = inflate;
         slideup = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slideup);
         slidedown = AnimationUtils.loadAnimation(getContext(),
@@ -83,8 +105,6 @@ public class NewscardFragment extends Fragment {
         } catch (Exception ignored) {
         }
 
-        setupbubblelistners(inflate);
-
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
@@ -98,6 +118,7 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName.trim());
         date.setText(newsCard.date.trim());
         author.setText(newsCard.author.trim());
+        ApiExecutor.getInstance().fetchBubbles(newsCard.id);
         if (newsCard.impact.isEmpty()) {
             hideImpact(impactLayout, impactText);
         } else {
@@ -210,10 +231,18 @@ public class NewscardFragment extends Fragment {
         return inflate;
     }
 
-    private void setupbubblelistners(View inflate) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(BubbleEvent event) {
+        List<Bubble> bubbleList = event.getBubbleList();
+        setupbubblelistners(inflateHolder, bubbleList);
+    }
 
+    private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
+
+        if (bubbleList.size() == 0)
+            return;
         final Button q1 = (Button) inflate.findViewById(R.id.q1);
-        q1.setText("Back ground ?");
+        q1.setText(bubbleList.get(0).getQuestion());
         final Button q2 = (Button) inflate.findViewById(R.id.q2);
         q2.setText("Similar deals ?");
         final Button q3 = (Button) inflate.findViewById(R.id.q3);
@@ -226,9 +255,7 @@ public class NewscardFragment extends Fragment {
         q6.setText("Why such valuation ?");
         final Button q7 = (Button) inflate.findViewById(R.id.q7);
         q7.setText("Why bought ?");
-        final Button q8 = (Button) infla
-
-        te.findViewById(R.id.q8);
+        final Button q8 = (Button) inflate.findViewById(R.id.q8);
         q8.setText("Startup billion aires ?");
         final Button q9 = (Button) inflate.findViewById(R.id.q9);
         q9.setText("Headquaters ?");
@@ -238,7 +265,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Background", "Turakhia brothers (Divyank aged 34 and Bhavin aged 36) are the classic nerds-turn-billionaire story. They turned web entrepreneurs in their teens.");
+                showquestiondialog(bubbleList.get(0).getQuestion(), bubbleList.get(0).getAnswer());
 
             }
         });
