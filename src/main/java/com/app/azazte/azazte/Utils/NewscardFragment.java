@@ -130,7 +130,7 @@ public class NewscardFragment extends Fragment {
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NewUI) getActivity()).showTopBar();
+           //     ((NewUI) getActivity()).showTopBar();
             }
         });
 
@@ -325,6 +325,7 @@ public class NewscardFragment extends Fragment {
                         .load(imageUrl)
                         .placeholder(R.drawable.placeholder)
                         .config(Bitmap.Config.RGB_565)
+                        .resize(250, 350)
                         .into(imageView);
             }
 
