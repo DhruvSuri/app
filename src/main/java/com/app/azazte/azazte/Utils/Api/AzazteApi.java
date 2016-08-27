@@ -1,8 +1,11 @@
 package com.app.azazte.azazte.Utils.Api;
 
+import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.FCMServerResponse;
 import com.app.azazte.azazte.Beans.NewsCardWrapper;
 import com.app.azazte.azazte.Beans.NotificationConfig;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,5 +23,6 @@ public interface AzazteApi {
     @POST("/service/rest/notification/save")
     Call<FCMServerResponse> saveFCMId(@Body NotificationConfig requestDTO);
 
+    Call<List<Bubble>> fetchBubbles(String storyId);
 }
 

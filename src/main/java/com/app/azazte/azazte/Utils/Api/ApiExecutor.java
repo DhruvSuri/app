@@ -2,11 +2,13 @@ package com.app.azazte.azazte.Utils.Api;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
+import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.FCMServerResponse;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Beans.NewsCardWrapper;
 import com.app.azazte.azazte.Beans.NotificationConfig;
 import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.Event.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -86,9 +88,24 @@ public class ApiExecutor {
 
             @Override
             public void onFailure(Call<FCMServerResponse> call, Throwable t) {
-
             }
         });
         return null;
+    }
+
+    public void fetchBubbles(String storyId) {
+        Call<List<Bubble>> bubbleResponse = azazteApiService.fetchBubbles(storyId);
+        bubbleResponse.enqueue(new Callback<List<Bubble>>() {
+            @Override
+            public void onResponse(Call<List<Bubble>> call, Response<List<Bubble>> response) {
+                List<Bubble> bubbleList = response.body();
+                EventBus.getDefault().post(new BubbleEvent(bubbleList));
+            }
+
+            @Override
+            public void onFailure(Call<List<Bubble>> call, Throwable t) {
+                EventBus.getDefault().post(new BubbleEvent(null));
+            }
+        });
     }
 }
