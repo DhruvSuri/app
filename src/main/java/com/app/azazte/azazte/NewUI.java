@@ -27,6 +27,7 @@ import com.app.azazte.azazte.Event.MessageEvent;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.NewscardFragment;
+import com.app.azazte.azazte.Utils.TemplateFragment;
 import com.app.azazte.azazte.animation.DepthTransform;
 
 import org.greenrobot.eventbus.EventBus;
@@ -481,6 +482,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             for (NewsCard newsCard : allBookmarks) {
                 adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
             }
+            addEndLayoutToFragmentList(adapter, R.layout.emptylibrary);
             return;
         }
 
@@ -499,10 +501,17 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                     adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
                     break;
                 }
-
             }
-
         }
+        addEndLayoutToFragmentList(adapter, R.layout.endofstory);
+    }
+
+    private void addEndLayoutToFragmentList(ViewPagerAdapter adapter, int layout) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(TemplateFragment.LAYOUT,layout);
+        TemplateFragment templateFragment = new TemplateFragment();
+        templateFragment.setArguments(bundle);
+        adapter.addFrag(templateFragment);
     }
 
 
@@ -510,14 +519,14 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         if (topBar.getVisibility() == View.GONE) {
             topBar.setVisibility(View.VISIBLE);
             topBar.startAnimation(fadeIn);
-      //      topBar.postDelayed(new Runnable() {
-      //          @Override
-      //          public void run() {
-      //              topBar.startAnimation(fadeOut);
-      //              topBar.setVisibility(View.GONE);
-      //              topBar.clearAnimation();
-      //          }
-      //      }, 5000);
+            //      topBar.postDelayed(new Runnable() {
+            //          @Override
+            //          public void run() {
+            //              topBar.startAnimation(fadeOut);
+            //              topBar.setVisibility(View.GONE);
+            //              topBar.clearAnimation();
+            //          }
+            //      }, 5000);
 
         } else {
             topBar.startAnimation(fadeOut);
