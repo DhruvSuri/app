@@ -93,7 +93,9 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName.trim());
         date.setText(newsCard.date.trim());
         author.setText(newsCard.author.trim());
-        impactLabel.setText(newsCard.impactLabel);
+        if (newsCard.impactLabel != null){
+            impactLabel.setText(newsCard.impactLabel);
+        }
         if (newsCard.impact.isEmpty()) {
             hideImpact(impactLayout, impactText);
         } else {

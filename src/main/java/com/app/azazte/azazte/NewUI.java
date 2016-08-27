@@ -486,15 +486,22 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
         for (NewsCard newsCard : allNews) {
-            int cardCategory;
-            try {
-                cardCategory = Integer.valueOf(newsCard.category);
-            } catch (Exception e) {
-                cardCategory = 0;
+            int cardCategory = 0;
+            String[] split = newsCard.category.split(",");
+
+            for (String categoryString : split) {
+                try {
+                    cardCategory = Integer.valueOf(categoryString);
+                } catch (Exception e) {
+                    cardCategory = 0;
+                }
+                if (category == cardCategory || category == 0) {
+                    adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
+                    break;
+                }
+
             }
-            if (category == cardCategory || category == 0) {
-                adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
-            }
+
         }
     }
 
