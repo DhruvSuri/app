@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
-import com.app.azazte.azazte.Utils.azUtils;
 import com.crashlytics.android.Crashlytics;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -84,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void init() {
-        Connector.connector = new Connector(this);
-        azUtils.setPicassoInstance(this);
+        Connector.connector = new Connector(this.getApplicationContext());
         MixPanelUtils.init(this);
         PrefManager.init(this);
         MixPanelUtils.fetchRegistrationId();

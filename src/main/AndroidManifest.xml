@@ -102,9 +102,6 @@
             android:name="com.parse.push.gcm_sender_id"
             android:value="id:527444607031" />
 
-        <activity
-            android:name=".About_Activity"
-            android:label="@string/title_activity_about_" />
         <activity android:name=".NewUI" />
     </application>
 

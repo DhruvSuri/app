@@ -243,8 +243,6 @@ public class NewscardFragment extends Fragment {
 
     private void shareBitmap(View view, String fileName) {
         try {
-
-
             view.setDrawingCacheEnabled(true);
             view.buildDrawingCache(true);
             view.setDrawingCacheEnabled(true);
