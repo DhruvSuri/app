@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.NewsCard;
 
 import java.util.ArrayList;
@@ -33,6 +34,11 @@ public class Connector extends SQLiteOpenHelper {
     public static final String NEWS_SENTIMENT = "sentiment";
     private static final String NEWS_IMPACT_LABEL = "impactLabel";
 
+    private static final String BUBBLE_QUESTION = "question";
+    private static final String BUBBLE_ANSWER = "answer";
+    private static final String BUBBLE_STORY_ID = "storyId";
+    private static final String BUBBLE_ID = "id";
+
     public static Connector connector;
 
     public Connector(Context context) {
@@ -49,6 +55,7 @@ public class Connector extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS news");
+        db.execSQL("DROP TABLE IF EXISTS bubble");
         onCreate(db);
     }
 
@@ -125,6 +132,43 @@ public class Connector extends SQLiteOpenHelper {
         return array_list;
     }
 
+    public ArrayList<Bubble> getBubbles(String storyId) {
+        ArrayList<Bubble> array_list = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from bubble where " + BUBBLE_STORY_ID + "=\"" + storyId + "\"", null);
+        res.moveToFirst();
+        Bubble bubble;
+        while (res.isAfterLast() == false) {
+            bubble = fillBubble(res);
+            array_list.add(bubble);
+            res.moveToNext();
+        }
+        res.close();
+        return array_list;
+    }
+
+    private Bubble fillBubble(Cursor res) {
+        Bubble bubble = new Bubble();
+        bubble.setStoryId(res.getString(res.getColumnIndex(BUBBLE_STORY_ID)));
+        bubble.setQuestion(res.getString(res.getColumnIndex(BUBBLE_QUESTION)));
+        bubble.setAnswer(res.getString(res.getColumnIndex(BUBBLE_ANSWER)));
+        bubble.setId(res.getString(res.getColumnIndex(BUBBLE_ID)));
+        return bubble;
+    }
+
+    public boolean insertBubble(Bubble bubble) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BUBBLE_ID, bubble.getId());
+        contentValues.put(BUBBLE_STORY_ID, bubble.getStoryId());
+        contentValues.put(BUBBLE_QUESTION, bubble.getQuestion());
+        contentValues.put(BUBBLE_ANSWER, bubble.getAnswer());
+        db.insert("bubble", null, contentValues);
+        return true;
+    }
+
+
     public NewsCard getNewsById(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from news where id=" + id, null);
@@ -183,6 +227,12 @@ public class Connector extends SQLiteOpenHelper {
         }
         for (NewsCard newsCard : allBookmarks) {
             setBookmarked(newsCard.id);
+        }
+    }
+
+    public void saveBubbles(List<Bubble> bubbleList) {
+        for (Bubble bubble : bubbleList) {
+            insertBubble(bubble);
         }
     }
 }

@@ -80,6 +80,7 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+        ApiExecutor.getInstance().fetchBubbles(newsCard.id);
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
 
@@ -225,11 +226,11 @@ public class NewscardFragment extends Fragment {
         final Button q1 = (Button) inflate.findViewById(R.id.q1);
         q1.setText(bubbleList.get(0).getQuestion());
         final Button q2 = (Button) inflate.findViewById(R.id.q2);
-        q2.setText("Similar deals ?");
+        q2.setText(bubbleList.get(1).getQuestion());
         final Button q3 = (Button) inflate.findViewById(R.id.q3);
-        q3.setText("Annual Revenue ?");
+        q3.setText(bubbleList.get(2).getQuestion());
         final Button q4 = (Button) inflate.findViewById(R.id.q4);
-        q4.setText("Indian Ad Market ?");
+        q4.setText(bubbleList.get(3).getQuestion());
         final Button q5 = (Button) inflate.findViewById(R.id.q5);
         q5.setText("Funding ?");
         final Button q6 = (Button) inflate.findViewById(R.id.q6);
@@ -255,7 +256,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Similar deals", "Admob by Google's  at $750Mn and MoPub by Twitter at $350Mn");
+                showquestiondialog(bubbleList.get(1).getQuestion(), bubbleList.get(1).getAnswer());
 
             }
         });
@@ -264,7 +265,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Annual Revenue", "$450 Mn (90% from USA)");
+                showquestiondialog(bubbleList.get(2).getQuestion(), bubbleList.get(2).getAnswer());
 
             }
         });
@@ -273,7 +274,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Indian Ad Market", "$7.61 Billion in 2016");
+                showquestiondialog(bubbleList.get(3).getQuestion(), bubbleList.get(3).getAnswer());
 
             }
         });
@@ -282,47 +283,55 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Funding", "Bootstrapped");
+                showquestiondialog(bubbleList.get(4).getQuestion(), bubbleList.get(4).getAnswer());
 
             }
         });
 
-        q6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        q6.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+//
+//            }
+//        });
+//
+//        q7.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts");
+//
+//            }
+//        });
+//
+//        q8.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders");
+//
+//            }
+//        });
+//
+//        q9.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog("Headquaters", "Global - Dubai.US - New York");
+//
+//            }
+//        });
 
-                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+    }
 
-            }
-        });
-
-        q7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts");
-
-            }
-        });
-
-        q8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders");
-
-            }
-        });
-
-        q9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog("Headquaters", "Global - Dubai.US - New York");
-
-            }
-        });
-
+    private void fillBubblesDummyData(List<Bubble> bubbleList) {
+        bubbleList.add(new Bubble());
+        bubbleList.add(new Bubble());
+        bubbleList.add(new Bubble());
+        bubbleList.add(new Bubble());
+        bubbleList.add(new Bubble());
     }
 
 
