@@ -40,7 +40,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import xdroid.toaster.Toaster;
