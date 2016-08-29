@@ -259,7 +259,7 @@ public class NewscardFragment extends Fragment {
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-            intent.putExtra(Intent.EXTRA_TEXT, "Know the impact of business, economy and finance on your wallet. All In 30 seconds! ?\n Finup : Decoding business, finance and technology in 30 second reads.\n" +
+            intent.putExtra(Intent.EXTRA_TEXT, "Know the impact of business, economy and finance on YOU . All In 30 seconds! ?\n" +
                     "Download finup: http://bit.ly/29Gnkgl");
             intent.setType("image/png");
             startActivity(Intent.createChooser(intent, "finup"));

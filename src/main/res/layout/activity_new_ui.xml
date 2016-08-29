@@ -50,20 +50,19 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="#000000"
+        android:background="#d2000000"
         android:visibility="visible"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_alignParentBottom="false"
-        android:focusable="true"
-        android:touchscreenBlocksFocus="true">
+           android:layout_alignParentBottom="false"
+        android:focusable="false"
+        android:touchscreenBlocksFocus="false">
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/categories"
             android:src="@drawable/ic_menu"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" />
 
           <TextView
             android:layout_width="wrap_content"
@@ -99,8 +98,32 @@
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
             android:layout_centerVertical="true"
-            android:padding="2dp" />
-    </RelativeLayout>
+            android:padding="2dp"
+                android:layout_marginLeft="10dp" />
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_alignParentTop="true"
+               android:layout_alignParentStart="true"
+               android:layout_toStartOf="@+id/top_refresh"
+               android:id="@+id/topfilter"></FrameLayout>
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_alignParentTop="false"
+               android:layout_toEndOf="@+id/topfilter"
+               android:layout_toLeftOf="@+id/settings"
+               android:id="@+id/refreshfilter"></FrameLayout>
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_toEndOf="@+id/top_refresh"
+               android:layout_alignParentTop="true"
+               android:id="@+id/settingfilter"></FrameLayout>
+       </RelativeLayout>
 
 
 </RelativeLayout>

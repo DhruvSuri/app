@@ -1,5 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
@@ -19,7 +21,8 @@
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="230dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/wall" />
 
 
         <RelativeLayout
@@ -42,11 +45,13 @@
                 android:paddingTop="15dp"
                 android:singleLine="false"
                 android:text="@string/newsinfo"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#4d4d4d"
+                fontPath="fonts/HelveticaNeueThin.ttf"
+                android:textColor="#000000"
                 android:textIsSelectable="false"
-                android:textSize="15sp"
-                android:typeface="sans" />
+                android:textSize="13sp"
+                tools:ignore="MissingPrefix"
+                android:textStyle="bold"
+                android:letterSpacing="0.03" />
 
             <LinearLayout
                 android:id="@+id/linearLayout13"
@@ -107,25 +112,25 @@
                 <TextView
                     android:id="@+id/impact"
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:background="#ffffff"
                     android:lineSpacingExtra="3dp"
-                    android:paddingBottom="10dp"
+                    android:paddingBottom="2dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:singleLine="false"
                     android:text="@string/impact"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="#141414"
+                    fontPath="fonts/HelveticaNeueLight.ttf"
+                    tools:ignore="MissingPrefix"
+                    android:textColor="#000000"
                     android:textIsSelectable="false"
-
-                    android:textSize="15sp"
-                    android:textStyle="normal"
-                    android:typeface="normal" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.03" />
 
             </RelativeLayout>
+
         </RelativeLayout>
 
 
@@ -138,7 +143,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_toStartOf="@+id/date">
+            android:layout_toStartOf="@+id/date"
+            android:background="@drawable/grad3">
 
 
             <TextView
@@ -146,18 +152,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="false"
-                android:layout_centerInParent="true"
-                android:background="@drawable/grad"
                 android:gravity="center_horizontal"
                 android:outlineProvider="paddedBounds"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="Right to cancel the property dead if builder fails to deliver in three months"
                 android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                fontPath="fonts/HelveticaNeueMedium.ttf"
+                tools:ignore="MissingPrefix"
+
                 android:textColor="#ffffff"
                 android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+
+                android:layout_centerInParent="true" />
 
             <TextView
                 android:id="@+id/moreAt"
@@ -269,48 +277,64 @@
         <RelativeLayout
             android:id="@+id/brand"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="false"
             android:layout_alignParentStart="false"
-            android:background="#353535"
             android:visibility="visible">
 
-            <ImageView
-                android:id="@+id/imageView11"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:padding="2dp"
-                android:src="@drawable/logo3" />
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/newstxt"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:alpha=".5"
+                android:background="#000"
+                android:visibility="visible" />
+
+
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:paddingBottom="3dp"
-                android:paddingLeft="7dp"
-                android:text="Business | Finance\nSimplify"
+                android:text="Business | Finance\nSimplified"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
+                fontPath="fonts/HelveticaNeueMedium.ttf"
+                tools:ignore="MissingPrefix"
+
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:typeface="sans" />
 
             <ImageView
                 android:id="@+id/imageView12"
-                android:layout_width="90dp"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:src="@drawable/playstore"
+                android:scaleType="fitXY"
+                android:layout_alignBottom="@+id/textView9"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="21dp"
-                android:layout_marginRight="21dp"
-                android:src="@drawable/playstore" />
+                android:layout_marginRight="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:src="@drawable/logopay"
+                android:scaleType="fitXY"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
         </RelativeLayout>
 
         <View

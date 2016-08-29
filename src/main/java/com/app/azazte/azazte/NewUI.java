@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -50,6 +52,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public RelativeLayout topBar;
     public RelativeLayout twilightFilter;
     public ImageView twilight;
+    CharSequence revert;
+
+    boolean categoryOpen;
+    boolean settingOpen;
 
     Animation fadeIn;
     Animation fadeOut;
@@ -82,7 +88,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CalligraphyConfig.initDefault("fonts/HelveticaNeue.tff");
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/HelveticaNeue.tff")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
         instance = this;
         String categoryName;
         setContentView(R.layout.activity_new_ui);
@@ -100,6 +110,30 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         categoriesSheet = BottomSheetBehavior.from(categoriesLayout);
         settingSheet = BottomSheetBehavior.from(settingsLayout);
 
+        categoriesSheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+            }
+        });
+        settingSheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+            }
+        });
         int category = getIntent().getIntExtra("category", 0);
         int newsPostion = getNewsPosition(this.getIntent());
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
@@ -156,10 +190,13 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView economy = (ImageView) findViewById(R.id.economy);
         ImageView global = (ImageView) findViewById(R.id.global);
         ImageView myLibrary = (ImageView) findViewById(R.id.bookmark);
-        ImageView settings = (ImageView) findViewById(R.id.settings);
-        ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
+        final ImageView settings = (ImageView) findViewById(R.id.settings);
+        final ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
         final ImageView topRefreshButton = (ImageView) findViewById(R.id.top_refresh);
-        TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
+        final TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
+        FrameLayout topfilter = (FrameLayout) findViewById(R.id.topfilter);
+        FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
+        FrameLayout settingsfilter = (FrameLayout) findViewById(R.id.settingfilter);
 
 
         //categories listeners
@@ -256,23 +293,53 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
 
-        settings.setOnClickListener(new View.OnClickListener() {
+        settingsfilter.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                categoriesSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                settingSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                if (settingSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED ) {
+                    settings.setImageResource(R.drawable.close);
+                    categoriesButton.setImageResource(R.drawable.ic_settings);
+                    topRefreshButton.setVisibility(View.INVISIBLE);
+                    revert = categoriesText.getText();
+                    categoriesText.setText("Settings");
+                    settingSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                }
+
+              //not working properly i have tried !!!
+
+
+
+               else{
+                     settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    categoriesText.setText(revert);
+                    topRefreshButton.setVisibility(View.VISIBLE);
+                    settings.setImageResource(R.drawable.ic_settings);
+                    categoriesButton.setImageResource(R.drawable.ic_menu);
+                }
+
             }
         });
 
-        categoriesButton.setOnClickListener(new View.OnClickListener() {
+        topfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (categoriesSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                     settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    revert = categoriesText.getText();
+                    categoriesText.setText("Categories");
+                    topRefreshButton.setVisibility(View.INVISIBLE);
+                    settings.setImageResource(R.drawable.close);
                     categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
 
                 } else {
                     categoriesSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    categoriesButton.setImageResource(R.drawable.ic_menu);
+                    categoriesText.setText(revert);
+                    topRefreshButton.setVisibility(View.VISIBLE);
+                    settings.setImageResource(R.drawable.ic_settings);
                 }
             }
         });
@@ -423,21 +490,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         });
 
 
-        categoriesText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (categoriesSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                    settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-                } else {
-                    categoriesSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-            }
-        });
-
-
-        topRefreshButton.setOnClickListener(new View.OnClickListener() {
+        refreshfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() == 0) {
@@ -542,7 +595,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

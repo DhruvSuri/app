@@ -79,5 +79,5 @@ dependencies {
     compile 'com.parse:parse-android:1.+'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'ch.acra:acra:4.9.0'
-    compile 'uk.co.chrisjenx:calligraphy:0.7.+'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 }
