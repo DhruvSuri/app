@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settings_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:touchscreenBlocksFocus="true"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
     android:background="#00ffffff">
-<RelativeLayout
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="false"
+        android:id="@+id/close" />
+
+    <RelativeLayout
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity=""
-    android:background="#d2000000"
+    android:background="#de000000"
     android:contextClickable="true"
     android:elevation="20dp"
     android:orientation="vertical"
@@ -314,4 +320,5 @@
 
 
 </RelativeLayout>
+
 </RelativeLayout>
