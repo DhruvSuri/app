@@ -19,4 +19,6 @@ public interface AzazteApi {
 
     @POST("/service/rest/notification/save")
     Call<FCMServerResponse> saveFCMId(@Body NotificationConfig requestDTO);
+
 }
+

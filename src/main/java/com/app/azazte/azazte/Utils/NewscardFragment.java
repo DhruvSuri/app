@@ -39,8 +39,6 @@ public class NewscardFragment extends Fragment {
 
     NewsCard newsCard;
 
-    Animation slideup;
-    Animation slidedown;
     ImageButton shareButton;
     RelativeLayout brand;
 
@@ -61,10 +59,7 @@ public class NewscardFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
-        slideup = AnimationUtils.loadAnimation(getContext(),
-                R.anim.slideup);
-        slidedown = AnimationUtils.loadAnimation(getContext(),
-                R.anim.slidedown);
+
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
@@ -294,6 +289,7 @@ public class NewscardFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {

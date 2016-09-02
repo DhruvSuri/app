@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void StartSplashScreen(final String id) {
-        //animate();
+        animate();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
