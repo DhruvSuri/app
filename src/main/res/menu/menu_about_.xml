@@ -4,7 +4,7 @@
     tools:context="com.app.azazte.azazte.About_Activity">
 
     <item android:id="@+id/refresh"
-        android:icon="@drawable/ic_menu_refresh"
+        android:icon="@drawable/ic_menu"
         android:title="Refresh"
        app:showAsAction="always" />
      </menu>

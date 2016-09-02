@@ -49,14 +49,16 @@ public class MainActivity extends AppCompatActivity {
                 .build()
         );
         setContentView(R.layout.activity_main);
+       // animate();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
+
         init();
         StartSplashScreen(id);
     }
 
     private void StartSplashScreen(final String id) {
-        animate();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -77,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
         l.startAnimation(anim);
-
         anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
         RelativeLayout logo = (RelativeLayout) findViewById(R.id.logo);
@@ -114,46 +115,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-        optionsMenu = menu;
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_about_, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.refresh:
-                setRefreshActionButtonState(true);
-                ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
-                Toast.makeText(this, "Fetching News", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    public static void setRefreshActionButtonState(final boolean refresh) {
-        if (optionsMenu != null) {
-            final MenuItem refreshItem = optionsMenu
-                    .findItem(R.id.refresh);
-            if (refreshItem != null) {
-                if (refresh) {
-                    refreshItem.setActionView(R.layout.actionbar_refresh);
-                } else {
-                    refreshItem.setActionView(null);
-                }
-            }
-        }
-    }
 }
 

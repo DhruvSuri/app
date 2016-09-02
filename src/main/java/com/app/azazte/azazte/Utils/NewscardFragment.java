@@ -59,7 +59,24 @@ public class NewscardFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
+        //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
 
+        inflateView(inflate);
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBrand();
+                shareBitmap(inflate, newsCard.id);
+                shareButton.setClickable(false);
+                hideBrand();
+            }
+        });
+
+        return inflate;
+    }
+
+    public void inflateView(final View inflate) {
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
@@ -88,7 +105,7 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName.trim());
         date.setText(newsCard.date.trim());
         author.setText(newsCard.author.trim());
-        if (newsCard.impactLabel != null){
+        if (newsCard.impactLabel != null) {
             impactLabel.setText(newsCard.impactLabel);
         }
         if (newsCard.impact.isEmpty()) {
@@ -105,31 +122,6 @@ public class NewscardFragment extends Fragment {
 
         hideBrand();
 
-
-//        newstxt.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                final int bodyHeight = newstxt.getMeasuredHeight();
-//                if (impactText.getVisibility() == View.INVISIBLE){
-//                    setImageDisplayHeight(image, bodyHeight);
-//                }
-//                impactText.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        int impactHeight = impactText.getMeasuredHeight();
-//                        setImageDisplayHeight(image, bodyHeight + impactHeight);
-//                    }
-//                });
-//            }
-//        });
-
-
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-           //     ((NewUI) getActivity()).showTopBar();
-            }
-        });
 
         newshead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,18 +181,7 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-        shareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showBrand();
-                shareBitmap(inflate, newsCard.id);
-                shareButton.setClickable(false);
-                hideBrand();
-            }
-        });
 
-
-        return inflate;
     }
 
 
@@ -289,7 +270,6 @@ public class NewscardFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {

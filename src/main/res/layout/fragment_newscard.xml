@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
@@ -22,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:scaleType="fitXY"
-            android:src="@drawable/wall" />
+            android:src="@drawable/placeholder" />
 
 
         <RelativeLayout
@@ -39,7 +38,7 @@
 
                 android:layout_alignParentStart="false"
                 android:layout_marginBottom="5dp"
-                android:lineSpacingExtra="3dp"
+                android:lineSpacingExtra="2dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="15dp"
@@ -48,7 +47,7 @@
                 fontPath="fonts/HelveticaNeueThin.ttf"
                 android:textColor="#000000"
                 android:textIsSelectable="false"
-                android:textSize="13sp"
+                android:textSize="15sp"
                 tools:ignore="MissingPrefix"
                 android:textStyle="bold"
                 android:letterSpacing="0.03" />
@@ -82,6 +81,8 @@
                     android:text="IMPACT "
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="12sp"
+                    tools:ignore="MissingPrefix"
+                    fontPath="fonts/HelveticaNeueMedium.ttf"
                     android:typeface="serif"
                     android:visibility="visible" />
 
@@ -115,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:background="#ffffff"
-                    android:lineSpacingExtra="3dp"
+                    android:lineSpacingExtra="2dp"
                     android:paddingBottom="2dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -125,7 +126,7 @@
                     tools:ignore="MissingPrefix"
                     android:textColor="#000000"
                     android:textIsSelectable="false"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.03" />
 
@@ -330,7 +331,7 @@
                 android:id="@+id/imageView11"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:src="@drawable/logopay"
+                android:src="@drawable/logo3"
                 android:scaleType="fitXY"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />

@@ -82,13 +82,12 @@ public class GCMIntentService extends IntentService {
         MixPanelUtils.track(MixPanelUtils.NOTIFICATION + msg);
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.round_logo)
+                        .setSmallIcon(R.drawable.notification)
                         .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
-                                R.drawable.round_logo))
-                        .setContentTitle(FINUP)
+                                R.drawable.icon))
+                        .setContentTitle(msg)
                         .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg)).setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).setTicker(FINUP)
-                        .setContentText(msg);
+                                .bigText(msg)).setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).setTicker(FINUP);
         mBuilder.setPriority(0);
         mBuilder.setAutoCancel(true);
         mBuilder.setContentIntent(contentIntent);

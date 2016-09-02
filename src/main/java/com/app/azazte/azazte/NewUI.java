@@ -17,6 +17,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -40,6 +42,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -59,6 +62,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     Animation fadeOut;
     ImageView settings;
     ImageView categoriesButton;
+    ImageView notification;
+    ImageView imageView;
     ImageView topRefreshButton;
     TextView categoriesText;
     private ViewPagerAdapter adapter;
@@ -94,16 +99,18 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         );
         instance = this;
         String categoryName;
-        setContentView(R.layout.activity_new_ui);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_new_ui);
         fadeIn = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fadein);
         fadeOut = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fadeout);
-        RelativeLayout categoriesLayout = (RelativeLayout) findViewById(R.id.bottom_sheet);
-        RelativeLayout settingsLayout = (RelativeLayout) findViewById(R.id.settings_sheet);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
+        View view = getLayoutInflater().inflate(R.layout.settings, null);
+
         findViewById(R.id.notification);
         setListeners();
         int category = getIntent().getIntExtra("category", 0);
@@ -186,9 +193,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 topRefreshButton.setVisibility(View.INVISIBLE);
                 settings.setImageResource(R.drawable.close);
                 openCategory();
-          }
+            }
         });
-
 
 
         refreshfilter.setOnClickListener(new View.OnClickListener() {
@@ -222,10 +228,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         settingSheet.setCancelable(false);
         settingSheet.show();
         settingSheet.getWindow().setGravity(Gravity.RIGHT);
+        notification = (ImageView) view.findViewById(R.id.notification);
+        imageView = (ImageView) view.findViewById(R.id.noimage);
         ImageView shareApp = (ImageView) view.findViewById(R.id.privacy);
         final ImageView about = (ImageView) view.findViewById(R.id.about);
-        final ImageView notification = (ImageView) view.findViewById(R.id.notification);
-        final ImageView imageView = (ImageView) view.findViewById(R.id.noimage);
         twilight = (ImageView) view.findViewById(R.id.night);
         ImageView privacy = (ImageView) view.findViewById(R.id.shareApp);
         ImageView rate = (ImageView) view.findViewById(R.id.rate);
@@ -385,10 +391,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         });
 
 
-
-
     }
-
 
 
     public void openCategory() {
@@ -521,9 +524,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     }
 
 
-
-
-
     private void refresh() {
         Toaster.toast("Hold on! refreshing");
         ApiExecutor.getInstance().getNews(null, null);
@@ -533,6 +533,29 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setPageTransformer(true, new DepthTransform());
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    topRefreshButton.setImageResource(R.drawable.refresh);
+                } else {
+                    topRefreshButton.setImageResource(R.drawable.top);
+
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+
+            }
+        });
+
         setupNewsCards(adapter, category);
         viewPager.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -570,7 +593,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     private void addEndLayoutToFragmentList(ViewPagerAdapter adapter, int layout) {
         Bundle bundle = new Bundle();
-        bundle.putInt(TemplateFragment.LAYOUT,layout);
+        bundle.putInt(TemplateFragment.LAYOUT, layout);
         TemplateFragment templateFragment = new TemplateFragment();
         templateFragment.setArguments(bundle);
         adapter.addFrag(templateFragment);

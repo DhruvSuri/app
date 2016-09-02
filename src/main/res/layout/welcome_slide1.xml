@@ -33,7 +33,7 @@
         android:layout_width="100dp"
         android:layout_height="45dp"
         android:id="@+id/imageView4"
-        android:src="@drawable/logoblack"
+        android:src="@drawable/logo3"
         android:scaleType="fitXY"
         android:layout_alignBottom="@+id/textView5"
         android:layout_toRightOf="@+id/imageView3"
