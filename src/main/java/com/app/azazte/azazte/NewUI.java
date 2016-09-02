@@ -564,10 +564,12 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private void setupNewsCards(ViewPagerAdapter adapter, Integer category) {
         if (category == -1) {
             ArrayList<NewsCard> allBookmarks = Connector.getInstance().getAllBookmarks();
+            if (allBookmarks.size() == 0) {
+                addEndLayoutToFragmentList(adapter, R.layout.emptylibrary);
+            }
             for (NewsCard newsCard : allBookmarks) {
                 adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
             }
-            addEndLayoutToFragmentList(adapter, R.layout.emptylibrary);
             return;
         }
 
