@@ -295,28 +295,6 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showOptionsOverLay() {
-
-        final Dialog dialog = new Dialog(getContext(), R.style.DialogAnimation);
-
-        dialog.setContentView(R.layout.option_dialog);
-        final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
-        final RelativeLayout tray = (RelativeLayout) dialog.findViewById(R.id.overlay_layout);
-
-        tray.startAnimation(slideup);
-
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                tray.startAnimation(slidedown);
-                tray.setVisibility(View.INVISIBLE);
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
         if (imageUrl != null && !imageUrl.isEmpty()) {

@@ -48,7 +48,7 @@
                 fontPath="fonts/HelveticaNeueThin.ttf"
                 android:textColor="#000000"
                 android:textIsSelectable="false"
-                android:textSize="13sp"
+                android:textSize="15sp"
                 tools:ignore="MissingPrefix"
                 android:textStyle="bold"
                 android:letterSpacing="0.03" />
@@ -125,7 +125,7 @@
                     tools:ignore="MissingPrefix"
                     android:textColor="#000000"
                     android:textIsSelectable="false"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.03" />
 

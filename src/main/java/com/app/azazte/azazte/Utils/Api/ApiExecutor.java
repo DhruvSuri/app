@@ -1,12 +1,11 @@
 package com.app.azazte.azazte.Utils.Api;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 
-import com.app.azazte.azazte.Beans.NotificationConfig;
 import com.app.azazte.azazte.Beans.FCMServerResponse;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Beans.NewsCardWrapper;
+import com.app.azazte.azazte.Beans.NotificationConfig;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.MessageEvent;
 
@@ -47,7 +46,7 @@ public class ApiExecutor {
     }
 
     public void getNews(String email, final SwipeRefreshLayout swipe) {
-        final Call<NewsCardWrapper> newsCardWrapperCall = azazteApiService.getNews(0, 200);
+        final Call<NewsCardWrapper> newsCardWrapperCall = azazteApiService.getNews(0, 200, true);
         newsCardWrapperCall.enqueue(new Callback<NewsCardWrapper>() {
 
 
@@ -77,7 +76,7 @@ public class ApiExecutor {
         });
     }
 
-    public FCMServerResponse sendIdToServer(NotificationConfig config){
+    public FCMServerResponse sendIdToServer(NotificationConfig config) {
         Call<FCMServerResponse> call = azazteApiService.saveFCMId(config);
         call.enqueue(new Callback<FCMServerResponse>() {
             @Override

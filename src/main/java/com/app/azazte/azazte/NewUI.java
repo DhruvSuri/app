@@ -52,7 +52,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public RelativeLayout topBar;
     public RelativeLayout twilightFilter;
     public ImageView twilight;
-    CharSequence revert;
+    private CharSequence revert;
 
     boolean categoryOpen;
     boolean settingOpen;
@@ -64,8 +64,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private ViewPager viewPager;
     private BottomSheetBehavior categoriesSheet;
     private BottomSheetBehavior settingSheet;
-    private int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_FULLSCREEN;
+    private static final String SETTINGS = "Settings";
+    private static final String CATEGORIES = "Categories";
 
 
     @Override
@@ -105,33 +105,60 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         RelativeLayout settingsLayout = (RelativeLayout) findViewById(R.id.settings_sheet);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
-        findViewById(R.id.notification);
         setListeners();
+
+
         categoriesSheet = BottomSheetBehavior.from(categoriesLayout);
         settingSheet = BottomSheetBehavior.from(settingsLayout);
 
         categoriesSheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                if (newState == BottomSheetBehavior.STATE_SETTLING) {
                     categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+//                bottomSheet.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+//                        int action = MotionEventCompat.getActionMasked(event);
+//                        switch (action) {
+//                            case MotionEvent.ACTION_DOWN:
+//                                return false;
+//                            default:
+//                                return true;
+//                        }
+//                    }
+//                });
             }
         });
         settingSheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                    categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if (newState == BottomSheetBehavior.STATE_SETTLING) {
+                    settingSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+//                bottomSheet.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        settingSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+//                        int action = MotionEventCompat.getActionMasked(event);
+//                        switch (action) {
+//                            case MotionEvent.ACTION_DOWN:
+//                                return false;
+//                            default:
+//                                return true;
+//                        }
+//                    }
+//                });
             }
         });
         int category = getIntent().getIntExtra("category", 0);
@@ -194,6 +221,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         final ImageView categoriesButton = (ImageView) findViewById(R.id.categories);
         final ImageView topRefreshButton = (ImageView) findViewById(R.id.top_refresh);
         final TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
+
+
         FrameLayout topfilter = (FrameLayout) findViewById(R.id.topfilter);
         FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
         FrameLayout settingsfilter = (FrameLayout) findViewById(R.id.settingfilter);
@@ -297,23 +326,24 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
             @Override
             public void onClick(View v) {
+                if (categoriesSheet.getState() == BottomSheetBehavior.STATE_EXPANDED || categoriesSheet.getState() == BottomSheetBehavior.STATE_SETTLING) { // This is for closing the categories sheet
+                    categoriesSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    categoriesButton.setImageResource(R.drawable.ic_menu);
+                    categoriesText.setText(revert);
+                    topRefreshButton.setVisibility(View.VISIBLE);
+                    settings.setImageResource(R.drawable.ic_settings);
+                    return;
+                }
 
-                if (settingSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED ) {
+                if (settingSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                    settingSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
                     settings.setImageResource(R.drawable.close);
                     categoriesButton.setImageResource(R.drawable.ic_settings);
                     topRefreshButton.setVisibility(View.INVISIBLE);
                     revert = categoriesText.getText();
-                    categoriesText.setText("Settings");
-                    settingSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-                }
-
-              //not working properly i have tried !!!
-
-
-
-               else{
-                     settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    categoriesText.setText(SETTINGS);
+                } else {
+                    settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     categoriesText.setText(revert);
                     topRefreshButton.setVisibility(View.VISIBLE);
                     settings.setImageResource(R.drawable.ic_settings);
@@ -326,10 +356,21 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         topfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (settingSheet.getState() == BottomSheetBehavior.STATE_EXPANDED || settingSheet.getState() == BottomSheetBehavior.STATE_SETTLING) {
+                    settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    categoriesText.setText(revert);
+                    topRefreshButton.setVisibility(View.VISIBLE);
+                    settings.setImageResource(R.drawable.ic_settings);
+                    categoriesButton.setImageResource(R.drawable.ic_menu);
+                    return;
+                }
+
                 if (categoriesSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                     settingSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    revert = categoriesText.getText();
-                    categoriesText.setText("Categories");
+                    if (!categoriesText.getText().equals(CATEGORIES) && !categoriesText.getText().equals(SETTINGS)) {
+                        revert = categoriesText.getText();
+                    }
+                    categoriesText.setText(CATEGORIES);
                     topRefreshButton.setVisibility(View.INVISIBLE);
                     settings.setImageResource(R.drawable.close);
                     categoriesSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -532,10 +573,12 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     private void setupNewsCards(ViewPagerAdapter adapter, Integer category) {
         if (category == -1) {
             ArrayList<NewsCard> allBookmarks = Connector.getInstance().getAllBookmarks();
+            if (allBookmarks.size() == 0) {
+                addEndLayoutToFragmentList(adapter, R.layout.emptylibrary);
+            }
             for (NewsCard newsCard : allBookmarks) {
                 adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
             }
-            addEndLayoutToFragmentList(adapter, R.layout.emptylibrary);
             return;
         }
 
@@ -561,7 +604,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     private void addEndLayoutToFragmentList(ViewPagerAdapter adapter, int layout) {
         Bundle bundle = new Bundle();
-        bundle.putInt(TemplateFragment.LAYOUT,layout);
+        bundle.putInt(TemplateFragment.LAYOUT, layout);
         TemplateFragment templateFragment = new TemplateFragment();
         templateFragment.setArguments(bundle);
         adapter.addFrag(templateFragment);

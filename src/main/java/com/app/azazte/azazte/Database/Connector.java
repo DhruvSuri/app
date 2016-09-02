@@ -36,7 +36,7 @@ public class Connector extends SQLiteOpenHelper {
     public static Connector connector;
 
     public Connector(Context context) {
-        super(context.getApplicationContext(), DATABASE_NAME, null, 5);
+        super(context.getApplicationContext(), DATABASE_NAME, null, 8);
     }
 
     @Override
