@@ -181,7 +181,12 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-
+        impactLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ((NewUI) getActivity()).showTopBar();
+            }
+        });
     }
 
 

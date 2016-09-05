@@ -7,18 +7,14 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -42,7 +38,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -240,6 +235,19 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView feedback = (ImageView) view.findViewById(R.id.feedback);
         FrameLayout close = (FrameLayout) view.findViewById(R.id.close);
 
+        if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
+            notification.setImageResource(R.drawable.bell);
+        } else {
+            notification.setImageResource(R.drawable.bellon);
+        }
+
+        if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
+            imageView.setImageResource(R.drawable.image);
+        } else {
+            imageView.setImageResource(R.drawable.imageon);
+        }
+
+
         settingSheet.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
@@ -355,15 +363,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int drawable;
-                if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
-                    PrefManager.getInstance().setImageOn();
-                    drawable = R.drawable.imageon;
-                } else {
-                    PrefManager.getInstance().setImageOff();
-                    drawable = R.drawable.image;
-                }
-                imageView.setImageResource(drawable);
+                imageView.setImageResource(getImageDrawable());
             }
         });
 
@@ -371,15 +371,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int drawable;
-                if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
-                    PrefManager.getInstance().setNotificationOn();
-                    drawable = R.drawable.bellon;
-                } else {
-                    PrefManager.getInstance().setNotificationOff();
-                    drawable = R.drawable.bell;
-                }
-                notification.setImageResource(drawable);
+                notification.setImageResource(getNotificationDrawable());
             }
         });
 
@@ -391,6 +383,26 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         });
 
 
+    }
+
+    public int getNotificationDrawable() {
+        if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
+            PrefManager.getInstance().setNotificationOn();
+            return R.drawable.bellon;
+        } else {
+            PrefManager.getInstance().setNotificationOff();
+            return R.drawable.bell;
+        }
+    }
+
+    public int getImageDrawable() {
+        if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
+            PrefManager.getInstance().setImageOn();
+            return R.drawable.imageon;
+        } else {
+            PrefManager.getInstance().setImageOff();
+            return R.drawable.image;
+        }
     }
 
 
