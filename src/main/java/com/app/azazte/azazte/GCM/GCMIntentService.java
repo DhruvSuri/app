@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 public class GCMIntentService extends IntentService {
     public static int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
-    public static String FINUP = "finup";
+    public static String FINUP = "Finup";
     public static String ID = "id";
 
     public GCMIntentService() {
@@ -82,14 +82,14 @@ public class GCMIntentService extends IntentService {
         MixPanelUtils.track(MixPanelUtils.NOTIFICATION + msg);
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.round_logo)
-                        .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
-                                R.drawable.round_logo))
+                        .setAutoCancel(true)
+                        .setSmallIcon(R.drawable.notification)
+                        .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.icon))
                         .setContentTitle(FINUP)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg)).setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).setTicker(FINUP)
-                        .setContentText(msg);
-        mBuilder.setPriority(0);
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
+                        .setContentText(msg)
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        mBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
         mBuilder.setAutoCancel(true);
         mBuilder.setContentIntent(contentIntent);
         try {

@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
-import com.app.azazte.azazte.Utils.azUtils;
 import com.crashlytics.android.Crashlytics;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -44,16 +43,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String id = this.getIntent().getStringExtra("id");
-        CalligraphyConfig.initDefault("fonts/HelveticaNeue.tff");
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/HelveticaNeue.tff")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
         setContentView(R.layout.activity_main);
+       // animate();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
+
         init();
         StartSplashScreen(id);
     }
 
     private void StartSplashScreen(final String id) {
-        //animate();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -74,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
         l.startAnimation(anim);
-
         anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
         RelativeLayout logo = (RelativeLayout) findViewById(R.id.logo);
@@ -84,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void init() {
-        Connector.connector = new Connector(this);
-        azUtils.setPicassoInstance(this);
+        Connector.connector = new Connector(this.getApplicationContext());
         MixPanelUtils.init(this);
         PrefManager.init(this);
         MixPanelUtils.fetchRegistrationId();
@@ -112,46 +115,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-        optionsMenu = menu;
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_about_, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.refresh:
-                setRefreshActionButtonState(true);
-                ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
-                Toast.makeText(this, "Fetching News", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    public static void setRefreshActionButtonState(final boolean refresh) {
-        if (optionsMenu != null) {
-            final MenuItem refreshItem = optionsMenu
-                    .findItem(R.id.refresh);
-            if (refreshItem != null) {
-                if (refresh) {
-                    refreshItem.setActionView(R.layout.actionbar_refresh);
-                } else {
-                    refreshItem.setActionView(null);
-                }
-            }
-        }
-    }
 }
 

@@ -24,9 +24,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="you&apos;ve read all stories \n swipe for more "
+        android:text="you&apos;ve read all stories\n in this category"
         android:id="@+id/textView34"
         android:layout_below="@+id/textView10"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keep Reading"
+        android:id="@+id/readMore"
+        android:layout_below="@+id/textView34"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
 </RelativeLayout>

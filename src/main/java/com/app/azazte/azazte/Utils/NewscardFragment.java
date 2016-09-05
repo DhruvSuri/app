@@ -39,8 +39,6 @@ public class NewscardFragment extends Fragment {
 
     NewsCard newsCard;
 
-    Animation slideup;
-    Animation slidedown;
     ImageButton shareButton;
     RelativeLayout brand;
 
@@ -61,16 +59,31 @@ public class NewscardFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
-        slideup = AnimationUtils.loadAnimation(getContext(),
-                R.anim.slideup);
-        slidedown = AnimationUtils.loadAnimation(getContext(),
-                R.anim.slidedown);
+        //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
+
+        inflateView(inflate);
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBrand();
+                shareBitmap(inflate, newsCard.id);
+                shareButton.setClickable(false);
+                hideBrand();
+            }
+        });
+
+        return inflate;
+    }
+
+    public void inflateView(final View inflate) {
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
+        TextView impactLabel = (TextView) inflate.findViewById(R.id.textView18);
 
         final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
 
@@ -92,6 +105,9 @@ public class NewscardFragment extends Fragment {
         newsSource.setText(newsCard.newsSourceName.trim());
         date.setText(newsCard.date.trim());
         author.setText(newsCard.author.trim());
+        if (newsCard.impactLabel != null) {
+            impactLabel.setText(newsCard.impactLabel);
+        }
         if (newsCard.impact.isEmpty()) {
             hideImpact(impactLayout, impactText);
         } else {
@@ -106,31 +122,6 @@ public class NewscardFragment extends Fragment {
 
         hideBrand();
 
-
-//        newstxt.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                final int bodyHeight = newstxt.getMeasuredHeight();
-//                if (impactText.getVisibility() == View.INVISIBLE){
-//                    setImageDisplayHeight(image, bodyHeight);
-//                }
-//                impactText.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        int impactHeight = impactText.getMeasuredHeight();
-//                        setImageDisplayHeight(image, bodyHeight + impactHeight);
-//                    }
-//                });
-//            }
-//        });
-
-
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((NewUI) getActivity()).showTopBar();
-            }
-        });
 
         newshead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,18 +181,12 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-        shareButton.setOnClickListener(new View.OnClickListener() {
+        impactLayout.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                showBrand();
-                shareBitmap(inflate, newsCard.id);
-                shareButton.setClickable(false);
-                hideBrand();
+            public void onClick(View v) {
+                ((NewUI) getActivity()).showTopBar();
             }
         });
-
-
-        return inflate;
     }
 
 
@@ -241,8 +226,6 @@ public class NewscardFragment extends Fragment {
 
     private void shareBitmap(View view, String fileName) {
         try {
-
-
             view.setDrawingCacheEnabled(true);
             view.buildDrawingCache(true);
             view.setDrawingCacheEnabled(true);
@@ -257,7 +240,7 @@ public class NewscardFragment extends Fragment {
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-            intent.putExtra(Intent.EXTRA_TEXT, "Know the impact of business, economy and finance on your wallet. All In 30 seconds! ?\n Finup : Decoding business, finance and technology in 30 second reads.\n" +
+            intent.putExtra(Intent.EXTRA_TEXT, "Know the impact of business, economy and finance on YOU . All In 30 seconds! ?\n" +
                     "Download finup: http://bit.ly/29Gnkgl");
             intent.setType("image/png");
             startActivity(Intent.createChooser(intent, "finup"));
@@ -293,28 +276,6 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showOptionsOverLay() {
-
-        final Dialog dialog = new Dialog(getContext(), R.style.DialogAnimation);
-
-        dialog.setContentView(R.layout.option_dialog);
-        final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
-        final RelativeLayout tray = (RelativeLayout) dialog.findViewById(R.id.overlay_layout);
-
-        tray.startAnimation(slideup);
-
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                tray.startAnimation(slidedown);
-                tray.setVisibility(View.INVISIBLE);
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
         if (imageUrl != null && !imageUrl.isEmpty()) {
@@ -325,6 +286,7 @@ public class NewscardFragment extends Fragment {
                         .load(imageUrl)
                         .placeholder(R.drawable.placeholder)
                         .config(Bitmap.Config.RGB_565)
+                        .resize(250, 350)
                         .into(imageView);
             }
 

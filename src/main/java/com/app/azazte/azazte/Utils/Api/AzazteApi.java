@@ -1,8 +1,8 @@
 package com.app.azazte.azazte.Utils.Api;
 
-import com.app.azazte.azazte.Beans.NotificationConfig;
 import com.app.azazte.azazte.Beans.FCMServerResponse;
 import com.app.azazte.azazte.Beans.NewsCardWrapper;
+import com.app.azazte.azazte.Beans.NotificationConfig;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,8 +15,10 @@ import retrofit2.http.Query;
  */
 public interface AzazteApi {
     @GET("/service/rest/news")
-    Call<NewsCardWrapper> getNews(@Query("start") Integer start,@Query("limit") Integer limit);
+    Call<NewsCardWrapper> getNews(@Query("start") Integer start, @Query("limit") Integer limit, @Query("multipleFlag") Boolean multipleFlag);
 
     @POST("/service/rest/notification/save")
     Call<FCMServerResponse> saveFCMId(@Body NotificationConfig requestDTO);
+
 }
+

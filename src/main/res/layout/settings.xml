@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settings_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:touchscreenBlocksFocus="true"
+    android:background="#00ffffff">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="false"
+        android:id="@+id/close" />
+
+    <RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity=""
-    android:background="#ca000000"
+    android:background="#de000000"
     android:contextClickable="true"
     android:elevation="20dp"
     android:orientation="vertical"
-    android:touchscreenBlocksFocus="true"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    android:layout_marginTop="50dp">
 
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView33"
-        android:layout_marginBottom="15dp"
+        android:layout_height="match_parent"
         android:paddingBottom="5dp"
         android:paddingLeft="35dp"
         android:paddingRight="35dp"
@@ -308,36 +318,7 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_alignTop="@+id/imageView7"
-        android:layout_centerHorizontal="true" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentTop="true"
-        android:background="#ffffffff"
-        android:visibility="gone" />
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:id="@+id/imageView7"
-        android:src="@drawable/down"
-        android:layout_below="@+id/view2"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp" />
-
+</RelativeLayout>
 
 </RelativeLayout>

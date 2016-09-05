@@ -36,8 +36,8 @@ android {
         applicationId "com.app.azazte.azazte"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 13
-        versionName "3.0"
+        versionCode 14
+        versionName "3.1"
     }
     buildTypes {
         release {
@@ -79,5 +79,5 @@ dependencies {
     compile 'com.parse:parse-android:1.+'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'ch.acra:acra:4.9.0'
-    compile 'uk.co.chrisjenx:calligraphy:0.7.+'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 }

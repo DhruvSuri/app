@@ -10,7 +10,6 @@ import com.app.azazte.azazte.Beans.NewsCard;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * Created by sprinklr on 24/03/16.
@@ -32,17 +31,18 @@ public class Connector extends SQLiteOpenHelper {
     public static final String NEWS_AUTHOR = "author";
     public static final String NEWS_IMPACT = "impact";
     public static final String NEWS_SENTIMENT = "sentiment";
+    private static final String NEWS_IMPACT_LABEL = "impactLabel";
 
     public static Connector connector;
 
     public Connector(Context context) {
-        super(context.getApplicationContext(), DATABASE_NAME, null, 4);
+        super(context.getApplicationContext(), DATABASE_NAME, null, 8);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        db.execSQL("create table news (id text primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,place text,category text,isBookmarked integer,author text,impact text,sentiment integer)");
+        db.execSQL("create table news (id text primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,place text,category text,isBookmarked integer,author text,impact text,impactLabel text,sentiment integer)");
     }
 
     @Override
@@ -71,6 +71,7 @@ public class Connector extends SQLiteOpenHelper {
         contentValues.put(NEWS_AUTHOR, newsCard.author);
         contentValues.put(NEWS_SENTIMENT, newsCard.sentiment);
         contentValues.put(NEWS_IMPACT, newsCard.impact);
+        contentValues.put(NEWS_IMPACT_LABEL, newsCard.impactLabel);
 
         db.insert("news", null, contentValues);
         return true;
@@ -102,7 +103,7 @@ public class Connector extends SQLiteOpenHelper {
 
     public int getData(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery("select * from news where id=\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from news where id=\"" + id + "\"", null);
         final int count = res.getCount();
         res.close();
         return count;
@@ -148,6 +149,7 @@ public class Connector extends SQLiteOpenHelper {
         newsCard.impact = res.getString(res.getColumnIndex(NEWS_IMPACT));
         newsCard.sentiment = res.getString(res.getColumnIndex(NEWS_SENTIMENT));
         newsCard.author = res.getString(res.getColumnIndex(NEWS_AUTHOR));
+        newsCard.impactLabel = res.getString(res.getColumnIndex(NEWS_IMPACT_LABEL));
         return newsCard;
     }
 
