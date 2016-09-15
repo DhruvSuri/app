@@ -253,8 +253,8 @@ public class NewscardFragment extends Fragment {
         q3.setText(bubbleList.get(2).getQuestion());
         final Button q4 = (Button) inflate.findViewById(R.id.q4);
         q4.setText(bubbleList.get(3).getQuestion());
-        final Button q5 = (Button) inflate.findViewById(R.id.q5);
-        q5.setText(bubbleList.get(4).getQuestion());
+//        final Button q5 = (Button) inflate.findViewById(R.id.q5);
+//        q5.setText(bubbleList.get(4).getQuestion());
 //        final Button q6 = (Button) inflate.findViewById(R.id.q6);
 //        q6.setText("Why such valuation ?");
 //        final Button q7 = (Button) inflate.findViewById(R.id.q7);
@@ -301,14 +301,14 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-        q5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog(bubbleList.get(4).getQuestion(), bubbleList.get(4).getAnswer());
-
-            }
-        });
+//        q5.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                showquestiondialog(bubbleList.get(4).getQuestion(), bubbleList.get(4).getAnswer());
+//
+//            }
+//        });
 
 //        q6.setOnClickListener(new View.OnClickListener() {
 //            @Override

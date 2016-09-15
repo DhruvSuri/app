@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/newstxt"
                 android:orientation="horizontal"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <View
                     android:id="@+id/view3"
@@ -79,7 +79,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="12sp"
                     android:typeface="serif"
-                    android:visibility="invisible" />
+                    android:visibility="visible" />
 
                 <View
                     android:id="@+id/view3"
@@ -93,7 +93,7 @@
                     android:layout_marginTop="5dp"
                     android:alpha=".5"
                     android:background="#000"
-                    android:visibility="invisible" />
+                    android:visibility="visible" />
             </LinearLayout>
             <!-- Content -->
 
@@ -125,7 +125,7 @@
                     android:textSize="15sp"
                     android:textStyle="normal"
                     android:typeface="normal"
-                    android:visibility="invisible" />
+                    android:visibility="visible" />
 
             </RelativeLayout>
         </RelativeLayout>
@@ -408,7 +408,7 @@
                         android:textColor="#000"
                         android:textSize="10dp" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/q5"
                         android:layout_width="65dp"
                         android:layout_height="65dp"
@@ -422,87 +422,115 @@
                         android:minLines="2"
                         android:text="null"
                         android:textColor="#000"
+                        android:textSize="10dp"
+                        android:src="@drawable/freecharge"
+                        android:nestedScrollingEnabled="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:cropToPadding="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop" />
+
+                    <ImageButton
+                        android:id="@+id/q6"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="#EE9A49"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:minLines="2"
+                        android:text="similar companies"
+                        android:textColor="#000"
+                        android:textSize="10dp"
+                        android:src="@drawable/linkedin"
+                        android:nestedScrollingEnabled="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:cropToPadding="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"/>
+
+                    <ImageButton
+                        android:id="@+id/q7"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="#9F79EE"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:minLines="2"
+                        android:text="similar companies"
+                        android:textColor="#000"
+                        android:textSize="10dp"
+                        android:src="@drawable/twitterbubble"
+                        android:nestedScrollingEnabled="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:cropToPadding="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"/>
+
+                    <ImageButton
+                        android:id="@+id/q8"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="#759EF0"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:minLines="2"
+                        android:text="similar companies"
+                        android:textColor="#000"
+                        android:textSize="10dp"
+                        android:src="@drawable/wikipedia"
+                        android:nestedScrollingEnabled="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:cropToPadding="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"/>
+
+                    <ImageButton
+                        android:id="@+id/q9"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="#19E6A1"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:minLines="2"
+                        android:text="similar companies"
+                        android:textColor="#000"
                         android:textSize="10dp" />
 
-                    <!--<Button-->
-                        <!--android:id="@+id/q6"-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:background="@drawable/circle"-->
-                        <!--android:backgroundTint="#EE9A49"-->
-                        <!--android:elevation="5dp"-->
-                        <!--android:gravity="center"-->
-                        <!--android:minLines="2"-->
-                        <!--android:text="similar companies"-->
-                        <!--android:textColor="#000"-->
-                        <!--android:textSize="10dp" />-->
-
-                    <!--<Button-->
-                        <!--android:id="@+id/q7"-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:background="@drawable/circle"-->
-                        <!--android:backgroundTint="#9F79EE"-->
-                        <!--android:elevation="5dp"-->
-                        <!--android:gravity="center"-->
-                        <!--android:minLines="2"-->
-                        <!--android:text="similar companies"-->
-                        <!--android:textColor="#000"-->
-                        <!--android:textSize="10dp" />-->
-
-                    <!--<Button-->
-                        <!--android:id="@+id/q8"-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:background="@drawable/circle"-->
-                        <!--android:backgroundTint="#759EF0"-->
-                        <!--android:elevation="5dp"-->
-                        <!--android:gravity="center"-->
-                        <!--android:minLines="2"-->
-                        <!--android:text="similar companies"-->
-                        <!--android:textColor="#000"-->
-                        <!--android:textSize="10dp" />-->
-
-                    <!--<Button-->
-                        <!--android:id="@+id/q9"-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:background="@drawable/circle"-->
-                        <!--android:backgroundTint="#19E6A1"-->
-                        <!--android:elevation="5dp"-->
-                        <!--android:gravity="center"-->
-                        <!--android:minLines="2"-->
-                        <!--android:text="similar companies"-->
-                        <!--android:textColor="#000"-->
-                        <!--android:textSize="10dp" />-->
-
-                    <!--<Button-->
-                        <!--android:id="@+id/q10"-->
-                        <!--android:layout_width="65dp"-->
-                        <!--android:layout_height="65dp"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:background="@drawable/circle"-->
-                        <!--android:backgroundTint="#9DD926"-->
-                        <!--android:elevation="5dp"-->
-                        <!--android:gravity="center"-->
-                        <!--android:minLines="2"-->
-                        <!--android:text="similar companies"-->
-                        <!--android:textColor="#000"-->
-                        <!--android:textSize="10dp" />-->
+                    <ImageButton
+                        android:id="@+id/q10"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="#9DD926"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:minLines="2"
+                        android:text="similar companies"
+                        android:textColor="#000"
+                        android:textSize="10dp" />
 
                 </LinearLayout>
             </HorizontalScrollView>
