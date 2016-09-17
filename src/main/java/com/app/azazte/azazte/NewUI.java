@@ -81,7 +81,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        onRestart();
+        reboot();
     }
 
     @Override
@@ -448,7 +448,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(0);
                 categoryChosen = 0;
                 categoryChosenString = "All News";
-                onRestart();
+                reboot();
             }
         });
 
@@ -458,7 +458,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(1);
                 categoryChosen = 1;
                 categoryChosenString = "Economy";
-                onRestart();
+                reboot();
             }
         });
 
@@ -468,7 +468,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(2);
                 categoryChosen = 2;
                 categoryChosenString = "Deals";
-                onRestart();
+                reboot();
             }
         });
 
@@ -478,7 +478,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(4);
                 categoryChosen = 3;
                 categoryChosenString = "Finance";
-                onRestart();
+                reboot();
             }
         });
 
@@ -488,7 +488,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(3);
                 categoryChosen = 4;
                 categoryChosenString = "Money";
-                onRestart();
+                reboot();
             }
         });
 
@@ -498,7 +498,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(3);
                 categoryChosen = 5;
                 categoryChosenString = "Global";
-                onRestart();
+                reboot();
             }
         });
 
@@ -508,7 +508,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(3);
                 categoryChosen = 6;
                 categoryChosenString = "Tax";
-                onRestart();
+                reboot();
             }
         });
 
@@ -518,7 +518,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(5);
                 categoryChosen = 7;
                 categoryChosenString = "Startup";
-                onRestart();
+                reboot();
             }
         });
 
@@ -529,7 +529,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(-1);
                 categoryChosen = -1;
                 categoryChosenString = "My Library";
-                onRestart();
+                reboot();
             }
         });
 
@@ -639,6 +639,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     protected void onRestart() {
         // TODO Auto-generated method stub
         super.onRestart();
+    }
+
+    public void reboot(){
         Intent intent = new Intent(this, NewUI.class);
         intent.putExtra("category", categoryChosen);
         intent.putExtra("categoryChosenString", categoryChosenString);
