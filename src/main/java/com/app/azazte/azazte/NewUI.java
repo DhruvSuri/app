@@ -52,7 +52,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public RelativeLayout topBar;
     public RelativeLayout twilightFilter;
     public ImageView twilight;
-    CharSequence revert;
+    Dialog categorySheet;
     Animation fadeIn;
     Animation fadeOut;
     ImageView settings;
@@ -61,6 +61,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     ImageView imageView;
     ImageView topRefreshButton;
     TextView categoriesText;
+    int backPressed = 0 ;
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
     private int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -81,7 +82,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        onRestart();
+        reboot();
     }
 
     @Override
@@ -168,8 +169,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
             @Override
             public void onClick(View v) {
-                revert = categoriesText.getText();
-                categoriesText.setText("Settings");
+                categoriesText.setVisibility(View.INVISIBLE);
                 topRefreshButton.setVisibility(View.INVISIBLE);
                 settings.setImageResource(R.drawable.close);
                 categoriesButton.setImageResource(R.drawable.ic_settings);
@@ -183,8 +183,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         topfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                revert = categoriesText.getText();
-                categoriesText.setText("Categories");
+                categoriesText.setVisibility(View.INVISIBLE);
                 topRefreshButton.setVisibility(View.INVISIBLE);
                 settings.setImageResource(R.drawable.close);
                 openCategory();
@@ -220,7 +219,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         View view = getLayoutInflater().inflate(R.layout.settings, null);
         final Dialog settingSheet = new Dialog(NewUI.this, R.style.leftSheet);
         settingSheet.setContentView(view);
-        settingSheet.setCancelable(false);
+        settingSheet.setCancelable(true);
         settingSheet.show();
         settingSheet.getWindow().setGravity(Gravity.RIGHT);
         notification = (ImageView) view.findViewById(R.id.notification);
@@ -251,8 +250,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         settingSheet.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-
-                categoriesText.setText(revert);
+                categoriesText.setVisibility(View.VISIBLE);
                 topRefreshButton.setVisibility(View.VISIBLE);
                 categoriesButton.setImageResource(R.drawable.ic_menu);
                 settings.setImageResource(R.drawable.ic_settings);
@@ -408,9 +406,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     public void openCategory() {
         View view = getLayoutInflater().inflate(R.layout.categories, null);
-        final Dialog categorySheet = new Dialog(NewUI.this, R.style.rightSheet);
+        categorySheet = new Dialog(NewUI.this, R.style.rightSheet);
         categorySheet.setContentView(view);
-        categorySheet.setCancelable(false);
+        categorySheet.setCancelable(true);
         categorySheet.getWindow().setGravity(Gravity.LEFT);
         categorySheet.show();
 
@@ -428,7 +426,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         categorySheet.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                categoriesText.setText(revert);
+                categoriesText.setVisibility(View.VISIBLE);
                 topRefreshButton.setVisibility(View.VISIBLE);
                 settings.setImageResource(R.drawable.ic_settings);
             }
@@ -448,7 +446,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(0);
                 categoryChosen = 0;
                 categoryChosenString = "All News";
-                onRestart();
+                reboot();
             }
         });
 
@@ -458,7 +456,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(1);
                 categoryChosen = 1;
                 categoryChosenString = "Economy";
-                onRestart();
+                reboot();
             }
         });
 
@@ -468,7 +466,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(2);
                 categoryChosen = 2;
                 categoryChosenString = "Deals";
-                onRestart();
+                reboot();
             }
         });
 
@@ -478,7 +476,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(4);
                 categoryChosen = 3;
                 categoryChosenString = "Finance";
-                onRestart();
+                reboot();
             }
         });
 
@@ -488,7 +486,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(3);
                 categoryChosen = 4;
                 categoryChosenString = "Money";
-                onRestart();
+                reboot();
             }
         });
 
@@ -498,7 +496,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(3);
                 categoryChosen = 5;
                 categoryChosenString = "Global";
-                onRestart();
+                reboot();
             }
         });
 
@@ -508,7 +506,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(3);
                 categoryChosen = 6;
                 categoryChosenString = "Tax";
-                onRestart();
+                reboot();
             }
         });
 
@@ -518,7 +516,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(5);
                 categoryChosen = 7;
                 categoryChosenString = "Startup";
-                onRestart();
+                reboot();
             }
         });
 
@@ -529,7 +527,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 //setupViewPager(-1);
                 categoryChosen = -1;
                 categoryChosenString = "My Library";
-                onRestart();
+                reboot();
             }
         });
 
@@ -639,6 +637,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     protected void onRestart() {
         // TODO Auto-generated method stub
         super.onRestart();
+    }
+
+    public void reboot(){
         Intent intent = new Intent(this, NewUI.class);
         intent.putExtra("category", categoryChosen);
         intent.putExtra("categoryChosenString", categoryChosenString);
@@ -678,5 +679,25 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         }
     }
 
+    @Override
+    protected void onResume() {
+        backPressed=0;
+        super.onResume();
+    }
 
+    @Override
+    public void onBackPressed() {
+       if(viewPager.getCurrentItem()>0) {
+           viewPager.setCurrentItem(0);
+       }
+
+        else {
+           Toaster.toast("press again to exit");
+           backPressed++;
+           if(backPressed>1){
+               moveTaskToBack(true);
+           }
+       }
+
+    }
 }

@@ -28,6 +28,7 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -278,21 +279,25 @@ public class NewscardFragment extends Fragment {
 
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
-        if (imageUrl != null && !imageUrl.isEmpty()) {
-            if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
-                imageView.setImageResource(R.drawable.placeholder);
-            } else {
-                Picasso.with(imageView.getContext().getApplicationContext())
-                        .load(imageUrl)
-                        .placeholder(R.drawable.placeholder)
-                        .config(Bitmap.Config.RGB_565)
-                        .resize(250, 350)
-                        .into(imageView);
-            }
+
+
+        Glide.with(this).load(imageUrl).into(imageView);
+
+//        if (imageUrl != null && !imageUrl.isEmpty()) {
+//            if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
+//                imageView.setImageResource(R.drawable.placeholder);
+//            } else {
+//                Picasso.with(imageView.getContext().getApplicationContext())
+//                        .load(imageUrl)
+//                        .placeholder(R.drawable.placeholder)
+//                        .config(Bitmap.Config.RGB_565)
+//                        .resize(250, 350)
+//                        .into(imageView);
+//            }
 
             //picasso.load(imageUrl).noFade().placeholder(R.drawable.placeholder).resize(300, 300).into(imageView);
             //picasso.getSnapshot().dump();
-        }
+        //}
     }
 
 
