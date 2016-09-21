@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#ffffff"
-    android:orientation="vertical"
-    android:padding="2dp">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/newsc"
@@ -14,52 +13,197 @@
         android:alpha="20"
 
 
-        android:background="#ffffff">
-
+        android:background="#d0d0d0">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/bottombar">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:scaleType="fitXY"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/placeholder"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
+
+        <RelativeLayout
+            android:id="@+id/stack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/imageView2"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp">
+
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/newsImpactTab"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="0dp"
+                android:backgroundTint="#04b9f0"
+                android:layout_alignEnd="@+id/newsBody"
+                android:layout_toEndOf="@+id/summaryTab"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true">
+
+                <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                    android:clickable="false"
+                    android:id="@+id/impactTabs">
+
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IMPACT "
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="13dp"
+                        tools:ignore="MissingPrefix"
+                        fontPath="fonts/HelveticaNeueMedium.ttf"
+                        android:typeface="serif"
+                        android:visibility="visible"
+                        android:textColor="#ffffff"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp" />
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/summaryTab"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                card_view:cardCornerRadius="0dp"
+                android:layout_alignBottom="@+id/newsBody"
+                android:layout_alignStart="@+id/newsBody"
+                android:backgroundTint="#b4b4b4">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/summaryTabs"
+                    android:layout_height="match_parent"
+                    android:clickable="false">
+
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Summary"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="13dp"
+                        tools:ignore="MissingPrefix"
+                        fontPath="fonts/HelveticaNeueMedium.ttf"
+                        android:typeface="serif"
+                        android:visibility="visible"
+                        android:textColor="#ffffff"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp" />
+
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/newsBody"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                card_view:cardCornerRadius="0dp"
+                android:layout_marginTop="35dp"
+                android:elevation="5dp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#04b9f0"
+    android:paddingTop="3dp">
+
+                <TextView
+                    android:id="@+id/newstxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:lineSpacingExtra="2dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="15dp"
+                    android:singleLine="false"
+                    android:text="@string/newsinfo"
+                    fontPath="fonts/HelveticaNeueThin.ttf"
+                    android:textColor="#000000"
+                    android:textIsSelectable="false"
+                    android:textSize="15dp"
+                    tools:ignore="MissingPrefix"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.03"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:background="#ffffff" />
+
+    <ImageButton
+        android:id="@+id/shareNews"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#00ffffff"
+        android:contentDescription="share"
+        android:cropToPadding="false"
+        android:padding="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/share2"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </RelativeLayout>
+</RelativeLayout>
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/header">
+            android:layout_below="@+id/bookmarkLine"
+            android:layout_alignParentStart="true"
+            android:visibility="gone">
 
-            <TextView
-                android:id="@+id/newstxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="false"
 
-                android:layout_alignParentStart="false"
-                android:layout_marginBottom="5dp"
-                android:lineSpacingExtra="2dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="15dp"
-                android:singleLine="false"
-                android:text="@string/newsinfo"
-                fontPath="fonts/HelveticaNeueThin.ttf"
-                android:textColor="#000000"
-                android:textIsSelectable="false"
-                android:textSize="15sp"
-                tools:ignore="MissingPrefix"
-                android:textStyle="bold"
-                android:letterSpacing="0.03" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/linearLayout13"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_below="@+id/newstxt"
                 android:orientation="horizontal"
-                android:visibility="invisible">
+                android:visibility="gone"
+                android:translationZ="1dp"
+                android:layout_margin="5dp"
+                android:background="#89000000">
 
                 <View
                     android:id="@+id/view3"
@@ -73,7 +217,7 @@
                     android:layout_marginTop="5dp"
                     android:alpha=".5"
                     android:background="#000"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView18"
@@ -81,11 +225,15 @@
                     android:layout_height="wrap_content"
                     android:text="IMPACT "
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textSize="12sp"
+                    android:textSize="13dp"
                     tools:ignore="MissingPrefix"
                     fontPath="fonts/HelveticaNeueMedium.ttf"
                     android:typeface="serif"
-                    android:visibility="invisible" />
+                    android:visibility="visible"
+                    android:textColor="#ffffff"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp" />
 
                 <View
                     android:id="@+id/view3"
@@ -99,8 +247,10 @@
                     android:layout_marginTop="5dp"
                     android:alpha=".5"
                     android:background="#000"
-                    android:visibility="invisible" />
-            </LinearLayout>
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
             <!-- Content -->
 
 
@@ -108,7 +258,6 @@
                 android:id="@+id/impactLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/linearLayout13"
                 android:layout_marginTop="5dp">
 
                 <TextView
@@ -130,152 +279,12 @@
                     android:textSize="15sp"
                     android:textStyle="normal"
                     android:typeface="normal"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
         </RelativeLayout>
 
-
-        <RelativeLayout
-            android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView2"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_toStartOf="@+id/date"
-            android:background="@drawable/grad3">
-
-
-            <TextView
-                android:id="@+id/headtxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
-                android:gravity="center_horizontal"
-                android:outlineProvider="paddedBounds"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="Right to cancel the property dead if builder fails to deliver in three months"
-                android:textAlignment="center"
-                fontPath="fonts/HelveticaNeueMedium.ttf"
-                tools:ignore="MissingPrefix"
-
-                android:textColor="#ffffff"
-                android:textSize="22sp"
-                android:textStyle="bold"
-
-                android:layout_centerInParent="true" />
-
-            <TextView
-                android:id="@+id/moreAt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/newsSource"
-                android:layout_alignLeft="@+id/newsSource"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentStart="true"
-                android:paddingLeft="7dp"
-                android:text="more at :"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ebebeb"
-                android:textSize="10sp"
-                android:visibility="visible"></TextView>
-
-            <TextView
-                android:id="@+id/newsSource"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="10dp"
-                android:paddingBottom="3dp"
-                android:paddingLeft="7dp"
-                android:text="News Source Name"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#2ce3e6"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:visibility="visible"></TextView>
-
-            <ImageButton
-                android:id="@+id/shareNews"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:background="#00ffffff"
-                android:contentDescription="share"
-                android:cropToPadding="false"
-                android:elevation="24dp"
-                android:padding="2dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/share2"
-                android:visibility="visible" />
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/headtxt"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/author"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="false"
-                        android:layout_alignParentRight="false"
-                        android:layout_toLeftOf="@+id/textView20"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="Anjali Jain"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
-                        android:visibility="visible" />
-
-                    <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="|"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:id="@+id/dateText"
-                        android:layout_width="80dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentTop="false"
-                        android:layout_toEndOf="@+id/textView20"
-                        android:layout_toRightOf="@+id/textView20"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="Jun 24, 2016"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
-                        android:visibility="visible"></TextView>
-                </RelativeLayout>
-            </RelativeLayout>
-
-
-        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/brand"
@@ -346,16 +355,17 @@
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_below="@+id/header"
-            android:background="#2ce3e6" />
+            android:background="#2ce3e6"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/bottombar"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:background="#ffffff"
-            android:elevation="10dp">
+            android:visibility="visible"
+            android:background="#d0d0d0">
 
             <HorizontalScrollView
                 android:id="@+id/horizontalScrollView"
@@ -367,171 +377,325 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:padding="3dp">
+                    android:padding="3dp"
+                    android:visibility="visible">
 
                     <Button
                         android:id="@+id/q1"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#7883c887"
-                        android:elevation="5dp"
+                        android:backgroundTint="#d62f2f"
                         android:gravity="center"
                         android:minLines="2"
                         android:text="company revenue"
-                        android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:textColor="#ffffff"
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q2"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#8230c9db"
-                        android:elevation="5dp"
+                        android:backgroundTint="#c2faa700"
                         android:gravity="center"
                         android:minLines="2"
-                        android:text="Who is Ceo ?"
-                        android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:text="Who is \n Ceo ?"
+                        android:textColor="#ffffff"
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q3"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#63c476"
-                        android:elevation="5dp"
+                        android:backgroundTint="#b900c14d"
                         android:gravity="center"
                         android:minLines="2"
                         android:text="How much worth"
-                        android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:textColor="#ffffff"
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q4"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#f78c82"
-                        android:elevation="5dp"
+                        android:backgroundTint="#b30176eb"
                         android:gravity="center"
                         android:minLines="2"
-                        android:text="What is GST ?"
-                        android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:text="What is \n GST ?"
+                        android:textColor="#ffffff"
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q5"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#5fb4f5"
-                        android:elevation="5dp"
+                        android:backgroundTint="#bdb909b6"
                         android:gravity="center"
                         android:minLines="2"
                         android:text="similar companies"
-                        android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:textColor="#ffffff"
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q6"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#EE9A49"
-                        android:elevation="5dp"
+                        android:backgroundTint="#a9d62f2f"
                         android:gravity="center"
                         android:minLines="2"
                         android:text="similar companies"
-                        android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:textColor="#ffffff"
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q7"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#9F79EE"
-                        android:elevation="5dp"
+                        android:backgroundTint="#ffffff"
                         android:gravity="center"
                         android:minLines="2"
                         android:text="similar companies"
                         android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q8"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#759EF0"
-                        android:elevation="5dp"
+                        android:backgroundTint="#ffffff"
                         android:gravity="center"
                         android:minLines="2"
                         android:text="similar companies"
                         android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q9"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#19E6A1"
-                        android:elevation="5dp"
+                        android:backgroundTint="#ffffff"
                         android:gravity="center"
                         android:minLines="2"
                         android:text="similar companies"
                         android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                     <Button
                         android:id="@+id/q10"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#9DD926"
-                        android:elevation="5dp"
+                        android:backgroundTint="#ffffff"
                         android:gravity="center"
                         android:minLines="2"
                         android:text="similar companies"
                         android:textColor="#000"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                        android:translationZ="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp" />
 
                 </LinearLayout>
             </HorizontalScrollView>
 
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_toStartOf="@+id/date"
+        android:background="@drawable/grad3">
+
+
+        <TextView
+            android:id="@+id/headtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:gravity="center_horizontal"
+            android:outlineProvider="paddedBounds"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="Right to cancel the property dead if builder fails to deliver in three months"
+            android:textAlignment="center"
+            fontPath="fonts/HelveticaNeueMedium.ttf"
+            tools:ignore="MissingPrefix"
+
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:textStyle="bold"
+
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/moreAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/newsSource"
+            android:layout_alignLeft="@+id/newsSource"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="7dp"
+            android:text="more at :"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ebebeb"
+            android:textSize="10sp"
+            android:visibility="gone"></TextView>
+
+        <TextView
+            android:id="@+id/newsSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="3dp"
+            android:paddingLeft="7dp"
+            android:text="News Source Name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#2ce3e6"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone"></TextView>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/headtxt"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentRight="false"
+                    android:layout_toLeftOf="@+id/textView20"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Anjali Jain"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="|"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/dateText"
+                    android:layout_width="80dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentTop="false"
+                    android:layout_toEndOf="@+id/textView20"
+                    android:layout_toRightOf="@+id/textView20"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Jun 24, 2016"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp"
+                    android:visibility="visible"></TextView>
+            </RelativeLayout>
         </RelativeLayout>
 
 

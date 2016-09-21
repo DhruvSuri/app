@@ -9,14 +9,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,8 +28,8 @@ import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
-import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
+import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
@@ -109,6 +108,12 @@ public class NewscardFragment extends Fragment {
         TextView author = (TextView) inflate.findViewById(R.id.author);
         TextView impactLabel = (TextView) inflate.findViewById(R.id.textView18);
 
+        //imapct tabs
+
+        RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.impactTabs);
+        RelativeLayout summaryTab = (RelativeLayout) inflate.findViewById(R.id.summaryTabs);
+
+
         final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
 
         try {
@@ -145,6 +150,28 @@ public class NewscardFragment extends Fragment {
         }
 
         hideBrand();
+
+
+        impactTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                newstxt.setText(newsCard.impact.trim());
+
+
+            }
+        });
+
+
+        summaryTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                newstxt.setText(newsCard.newsBody.trim());
+
+
+            }
+        });
 
 
         newshead.setOnClickListener(new View.OnClickListener() {
@@ -205,12 +232,26 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-        impactLayout.setOnClickListener(new View.OnClickListener(){
+        impactLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((NewUI) getActivity()).showTopBar();
             }
         });
+
+
+        final Button q6 = (Button) inflate.findViewById(R.id.q6);
+        q6.setText("Why such valuation ?");
+
+        q6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+
+            }
+        });
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -223,6 +264,8 @@ public class NewscardFragment extends Fragment {
 
         if (bubbleList.size() == 0)
             return;
+
+
         final Button q1 = (Button) inflate.findViewById(R.id.q1);
         q1.setText(bubbleList.get(0).getQuestion());
         final Button q2 = (Button) inflate.findViewById(R.id.q2);
@@ -432,12 +475,7 @@ public class NewscardFragment extends Fragment {
         TextView answerView = (TextView) dialog.findViewById(R.id.bubbleAnswer);
         answerView.setText(answer);
         final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+
 
         dialog.show();
     }
@@ -459,8 +497,8 @@ public class NewscardFragment extends Fragment {
 //                        .into(imageView);
 //            }
 
-            //picasso.load(imageUrl).noFade().placeholder(R.drawable.placeholder).resize(300, 300).into(imageView);
-            //picasso.getSnapshot().dump();
+        //picasso.load(imageUrl).noFade().placeholder(R.drawable.placeholder).resize(300, 300).into(imageView);
+        //picasso.getSnapshot().dump();
         //}
     }
 

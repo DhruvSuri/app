@@ -23,6 +23,7 @@ public interface AzazteApi {
     @POST("/service/rest/notification/save")
     Call<FCMServerResponse> saveFCMId(@Body NotificationConfig requestDTO);
 
-    Call<List<Bubble>> fetchBubbles(String storyId);
+    @GET("/service/rest/bubble")
+    Call<List<Bubble>> fetchBubbles(@Query("storyId") String storyId);
 }
 

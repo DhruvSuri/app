@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#ad000000"
-    android:id="@+id/parent">
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:id="@+id/parent"
+    android:background="#d2000000"
+    android:alpha="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +21,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="#18c5e8"
+            android:background="#0d8199"
             android:id="@+id/relativeLayout4"
             android:elevation="50dp">
 
@@ -59,5 +64,6 @@
                 android:textColor="#000" />
         </RelativeLayout>
 
+    </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
