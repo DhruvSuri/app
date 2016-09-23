@@ -10,8 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -22,7 +20,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,8 +40,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.MatchResult;
 
 import xdroid.toaster.Toaster;
 
@@ -56,7 +53,6 @@ public class NewscardFragment extends Fragment {
     RelativeLayout brand;
     private View inflateHolder;
     Vibrator vibe;
-
 
 
     private OnFragmentInteractionListener mListener;
@@ -91,7 +87,7 @@ public class NewscardFragment extends Fragment {
         inflateHolder = inflate;
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
 
-       vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 
         inflateView(inflate);
 
@@ -104,7 +100,6 @@ public class NewscardFragment extends Fragment {
                 hideBrand();
             }
         });
-
         return inflate;
     }
 
@@ -124,7 +119,6 @@ public class NewscardFragment extends Fragment {
         final RelativeLayout summaryTab = (RelativeLayout) inflate.findViewById(R.id.summaryTabs);
         final FrameLayout impactMargin = (FrameLayout) inflate.findViewById(R.id.impactMargin);
         final FrameLayout summaryMargin = (FrameLayout) inflate.findViewById(R.id.summaryMargin);
-
 
 
         final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
@@ -173,7 +167,7 @@ public class NewscardFragment extends Fragment {
                 summaryMargin.setVisibility(View.GONE);
                 summaryTab.setBackgroundColor(Color.parseColor("#919191"));
                 impactTab.setBackgroundColor(Color.parseColor("#04b9f0"));
-               // newstxt.animate().alpha(1.0f).setDuration(500);
+                // newstxt.animate().alpha(1.0f).setDuration(500);
                 newstxt.setText(newsCard.impact.trim());
 
 
@@ -189,9 +183,8 @@ public class NewscardFragment extends Fragment {
                 summaryMargin.setVisibility(View.VISIBLE);
                 summaryTab.setBackgroundColor(Color.parseColor("#04b9f0"));
                 impactTab.setBackgroundColor(Color.parseColor("#919191"));
-             //   newstxt.animate().alpha(0.0f).setDuration(500);
+                //   newstxt.animate().alpha(0.0f).setDuration(500);
                 newstxt.setText(newsCard.newsBody.trim());
-
 
 
             }
@@ -265,6 +258,9 @@ public class NewscardFragment extends Fragment {
         });
 
 
+        ArrayList<Bubble> bubbles = Connector.getInstance().getBubbles(newsCard.id);
+        setupbubblelistners(inflate, bubbles);
+
 //        final Button q6 = (Button) inflate.findViewById(R.id.q6);
 //        q6.setText("Why such valuation ?");
 //
@@ -282,15 +278,16 @@ public class NewscardFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(BubbleEvent event) {
         List<Bubble> bubbleList = event.getBubbleList();
-        setupbubblelistners(inflateHolder, bubbleList);
+        //setupbubblelistners(inflateHolder, bubbleList);
     }
 
     private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
 
-        if (bubbleList.size() == 0){
+        if (bubbleList.size() == 0) {
             return;
         }
 
+        fillBubblesDummyData(bubbleList);
 
         final Button q1 = (Button) inflate.findViewById(R.id.q1);
         q1.setText(bubbleList.get(0).getQuestion());

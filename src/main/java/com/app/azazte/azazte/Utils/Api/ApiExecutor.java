@@ -99,7 +99,8 @@ public class ApiExecutor {
             @Override
             public void onResponse(Call<List<Bubble>> call, Response<List<Bubble>> response) {
                 List<Bubble> bubbleList = response.body();
-                EventBus.getDefault().post(new BubbleEvent(bubbleList));
+                Connector.getInstance().saveBubbles(bubbleList);
+                //EventBus.getDefault().post(new BubbleEvent(bubbleList));
             }
 
             @Override
