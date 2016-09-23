@@ -46,7 +46,6 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.regex.MatchResult;
 
-import fr.tvbarthel.lib.blurdialogfragment.BlurDialogEngine;
 import xdroid.toaster.Toaster;
 
 public class NewscardFragment extends Fragment {
@@ -89,6 +88,7 @@ public class NewscardFragment extends Fragment {
                              Bundle savedInstanceState) {
         ApiExecutor.getInstance().fetchBubbles(newsCard.id);
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
+        inflateHolder = inflate;
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
 
        vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
@@ -265,17 +265,17 @@ public class NewscardFragment extends Fragment {
         });
 
 
-        final Button q6 = (Button) inflate.findViewById(R.id.q6);
-        q6.setText("Why such valuation ?");
-
-        q6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vibe.vibrate(100);
-                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
-
-            }
-        });
+//        final Button q6 = (Button) inflate.findViewById(R.id.q6);
+//        q6.setText("Why such valuation ?");
+//
+//        q6.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                vibe.vibrate(100);
+//                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+//
+//            }
+//        });
 
     }
 
@@ -287,8 +287,9 @@ public class NewscardFragment extends Fragment {
 
     private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
 
-        if (bubbleList.size() == 0)
+        if (bubbleList.size() == 0){
             return;
+        }
 
 
         final Button q1 = (Button) inflate.findViewById(R.id.q1);
@@ -300,7 +301,7 @@ public class NewscardFragment extends Fragment {
         final Button q4 = (Button) inflate.findViewById(R.id.q4);
         q4.setText(bubbleList.get(3).getQuestion());
         final Button q5 = (Button) inflate.findViewById(R.id.q5);
-        q5.setText("Funding ?");
+        q5.setText(bubbleList.get(4).getQuestion());
         final Button q6 = (Button) inflate.findViewById(R.id.q6);
         q6.setText("Why such valuation ?");
         final Button q7 = (Button) inflate.findViewById(R.id.q7);
@@ -356,41 +357,41 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-//        q6.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
-//
-//            }
-//        });
-//
-//        q7.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts");
-//
-//            }
-//        });
-//
-//        q8.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders");
-//
-//            }
-//        });
-//
-//        q9.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                showquestiondialog("Headquaters", "Global - Dubai.US - New York");
-//
-//            }
-//        });
+        q6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+
+            }
+        });
+
+        q7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts");
+
+            }
+        });
+
+        q8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders");
+
+            }
+        });
+
+        q9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Headquaters", "Global - Dubai.US - New York");
+
+            }
+        });
 
     }
 
