@@ -8,8 +8,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -17,8 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -40,7 +44,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.regex.MatchResult;
 
+import fr.tvbarthel.lib.blurdialogfragment.BlurDialogEngine;
 import xdroid.toaster.Toaster;
 
 public class NewscardFragment extends Fragment {
@@ -50,6 +56,8 @@ public class NewscardFragment extends Fragment {
     ImageButton shareButton;
     RelativeLayout brand;
     private View inflateHolder;
+    Vibrator vibe;
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -83,6 +91,8 @@ public class NewscardFragment extends Fragment {
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
 
+       vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+
         inflateView(inflate);
 
         shareButton.setOnClickListener(new View.OnClickListener() {
@@ -110,8 +120,11 @@ public class NewscardFragment extends Fragment {
 
         //imapct tabs
 
-        RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.impactTabs);
-        RelativeLayout summaryTab = (RelativeLayout) inflate.findViewById(R.id.summaryTabs);
+        final RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.impactTabs);
+        final RelativeLayout summaryTab = (RelativeLayout) inflate.findViewById(R.id.summaryTabs);
+        final FrameLayout impactMargin = (FrameLayout) inflate.findViewById(R.id.impactMargin);
+        final FrameLayout summaryMargin = (FrameLayout) inflate.findViewById(R.id.summaryMargin);
+
 
 
         final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
@@ -155,7 +168,12 @@ public class NewscardFragment extends Fragment {
         impactTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibe.vibrate(100);
+                impactMargin.setVisibility(View.VISIBLE);
+                summaryMargin.setVisibility(View.GONE);
+                summaryTab.setBackgroundColor(Color.parseColor("#919191"));
+                impactTab.setBackgroundColor(Color.parseColor("#04b9f0"));
+               // newstxt.animate().alpha(1.0f).setDuration(500);
                 newstxt.setText(newsCard.impact.trim());
 
 
@@ -166,8 +184,14 @@ public class NewscardFragment extends Fragment {
         summaryTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibe.vibrate(100);
+                impactMargin.setVisibility(View.GONE);
+                summaryMargin.setVisibility(View.VISIBLE);
+                summaryTab.setBackgroundColor(Color.parseColor("#04b9f0"));
+                impactTab.setBackgroundColor(Color.parseColor("#919191"));
+             //   newstxt.animate().alpha(0.0f).setDuration(500);
                 newstxt.setText(newsCard.newsBody.trim());
+
 
 
             }
@@ -177,6 +201,7 @@ public class NewscardFragment extends Fragment {
         newshead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                vibe.vibrate(100);
                 if (newsCard.isBookmarked == 0) {
                     Connector.getInstance().setBookmarked(newsCard.id);
                     newsCard.isBookmarked = 1;
@@ -246,7 +271,7 @@ public class NewscardFragment extends Fragment {
         q6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibe.vibrate(100);
                 showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
 
             }
@@ -466,8 +491,7 @@ public class NewscardFragment extends Fragment {
 
     public void showquestiondialog(String question, String answer) {
 
-        final Dialog dialog = new Dialog(getContext(), R.style.rightSheet);
-
+        final Dialog dialog = new Dialog(getContext(), R.style.customDialog);
         dialog.setContentView(R.layout.questiondialog);
 
         TextView questionView = (TextView) dialog.findViewById(R.id.bubbleQuestion);

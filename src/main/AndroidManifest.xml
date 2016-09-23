@@ -19,6 +19,7 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.app.azazte.azazte.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 
     <supports-screens
@@ -36,7 +37,8 @@
         android:theme="@style/MyMaterialTheme">
         <receiver
             android:name=".GCM.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:permission="com.google.android.c2dm.permission.SEND"
+         >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
