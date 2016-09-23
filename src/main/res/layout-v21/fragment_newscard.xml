@@ -27,7 +27,9 @@
             android:src="@drawable/placeholder"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:visibility="visible"
+            android:translationZ="3dp" />
 
         <RelativeLayout
             android:id="@+id/stack"
@@ -77,6 +79,15 @@
                     android:id="@+id/impactTabs">
 
 
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/bookmark"
+                        android:src="@drawable/bookmark"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp" />
+
                     <TextView
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
@@ -107,7 +118,7 @@
                 android:animateLayoutChanges="true"
                 android:layout_height="match_parent"
                 card_view:cardCornerRadius="3dp"
-                android:backgroundTint="#04b9f0"
+                android:backgroundTint="#3498db"
                 android:layout_alignParentBottom="false"
                 android:layout_below="@+id/impactMargin">
 
@@ -152,7 +163,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#04b9f0"
+    android:background="#3498db"
     android:paddingTop="3dp">
 
                 <TextView
@@ -163,10 +174,10 @@
                     android:lineSpacingExtra="3dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingTop="15dp"
+                    android:paddingTop="5dp"
                     android:singleLine="false"
                     android:text="@string/newsinfo"
-                    fontPath="fonts/HelveticaNeueThin.ttf"
+                    fontPath="fonts/HelveticaNeueLight.ttf"
                     android:textColor="#000000"
                     android:textIsSelectable="false"
                     android:textSize="15dp"
@@ -380,10 +391,11 @@
         <RelativeLayout
             android:id="@+id/bottombar"
             android:layout_width="match_parent"
-            android:layout_height="95dp"
+            android:layout_height="90dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:padding="5dp">
 
             <HorizontalScrollView
                 android:id="@+id/horizontalScrollView"
@@ -391,203 +403,238 @@
                 android:layout_height="match_parent"
                 android:scrollbars="none">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:visibility="visible">
 
                     <Button
                         android:id="@+id/q1"
-                        android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_width="68dp"
+                        android:layout_height="68dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#d3d62f2f"
+                        android:backgroundTint="#e74c3c"
                         android:gravity="center"
-                        android:minLines="2"
-                        android:text=""
+                        android:minLines="3"
+                        android:text="Dummy questions"
                         android:textColor="#ffffff"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:visibility="visible"
+                        android:maxLines="3"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginRight="10dp" />
 
                     <Button
                         android:id="@+id/q2"
-                        android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_width="68dp"
+                        android:layout_height="68dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#d2faa700"
+                        android:backgroundTint="#1abc9c"
                         android:gravity="center"
-                        android:minLines="2"
-                        android:text=""
+                        android:minLines="3"
+                        android:text="DUMMY QUESTIONS \n 3"
                         android:textColor="#ffffff"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:visibility="visible"
+                        android:maxLines="3"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q1" />
 
                     <Button
                         android:id="@+id/q3"
-                        android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_width="68dp"
+                        android:layout_height="68dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#c800c14d"
+                        android:backgroundTint="#f1c40f"
                         android:gravity="center"
-                        android:minLines="2"
-                        android:text=""
+                        android:minLines="3"
+                        android:text="Dummy"
                         android:textColor="#ffffff"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:visibility="visible"
+                        android:maxLines="3"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q2" />
 
                     <Button
                         android:id="@+id/q4"
-                        android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_width="68dp"
+                        android:layout_height="68dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#d50176eb"
+                        android:backgroundTint="#8e44ad"
                         android:gravity="center"
-                        android:minLines="2"
-                        android:text=""
+                        android:minLines="3"
+                        android:text="Dummy questions"
                         android:textColor="#ffffff"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:visibility="visible"
+                        android:maxLines="3"
+                        android:layout_marginRight="8dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q3" />
 
                     <Button
                         android:id="@+id/q5"
-                        android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_width="68dp"
+                        android:layout_height="68dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/circle"
-                        android:backgroundTint="#d3b909b6"
+                        android:backgroundTint="#2ecc71"
                         android:gravity="center"
-                        android:minLines="2"
-                        android:text=""
+                        android:minLines="3"
+                        android:text="Dummy"
                         android:textColor="#ffffff"
                         android:textSize="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
                         android:translationZ="0dp"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:visibility="visible"
+                        android:maxLines="3"
+                        android:layout_marginRight="8dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q4" />
 
                     <Button
                         android:id="@+id/q6"
                         android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/circle"
-                        android:backgroundTint="#a9d62f2f"
+                        android:background="@drawable/youtube"
                         android:gravity="center"
                         android:minLines="2"
-                        android:text="similar companies"
                         android:textColor="#ffffff"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q5" />
 
                     <Button
                         android:id="@+id/q7"
                         android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/circle"
-                        android:backgroundTint="#ffffff"
+                        android:background="@drawable/twitter"
                         android:gravity="center"
                         android:minLines="2"
-                        android:text="similar companies"
                         android:textColor="#000"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q6" />
 
                     <Button
                         android:id="@+id/q8"
                         android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/circle"
-                        android:backgroundTint="#ffffff"
+                        android:background="@drawable/quora"
                         android:gravity="center"
                         android:minLines="2"
-                        android:text="similar companies"
-                        android:textColor="#000"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q7" />
 
                     <Button
                         android:id="@+id/q9"
                         android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/circle"
-                        android:backgroundTint="#ffffff"
+                        android:background="@drawable/wp"
                         android:gravity="center"
                         android:minLines="2"
-                        android:text="similar companies"
                         android:textColor="#000"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q8" />
 
                     <Button
                         android:id="@+id/q10"
                         android:layout_width="70dp"
-                        android:layout_height="85dp"
+                        android:layout_height="70dp"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/circle"
-                        android:backgroundTint="#ffffff"
+                        android:background="@drawable/linkedin"
                         android:gravity="center"
                         android:minLines="2"
-                        android:text="similar companies"
                         android:textColor="#000"
                         android:textSize="10dp"
                         android:translationZ="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:textStyle="bold"
-                        android:elevation="0dp" />
+                        android:elevation="0dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_alignParentLeft="false"
+                        android:layout_marginLeft="0dp"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toRightOf="@+id/q9" />
 
-                </LinearLayout>
+                </RelativeLayout>
             </HorizontalScrollView>
 
         </RelativeLayout>

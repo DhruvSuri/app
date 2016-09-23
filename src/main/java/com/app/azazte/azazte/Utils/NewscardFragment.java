@@ -16,10 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -162,11 +165,10 @@ public class NewscardFragment extends Fragment {
         impactTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vibe.vibrate(100);
                 impactMargin.setVisibility(View.VISIBLE);
                 summaryMargin.setVisibility(View.GONE);
                 summaryTab.setBackgroundColor(Color.parseColor("#919191"));
-                impactTab.setBackgroundColor(Color.parseColor("#04b9f0"));
+                impactTab.setBackgroundColor(Color.parseColor("#3498db"));
                 // newstxt.animate().alpha(1.0f).setDuration(500);
                 newstxt.setText(newsCard.impact.trim());
 
@@ -181,7 +183,7 @@ public class NewscardFragment extends Fragment {
                 vibe.vibrate(100);
                 impactMargin.setVisibility(View.GONE);
                 summaryMargin.setVisibility(View.VISIBLE);
-                summaryTab.setBackgroundColor(Color.parseColor("#04b9f0"));
+                summaryTab.setBackgroundColor(Color.parseColor("#3498db"));
                 impactTab.setBackgroundColor(Color.parseColor("#919191"));
                 //   newstxt.animate().alpha(0.0f).setDuration(500);
                 newstxt.setText(newsCard.newsBody.trim());
@@ -286,6 +288,7 @@ public class NewscardFragment extends Fragment {
         if (bubbleList.size() == 0) {
             return;
         }
+        fillBubblesDummyData(bubbleList);
 
         fillBubblesDummyData(bubbleList);
 
@@ -300,20 +303,18 @@ public class NewscardFragment extends Fragment {
         final Button q5 = (Button) inflate.findViewById(R.id.q5);
         q5.setText(bubbleList.get(4).getQuestion());
         final Button q6 = (Button) inflate.findViewById(R.id.q6);
-        q6.setText("Why such valuation ?");
         final Button q7 = (Button) inflate.findViewById(R.id.q7);
-        q7.setText("Why bought ?");
         final Button q8 = (Button) inflate.findViewById(R.id.q8);
-        q8.setText("Startup billion aires ?");
         final Button q9 = (Button) inflate.findViewById(R.id.q9);
-        q9.setText("Headquaters ?");
+        final Button q10 = (Button) inflate.findViewById(R.id.q10);
+
 
 
         q1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog(bubbleList.get(0).getQuestion(), bubbleList.get(0).getAnswer());
+                showquestiondialog(bubbleList.get(0).getQuestion(), bubbleList.get(0).getAnswer(),null,"#e74c3c");
 
             }
         });
@@ -322,7 +323,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog(bubbleList.get(1).getQuestion(), bubbleList.get(1).getAnswer());
+                showquestiondialog(bubbleList.get(1).getQuestion(), bubbleList.get(1).getAnswer(),null,"#1abc9c");
 
             }
         });
@@ -331,7 +332,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog(bubbleList.get(2).getQuestion(), bubbleList.get(2).getAnswer());
+                showquestiondialog(bubbleList.get(2).getQuestion(), bubbleList.get(2).getAnswer(),null,"#f1c40f");
 
             }
         });
@@ -340,7 +341,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog(bubbleList.get(3).getQuestion(), bubbleList.get(3).getAnswer());
+                showquestiondialog(bubbleList.get(3).getQuestion(), bubbleList.get(3).getAnswer(),null,"#8e44ad");
 
             }
         });
@@ -349,7 +350,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog(bubbleList.get(4).getQuestion(), bubbleList.get(4).getAnswer());
+                showquestiondialog(bubbleList.get(4).getQuestion(), bubbleList.get(4).getAnswer(),null,"#2ecc71");
 
             }
         });
@@ -358,7 +359,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
+                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015","https://www.youtube.com/embed/Z1LctxzEREE",null);
 
             }
         });
@@ -367,7 +368,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts");
+                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts","https://twitter.com/azazte_com",null);
 
             }
         });
@@ -376,7 +377,7 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders");
+                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders","https://www.quora.com/What-is-the-difference-between-a-stock-index-a-stock-market-and-a-stock-exchange",null);
 
             }
         });
@@ -385,7 +386,16 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showquestiondialog("Headquaters", "Global - Dubai.US - New York");
+                showquestiondialog("Headquaters", "Global - Dubai.US - New York","http://wikipedia.com",null);
+
+            }
+        });
+
+        q10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showquestiondialog("Headquaters", "Global - Dubai.US - New York","https://www.linkedin.com/in/vijayshekhar",null);
 
             }
         });
@@ -487,19 +497,74 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showquestiondialog(String question, String answer) {
+    public void showquestiondialog(String question, String answer , String url ,String color) {
+
 
         final Dialog dialog = new Dialog(getContext(), R.style.customDialog);
         dialog.setContentView(R.layout.questiondialog);
 
-        TextView questionView = (TextView) dialog.findViewById(R.id.bubbleQuestion);
-        questionView.setText(question);
-        TextView answerView = (TextView) dialog.findViewById(R.id.bubbleAnswer);
-        answerView.setText(answer);
-        final RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.parent);
+        RelativeLayout webLayout = (RelativeLayout) dialog.findViewById(R.id.webLayout);
+        RelativeLayout qnaLayout = (RelativeLayout) dialog.findViewById(R.id.qnaLayout);
 
 
+
+        if (url!= null){
+            setUpWebview(dialog,url);
+            webLayout.setVisibility(View.VISIBLE);
+        }else{
+            qnaLayout.setBackgroundColor(Color.parseColor(color));
+            webLayout.setVisibility(View.INVISIBLE);
+            TextView questionView = (TextView) dialog.findViewById(R.id.bubbleQuestion);
+            questionView.setText(question);
+            TextView answerView = (TextView) dialog.findViewById(R.id.bubbleAnswer);
+            answerView.setText(answer);
+        }
         dialog.show();
+    }
+
+    private void setUpWebview(Dialog dialog,String url) {
+
+        WebView webView = (WebView) dialog.findViewById(R.id.webView);
+        final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress) ;
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(url);
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
+
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                // Handle the error
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                // TODO Auto-generated method stub
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // TODO Auto-generated method stub
+                super.onPageFinished(view, url);
+                progressBar.setVisibility(View.GONE);
+            }
+
+
+        });
     }
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
