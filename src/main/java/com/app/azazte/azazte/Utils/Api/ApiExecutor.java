@@ -48,7 +48,7 @@ public class ApiExecutor {
     }
 
     public void getNews(String email, final SwipeRefreshLayout swipe) {
-        final Call<NewsCardWrapper> newsCardWrapperCall = azazteApiService.getNews(0, 200, true);
+        final Call<NewsCardWrapper> newsCardWrapperCall = azazteApiService.getNews(0, 400, true);
         newsCardWrapperCall.enqueue(new Callback<NewsCardWrapper>() {
 
 

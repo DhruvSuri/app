@@ -583,6 +583,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             return;
         }
 
+        //TODO
+        //Being done for review purpose
+        // Setting category = 11 (Bubble news)
+        category = 11;
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
         for (NewsCard newsCard : allNews) {
             int cardCategory = 0;
