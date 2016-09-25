@@ -49,7 +49,7 @@ public class Connector extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
         db.execSQL("create table news (id text primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,place text,category text,isBookmarked integer,author text,impact text,impactLabel text,sentiment integer)");
-        db.execSQL("create table news (id text primary key, storyId text,question text,answer text)");
+        db.execSQL("create table bubble (id text primary key, storyId text,question text,answer text)");
     }
 
     @Override
