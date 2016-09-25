@@ -110,7 +110,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         findViewById(R.id.notification);
         setListeners();
         int category = getIntent().getIntExtra("category", 0);
-        int newsPostion = getNewsPosition(this.getIntent());
+        int newsPostion = getNewsPosition(getIntent());
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         if (category == 0) {
             categoryName = "All News";
