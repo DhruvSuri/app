@@ -39,7 +39,9 @@
             android:layout_marginTop="3dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:layout_marginBottom="3dp">
+            android:layout_marginBottom="3dp"
+            android:elevation="5dp"
+            android:translationZ="5dp">
 
 
             <FrameLayout
@@ -391,7 +393,7 @@
         <RelativeLayout
             android:id="@+id/bottombar"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:visibility="visible"
@@ -404,15 +406,15 @@
                 android:scrollbars="none">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:visibility="visible">
 
                     <Button
                         android:id="@+id/q6"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/youtube"
                         android:gravity="center"
@@ -424,16 +426,14 @@
                         android:elevation="0dp"
                         android:layout_marginRight="8dp"
                         android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="0dp"
+                        android:layout_marginLeft="2dp"
                         android:layout_alignParentTop="false"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginBottom="0dp"
-                        android:layout_toRightOf="@+id/q5" />
+                        android:layout_marginTop="0dp" />
 
                     <Button
                         android:id="@+id/q7"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/twitter"
                         android:gravity="center"
@@ -445,16 +445,15 @@
                         android:elevation="0dp"
                         android:layout_marginRight="8dp"
                         android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="0dp"
+                        android:layout_marginLeft="2dp"
                         android:layout_alignParentTop="false"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="0dp"
                         android:layout_toRightOf="@+id/q6" />
 
                     <Button
                         android:id="@+id/q8"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/quora"
                         android:gravity="center"
@@ -465,16 +464,15 @@
                         android:elevation="0dp"
                         android:layout_marginRight="8dp"
                         android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="0dp"
+                        android:layout_marginLeft="2dp"
                         android:layout_alignParentTop="false"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="0dp"
                         android:layout_toRightOf="@+id/q7" />
 
                     <Button
                         android:id="@+id/q9"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/wp"
                         android:gravity="center"
@@ -486,16 +484,15 @@
                         android:elevation="0dp"
                         android:layout_marginRight="8dp"
                         android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="0dp"
+                        android:layout_marginLeft="2dp"
                         android:layout_alignParentTop="false"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="0dp"
                         android:layout_toRightOf="@+id/q8" />
 
                     <Button
                         android:id="@+id/q10"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/linkedin"
                         android:gravity="center"
@@ -507,10 +504,9 @@
                         android:elevation="0dp"
                         android:layout_marginRight="8dp"
                         android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="0dp"
+                        android:layout_marginLeft="2dp"
                         android:layout_alignParentTop="false"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="0dp"
                         android:layout_toRightOf="@+id/q9" />
 
                 </RelativeLayout>

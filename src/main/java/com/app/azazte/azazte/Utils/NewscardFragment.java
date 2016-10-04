@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -55,7 +56,6 @@ public class NewscardFragment extends Fragment {
     ImageButton shareButton;
     RelativeLayout brand;
     private View inflateHolder;
-    Vibrator vibe;
     private static String DASH = "-";
     private static String REBRANDLY_DOMAIN = "https://www.rebrand.ly/finup-";
 
@@ -92,7 +92,7 @@ public class NewscardFragment extends Fragment {
         inflateHolder = inflate;
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
 
-        vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+
 
         inflateView(inflate);
 
@@ -182,7 +182,7 @@ public class NewscardFragment extends Fragment {
         summaryTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vibe.vibrate(100);
+
                 impactMargin.setVisibility(View.GONE);
                 summaryMargin.setVisibility(View.VISIBLE);
                 summaryTab.setBackgroundColor(Color.parseColor("#3498db"));
@@ -198,7 +198,7 @@ public class NewscardFragment extends Fragment {
         newshead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vibe.vibrate(100);
+
                 if (newsCard.isBookmarked == 0) {
                     Connector.getInstance().setBookmarked(newsCard.id);
                     newsCard.isBookmarked = 1;
@@ -423,13 +423,19 @@ public class NewscardFragment extends Fragment {
     }
 
     public void showquestiondialog(String question, String answer, String url, String color) {
-
-
-        final Dialog dialog = new Dialog(getContext(), R.style.customDialog);
+        final Dialog dialog = new Dialog(getContext(), R.style.dialog);
         dialog.setContentView(R.layout.questiondialog);
-
         RelativeLayout webLayout = (RelativeLayout) dialog.findViewById(R.id.webLayout);
+         RelativeLayout parent = (RelativeLayout) dialog.findViewById(R.id.parent);
         RelativeLayout qnaLayout = (RelativeLayout) dialog.findViewById(R.id.qnaLayout);
+
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
 
 
         if (url != null) {
@@ -446,11 +452,20 @@ public class NewscardFragment extends Fragment {
         dialog.show();
     }
 
+
+
+
+
     private void setUpWebview(Dialog dialog, String url) {
 
         WebView webView = (WebView) dialog.findViewById(R.id.webView);
         final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webView.loadUrl(url);
 
         webView.setWebViewClient(new WebViewClient() {
