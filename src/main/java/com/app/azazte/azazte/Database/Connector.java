@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.NewsCard;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,22 +35,23 @@ public class Connector extends SQLiteOpenHelper {
     public static final String NEWS_SENTIMENT = "sentiment";
     private static final String NEWS_IMPACT_LABEL = "impactLabel";
 
-    private static final String BUBBLE_QUESTION = "question";
-    private static final String BUBBLE_ANSWER = "answer";
+    private static final String BUBBLE_KEY = "key";
+    private static final String BUBBLE_VALUE = "value";
     private static final String BUBBLE_STORY_ID = "storyId";
     private static final String BUBBLE_ID = "id";
+    private static final String BUBBLE_TWITTER = "TWITTER";
 
     public static Connector connector;
 
     public Connector(Context context) {
-        super(context.getApplicationContext(), DATABASE_NAME, null, 9);
+        super(context.getApplicationContext(), DATABASE_NAME, null, 11);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
         db.execSQL("create table news (id text primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,place text,category text,isBookmarked integer,author text,impact text,impactLabel text,sentiment integer)");
-        db.execSQL("create table bubble (id text primary key, storyId text,question text,answer text)");
+        db.execSQL("create table bubble (id text primary key, storyId text,key text,value text)");
     }
 
     @Override
@@ -149,11 +151,27 @@ public class Connector extends SQLiteOpenHelper {
         return array_list;
     }
 
+    public ArrayList<Bubble> getBubble(String storyId,String key){
+        ArrayList<Bubble> array_list = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from bubble where " + BUBBLE_STORY_ID + "=\"" + storyId + "\"" + "and "+ BUBBLE_KEY + "=\"" + key + "\"", null);
+        res.moveToFirst();
+        Bubble bubble;
+        while (res.isAfterLast() == false) {
+            bubble = fillBubble(res);
+            array_list.add(bubble);
+            res.moveToNext();
+        }
+        res.close();
+        return array_list;
+    }
+
     private Bubble fillBubble(Cursor res) {
         Bubble bubble = new Bubble();
         bubble.setStoryId(res.getString(res.getColumnIndex(BUBBLE_STORY_ID)));
-        bubble.setQuestion(res.getString(res.getColumnIndex(BUBBLE_QUESTION)));
-        bubble.setAnswer(res.getString(res.getColumnIndex(BUBBLE_ANSWER)));
+        bubble.setQuestion(res.getString(res.getColumnIndex(BUBBLE_KEY)));
+        bubble.setAnswer(res.getString(res.getColumnIndex(BUBBLE_VALUE)));
         bubble.setId(res.getString(res.getColumnIndex(BUBBLE_ID)));
         return bubble;
     }
@@ -163,8 +181,8 @@ public class Connector extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(BUBBLE_ID, bubble.getId());
         contentValues.put(BUBBLE_STORY_ID, bubble.getStoryId());
-        contentValues.put(BUBBLE_QUESTION, bubble.getQuestion());
-        contentValues.put(BUBBLE_ANSWER, bubble.getAnswer());
+        contentValues.put(BUBBLE_KEY, bubble.getQuestion());
+        contentValues.put(BUBBLE_VALUE, bubble.getAnswer());
         db.insert("bubble", null, contentValues);
         return true;
     }

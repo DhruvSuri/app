@@ -56,6 +56,8 @@ public class NewscardFragment extends Fragment {
     RelativeLayout brand;
     private View inflateHolder;
     Vibrator vibe;
+    private static String DASH = "-";
+    private static String REBRANDLY_DOMAIN = "https://www.rebrand.ly/finup-";
 
 
     private OnFragmentInteractionListener mListener;
@@ -263,18 +265,6 @@ public class NewscardFragment extends Fragment {
         ArrayList<Bubble> bubbles = Connector.getInstance().getBubbles(newsCard.id);
         setupbubblelistners(inflate, bubbles);
 
-//        final Button q6 = (Button) inflate.findViewById(R.id.q6);
-//        q6.setText("Why such valuation ?");
-//
-//        q6.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                vibe.vibrate(100);
-//                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015");
-//
-//            }
-//        });
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -284,24 +274,6 @@ public class NewscardFragment extends Fragment {
     }
 
     private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
-
-        if (bubbleList.size() == 0) {
-            return;
-        }
-        fillBubblesDummyData(bubbleList);
-
-        fillBubblesDummyData(bubbleList);
-
-        final Button q1 = (Button) inflate.findViewById(R.id.q1);
-        q1.setText(bubbleList.get(0).getQuestion());
-        final Button q2 = (Button) inflate.findViewById(R.id.q2);
-        q2.setText(bubbleList.get(1).getQuestion());
-        final Button q3 = (Button) inflate.findViewById(R.id.q3);
-        q3.setText(bubbleList.get(2).getQuestion());
-        final Button q4 = (Button) inflate.findViewById(R.id.q4);
-        q4.setText(bubbleList.get(3).getQuestion());
-        final Button q5 = (Button) inflate.findViewById(R.id.q5);
-        q5.setText(bubbleList.get(4).getQuestion());
         final Button q6 = (Button) inflate.findViewById(R.id.q6);
         final Button q7 = (Button) inflate.findViewById(R.id.q7);
         final Button q8 = (Button) inflate.findViewById(R.id.q8);
@@ -309,97 +281,50 @@ public class NewscardFragment extends Fragment {
         final Button q10 = (Button) inflate.findViewById(R.id.q10);
 
 
-
-        q1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog(bubbleList.get(0).getQuestion(), bubbleList.get(0).getAnswer(),null,"#e74c3c");
-
-            }
-        });
-
-        q2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog(bubbleList.get(1).getQuestion(), bubbleList.get(1).getAnswer(),null,"#1abc9c");
-
-            }
-        });
-
-        q3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog(bubbleList.get(2).getQuestion(), bubbleList.get(2).getAnswer(),null,"#f1c40f");
-
-            }
-        });
-
-        q4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog(bubbleList.get(3).getQuestion(), bubbleList.get(3).getAnswer(),null,"#8e44ad");
-
-            }
-        });
-
-        q5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showquestiondialog(bubbleList.get(4).getQuestion(), bubbleList.get(4).getAnswer(),null,"#2ecc71");
-
-            }
-        });
-
         q6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015","https://www.youtube.com/embed/Z1LctxzEREE",null);
-
+                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015", REBRANDLY_DOMAIN + "YOUTUBE" + DASH + newsCard.id, null);
             }
         });
 
         q7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts","https://twitter.com/azazte_com",null);
-
+                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts", REBRANDLY_DOMAIN + "TWITTER" + DASH + newsCard.id, null);
             }
         });
 
         q8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders","https://www.quora.com/What-is-the-difference-between-a-stock-index-a-stock-market-and-a-stock-exchange",null);
-
+                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders", REBRANDLY_DOMAIN + "QUORA" + DASH + newsCard.id, null);
             }
         });
 
         q9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                showquestiondialog("Headquaters", "Global - Dubai.US - New York","http://wikipedia.com",null);
-
+                showquestiondialog("Headquaters", "Global - Dubai.US - New York", REBRANDLY_DOMAIN + "WIKI" + DASH + newsCard.id, null);
             }
         });
 
         q10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                showquestiondialog("Headquaters", "Global - Dubai.US - New York","https://www.linkedin.com/in/vijayshekhar",null);
-
+                showquestiondialog("Headquaters", "Global - Dubai.US - New York", REBRANDLY_DOMAIN + "LINKEDIN" + DASH + newsCard.id, null);
             }
         });
 
+    }
+
+
+    public String getBubbleResponse(String sourceString) {
+        ArrayList<Bubble> source = Connector.getInstance().getBubble(newsCard.id, sourceString);
+        if (source.size() == 0) {
+            return "finup.in";
+        }
+        return source.get(0).getAnswer();
     }
 
     private void fillBubblesDummyData(List<Bubble> bubbleList) {
@@ -497,7 +422,7 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showquestiondialog(String question, String answer , String url ,String color) {
+    public void showquestiondialog(String question, String answer, String url, String color) {
 
 
         final Dialog dialog = new Dialog(getContext(), R.style.customDialog);
@@ -507,11 +432,10 @@ public class NewscardFragment extends Fragment {
         RelativeLayout qnaLayout = (RelativeLayout) dialog.findViewById(R.id.qnaLayout);
 
 
-
-        if (url!= null){
-            setUpWebview(dialog,url);
+        if (url != null) {
+            setUpWebview(dialog, url);
             webLayout.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             qnaLayout.setBackgroundColor(Color.parseColor(color));
             webLayout.setVisibility(View.INVISIBLE);
             TextView questionView = (TextView) dialog.findViewById(R.id.bubbleQuestion);
@@ -522,31 +446,23 @@ public class NewscardFragment extends Fragment {
         dialog.show();
     }
 
-    private void setUpWebview(Dialog dialog,String url) {
+    private void setUpWebview(Dialog dialog, String url) {
 
         WebView webView = (WebView) dialog.findViewById(R.id.webView);
-        final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress) ;
+        final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(url);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
-            }
-        });
-
-
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                // Handle the error
+                System.out.print("");
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
-                return true;
+                return false;
             }
 
 

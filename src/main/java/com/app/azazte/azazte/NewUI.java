@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -88,6 +90,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        final PackageManager pm = getPackageManager();
+//        //get a list of installed apps.
+//        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/HelveticaNeue.tff")
                 .setFontAttrId(R.attr.fontPath)
@@ -583,10 +589,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             return;
         }
 
-        //TODO
-        //Being done for review purpose
-        // Setting category = 11 (Bubble news)
-        category = 11;
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
         for (NewsCard newsCard : allNews) {
             int cardCategory = 0;

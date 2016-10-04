@@ -100,7 +100,6 @@ public class ApiExecutor {
             public void onResponse(Call<List<Bubble>> call, Response<List<Bubble>> response) {
                 List<Bubble> bubbleList = response.body();
                 Connector.getInstance().saveBubbles(bubbleList);
-                //EventBus.getDefault().post(new BubbleEvent(bubbleList));
             }
 
             @Override
