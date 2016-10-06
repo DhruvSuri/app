@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -23,6 +22,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -91,7 +91,6 @@ public class NewscardFragment extends Fragment {
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         inflateHolder = inflate;
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
-
 
 
         inflateView(inflate);
@@ -279,6 +278,7 @@ public class NewscardFragment extends Fragment {
         final Button q8 = (Button) inflate.findViewById(R.id.q8);
         final Button q9 = (Button) inflate.findViewById(R.id.q9);
         final Button q10 = (Button) inflate.findViewById(R.id.q10);
+        LinearLayout linearLayout = (LinearLayout)inflate.findViewById(R.id.linearLayoutButtons);
 
 
         q6.setOnClickListener(new View.OnClickListener() {
@@ -426,7 +426,7 @@ public class NewscardFragment extends Fragment {
         final Dialog dialog = new Dialog(getContext(), R.style.dialog);
         dialog.setContentView(R.layout.questiondialog);
         RelativeLayout webLayout = (RelativeLayout) dialog.findViewById(R.id.webLayout);
-         RelativeLayout parent = (RelativeLayout) dialog.findViewById(R.id.parent);
+        RelativeLayout parent = (RelativeLayout) dialog.findViewById(R.id.parent);
         RelativeLayout qnaLayout = (RelativeLayout) dialog.findViewById(R.id.qnaLayout);
 
         parent.setOnClickListener(new View.OnClickListener() {
@@ -451,9 +451,6 @@ public class NewscardFragment extends Fragment {
         }
         dialog.show();
     }
-
-
-
 
 
     private void setUpWebview(Dialog dialog, String url) {
