@@ -134,7 +134,7 @@ public class NewscardFragment extends Fragment {
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
-        final View bookmarkView = inflate.findViewById(R.id.bookmarkLine);
+        final ImageView bookmarkView = (ImageView) inflate.findViewById(R.id.bookmark);
         shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
         brand = (RelativeLayout) inflate.findViewById(R.id.brand);
         View impactLayout = inflate.findViewById(R.id.linearLayout13);
@@ -155,9 +155,9 @@ public class NewscardFragment extends Fragment {
         }
 
         if (newsCard.isBookmarked == 1) {
-            bookmarkView.setBackgroundColor(Color.parseColor("#2ce3e6"));
+            bookmarkView.setVisibility(View.VISIBLE);
         } else {
-            bookmarkView.setBackgroundColor(255);
+            bookmarkView.setVisibility(View.INVISIBLE);
         }
 
         hideBrand();
@@ -168,8 +168,8 @@ public class NewscardFragment extends Fragment {
             public void onClick(View v) {
                 impactMargin.setVisibility(View.VISIBLE);
                 summaryMargin.setVisibility(View.GONE);
-                summaryTab.setBackgroundColor(Color.parseColor("#919191"));
-                impactTab.setBackgroundColor(Color.parseColor("#3498db"));
+                summaryTab.setBackgroundColor(Color.parseColor("#87d8fd"));
+                impactTab.setBackgroundColor(Color.parseColor("#33b6f3"));
                 // newstxt.animate().alpha(1.0f).setDuration(500);
                 newstxt.setText(newsCard.impact.trim());
 
@@ -184,8 +184,8 @@ public class NewscardFragment extends Fragment {
 
                 impactMargin.setVisibility(View.GONE);
                 summaryMargin.setVisibility(View.VISIBLE);
-                summaryTab.setBackgroundColor(Color.parseColor("#3498db"));
-                impactTab.setBackgroundColor(Color.parseColor("#919191"));
+                summaryTab.setBackgroundColor(Color.parseColor("#33b6f3"));
+                impactTab.setBackgroundColor(Color.parseColor("#87d8fd"));
                 //   newstxt.animate().alpha(0.0f).setDuration(500);
                 newstxt.setText(newsCard.newsBody.trim());
 
@@ -201,12 +201,12 @@ public class NewscardFragment extends Fragment {
                 if (newsCard.isBookmarked == 0) {
                     Connector.getInstance().setBookmarked(newsCard.id);
                     newsCard.isBookmarked = 1;
-                    bookmarkView.setBackgroundColor(Color.parseColor("#2ce3e6"));
+                    bookmarkView.setVisibility(View.VISIBLE);
                     Toaster.toast("Added to your Library");
                 } else {
                     Connector.getInstance().unsetBookmarked(newsCard.id);
                     newsCard.isBookmarked = 0;
-                    bookmarkView.setBackgroundColor(255);
+                    bookmarkView.setVisibility(View.INVISIBLE);
                     Toaster.toast("Removed from your Library");
                 }
             }
@@ -278,7 +278,7 @@ public class NewscardFragment extends Fragment {
         final Button q8 = (Button) inflate.findViewById(R.id.q8);
         final Button q9 = (Button) inflate.findViewById(R.id.q9);
         final Button q10 = (Button) inflate.findViewById(R.id.q10);
-        LinearLayout linearLayout = (LinearLayout)inflate.findViewById(R.id.linearLayoutButtons);
+
 
 
         q6.setOnClickListener(new View.OnClickListener() {

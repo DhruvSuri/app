@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -171,15 +172,24 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
         final FrameLayout settingsfilter = (FrameLayout) findViewById(R.id.settingfilter);
 
+        assert settingsfilter != null;
         settingsfilter.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                categoriesText.setVisibility(View.INVISIBLE);
-                topRefreshButton.setVisibility(View.INVISIBLE);
-                settings.setImageResource(R.drawable.close);
-                categoriesButton.setImageResource(R.drawable.ic_settings);
-                openSettings();
+             //  categoriesText.setVisibility(View.INVISIBLE);
+             //  topRefreshButton.setVisibility(View.INVISIBLE);
+             //  settings.setImageResource(R.drawable.close);
+             //  categoriesButton.setImageResource(R.drawable.ic_settings);
+                Intent intent = new Intent(getApplicationContext(),
+                        HomeScreen.class);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            //    intent.putExtra("id", id);
+                startActivity(intent);
+
+
+              //  openSettings();
 
 
             }
@@ -192,6 +202,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 categoriesText.setVisibility(View.INVISIBLE);
                 topRefreshButton.setVisibility(View.INVISIBLE);
                 settings.setImageResource(R.drawable.close);
+                topBar.setBackgroundColor(Color.parseColor("#1E88E5"));
                 openCategory();
             }
         });
@@ -419,15 +430,15 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         categorySheet.show();
 
         FrameLayout close = (FrameLayout) view.findViewById(R.id.close);
-        ImageView allNews = (ImageView) view.findViewById(R.id.allnews);
-        ImageView business = (ImageView) view.findViewById(R.id.business);
-        ImageView tax = (ImageView) view.findViewById(R.id.tax);
-        ImageView law = (ImageView) view.findViewById(R.id.law);
-        ImageView finace = (ImageView) view.findViewById(R.id.finance);
-        ImageView money = (ImageView) view.findViewById(R.id.money);
-        ImageView economy = (ImageView) view.findViewById(R.id.economy);
-        ImageView global = (ImageView) view.findViewById(R.id.global);
-        ImageView myLibrary = (ImageView) view.findViewById(R.id.bookmark);
+        FrameLayout allNews = (FrameLayout) view.findViewById(R.id.allnews);
+        FrameLayout business = (FrameLayout) view.findViewById(R.id.business);
+        FrameLayout law = (FrameLayout) view.findViewById(R.id.law);
+        FrameLayout tech = (FrameLayout) view.findViewById(R.id.techno);
+        FrameLayout finace = (FrameLayout) view.findViewById(R.id.finance);
+        FrameLayout money = (FrameLayout) view.findViewById(R.id.money);
+        FrameLayout economy = (FrameLayout) view.findViewById(R.id.economy);
+        FrameLayout global = (FrameLayout) view.findViewById(R.id.global);
+        FrameLayout myLibrary = (FrameLayout) view.findViewById(R.id.library);
 
         categorySheet.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -435,6 +446,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 categoriesText.setVisibility(View.VISIBLE);
                 topRefreshButton.setVisibility(View.VISIBLE);
                 settings.setImageResource(R.drawable.ic_settings);
+                topBar.setBackgroundColor(Color.parseColor("#d2000000"));
             }
         });
 
@@ -471,7 +483,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(2);
                 categoryChosen = 2;
-                categoryChosenString = "Deals";
+                categoryChosenString = "Business";
                 reboot();
             }
         });
@@ -501,17 +513,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 5;
-                categoryChosenString = "Global";
-                reboot();
-            }
-        });
-
-        tax.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //setupViewPager(3);
-                categoryChosen = 6;
-                categoryChosenString = "Tax";
+                categoryChosenString = "World";
                 reboot();
             }
         });
@@ -519,9 +521,19 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         law.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //setupViewPager(3);
+                categoryChosen = 6;
+                categoryChosenString = "Law";
+                reboot();
+            }
+        });
+
+        tech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 //setupViewPager(5);
                 categoryChosen = 7;
-                categoryChosenString = "Startup";
+                categoryChosenString = "Technology";
                 reboot();
             }
         });

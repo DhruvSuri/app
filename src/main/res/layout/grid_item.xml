@@ -1,0 +1,40 @@
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardCornerRadius="0dp"
+    android:layout_marginBottom="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout6">
+
+        <ImageView
+            android:id="@+id/newsimage"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:contentDescription="@string/action_settings"
+            android:src="@drawable/placeholder"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text="Right to cancel the property dead if builder fails to deliver in three months"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textColor="#000"
+            android:layout_alignParentStart="false"
+            android:gravity="center"
+            android:layout_below="@+id/newsimage" />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

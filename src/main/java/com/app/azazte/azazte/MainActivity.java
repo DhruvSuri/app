@@ -62,10 +62,14 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+          // Intent intent = new Intent(getApplicationContext(),
+          //         NewUI.class);
+          //     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+          //     intent.putExtra("id", id);
+          //     startActivity(intent);
                 Intent intent = new Intent(getApplicationContext(),
-                        NewUI.class);
+                     HomeScreen.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("id", id);
                 startActivity(intent);
                 MainActivity.this.finish();
             }
