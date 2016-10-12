@@ -9,6 +9,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -28,6 +32,8 @@ import android.widget.TextView;
 
 import com.app.azazte.azazte.AzazteWebView;
 import com.app.azazte.azazte.Beans.Bubble;
+import com.app.azazte.azazte.Beans.BubblesAdapter;
+import com.app.azazte.azazte.Beans.HomeScreenAdapter;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
@@ -53,12 +59,11 @@ public class NewscardFragment extends Fragment {
 
     private static final String TWITTER = "TWITTER";
     NewsCard newsCard;
-
+    BubblesAdapter myadapter;
     ImageButton shareButton;
     RelativeLayout brand;
     private View inflateHolder;
-    private static String DASH = "-";
-    private static String REBRANDLY_DOMAIN = "https://www.rebrand.ly/finup-";
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -92,7 +97,6 @@ public class NewscardFragment extends Fragment {
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         inflateHolder = inflate;
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
-
 
         inflateView(inflate);
 
@@ -169,9 +173,9 @@ public class NewscardFragment extends Fragment {
             public void onClick(View v) {
                 impactMargin.setVisibility(View.VISIBLE);
                 summaryMargin.setVisibility(View.GONE);
-                summaryTab.setBackgroundColor(Color.parseColor("#87d8fd"));
-                impactTab.setBackgroundColor(Color.parseColor("#33b6f3"));
-                // newstxt.animate().alpha(1.0f).setDuration(500);
+                summaryTab.setBackgroundColor(Color.parseColor("#ad00bcd4"));
+                impactTab.setBackgroundColor(Color.parseColor("#009688"));
+               // summaryTab.animate().alpha(1.0f).setDuration(500);
                 newstxt.setText(newsCard.impact.trim());
 
 
@@ -185,9 +189,10 @@ public class NewscardFragment extends Fragment {
 
                 impactMargin.setVisibility(View.GONE);
                 summaryMargin.setVisibility(View.VISIBLE);
-                summaryTab.setBackgroundColor(Color.parseColor("#33b6f3"));
-                impactTab.setBackgroundColor(Color.parseColor("#87d8fd"));
-                //   newstxt.animate().alpha(0.0f).setDuration(500);
+                summaryTab.setBackgroundColor(Color.parseColor("#009688"));
+                impactTab.setBackgroundColor(Color.parseColor("#ad00bcd4"));
+            //   impactTab.animate().alpha(0.0f).setDuration(500);
+                newstxt.animate();
                 newstxt.setText(newsCard.newsBody.trim());
 
 
@@ -273,12 +278,15 @@ public class NewscardFragment extends Fragment {
     }
 
     private void setupBubbleListener(View inflate) {
-        Button twitter = (Button) inflate.findViewById(R.id.twitter);
-        int baseId = R.id.twitter;
+
+      //  Button twitter = (Button) inflate.findViewById(R.id.twitter);
+      //  int baseId = R.id.twitter;
         ArrayList<Bubble> bubbles = Connector.getInstance().getBubbles(newsCard.id);
         if (bubbles.size() == 0) {
             return;
         }
+
+
         String answer = bubbles.get(0).getAnswer();
         StringTokenizer tokenizer = new StringTokenizer(answer, ",");
         List<String> tokens = new ArrayList<>();
@@ -290,12 +298,24 @@ public class NewscardFragment extends Fragment {
             tokens.add(token);
         }
 
-        for (String channel : tokens) {
-            baseId = setupButton(channel, inflate, baseId);
-        }
+      // for (String channel : tokens) {
+      // //  baseId = setupButton(channel, inflate, baseId);
+      // }
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView bubbles_rv = (RecyclerView) inflate.findViewById(R.id.bubbles_rv);
+        bubbles_rv.setLayoutManager(layoutManager);
+        myadapter = new BubblesAdapter(tokens, newsCard.id , getContext(),getActivity(),inflate);
+        bubbles_rv.setItemAnimator(new DefaultItemAnimator());
+        bubbles_rv.setAdapter(myadapter);
+
+
+
+
     }
 
     private int setupButton(final String channel, View inflate, int baseId) {
+
         Button button = new Button(this.getContext());
         int drawable = this.getResources().getIdentifier(channel.toLowerCase(), "drawable", this.getContext().getPackageName());
         button.setBackground(this.getResources().getDrawable(drawable));
@@ -310,23 +330,17 @@ public class NewscardFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showquestiondialog(REBRANDLY_DOMAIN + channel.toUpperCase() + DASH + newsCard.id);
+             //   showquestiondialog(REBRANDLY_DOMAIN + channel.toUpperCase() + DASH + newsCard.id);
             }
         });
-        ((RelativeLayout) inflate.findViewById(R.id.bubbleRelativeLayout)).addView(button);
+      //  ((RelativeLayout) inflate.findViewById(R.id.bubbleRelativeLayout)).addView(button);
         return button.getId();
     }
 
-    private int intializeTwitter(View inflate) {
-        Button twitter = (Button) inflate.findViewById(R.id.twitter);
-        twitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showquestiondialog(REBRANDLY_DOMAIN + "twitter" + DASH + newsCard.id);
-            }
-        });
-        return twitter.getId();
-    }
+  //  private int intializeTwitter(View inflate) {
+  //     Button twitter = (Button) inflate.findViewById(R.id.twitter);
+  //
+  //  }
 
     private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
 //        final Button q6 = (Button) inflate.findViewById(R.id.q6); // Youtube
@@ -513,72 +527,17 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showquestiondialog(String url) {
-        final Dialog dialog = new Dialog(getContext(), R.style.dialog);
-        dialog.setContentView(R.layout.questiondialog);
-        RelativeLayout webLayout = (RelativeLayout) dialog.findViewById(R.id.webLayout);
-        RelativeLayout parent = (RelativeLayout) dialog.findViewById(R.id.parent);
-        RelativeLayout qnaLayout = (RelativeLayout) dialog.findViewById(R.id.qnaLayout);
-
-        parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        setUpWebview(dialog, url);
-        webLayout.setVisibility(View.VISIBLE);
-        dialog.show();
-    }
-
-
-    private void setUpWebview(Dialog dialog, String url) {
-
-        WebView webView = (WebView) dialog.findViewById(R.id.webView);
-        final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        webView.getSettings().setAppCacheEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        webView.loadUrl(url);
-
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                System.out.print("");
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return false;
-            }
-
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                // TODO Auto-generated method stub
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                // TODO Auto-generated method stub
-                super.onPageFinished(view, url);
-                progressBar.setVisibility(View.GONE);
-            }
-
-
-        });
-    }
 
     private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
 
 
-        Glide.with(this).load(imageUrl).into(imageView);
+        //Glide.with(this).load(imageUrl).into(imageView);
+         Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.placeholder) // can also be a drawable
+                .crossFade()
+                .into(imageView);
+
 
 //        if (imageUrl != null && !imageUrl.isEmpty()) {
 //            if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {

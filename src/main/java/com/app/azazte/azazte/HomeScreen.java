@@ -16,6 +16,7 @@ import com.app.azazte.azazte.Beans.HomeScreenAdapter;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
@@ -40,11 +41,13 @@ public class HomeScreen extends AppCompatActivity {
         FrameLayout headClick = (FrameLayout)findViewById(R.id.clickFrame);
         allNews = Connector.getInstance().getAllNews();
         setUpHead(headerImage,heading,headClick);
+        RecyclerViewHeader header = (RecyclerViewHeader) findViewById(R.id.header);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv);
         myadapter = new HomeScreenAdapter(allNews, this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(mLayoutManager);
+        header.attachTo(recyclerView);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(myadapter);
 

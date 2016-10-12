@@ -62,30 +62,16 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
         newsCard = allnews.get(position+1);
         holder.heading.setText(newsCard.newsHead);
         setImageIntoView(picasso, holder.newsImage, newsCard.imageUrl);
-        holder.heading.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context,
-                                NewUI.class);
-
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("id", newsCard.id);
-                context.startActivity(intent);
-
-            }
-        });
-
-
 
     }
 
     @Override
     public int getItemCount() {
-        return allnews.size();
+        return allnews.size()-1;
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView heading;
         public ImageView newsImage;
         public FrameLayout clickFrame;
@@ -93,9 +79,25 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
         public MyViewHolder(View itemView) {
             super(itemView);
 
-           // clickFrame = (FrameLayout) itemView.findViewById(R.id.click);
+        //    clickFrame = (FrameLayout) itemView.findViewById(R.id.clickFrame);
             newsImage = (ImageView) itemView.findViewById(R.id.newsimage);
             heading = (TextView) itemView.findViewById(R.id.headline);
+
+            newsImage.setOnClickListener(this);
+            heading.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            newsCard = allnews.get(getPosition()+1);
+            Intent intent = new Intent(context,
+                    NewUI.class);
+
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.putExtra("id", newsCard.id);
+            context.startActivity(intent);
 
         }
     }

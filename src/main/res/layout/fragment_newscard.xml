@@ -3,8 +3,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#E9EBEE"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#f9f9f9">
 
     <RelativeLayout
         android:id="@+id/newsc"
@@ -22,8 +22,8 @@
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:scaleType="fitXY"
+                android:layout_height="220dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/placeholder"
                 android:visibility="visible"
                 android:translationZ="3dp" />
@@ -34,9 +34,9 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/imageView2"
                 android:layout_marginBottom="3dp"
+                android:layout_marginTop="2dp"
                 android:elevation="5dp"
-                android:translationZ="5dp"
-                android:layout_marginTop="5dp">
+                android:translationZ="2dp">
 
 
                 <FrameLayout
@@ -65,7 +65,7 @@
                     card_view:cardCornerRadius="0dp"
                     android:layout_alignEnd="@+id/newsBody"
                     android:layout_toEndOf="@+id/summaryTab"
-                    android:backgroundTint="#87d8fd"
+                    android:backgroundTint="#ad00bcd4"
                     android:layout_alignParentBottom="false"
                     android:layout_below="@+id/summaryMargin">
 
@@ -82,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:text="Impact"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textSize="13dp"
+                            android:textSize="12dp"
                             tools:ignore="MissingPrefix"
                             fontPath="fonts/HelveticaNeueMedium.ttf"
                             android:typeface="serif"
@@ -91,7 +91,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginTop="7dp" />
+                            android:layout_marginTop="5dp" />
 
 
                     </RelativeLayout>
@@ -106,7 +106,7 @@
                     android:animateLayoutChanges="true"
                     android:layout_height="match_parent"
                     card_view:cardCornerRadius="0dp"
-                    android:backgroundTint="#33b6f3"
+                    android:backgroundTint="#009688"
                     android:layout_alignParentBottom="false"
                     android:layout_below="@+id/impactMargin">
 
@@ -123,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:text="Summary"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textSize="13dp"
+                            android:textSize="12dp"
                             tools:ignore="MissingPrefix"
                             fontPath="fonts/HelveticaNeueMedium.ttf"
                             android:typeface="serif"
@@ -132,7 +132,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="5dp" />
 
 
 
@@ -147,12 +147,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     card_view:cardCornerRadius="0dp"
-                    android:layout_marginTop="35dp">
+                    android:layout_marginTop="25dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#33b6f3"
-                        android:paddingTop="3dp">
+                        android:background="#009688"
+                        android:paddingTop="1dp">
 
                         <TextView
                             android:id="@+id/newstxt"
@@ -160,8 +160,8 @@
                             android:layout_height="wrap_content"
                             android:animateLayoutChanges="true"
                             android:lineSpacingExtra="3dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
                             android:paddingTop="5dp"
                             android:singleLine="false"
                             android:text="@string/newsinfo"
@@ -170,7 +170,6 @@
                             android:textIsSelectable="false"
                             android:textSize="15dp"
                             tools:ignore="MissingPrefix"
-                            android:textStyle="bold"
                             android:letterSpacing="0.06"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentBottom="true"
@@ -365,45 +364,20 @@
         <RelativeLayout
             android:id="@+id/bottombar"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="105dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentStart="false"
             android:visibility="visible"
-            android:padding="5dp">
+            android:gravity="center_horizontal">
 
-            <HorizontalScrollView
-                android:id="@+id/horizontalScrollView"
-                android:layout_width="match_parent"
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/bubbles_rv"
+                android:scrollbars="none"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:scrollbars="none">
-
-                <RelativeLayout
-                    android:id="@+id/bubbleRelativeLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <Button
-                        android:id="@+id/twitter"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/youtube"
-                        android:gravity="center"
-                        android:minLines="2"
-                        android:textColor="#ffffff"
-                        android:textSize="10dp"
-                        android:translationZ="0dp"
-                        android:textStyle="bold"
-                        android:elevation="0dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="2dp"
-                        android:layout_alignParentTop="false"
-                        android:layout_marginTop="0dp" />
-                </RelativeLayout>
-            </HorizontalScrollView>
+                android:visibility="visible"
+                android:elevation="2dp" />
 
         </RelativeLayout>
 
@@ -553,10 +527,18 @@
             android:visibility="visible"
             android:layout_alignParentBottom="true"
             android:layout_alignEnd="@+id/bookmark"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="25dp" />
+
 
 
     </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/blurFrame"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:background="#00ffffff"></FrameLayout>
+
 
 
 </RelativeLayout>

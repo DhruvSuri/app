@@ -718,4 +718,5 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
        }
 
     }
+
 }

@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout android:id="@+id/main_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+
     tools:context="com.app.azazte.azazte.HomeScreen"
-    android:background="#767676"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="#c3000000">
 
-    <include layout="@layout/topbar"></include>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/grid_item2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-
+    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:id="@+id/relativeLayout">
+            android:id="@+id/relativeLayout"
+            android:padding="2dp">
 
             <ImageView
                 android:id="@+id/headerImage"
@@ -58,16 +72,13 @@
 
         </RelativeLayout>
 
+        </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout" />
+    <include
+        layout="@layout/topbar"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" />
 
 </RelativeLayout>
 
-
+</android.support.design.widget.CoordinatorLayout>

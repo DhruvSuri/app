@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent"
     android:alpha="1"
-    android:background="#b1000000">
+    android:background="#00ffffff">
 
 
 
@@ -77,20 +77,44 @@
             android:layout_marginRight="10dp" />
     </RelativeLayout>
 
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/base"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:animateLayoutChanges="true"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="110dp"
+        android:layout_alignParentBottom="false"
+        android:elevation="10dp"
+        android:layout_below="@+id/qnaLayout"
+        android:layout_toEndOf="@+id/qnaLayout"
+        android:background="#ffffff"
+        android:backgroundTint="#ffffff">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
         android:id="@+id/webLayout"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="70dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        android:background="@drawable/curvedborder">
+
 
         <WebView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/webView"
+            android:background="@drawable/curvedborder"
             android:foregroundGravity="center_vertical"
             android:layout_gravity="center"
             android:visibility="visible" />
@@ -103,6 +127,6 @@
             android:id="@+id/progress" />
 
     </RelativeLayout>
-
+</android.support.v7.widget.CardView>
 
 </RelativeLayout>

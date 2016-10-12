@@ -57,11 +57,11 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowIsFloating">false</item>
-        <item name="android:windowAnimationStyle">@style/dialog.animation</item>
+      <item name="android:windowAnimationStyle">@style/dialog.animation</item>
     </style>
     <style name="dialog.animation">
-        <item name="android:windowEnterAnimation">@anim/fadein</item>
-        <item name="android:windowExitAnimation">@anim/fadeout</item>
+        <item name="android:windowEnterAnimation">@anim/growin</item>
+        <item name="android:windowExitAnimation">@anim/growout</item>
     </style>
 
     <style name="MyMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
