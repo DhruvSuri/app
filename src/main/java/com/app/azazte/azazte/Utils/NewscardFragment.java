@@ -273,13 +273,37 @@ public class NewscardFragment extends Fragment {
     }
 
     private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
-        final Button q6 = (Button) inflate.findViewById(R.id.q6);
-        final Button q7 = (Button) inflate.findViewById(R.id.q7);
-        final Button q8 = (Button) inflate.findViewById(R.id.q8);
-        final Button q9 = (Button) inflate.findViewById(R.id.q9);
-        final Button q10 = (Button) inflate.findViewById(R.id.q10);
-        LinearLayout linearLayout = (LinearLayout)inflate.findViewById(R.id.linearLayoutButtons);
+        final Button q6 = (Button) inflate.findViewById(R.id.q6); // Youtube
+        final Button q7 = (Button) inflate.findViewById(R.id.q7); // Twitter
+        final Button q8 = (Button) inflate.findViewById(R.id.q8); // QUORA
+        final Button q9 = (Button) inflate.findViewById(R.id.q9); // WIKI
+        final Button q10 = (Button) inflate.findViewById(R.id.q10); // Linkedin
+        if (bubbleList.size() == 0){
+            q6.setVisibility(View.INVISIBLE);
+            q7.setVisibility(View.INVISIBLE);
+            q8.setVisibility(View.INVISIBLE);
+            q9.setVisibility(View.INVISIBLE);
+            q10.setVisibility(View.INVISIBLE);
+            return;
+        }
 
+        Bubble bubble = bubbleList.get(0);
+        String list = bubble.getAnswer();
+        if (!list.contains("YOUTUBE")){
+            q6.setVisibility(View.INVISIBLE);
+        }
+        if (!list.contains("TWITTER")){
+            q7.setVisibility(View.INVISIBLE);
+        }
+        if (!list.contains("QUORA")){
+            q8.setVisibility(View.INVISIBLE);
+        }
+        if (!list.contains("WIKI")){
+            q9.setVisibility(View.INVISIBLE);
+        }
+        if (!list.contains("LINKEDIN")){
+            q10.setVisibility(View.INVISIBLE);
+        }
 
         q6.setOnClickListener(new View.OnClickListener() {
             @Override

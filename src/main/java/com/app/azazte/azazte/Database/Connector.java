@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.NewsCard;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,11 +150,11 @@ public class Connector extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public ArrayList<Bubble> getBubble(String storyId,String key){
+    public ArrayList<Bubble> getBubble(String storyId, String key) {
         ArrayList<Bubble> array_list = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from bubble where " + BUBBLE_STORY_ID + "=\"" + storyId + "\"" + "and "+ BUBBLE_KEY + "=\"" + key + "\"", null);
+        Cursor res = db.rawQuery("select * from bubble where " + BUBBLE_STORY_ID + "=\"" + storyId + "\"" + "and " + BUBBLE_KEY + "=\"" + key + "\"", null);
         res.moveToFirst();
         Bubble bubble;
         while (res.isAfterLast() == false) {
@@ -249,7 +248,9 @@ public class Connector extends SQLiteOpenHelper {
         }
     }
 
-    public void saveBubbles(List<Bubble> bubbleList) {
+    public void saveBubbles(List<Bubble> bubbleList, String storyId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM bubble where " + BUBBLE_STORY_ID + "=\"" + storyId + "\"");
         for (Bubble bubble : bubbleList) {
             insertBubble(bubble);
         }
