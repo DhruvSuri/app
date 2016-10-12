@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,11 +45,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import xdroid.toaster.Toaster;
 
 public class NewscardFragment extends Fragment {
 
+    private static final String TWITTER = "TWITTER";
     NewsCard newsCard;
 
     ImageButton shareButton;
@@ -261,9 +262,8 @@ public class NewscardFragment extends Fragment {
         });
 
 
-        ArrayList<Bubble> bubbles = Connector.getInstance().getBubbles(newsCard.id);
-        setupbubblelistners(inflate, bubbles);
-
+        setupBubbleListener(inflate);
+        //setupbubblelistners(inflate, bubbles);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -272,73 +272,140 @@ public class NewscardFragment extends Fragment {
         //setupbubblelistners(inflateHolder, bubbleList);
     }
 
-    private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
-        final Button q6 = (Button) inflate.findViewById(R.id.q6); // Youtube
-        final Button q7 = (Button) inflate.findViewById(R.id.q7); // Twitter
-        final Button q8 = (Button) inflate.findViewById(R.id.q8); // QUORA
-        final Button q9 = (Button) inflate.findViewById(R.id.q9); // WIKI
-        final Button q10 = (Button) inflate.findViewById(R.id.q10); // Linkedin
-        if (bubbleList.size() == 0){
-            q6.setVisibility(View.INVISIBLE);
-            q7.setVisibility(View.INVISIBLE);
-            q8.setVisibility(View.INVISIBLE);
-            q9.setVisibility(View.INVISIBLE);
-            q10.setVisibility(View.INVISIBLE);
+    private void setupBubbleListener(View inflate) {
+        Button twitter = (Button) inflate.findViewById(R.id.twitter);
+        int baseId = R.id.twitter;
+        ArrayList<Bubble> bubbles = Connector.getInstance().getBubbles(newsCard.id);
+        if (bubbles.size() == 0) {
             return;
         }
-
-        Bubble bubble = bubbleList.get(0);
-        String list = bubble.getAnswer();
-        if (!list.contains("YOUTUBE")){
-            q6.setVisibility(View.INVISIBLE);
-        }
-        if (!list.contains("TWITTER")){
-            q7.setVisibility(View.INVISIBLE);
-        }
-        if (!list.contains("QUORA")){
-            q8.setVisibility(View.INVISIBLE);
-        }
-        if (!list.contains("WIKI")){
-            q9.setVisibility(View.INVISIBLE);
-        }
-        if (!list.contains("LINKEDIN")){
-            q10.setVisibility(View.INVISIBLE);
+        String answer = bubbles.get(0).getAnswer();
+        StringTokenizer tokenizer = new StringTokenizer(answer, ",");
+        List<String> tokens = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()) {
+            String token = tokenizer.nextToken();
+//            if (token.equals(TWITTER)) {
+//                continue;
+//            }
+            tokens.add(token);
         }
 
-        q6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015", REBRANDLY_DOMAIN + "YOUTUBE" + DASH + newsCard.id, null);
-            }
-        });
+        for (String channel : tokens) {
+            baseId = setupButton(channel, inflate, baseId);
+        }
+    }
 
-        q7.setOnClickListener(new View.OnClickListener() {
+    private int setupButton(final String channel, View inflate, int baseId) {
+        Button button = new Button(this.getContext());
+        int drawable = this.getResources().getIdentifier(channel.toLowerCase(), "drawable", this.getContext().getPackageName());
+        button.setBackground(this.getResources().getDrawable(drawable));
+        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        if (baseId != 0){
+            params.addRule(RelativeLayout.RIGHT_OF, baseId);
+        }
+        params.width = 200;
+        params.height = 200;
+        params.setMargins(0, 0, 50, 0);
+        button.setLayoutParams(params);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts", REBRANDLY_DOMAIN + "TWITTER" + DASH + newsCard.id, null);
+                showquestiondialog(REBRANDLY_DOMAIN + channel.toUpperCase() + DASH + newsCard.id);
             }
         });
+        ((RelativeLayout) inflate.findViewById(R.id.bubbleRelativeLayout)).addView(button);
+        return button.getId();
+    }
 
-        q8.setOnClickListener(new View.OnClickListener() {
+    private int intializeTwitter(View inflate) {
+        Button twitter = (Button) inflate.findViewById(R.id.twitter);
+        twitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders", REBRANDLY_DOMAIN + "QUORA" + DASH + newsCard.id, null);
+                showquestiondialog(REBRANDLY_DOMAIN + "twitter" + DASH + newsCard.id);
             }
         });
+        return twitter.getId();
+    }
 
-        q9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showquestiondialog("Headquaters", "Global - Dubai.US - New York", REBRANDLY_DOMAIN + "WIKI" + DASH + newsCard.id, null);
-            }
-        });
+    private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
+//        final Button q6 = (Button) inflate.findViewById(R.id.q6); // Youtube
+//        final Button q7 = (Button) inflate.findViewById(R.id.q7); // Twitter
+//        Button twitterCopy = new Button(this.getContext());
+//        int drawable = this.getResources().getIdentifier("twitter", "drawable", this.getContext().getPackageName());
+//        twitterCopy.setBackground(this.getResources().getDrawable(drawable));
+//        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        params.addRule(RelativeLayout.RIGHT_OF, R.id.q9);
+//        params.width = 60;
+//        params.height = 60;
+//        twitterCopy.setLayoutParams(params);
+//        ((RelativeLayout) inflate.findViewById(R.id.bubbleRelativeLayout)).addView(twitterCopy);
 
-        q10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showquestiondialog("Headquaters", "Global - Dubai.US - New York", REBRANDLY_DOMAIN + "LINKEDIN" + DASH + newsCard.id, null);
-            }
-        });
+
+//        final Button q8 = (Button) inflate.findViewById(R.id.q8); // quora
+//        final Button q9 = (Button) inflate.findViewById(R.id.q9); // WIKI
+//        final Button q10 = (Button) inflate.findViewById(R.id.q10); // Linkedin
+//        if (bubbleList.size() == 0) {
+//            q6.setVisibility(View.INVISIBLE);
+//            q7.setVisibility(View.INVISIBLE);
+//            q8.setVisibility(View.INVISIBLE);
+//            q9.setVisibility(View.INVISIBLE);
+//            q10.setVisibility(View.INVISIBLE);
+//            return;
+//        }
+//
+//        Bubble bubble = bubbleList.get(0);
+//        String list = bubble.getAnswer();
+//        if (!list.contains("youtube")) {
+//            q6.setVisibility(View.INVISIBLE);
+//        }
+//        if (!list.contains("twitter")) {
+//            q7.setVisibility(View.INVISIBLE);
+//        }
+//        if (!list.contains("quora")) {
+//            q8.setVisibility(View.INVISIBLE);
+//        }
+//        if (!list.contains("WIKI")) {
+//            q9.setVisibility(View.INVISIBLE);
+//        }
+//        if (!list.contains("linkedin")) {
+//            q10.setVisibility(View.INVISIBLE);
+//        }
+//
+//        q6.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015", REBRANDLY_DOMAIN + "youtube" + DASH + newsCard.id, null);
+//            }
+//        });
+//
+//        q7.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts", REBRANDLY_DOMAIN + "twitter" + DASH + newsCard.id, null);
+//            }
+//        });
+//
+//        q8.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders", REBRANDLY_DOMAIN + "quora" + DASH + newsCard.id, null);
+//            }
+//        });
+//
+//        q9.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showquestiondialog("Headquaters", "Global - Dubai.US - New York", REBRANDLY_DOMAIN + "WIKI" + DASH + newsCard.id, null);
+//            }
+//        });
+//
+//        q10.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showquestiondialog("Headquaters", "Global - Dubai.US - New York", REBRANDLY_DOMAIN + "linkedin" + DASH + newsCard.id, null);
+//            }
+//        });
 
     }
 
@@ -446,7 +513,7 @@ public class NewscardFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showquestiondialog(String question, String answer, String url, String color) {
+    public void showquestiondialog(String url) {
         final Dialog dialog = new Dialog(getContext(), R.style.dialog);
         dialog.setContentView(R.layout.questiondialog);
         RelativeLayout webLayout = (RelativeLayout) dialog.findViewById(R.id.webLayout);
@@ -456,23 +523,12 @@ public class NewscardFragment extends Fragment {
         parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dialog.dismiss();
             }
         });
 
-
-        if (url != null) {
-            setUpWebview(dialog, url);
-            webLayout.setVisibility(View.VISIBLE);
-        } else {
-            qnaLayout.setBackgroundColor(Color.parseColor(color));
-            webLayout.setVisibility(View.INVISIBLE);
-            TextView questionView = (TextView) dialog.findViewById(R.id.bubbleQuestion);
-            questionView.setText(question);
-            TextView answerView = (TextView) dialog.findViewById(R.id.bubbleAnswer);
-            answerView.setText(answer);
-        }
+        setUpWebview(dialog, url);
+        webLayout.setVisibility(View.VISIBLE);
         dialog.show();
     }
 

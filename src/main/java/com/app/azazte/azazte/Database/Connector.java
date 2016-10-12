@@ -38,7 +38,7 @@ public class Connector extends SQLiteOpenHelper {
     private static final String BUBBLE_VALUE = "value";
     private static final String BUBBLE_STORY_ID = "storyId";
     private static final String BUBBLE_ID = "id";
-    private static final String BUBBLE_TWITTER = "TWITTER";
+    private static final String BUBBLE_TWITTER = "twitter";
 
     public static Connector connector;
 

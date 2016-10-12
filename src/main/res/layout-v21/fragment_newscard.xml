@@ -378,17 +378,18 @@
                 android:scrollbars="none">
 
                 <RelativeLayout
+                    android:id="@+id/bubbleRelativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:visibility="visible">
 
                     <Button
-                        android:id="@+id/q6"
+                        android:id="@+id/twitter"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/youtube"
+                        android:background="@drawable/twitter"
                         android:gravity="center"
                         android:minLines="2"
                         android:textColor="#ffffff"
@@ -401,86 +402,6 @@
                         android:layout_marginLeft="2dp"
                         android:layout_alignParentTop="false"
                         android:layout_marginTop="0dp" />
-
-                    <Button
-                        android:id="@+id/q7"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/twitter"
-                        android:gravity="center"
-                        android:minLines="2"
-                        android:textColor="#000"
-                        android:textSize="10dp"
-                        android:translationZ="0dp"
-                        android:textStyle="bold"
-                        android:elevation="0dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="2dp"
-                        android:layout_alignParentTop="false"
-                        android:layout_marginTop="0dp"
-                        android:layout_toRightOf="@+id/q6" />
-
-                    <Button
-                        android:id="@+id/q8"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/quora"
-                        android:gravity="center"
-                        android:minLines="2"
-                        android:textSize="10dp"
-                        android:translationZ="0dp"
-                        android:textStyle="bold"
-                        android:elevation="0dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="2dp"
-                        android:layout_alignParentTop="false"
-                        android:layout_marginTop="0dp"
-                        android:layout_toRightOf="@+id/q7" />
-
-                    <Button
-                        android:id="@+id/q9"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/wp"
-                        android:gravity="center"
-                        android:minLines="2"
-                        android:textColor="#000"
-                        android:textSize="10dp"
-                        android:translationZ="0dp"
-                        android:textStyle="bold"
-                        android:elevation="0dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="2dp"
-                        android:layout_alignParentTop="false"
-                        android:layout_marginTop="0dp"
-                        android:layout_toRightOf="@+id/q8" />
-
-                    <Button
-                        android:id="@+id/q10"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/linkedin"
-                        android:gravity="center"
-                        android:minLines="2"
-                        android:textColor="#000"
-                        android:textSize="10dp"
-                        android:translationZ="0dp"
-                        android:textStyle="bold"
-                        android:elevation="0dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_alignParentLeft="false"
-                        android:layout_marginLeft="2dp"
-                        android:layout_alignParentTop="false"
-                        android:layout_marginTop="0dp"
-                        android:layout_toRightOf="@+id/q9" />
-
                 </RelativeLayout>
             </HorizontalScrollView>
 
