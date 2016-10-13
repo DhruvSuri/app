@@ -11,7 +11,7 @@
     android:layout_height="match_parent"
 
     tools:context="com.app.azazte.azazte.HomeScreen"
-    android:background="#c3000000">
+    android:background="#bbbbbb">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
@@ -19,7 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/grid_item2"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp" />
 
     <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
         android:id="@+id/header"
@@ -74,10 +76,10 @@
 
         </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 
-    <include
+ <!--   <include
         layout="@layout/topbar"
         android:layout_width="wrap_content"
-        android:layout_height="50dp" />
+        android:layout_height="50dp" /> -->
 
 </RelativeLayout>
 
