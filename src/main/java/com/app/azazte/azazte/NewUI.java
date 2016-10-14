@@ -85,7 +85,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        reboot();
+        //reboot();
     }
 
     @Override
