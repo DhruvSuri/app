@@ -1,6 +1,5 @@
 package com.app.azazte.azazte.Utils;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -19,21 +17,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.azazte.azazte.AzazteWebView;
 import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.BubblesAdapter;
-import com.app.azazte.azazte.Beans.HomeScreenAdapter;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
@@ -63,7 +55,6 @@ public class NewscardFragment extends Fragment {
     ImageButton shareButton;
     RelativeLayout brand;
     private View inflateHolder;
-
 
 
     private OnFragmentInteractionListener mListener;
@@ -175,7 +166,7 @@ public class NewscardFragment extends Fragment {
                 summaryMargin.setVisibility(View.GONE);
                 summaryTab.setBackgroundColor(Color.parseColor("#ad00bcd4"));
                 impactTab.setBackgroundColor(Color.parseColor("#009688"));
-               // summaryTab.animate().alpha(1.0f).setDuration(500);
+                // summaryTab.animate().alpha(1.0f).setDuration(500);
                 newstxt.setText(newsCard.impact.trim());
 
 
@@ -191,7 +182,7 @@ public class NewscardFragment extends Fragment {
                 summaryMargin.setVisibility(View.VISIBLE);
                 summaryTab.setBackgroundColor(Color.parseColor("#009688"));
                 impactTab.setBackgroundColor(Color.parseColor("#ad00bcd4"));
-            //   impactTab.animate().alpha(0.0f).setDuration(500);
+                //   impactTab.animate().alpha(0.0f).setDuration(500);
                 newstxt.animate();
                 newstxt.setText(newsCard.newsBody.trim());
 
@@ -279,165 +270,26 @@ public class NewscardFragment extends Fragment {
 
     private void setupBubbleListener(View inflate) {
 
-      //  Button twitter = (Button) inflate.findViewById(R.id.twitter);
-      //  int baseId = R.id.twitter;
         ArrayList<Bubble> bubbles = Connector.getInstance().getBubbles(newsCard.id);
         if (bubbles.size() == 0) {
             return;
         }
-
 
         String answer = bubbles.get(0).getAnswer();
         StringTokenizer tokenizer = new StringTokenizer(answer, ",");
         List<String> tokens = new ArrayList<>();
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
-//            if (token.equals(TWITTER)) {
-//                continue;
-//            }
             tokens.add(token);
         }
 
-      // for (String channel : tokens) {
-      // //  baseId = setupButton(channel, inflate, baseId);
-      // }
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView bubbles_rv = (RecyclerView) inflate.findViewById(R.id.bubbles_rv);
         bubbles_rv.setLayoutManager(layoutManager);
-        myadapter = new BubblesAdapter(tokens, newsCard.id , getContext(),getActivity(),inflate);
+        myadapter = new BubblesAdapter(tokens, newsCard.id, getContext(), getActivity(), inflate);
         bubbles_rv.setItemAnimator(new DefaultItemAnimator());
         bubbles_rv.setAdapter(myadapter);
-
-
-
-
-    }
-
-    private int setupButton(final String channel, View inflate, int baseId) {
-
-        Button button = new Button(this.getContext());
-        int drawable = this.getResources().getIdentifier(channel.toLowerCase(), "drawable", this.getContext().getPackageName());
-        button.setBackground(this.getResources().getDrawable(drawable));
-        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        if (baseId != 0){
-            params.addRule(RelativeLayout.RIGHT_OF, baseId);
-        }
-        params.width = 200;
-        params.height = 200;
-        params.setMargins(0, 0, 50, 0);
-        button.setLayoutParams(params);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             //   showquestiondialog(REBRANDLY_DOMAIN + channel.toUpperCase() + DASH + newsCard.id);
-            }
-        });
-      //  ((RelativeLayout) inflate.findViewById(R.id.bubbleRelativeLayout)).addView(button);
-        return button.getId();
-    }
-
-  //  private int intializeTwitter(View inflate) {
-  //     Button twitter = (Button) inflate.findViewById(R.id.twitter);
-  //
-  //  }
-
-    private void setupbubblelistners(View inflate, final List<Bubble> bubbleList) {
-//        final Button q6 = (Button) inflate.findViewById(R.id.q6); // Youtube
-//        final Button q7 = (Button) inflate.findViewById(R.id.q7); // Twitter
-//        Button twitterCopy = new Button(this.getContext());
-//        int drawable = this.getResources().getIdentifier("twitter", "drawable", this.getContext().getPackageName());
-//        twitterCopy.setBackground(this.getResources().getDrawable(drawable));
-//        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        params.addRule(RelativeLayout.RIGHT_OF, R.id.q9);
-//        params.width = 60;
-//        params.height = 60;
-//        twitterCopy.setLayoutParams(params);
-//        ((RelativeLayout) inflate.findViewById(R.id.bubbleRelativeLayout)).addView(twitterCopy);
-
-
-//        final Button q8 = (Button) inflate.findViewById(R.id.q8); // quora
-//        final Button q9 = (Button) inflate.findViewById(R.id.q9); // WIKI
-//        final Button q10 = (Button) inflate.findViewById(R.id.q10); // Linkedin
-//        if (bubbleList.size() == 0) {
-//            q6.setVisibility(View.INVISIBLE);
-//            q7.setVisibility(View.INVISIBLE);
-//            q8.setVisibility(View.INVISIBLE);
-//            q9.setVisibility(View.INVISIBLE);
-//            q10.setVisibility(View.INVISIBLE);
-//            return;
-//        }
-//
-//        Bubble bubble = bubbleList.get(0);
-//        String list = bubble.getAnswer();
-//        if (!list.contains("youtube")) {
-//            q6.setVisibility(View.INVISIBLE);
-//        }
-//        if (!list.contains("twitter")) {
-//            q7.setVisibility(View.INVISIBLE);
-//        }
-//        if (!list.contains("quora")) {
-//            q8.setVisibility(View.INVISIBLE);
-//        }
-//        if (!list.contains("WIKI")) {
-//            q9.setVisibility(View.INVISIBLE);
-//        }
-//        if (!list.contains("linkedin")) {
-//            q10.setVisibility(View.INVISIBLE);
-//        }
-//
-//        q6.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showquestiondialog("Why such valuation", "Profitable business with $230 million in revenue in 2015", REBRANDLY_DOMAIN + "youtube" + DASH + newsCard.id, null);
-//            }
-//        });
-//
-//        q7.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showquestiondialog("Why bought", "Chinese ad-tech space lags behind US counterparts", REBRANDLY_DOMAIN + "twitter" + DASH + newsCard.id, null);
-//            }
-//        });
-//
-//        q8.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showquestiondialog("Startup billionaires", "Flipkart ,Sanpdeal ,Infosys ,Paytm and Ola founders", REBRANDLY_DOMAIN + "quora" + DASH + newsCard.id, null);
-//            }
-//        });
-//
-//        q9.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showquestiondialog("Headquaters", "Global - Dubai.US - New York", REBRANDLY_DOMAIN + "WIKI" + DASH + newsCard.id, null);
-//            }
-//        });
-//
-//        q10.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showquestiondialog("Headquaters", "Global - Dubai.US - New York", REBRANDLY_DOMAIN + "linkedin" + DASH + newsCard.id, null);
-//            }
-//        });
-
-    }
-
-
-    public String getBubbleResponse(String sourceString) {
-        ArrayList<Bubble> source = Connector.getInstance().getBubble(newsCard.id, sourceString);
-        if (source.size() == 0) {
-            return "finup.in";
-        }
-        return source.get(0).getAnswer();
-    }
-
-    private void fillBubblesDummyData(List<Bubble> bubbleList) {
-        bubbleList.add(new Bubble());
-        bubbleList.add(new Bubble());
-        bubbleList.add(new Bubble());
-        bubbleList.add(new Bubble());
-        bubbleList.add(new Bubble());
     }
 
 
@@ -532,28 +384,11 @@ public class NewscardFragment extends Fragment {
 
 
         //Glide.with(this).load(imageUrl).into(imageView);
-         Glide.with(this)
+        Glide.with(this)
                 .load(imageUrl)
                 .placeholder(R.drawable.placeholder) // can also be a drawable
                 .crossFade()
                 .into(imageView);
-
-
-//        if (imageUrl != null && !imageUrl.isEmpty()) {
-//            if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
-//                imageView.setImageResource(R.drawable.placeholder);
-//            } else {
-//                Picasso.with(imageView.getContext().getApplicationContext())
-//                        .load(imageUrl)
-//                        .placeholder(R.drawable.placeholder)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .resize(250, 350)
-//                        .into(imageView);
-//            }
-
-        //picasso.load(imageUrl).noFade().placeholder(R.drawable.placeholder).resize(300, 300).into(imageView);
-        //picasso.getSnapshot().dump();
-        //}
     }
 
 

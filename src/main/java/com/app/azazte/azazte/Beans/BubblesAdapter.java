@@ -3,8 +3,6 @@ package com.app.azazte.azazte.Beans;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -12,31 +10,21 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
 import com.app.azazte.azazte.Utils.BlurBuilder;
-import com.app.azazte.azazte.Utils.NewscardFragment;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import xdroid.toaster.Toaster;
 
 import static xdroid.core.Global.getResources;
 
@@ -55,9 +43,6 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     LayoutInflater inflater;
     private static String DASH = "-";
     private static String REBRANDLY_DOMAIN = "https://www.rebrand.ly/finup-";
-
-
-
 
 
     public BubblesAdapter(List<String> tokens, String id, Context context, FragmentActivity activity, View inflate) {
@@ -83,20 +68,26 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         channel = tokens.get(position);
+        int drawable = getResources().getIdentifier(channel.toLowerCase(), "drawable", context.getPackageName());
+        holder.bubbles.setBackgroundResource(drawable);
 
-      switch (channel){
-
-          case "QUORA" :holder.bubbles.setBackgroundResource(R.drawable.quora);
-              break;
-          case "YOUTUBE" : holder.bubbles.setBackgroundResource(R.drawable.youtube);
-              break;
-          case "TWITTER" :holder.bubbles.setBackgroundResource(R.drawable.twitter);
-              break;
-          case "WIKI" :holder.bubbles.setBackgroundResource(R.drawable.wp);
-              break;
-          default: holder.bubbles.setBackgroundResource(R.drawable.info);
-      }
-
+//        switch (channel) {
+//
+//            case "QUORA":
+//                holder.bubbles.setBackgroundResource(R.drawable.quora);
+//                break;
+//            case "YOUTUBE":
+//                holder.bubbles.setBackgroundResource(R.drawable.youtube);
+//                break;
+//            case "TWITTER":
+//                holder.bubbles.setBackgroundResource(R.drawable.twitter);
+//                break;
+//            case "WIKI":
+//                holder.bubbles.setBackgroundResource(R.drawable.wiki);
+//                break;
+//            default:
+//                holder.bubbles.setBackgroundResource(R.drawable.info);
+//        }
 
 
     }
@@ -107,12 +98,12 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-       public ImageButton bubbles;
+        public ImageButton bubbles;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-           bubbles = (ImageButton) itemView.findViewById(R.id.bubbleIcon);
+            bubbles = (ImageButton) itemView.findViewById(R.id.bubbleIcon);
             bubbles.setOnClickListener(this);
 
         }
@@ -127,9 +118,9 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
 
 
     public void showquestiondialog(String url) {
-       Bitmap map=takeScreenShot(activity);
-        Bitmap blurmap = BlurBuilder.blur( activity, map );
-        final Drawable draw=new BitmapDrawable(getResources(),blurmap);
+        Bitmap map = takeScreenShot(activity);
+        Bitmap blurmap = BlurBuilder.blur(activity, map);
+        final Drawable draw = new BitmapDrawable(getResources(), blurmap);
         final Dialog dialog = new Dialog(context, R.style.dialog);
         dialog.setContentView(R.layout.questiondialog);
         final FrameLayout blur = (FrameLayout) inflate.findViewById(R.id.blurFrame);
@@ -150,7 +141,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
         webLayout.setVisibility(View.VISIBLE);
         dialog.show();
         blur.setBackground(draw);
-       // parent.setBackground(draw);
+        // parent.setBackground(draw);
     }
 
 
@@ -196,8 +187,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
         });
     }
 
-    private static Bitmap takeScreenShot(Activity activity)
-    {
+    private static Bitmap takeScreenShot(Activity activity) {
         View view = activity.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
@@ -207,7 +197,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
         int statusBarHeight = frame.top;
         int width = activity.getWindowManager().getDefaultDisplay().getWidth();
         int height = activity.getWindowManager().getDefaultDisplay().getHeight();
-        Bitmap blur = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height  - statusBarHeight);
+        Bitmap blur = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height - statusBarHeight);
         view.destroyDrawingCache();
         return blur;
     }
