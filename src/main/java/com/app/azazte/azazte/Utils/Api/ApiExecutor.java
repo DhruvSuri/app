@@ -61,7 +61,6 @@ public class ApiExecutor {
                 if (newsCardWrapper.newsCardList.size() > 0) {
                     List<NewsCard> newsCardList = newsCardWrapper.newsCardList;
                     Connector.getInstance().saveNewsInDb(newsCardList);
-                    Toaster.toast("Refreshed News");
                     EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
                 }
             }

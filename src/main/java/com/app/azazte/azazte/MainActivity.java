@@ -20,9 +20,14 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Event.MessageEvent;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.crashlytics.android.Crashlytics;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -30,12 +35,29 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class MainActivity extends AppCompatActivity {
 
     public static String emailAddress = "";
-    private static Menu optionsMenu;
+    String id;
 
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         Window window = getWindow();
         window.setFormat(PixelFormat.RGBA_8888);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        startSplashScreen();
     }
 
 
@@ -54,26 +76,35 @@ public class MainActivity extends AppCompatActivity {
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
 
         init();
-        StartSplashScreen(id);
+        this.id = id;
     }
 
-    private void StartSplashScreen(final String id) {
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-          // Intent intent = new Intent(getApplicationContext(),
-          //         NewUI.class);
-          //     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-          //     intent.putExtra("id", id);
-          //     startActivity(intent);
-                Intent intent = new Intent(getApplicationContext(),
-                     HomeScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
-                MainActivity.this.finish();
-            }
-        }, 2000);
+
+    private void startSplashScreen() {
+
+
+        Intent intent = new Intent(getApplicationContext(),
+                HomeScreen.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        MainActivity.this.finish();
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//          // Intent intent = new Intent(getApplicationContext(),
+//          //         NewUI.class);
+//          //     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//          //     intent.putExtra("id", id);
+//          //     startActivity(intent);
+////                Intent intent = new Intent(getApplicationContext(),
+////                     HomeScreen.class);
+////                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+////                startActivity(intent);
+////                MainActivity.this.finish();
+//            }
+//        }, 2000);
 
     }
 
