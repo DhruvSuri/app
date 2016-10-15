@@ -9,6 +9,7 @@ import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -65,11 +66,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String id = this.getIntent().getStringExtra("id");
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/HelveticaNeue.tff")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
         setContentView(R.layout.activity_main);
        // animate();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
