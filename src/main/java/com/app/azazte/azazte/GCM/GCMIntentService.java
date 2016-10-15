@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -17,6 +18,10 @@ import com.app.azazte.azazte.R;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Created by sprinklr on 24/03/16.
@@ -80,13 +85,30 @@ public class GCMIntentService extends IntentService {
                 intent, 0);
         MixPanelUtils.track(MixPanelUtils.NOTIFICATION);
         MixPanelUtils.track(MixPanelUtils.NOTIFICATION + msg);
+        NotificationCompat.Style finalStyle;
+        NotificationCompat.BigPictureStyle notiStyle = new NotificationCompat.BigPictureStyle();
+        notiStyle.setSummaryText(msg);
+        try {
+            String imageUrl = notificationObject.getImageUrl();
+            if (imageUrl == null){
+                throw new Exception("Image not found");
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
+            notiStyle.bigPicture(bitmap);
+            finalStyle = notiStyle;
+        } catch (Exception e) {
+            e.printStackTrace();
+            finalStyle = new NotificationCompat.BigTextStyle().bigText(msg);
+        }
+
+
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
                         .setAutoCancel(true)
                         .setSmallIcon(R.drawable.notification)
                         .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.icon))
                         .setContentTitle(FINUP)
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
+                        .setStyle(finalStyle)
                         .setContentText(msg)
                         .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         mBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);

@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -139,7 +141,16 @@ public class NewscardFragment extends Fragment {
         newshead.setText(newsCard.newsHead.trim());
         newstxt.setText(newsCard.newsBody.trim());
         newsSource.setText(newsCard.newsSourceName.trim());
-        date.setText(newsCard.date.trim());
+
+        long time = 0;
+        if (newsCard.createdTimeEpoch == null) {
+            time = new Date(newsCard.date).getTime();
+        } else {
+            time = newsCard.createdTimeEpoch;
+        }
+
+        date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
+
         author.setText(newsCard.author.trim());
         if (newsCard.impactLabel != null) {
             impactLabel.setText(newsCard.impactLabel);

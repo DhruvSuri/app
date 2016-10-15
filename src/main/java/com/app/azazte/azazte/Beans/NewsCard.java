@@ -12,22 +12,11 @@ public class NewsCard {
     public String newsSourceUrl;
     public String newsSourceName;
     public int isBookmarked;
+    public Long createdTimeEpoch;
     public String date;
     public String category;
     public String author;
     public String impact;
     public String impactLabel;
     public String sentiment;
-
-
-    public NewsCard() {
-    }
-
-    public NewsCard(String id, String imageUrl, String newsHead, String newsBody, String newsSource) {
-        this.newsSourceUrl = newsSource;
-        this.newsHead = newsHead;
-        this.newsBody = newsBody;
-        this.imageUrl = imageUrl;
-        this.id = id;
-    }
 }
