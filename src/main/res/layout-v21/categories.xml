@@ -9,28 +9,58 @@
     android:contextClickable="false"
     android:orientation="vertical"
     android:touchscreenBlocksFocus="true"
-    android:background="#00f44336">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Categories"
-        android:id="@+id/textView8"
-        android:textColor="#ffffff"
-        android:textSize="15sp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="40dp"
-        android:layout_toRightOf="@+id/categories"
+    android:background="#b9ff1100">
+    <RelativeLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/topBar"
+        android:background="#000000"
+        android:visibility="visible"
         android:layout_alignParentBottom="false"
-        android:visibility="visible" />
+        android:focusable="false"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:elevation="10dp"
+        android:translationZ="5dp">
 
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/back"
+            android:src="@drawable/backarrow"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Categories"
+            android:id="@+id/categoriesTextMenu"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/back"
+            android:layout_alignParentBottom="false" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/settings"
+            android:src="@drawable/ic_settings"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="2dp"
+            android:layout_marginRight="10dp" />
+
+
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="false"
 
-        android:background="#E9EBEE"
+        android:background="#ffffff"
         android:layout_marginTop="50dp">
 
         <RelativeLayout
@@ -62,8 +92,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="MONEY"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
+                    android:textStyle="bold"
                     android:id="@+id/textView38"
                     android:layout_alignParentTop="false"
                     android:layout_centerInParent="true"
@@ -113,8 +143,8 @@
                     android:textSize="15dp"
                     android:background="@drawable/border"
                     android:padding="5dp"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
+                    android:textStyle="bold"
                     android:translationZ="5dp" />
 
                 <FrameLayout
@@ -149,8 +179,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="LAW"
                     android:id="@+id/textView39"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
+                    android:textStyle="bold"
                     android:layout_alignParentTop="false"
                     android:layout_centerInParent="true"
                     android:textColor="#ffffff"
@@ -191,8 +221,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="BUSINESS"
                     android:id="@+id/textView37"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
+                    android:textStyle="bold"
                     android:layout_alignParentTop="false"
                     android:layout_centerInParent="true"
                     android:textColor="#ffffff"
@@ -233,8 +263,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="FINANCE"
                     android:id="@+id/textView36"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
+                    android:textStyle="bold"
                     android:layout_alignParentTop="false"
                     android:layout_centerInParent="true"
                     android:textColor="#ffffff"
@@ -275,14 +305,14 @@
                     android:text="ALL NEWS"
                     android:id="@+id/textView4"
                     android:layout_alignParentTop="false"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
                     android:layout_centerInParent="true"
                     android:textColor="#ffffff"
                     android:textSize="15dp"
                     android:background="@drawable/border"
                     android:padding="5dp"
-                    android:translationZ="5dp" />
+                    android:translationZ="5dp"
+                    android:textStyle="bold" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -318,8 +348,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="TECHNOLOGY"
                     android:id="@+id/textView41"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
+                    android:textStyle="bold"
                     android:layout_alignParentTop="false"
                     android:layout_centerInParent="true"
                     android:textColor="#ffffff"
@@ -359,8 +389,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="MY LIBRARY"
                     android:id="@+id/textView42"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
+                    android:textStyle="bold"
                     android:layout_alignParentTop="false"
                     android:layout_centerInParent="true"
                     android:textColor="#ffffff"
@@ -397,8 +427,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fontPath="fonts/HelveticaNeueLight.ttf"
-                    tools:ignore="MissingPrefix"
+                  
+                    android:textStyle="bold"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="ECONOMY"
                     android:id="@+id/textView13"
@@ -432,6 +462,15 @@
         android:layout_height="50dp"
         android:id="@+id/close"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toStartOf="@+id/settingfilter" />
+
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toEndOf="@+id/refreshfilter"
+        android:layout_alignParentTop="true"
+        android:id="@+id/settingfilter"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="true"></FrameLayout>
 
 </RelativeLayout>
