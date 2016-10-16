@@ -5,11 +5,11 @@
 
     <ImageButton
         android:layout_width="75dp"
-        android:layout_height="102dp"
+        android:layout_height="100dp"
         android:id="@+id/bubbleIcon"
         android:background="@drawable/twitter"
-        android:elevation="10dp"
         android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:translationZ="5dp" />
 </RelativeLayout>

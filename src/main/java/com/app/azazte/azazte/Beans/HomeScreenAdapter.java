@@ -49,7 +49,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.grid_item2, parent, false);
+        View itemView = inflater.inflate(R.layout.grid_item, parent, false);
 
         MyViewHolder holder = new MyViewHolder(itemView);
 
@@ -60,7 +60,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         newsCard = allnews.get(position+1);
-        holder.heading.setText(newsCard.newsHead);
+        holder.heading.setText(newsCard.newsHead.trim());
         setImageIntoView(picasso, holder.newsImage, newsCard.imageUrl);
 
     }
