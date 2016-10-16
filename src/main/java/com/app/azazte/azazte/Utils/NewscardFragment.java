@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -146,7 +147,7 @@ public class NewscardFragment extends Fragment {
         if (newsCard.createdTimeEpoch == null) {
             time = new Date(newsCard.date).getTime();
         } else {
-            time = newsCard.createdTimeEpoch;
+            time = Long.valueOf(newsCard.createdTimeEpoch);
         }
 
         date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));

@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,7 +40,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import xdroid.toaster.Toaster;
 
@@ -64,7 +61,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     ImageView imageView;
     ImageView topRefreshButton;
     TextView categoriesText;
-    int backPressed = 0 ;
+    int backPressed = 0;
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
     private int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -91,15 +88,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        final PackageManager pm = getPackageManager();
-//        //get a list of installed apps.
-//        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        final PackageManager pm = getPackageManager();
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/HelveticaNeue.tff")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
         instance = this;
         String categoryName;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -117,7 +107,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         findViewById(R.id.notification);
         setListeners();
         int category = getIntent().getIntExtra("category", 0);
-        int newsPostion = getNewsPosition(this.getIntent());
+        int newsPostion = getNewsPosition(this.getIntent().getStringExtra("id"),category);
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         if (category == 0) {
             categoryName = "All News";
@@ -148,9 +138,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         dialog.show();
     }
 
-    private int getNewsPosition(Intent intent) {
-        String id = intent.getStringExtra("id");
-        ArrayList<NewsCard> allNews = Connector.getInstance().getAllNews();
+    private int getNewsPosition(String id,Integer category) {
+        ArrayList<NewsCard> allNews = Connector.getInstance().getAllNewsByCategory(category);
         int position = 0;
         for (NewsCard news : allNews) {
             if (news.id.equals(id)) {
@@ -170,30 +159,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         final FrameLayout topfilter = (FrameLayout) findViewById(R.id.topfilter);
         FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
-        final FrameLayout settingsfilter = (FrameLayout) findViewById(R.id.settingfilter);
 
-        assert settingsfilter != null;
-        settingsfilter.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-             //  categoriesText.setVisibility(View.INVISIBLE);
-             //  topRefreshButton.setVisibility(View.INVISIBLE);
-             //  settings.setImageResource(R.drawable.close);
-             //  categoriesButton.setImageResource(R.drawable.ic_settings);
-                Intent intent = new Intent(getApplicationContext(),
-                        HomeScreen.class);
-
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            //    intent.putExtra("id", id);
-                startActivity(intent);
-
-
-              //  openSettings();
-
-
-            }
-        });
+        final FrameLayout homeFilter = (FrameLayout) findViewById(R.id.homeFilter);
 
 
         topfilter.setOnClickListener(new View.OnClickListener() {
@@ -201,12 +168,22 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 categoriesText.setVisibility(View.INVISIBLE);
                 topRefreshButton.setVisibility(View.INVISIBLE);
-                settings.setImageResource(R.drawable.close);
-                topBar.setBackgroundColor(Color.parseColor("#1E88E5"));
+                // settings.setImageResource(R.drawable.ic_settings);
+                //  topBar.setBackgroundColor(Color.parseColor("#1E88E5"));
                 openCategory();
             }
         });
 
+        homeFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(),
+                        HomeScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
 
         refreshfilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,6 +227,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         ImageView write = (ImageView) view.findViewById(R.id.write);
         ImageView feedback = (ImageView) view.findViewById(R.id.feedback);
         FrameLayout close = (FrameLayout) view.findViewById(R.id.close);
+        FrameLayout homefilter = (FrameLayout) view.findViewById(R.id.homeFilter);
 
         if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
             notification.setImageResource(R.drawable.bell);
@@ -263,23 +241,32 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             imageView.setImageResource(R.drawable.imageon);
         }
 
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingSheet.dismiss();
+            }
+        });
+
+        homefilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(),
+                        HomeScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
 
         settingSheet.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                categoriesText.setVisibility(View.VISIBLE);
-                topRefreshButton.setVisibility(View.VISIBLE);
-                categoriesButton.setImageResource(R.drawable.ic_menu);
-                settings.setImageResource(R.drawable.ic_settings);
+                // categoriesText.setVisibility(View.VISIBLE);
+                //  topRefreshButton.setVisibility(View.VISIBLE);
+                //  categoriesButton.setImageResource(R.drawable.ic_menu);
+                //  settings.setImageResource(R.drawable.ic_settings);
 
-            }
-        });
-
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                settingSheet.dismiss();
             }
         });
 
@@ -428,7 +415,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         categorySheet.setCancelable(true);
         categorySheet.getWindow().setGravity(Gravity.LEFT);
         categorySheet.show();
-
+        final FrameLayout settingsfilter = (FrameLayout) view.findViewById(R.id.settingfilter);
         FrameLayout close = (FrameLayout) view.findViewById(R.id.close);
         FrameLayout allNews = (FrameLayout) view.findViewById(R.id.allnews);
         FrameLayout business = (FrameLayout) view.findViewById(R.id.business);
@@ -445,8 +432,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onDismiss(DialogInterface dialog) {
                 categoriesText.setVisibility(View.VISIBLE);
                 topRefreshButton.setVisibility(View.VISIBLE);
-                settings.setImageResource(R.drawable.ic_settings);
-                topBar.setBackgroundColor(Color.parseColor("#d2000000"));
+                //   settings.setImageResource(R.drawable.home);
+                // topBar.setBackgroundColor(Color.parseColor("#d2000000"));
             }
         });
 
@@ -457,6 +444,20 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 categorySheet.dismiss();
             }
         });
+
+
+        settingsfilter.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                //  categorySheet.dismiss();
+                openSettings();
+
+
+            }
+        });
+
 
         allNews.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -572,9 +573,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                     topRefreshButton.setImageResource(R.drawable.refresh);
                 } else {
                     topRefreshButton.setImageResource(R.drawable.top);
-
                 }
-
             }
 
             @Override
@@ -657,7 +656,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         super.onRestart();
     }
 
-    public void reboot(){
+    public void reboot() {
         Intent intent = new Intent(this, NewUI.class);
         intent.putExtra("category", categoryChosen);
         intent.putExtra("categoryChosenString", categoryChosenString);
@@ -699,23 +698,21 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Override
     protected void onResume() {
-        backPressed=0;
+        backPressed = 0;
         super.onResume();
     }
 
     @Override
     public void onBackPressed() {
-       if(viewPager.getCurrentItem()>0) {
-           viewPager.setCurrentItem(0);
-       }
-
-        else {
-           Toaster.toast("press again to exit");
-           backPressed++;
-           if(backPressed>1){
-               moveTaskToBack(true);
-           }
-       }
+        if (viewPager.getCurrentItem() > 0) {
+            viewPager.setCurrentItem(0);
+        } else {
+            Toaster.toast("press again to exit");
+            backPressed++;
+            if (backPressed > 1) {
+                moveTaskToBack(true);
+            }
+        }
 
     }
 

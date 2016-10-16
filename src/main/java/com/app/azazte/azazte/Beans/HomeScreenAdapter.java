@@ -6,16 +6,10 @@ package com.app.azazte.azazte.Beans;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Movie;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
-
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.LayoutInflater;
- import android.view.View;
- import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,10 +17,8 @@ import android.widget.TextView;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.MyViewHolder> {
 
@@ -34,22 +26,21 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
     NewsCard newsCard;
     Context context;
     LayoutInflater inflater;
-    Picasso picasso;
+    String categoryName;
+    int category;
 
 
-
-
-
-    public HomeScreenAdapter(ArrayList<NewsCard>  allnews, Context context) {
+    public HomeScreenAdapter(ArrayList<NewsCard> allnews, int category, String categoryName, Context context) {
         this.allnews = allnews;
         this.context = context;
-
+        this.categoryName = categoryName;
+        this.category = category;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.grid_item2, parent, false);
+        View itemView = inflater.inflate(R.layout.grid_item, parent, false);
 
         MyViewHolder holder = new MyViewHolder(itemView);
 
@@ -59,15 +50,14 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        newsCard = allnews.get(position+1);
-        holder.heading.setText(newsCard.newsHead);
-        setImageIntoView(picasso, holder.newsImage, newsCard.imageUrl);
-
+        newsCard = allnews.get(position);
+        holder.heading.setText(newsCard.newsHead.trim());
+        setImageIntoView(holder.newsImage, newsCard.imageUrl);
     }
 
     @Override
     public int getItemCount() {
-        return allnews.size()-1;
+        return allnews.size();
     }
 
 
@@ -79,7 +69,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
         public MyViewHolder(View itemView) {
             super(itemView);
 
-        //    clickFrame = (FrameLayout) itemView.findViewById(R.id.clickFrame);
+            //    clickFrame = (FrameLayout) itemView.findViewById(R.id.clickFrame);
             newsImage = (ImageView) itemView.findViewById(R.id.newsimage);
             heading = (TextView) itemView.findViewById(R.id.headline);
 
@@ -91,17 +81,20 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
         @Override
         public void onClick(View v) {
 
-            newsCard = allnews.get(getPosition()+1);
+            newsCard = allnews.get(getPosition());
             Intent intent = new Intent(context,
                     NewUI.class);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             intent.putExtra("id", newsCard.id);
+            intent.putExtra("category",category);
+            intent.putExtra("categoryChosenString", categoryName);
             context.startActivity(intent);
 
         }
     }
-    private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
+
+    private void setImageIntoView(ImageView imageView, String imageUrl) {
 
         Glide.with(context).load(imageUrl).into(imageView);
 

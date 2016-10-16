@@ -33,6 +33,7 @@ public class Connector extends SQLiteOpenHelper {
     public static final String NEWS_IMPACT = "impact";
     public static final String NEWS_SENTIMENT = "sentiment";
     private static final String NEWS_IMPACT_LABEL = "impactLabel";
+    private static final String NEWS_CREATED_TIME_EPOCH = "createdTimeEpoch";
 
     private static final String BUBBLE_KEY = "key";
     private static final String BUBBLE_VALUE = "value";
@@ -43,13 +44,13 @@ public class Connector extends SQLiteOpenHelper {
     public static Connector connector;
 
     public Connector(Context context) {
-        super(context.getApplicationContext(), DATABASE_NAME, null, 11);
+        super(context.getApplicationContext(), DATABASE_NAME, null, 12);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        db.execSQL("create table news (id text primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,place text,category text,isBookmarked integer,author text,impact text,impactLabel text,sentiment integer)");
+        db.execSQL("create table news (id text primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,createdTimeEpoch text,place text,category text,isBookmarked integer,author text,impact text,impactLabel text,sentiment integer)");
         db.execSQL("create table bubble (id text primary key, storyId text,key text,value text)");
     }
 
@@ -76,6 +77,7 @@ public class Connector extends SQLiteOpenHelper {
         contentValues.put(NEWS_COLUMN_SOURCE_URL, newsCard.newsSourceUrl);
         contentValues.put(NEWS_COLUMN_SOURCE_NAME, newsCard.newsSourceName);
         contentValues.put(NEWS_COLUMN_DATE, newsCard.date);
+        contentValues.put(NEWS_CREATED_TIME_EPOCH, newsCard.createdTimeEpoch);
         contentValues.put(NEWS_COLUMN_CATEGORY, newsCard.category);
         contentValues.put(NEWS_AUTHOR, newsCard.author);
         contentValues.put(NEWS_SENTIMENT, newsCard.sentiment);
@@ -212,6 +214,7 @@ public class Connector extends SQLiteOpenHelper {
         newsCard.sentiment = res.getString(res.getColumnIndex(NEWS_SENTIMENT));
         newsCard.author = res.getString(res.getColumnIndex(NEWS_AUTHOR));
         newsCard.impactLabel = res.getString(res.getColumnIndex(NEWS_IMPACT_LABEL));
+        newsCard.createdTimeEpoch = res.getString(res.getColumnIndex(NEWS_CREATED_TIME_EPOCH));
         return newsCard;
     }
 
@@ -254,5 +257,30 @@ public class Connector extends SQLiteOpenHelper {
         for (Bubble bubble : bubbleList) {
             insertBubble(bubble);
         }
+    }
+
+    public ArrayList<NewsCard> getAllNewsByCategory(List<NewsCard> allNews, Integer category) {
+        ArrayList<NewsCard> list = new ArrayList<>();
+        for (NewsCard newsCard : allNews) {
+            int cardCategory = 0;
+            String[] split = newsCard.category.split(",");
+
+            for (String categoryString : split) {
+                try {
+                    cardCategory = Integer.valueOf(categoryString);
+                } catch (Exception e) {
+                    cardCategory = 0;
+                }
+                if (category == cardCategory || category == 0) {
+                    list.add(newsCard);
+                    break;
+                }
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<NewsCard> getAllNewsByCategory(Integer category) {
+        return getAllNewsByCategory(this.getAllNews(), category);
     }
 }

@@ -12,7 +12,7 @@ public class NewsCard {
     public String newsSourceUrl;
     public String newsSourceName;
     public int isBookmarked;
-    public Long createdTimeEpoch;
+    public String createdTimeEpoch;
     public String date;
     public String category;
     public String author;
