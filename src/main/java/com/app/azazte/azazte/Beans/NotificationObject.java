@@ -6,6 +6,17 @@ package com.app.azazte.azazte.Beans;
 public class NotificationObject {
     private String headline;
     private String id;
+    private String imageUrl;
+
+    public String getImageUrl() {
+
+
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getHeadline() {
         return headline;
