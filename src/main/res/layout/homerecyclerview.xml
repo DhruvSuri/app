@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.app.azazte.azazte.HomeScreen"
-    android:background="#f9f9f9"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
@@ -19,9 +18,12 @@
             android:layout_height="wrap_content"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
-            android:layout_margin="2dp" />
+            android:paddingBottom="3dp"
+            android:paddingTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:elevation="5dp"
+            android:background="#abffffff" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -36,8 +38,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Business"
             android:id="@+id/textView8"
-            android:textSize="18dp"
-            android:textColor="#525252"
+            android:textSize="19dp"
+            android:textColor="#ffffff"
             android:layout_marginLeft="15dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -47,10 +49,12 @@
             android:layout_height="wrap_content"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
             android:layout_below="@+id/textView8"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:elevation="5dp"
+            android:background="#abffffff" />
     </RelativeLayout>
 
     <View
@@ -62,8 +66,8 @@
         android:visibility="invisible"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -77,8 +81,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Economy"
             android:id="@+id/textView8"
-            android:textSize="18dp"
-            android:textColor="#525252"
+            android:textSize="19dp"
+            android:textColor="#ffffff"
             android:layout_marginLeft="15dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -88,10 +92,12 @@
             android:layout_height="wrap_content"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
             android:layout_below="@+id/textView8"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:elevation="5dp"
+            android:background="#abffffff" />
     </RelativeLayout>
 
     <View
@@ -103,8 +109,8 @@
         android:visibility="invisible"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp" />
 
 
     <RelativeLayout
@@ -119,8 +125,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="World"
             android:id="@+id/textView8"
-            android:textSize="18dp"
-            android:textColor="#525252"
+            android:textSize="19dp"
+            android:textColor="#ffffff"
             android:layout_marginLeft="15dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -130,10 +136,12 @@
             android:layout_height="wrap_content"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
             android:layout_below="@+id/textView8"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:elevation="5dp"
+            android:background="#abffffff" />
     </RelativeLayout>
 
     <View
@@ -145,8 +153,8 @@
         android:visibility="invisible"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -159,8 +167,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Money"
             android:id="@+id/textView8"
-            android:textSize="18dp"
-            android:textColor="#525252"
+            android:textSize="19dp"
+            android:textColor="#ffffff"
             android:layout_marginLeft="15dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -170,10 +178,12 @@
             android:layout_height="wrap_content"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
             android:layout_below="@+id/textView8"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:elevation="5dp"
+            android:background="#abffffff" />
     </RelativeLayout>
 
     <View
@@ -185,8 +195,8 @@
         android:visibility="invisible"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -199,8 +209,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Finance"
             android:id="@+id/textView8"
-            android:textSize="18dp"
-            android:textColor="#525252"
+            android:textSize="19dp"
+            android:textColor="#ffffff"
             android:layout_marginLeft="15dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -210,10 +220,12 @@
             android:layout_height="wrap_content"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
             android:layout_below="@+id/textView8"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:elevation="5dp"
+            android:background="#abffffff" />
     </RelativeLayout>
 
     <View
@@ -225,8 +237,8 @@
         android:visibility="invisible"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -239,8 +251,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Law"
             android:id="@+id/textView8"
-            android:textSize="18dp"
-            android:textColor="#525252"
+            android:textSize="19dp"
+            android:textColor="#ffffff"
             android:layout_marginLeft="15dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -250,10 +262,12 @@
             android:layout_height="wrap_content"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
             android:layout_below="@+id/textView8"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:elevation="5dp"
+            android:background="#abffffff" />
     </RelativeLayout>
 
     <View
@@ -265,8 +279,8 @@
         android:visibility="invisible"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -280,8 +294,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Technology"
             android:id="@+id/textView8"
-            android:textSize="18dp"
-            android:textColor="#525252"
+            android:textSize="19dp"
+            android:textColor="#ffffff"
             android:layout_marginLeft="15dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -291,10 +305,12 @@
             android:layout_height="wrap_content"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
             android:layout_below="@+id/textView8"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:elevation="5dp"
+            android:background="#abffffff" />
     </RelativeLayout>
 
     <View
@@ -306,8 +322,8 @@
         android:visibility="invisible"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp" />
 
 
 
@@ -316,8 +332,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/header"
-        android:padding="2dp"
-        android:layout_marginTop="50dp">
+        android:paddingLeft="4dp"
+        android:paddingTop="2dp"
+        android:paddingRight="4dp"
+        android:background="#abffffff">
 
         <ImageView
             android:id="@+id/headerImage"
@@ -357,7 +375,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_alignBottom="@+id/headerImage"
-            android:id="@+id/clickFrame"></FrameLayout>
+            android:id="@+id/clickFrame"
+            android:translationZ="5dp"></FrameLayout>
 
     </RelativeLayout>
 

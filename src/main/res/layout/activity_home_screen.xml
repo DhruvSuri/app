@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-<include layout="@layout/topbar"></include>
+
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/greenpat">
+
 <include layout="@layout/homerecyclerview"></include>
 
 

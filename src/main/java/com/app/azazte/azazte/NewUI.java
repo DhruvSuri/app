@@ -210,7 +210,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
 
     public void openSettings() {
-        View view = getLayoutInflater().inflate(R.layout.settings, null);
+        View view = getLayoutInflater().inflate(R.layout.settings2, null);
         final Dialog settingSheet = new Dialog(NewUI.this, R.style.leftSheet);
         settingSheet.setContentView(view);
         settingSheet.setCancelable(true);
@@ -218,14 +218,15 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         settingSheet.getWindow().setGravity(Gravity.RIGHT);
         notification = (ImageView) view.findViewById(R.id.notification);
         imageView = (ImageView) view.findViewById(R.id.noimage);
-        ImageView shareApp = (ImageView) view.findViewById(R.id.privacy);
-        final ImageView about = (ImageView) view.findViewById(R.id.about);
-        twilight = (ImageView) view.findViewById(R.id.night);
-        ImageView privacy = (ImageView) view.findViewById(R.id.shareApp);
-        ImageView rate = (ImageView) view.findViewById(R.id.rate);
-        ImageView mailUs = (ImageView) view.findViewById(R.id.mailus);
-        ImageView write = (ImageView) view.findViewById(R.id.write);
-        ImageView feedback = (ImageView) view.findViewById(R.id.feedback);
+        twilight = (ImageView) view.findViewById(R.id.light);
+        FrameLayout shareApp = (FrameLayout) view.findViewById(R.id.shareFrame);
+        final FrameLayout about = (FrameLayout) view.findViewById(R.id.aboutFrame);
+
+      FrameLayout privacy = (FrameLayout) view.findViewById(R.id.privacyFrame);
+      FrameLayout rate = (FrameLayout) view.findViewById(R.id.rateFrame);
+      FrameLayout mailUs = (FrameLayout) view.findViewById(R.id.contactFrame);
+      FrameLayout write = (FrameLayout) view.findViewById(R.id.writeFrame);
+      FrameLayout feedback = (FrameLayout) view.findViewById(R.id.feedbackFrame);
         FrameLayout close = (FrameLayout) view.findViewById(R.id.close);
         FrameLayout homefilter = (FrameLayout) view.findViewById(R.id.homeFilter);
 

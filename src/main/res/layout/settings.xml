@@ -4,7 +4,8 @@
     android:id="@+id/settings_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:touchscreenBlocksFocus="true"><RelativeLayout android:orientation="horizontal"
+    android:touchscreenBlocksFocus="true">
+    <RelativeLayout android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:id="@+id/topBar"
@@ -16,7 +17,7 @@
     android:elevation="10dp"
     android:translationZ="5dp">
 
-    <ImageView
+       <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:id="@+id/back"

@@ -118,7 +118,7 @@ public class HomeScreen extends AppCompatActivity {
         }
         setImageIntoView(picasso, headerImage, headCard.imageUrl);
         heading.setText(headCard.newsHead);
-        headClick.setOnClickListener(new View.OnClickListener() {
+        headerImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),
