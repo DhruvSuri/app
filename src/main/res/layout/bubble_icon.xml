@@ -7,7 +7,7 @@
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:id="@+id/bubbleIcon"
-        android:background="@drawable/twitter"
+        android:background="@drawable/info"
         android:layout_marginTop="1dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"

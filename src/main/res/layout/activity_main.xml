@@ -5,7 +5,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#000000">
+    android:background="@drawable/doodle">
 
     <RelativeLayout
         android:id="@+id/logo"

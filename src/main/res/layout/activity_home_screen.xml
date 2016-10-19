@@ -6,12 +6,57 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-<include layout="@layout/topbar"></include>
+    <RelativeLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/topBar"
+        android:background="#000000"
+        android:visibility="visible"
+        android:layout_alignParentBottom="false"
+        android:focusable="false"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:elevation="10dp"
+        android:translationZ="5dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/back"
+            android:src="@drawable/notification"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Finup"
+            android:id="@+id/categoriesTextMenu"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/back"
+            android:layout_alignParentBottom="false" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/h"
+            android:src="@drawable/ic_settings"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="2dp"
+            android:layout_marginRight="10dp" />
+
+
+    </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/doodle">
+
 <include layout="@layout/homerecyclerview"></include>
 
 
