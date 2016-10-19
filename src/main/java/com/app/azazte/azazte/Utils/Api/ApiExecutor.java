@@ -92,14 +92,14 @@ public class ApiExecutor {
         return null;
     }
 
-    public void fetchBubbles(final String storyId) {
-        Call<List<Bubble>> bubbleResponse = azazteApiService.fetchBubbles(storyId);
+    public void fetchBubbles() {
+        Call<List<Bubble>> bubbleResponse = azazteApiService.fetchBubbles();
         bubbleResponse.enqueue(new Callback<List<Bubble>>() {
             @Override
             public void onResponse(Call<List<Bubble>> call, Response<List<Bubble>> response) {
                 List<Bubble> bubbleList = response.body();
                 if (bubbleList.size() > 0) {
-                    Connector.getInstance().saveBubbles(bubbleList, storyId);
+                    Connector.getInstance().saveBubbles(bubbleList);
                 }
             }
 

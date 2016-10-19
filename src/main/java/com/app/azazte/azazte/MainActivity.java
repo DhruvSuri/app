@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
        // animate();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
+        ApiExecutor.getInstance().fetchBubbles();
 
         init();
         this.id = id;

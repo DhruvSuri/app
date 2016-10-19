@@ -251,9 +251,9 @@ public class Connector extends SQLiteOpenHelper {
         }
     }
 
-    public void saveBubbles(List<Bubble> bubbleList, String storyId) {
+    public void saveBubbles(List<Bubble> bubbleList) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM bubble where " + BUBBLE_STORY_ID + "=\"" + storyId + "\"");
+        db.execSQL("DELETE FROM bubble");
         for (Bubble bubble : bubbleList) {
             insertBubble(bubble);
         }

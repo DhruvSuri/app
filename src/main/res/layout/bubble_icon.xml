@@ -4,12 +4,13 @@
     android:layout_height="wrap_content">
 
     <ImageButton
-        android:layout_width="75dp"
-        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
         android:id="@+id/bubbleIcon"
         android:background="@drawable/twitter"
         android:layout_marginTop="1dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:translationZ="5dp" />
+        android:translationZ="5dp"
+        android:scaleType="fitXY" />
 </RelativeLayout>

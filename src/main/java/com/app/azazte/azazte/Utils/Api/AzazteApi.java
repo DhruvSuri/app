@@ -25,5 +25,8 @@ public interface AzazteApi {
 
     @GET("/service/rest/bubble")
     Call<List<Bubble>> fetchBubbles(@Query("storyId") String storyId);
+
+    @GET("/service/rest/bubble")
+    Call<List<Bubble>> fetchBubbles();
 }
 

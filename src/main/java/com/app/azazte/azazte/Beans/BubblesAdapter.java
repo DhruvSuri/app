@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 
 import com.app.azazte.azazte.R;
 import com.app.azazte.azazte.Utils.BlurBuilder;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -67,29 +68,13 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        channel = tokens.get(position);
-        int drawable = getResources().getIdentifier(channel.toLowerCase(), "drawable", context.getPackageName());
-        holder.bubbles.setBackgroundResource(drawable);
-
-//        switch (channel) {
-//
-//            case "QUORA":
-//                holder.bubbles.setBackgroundResource(R.drawable.quora);
-//                break;
-//            case "YOUTUBE":
-//                holder.bubbles.setBackgroundResource(R.drawable.youtube);
-//                break;
-//            case "TWITTER":
-//                holder.bubbles.setBackgroundResource(R.drawable.twitter);
-//                break;
-//            case "WIKI":
-//                holder.bubbles.setBackgroundResource(R.drawable.wiki);
-//                break;
-//            default:
-//                holder.bubbles.setBackgroundResource(R.drawable.info);
-//        }
-
-
+        //int drawable = getResources().getIdentifier(channel.toLowerCase(), "drawable", context.getPackageName());
+        Glide.with(this.context)
+                .load(REBRANDLY_DOMAIN + tokens.get(position).toUpperCase())
+                .placeholder(R.drawable.placeholder) // can also be a drawable
+                .crossFade()
+                .into(holder.bubbles);
+        //holder.bubbles.setBackgroundResource(drawable);
     }
 
     @Override
@@ -110,9 +95,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
 
         @Override
         public void onClick(View v) {
-
             showquestiondialog(REBRANDLY_DOMAIN + tokens.get(getPosition()).toUpperCase() + DASH + id);
-
         }
     }
 

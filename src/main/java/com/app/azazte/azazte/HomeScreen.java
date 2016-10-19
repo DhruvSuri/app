@@ -24,7 +24,6 @@ public class HomeScreen extends AppCompatActivity {
 
     HomeScreenAdapter myadapter;
     ArrayList<NewsCard> allNews;
-    NewsCard newsCard;
     NewsCard headCard;
     Picasso picasso;
     RelativeLayout topBar;

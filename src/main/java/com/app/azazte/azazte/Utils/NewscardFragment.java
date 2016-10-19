@@ -87,7 +87,7 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        ApiExecutor.getInstance().fetchBubbles(newsCard.id);
+
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         inflateHolder = inflate;
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
