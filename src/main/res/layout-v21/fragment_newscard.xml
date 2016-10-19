@@ -538,7 +538,7 @@
         android:layout_height="match_parent"
         android:clickable="false"
         android:background="#00ffffff"
-        android:visibility="gone"></FrameLayout>
+        android:visibility="visible"></FrameLayout>
 
 
 

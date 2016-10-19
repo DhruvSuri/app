@@ -8,13 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="#000000"
         android:visibility="visible"
         android:layout_alignParentBottom="false"
         android:focusable="false"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:elevation="10dp"
-        android:translationZ="5dp">
+        android:translationZ="5dp"
+        android:background="#db1939">
 
         <ImageView
             android:layout_width="25dp"
@@ -77,29 +77,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Notificat"
+                android:text="Notification"
                 android:id="@+id/bellText"
-                android:layout_alignParentStart="false"
                 android:textSize="11dp"
                 android:textColor="#44b3f9"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:layout_below="@+id/notification"
+                android:layout_centerHorizontal="true" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true">
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:id="@+id/notification"
-                    android:src="@drawable/bell"
-                    android:scaleType="fitXY"
-                    android:layout_alignParentTop="false"
-                    android:layout_centerHorizontal="true"
-                    android:visibility="visible"
-                    android:layout_gravity="center" />
-            </FrameLayout>
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/notification"
+                android:src="@drawable/bell"
+                android:scaleType="fitXY"
+                android:layout_alignParentTop="false"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible"
+                android:layout_gravity="center" />
 
         </RelativeLayout>
 

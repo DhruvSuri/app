@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="#1976D2"
+        android:background="#db1939"
         android:visibility="visible"
         android:layout_alignParentBottom="false"
         android:focusable="false"
