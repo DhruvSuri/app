@@ -111,7 +111,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         findViewById(R.id.notification);
         setListeners();
         int category = getIntent().getIntExtra("category", 0);
-        int newsPostion = getNewsPosition(this.getIntent().getStringExtra("id"),category);
+        int newsPostion = getNewsPosition(this.getIntent().getStringExtra("id"), category);
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         if (category == 0) {
             categoryName = "All News";
@@ -142,7 +142,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         dialog.show();
     }
 
-    private int getNewsPosition(String id,Integer category) {
+    private int getNewsPosition(String id, Integer category) {
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNewsByCategory(category);
         int position = 0;
         for (NewsCard news : allNews) {
@@ -227,14 +227,14 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         twilight = (ImageView) view.findViewById(R.id.light);
         FrameLayout shareApp = (FrameLayout) view.findViewById(R.id.shareFrame);
         final FrameLayout about = (FrameLayout) view.findViewById(R.id.aboutFrame);
-         bellTxt= (TextView) view.findViewById(R.id.bellText);
-         imageTxt = (TextView) view.findViewById(R.id.imageText);
+        bellTxt = (TextView) view.findViewById(R.id.bellText);
+        imageTxt = (TextView) view.findViewById(R.id.imageText);
         nighttxt = (TextView) view.findViewById(R.id.nightText);
-      FrameLayout privacy = (FrameLayout) view.findViewById(R.id.privacyFrame);
-      FrameLayout rate = (FrameLayout) view.findViewById(R.id.rateFrame);
-      FrameLayout mailUs = (FrameLayout) view.findViewById(R.id.contactFrame);
-      FrameLayout write = (FrameLayout) view.findViewById(R.id.writeFrame);
-      FrameLayout feedback = (FrameLayout) view.findViewById(R.id.feedbackFrame);
+        FrameLayout privacy = (FrameLayout) view.findViewById(R.id.privacyFrame);
+        FrameLayout rate = (FrameLayout) view.findViewById(R.id.rateFrame);
+        FrameLayout mailUs = (FrameLayout) view.findViewById(R.id.contactFrame);
+        FrameLayout write = (FrameLayout) view.findViewById(R.id.writeFrame);
+        FrameLayout feedback = (FrameLayout) view.findViewById(R.id.feedbackFrame);
         FrameLayout close = (FrameLayout) view.findViewById(R.id.close);
         FrameLayout homefilter = (FrameLayout) view.findViewById(R.id.homeFilter);
 
@@ -380,13 +380,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 imageView.setImageResource(getImageDrawable());
-                if(imageView.getDrawable()==getResources().getDrawable(R.drawable.imageon)){
+                if (imageView.getDrawable() == getResources().getDrawable(R.drawable.imageon)) {
 
                     imageTxt.setTextColor(Color.parseColor("#44b3f9"));
 
-                }
-
-                else{
+                } else {
                     imageTxt.setTextColor(Color.parseColor("#626262"));
                 }
 
@@ -398,10 +396,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 notification.setImageResource(getNotificationDrawable());
-                if(notification.getDrawable()==getResources().getDrawable(R.drawable.bell)){
+                if (notification.getDrawable() == getResources().getDrawable(R.drawable.bell)) {
                     bellTxt.setTextColor(Color.parseColor("#44b3f9"));
-                }
-                else {
+                } else {
                     bellTxt.setTextColor(Color.parseColor("#626262"));
                 }
             }
@@ -729,7 +726,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Override
     protected void onResume() {
-        backPressed = 0;
+       // backPressed = 0;
         super.onResume();
     }
 
@@ -738,11 +735,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         if (viewPager.getCurrentItem() > 0) {
             viewPager.setCurrentItem(0);
         } else {
-            Toaster.toast("press again to exit");
-            backPressed++;
-            if (backPressed > 1) {
-                moveTaskToBack(true);
-            }
+           // Toaster.toast("press again to exit");
+
+                // moveTaskToBack(true);
+                finish();
+
         }
 
     }

@@ -96,7 +96,11 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
     private void setImageIntoView(ImageView imageView, String imageUrl) {
 
-        Glide.with(context).load(imageUrl).into(imageView);
+        Glide.with(context)
+                .load(imageUrl)
+                .placeholder(R.drawable.placeholder) // can also be a drawable
+                .crossFade()
+                .into(imageView);
 
     }
 

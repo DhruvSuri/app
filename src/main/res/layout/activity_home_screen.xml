@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="#000000"
+        android:background="#1976D2"
         android:visibility="visible"
         android:layout_alignParentBottom="false"
         android:focusable="false"
@@ -22,7 +22,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/back"
-            android:src="@drawable/notification"
+            android:src="@drawable/ic_menu"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp" />
 
@@ -46,7 +46,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="2dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:visibility="visible" />
 
 
     </RelativeLayout>
@@ -54,6 +55,7 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nScrollView"
         android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
         android:layout_height="match_parent"
         android:background="@drawable/doodle">
 

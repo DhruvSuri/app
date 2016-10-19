@@ -176,8 +176,8 @@ public class NewscardFragment extends Fragment {
             public void onClick(View v) {
                 impactMargin.setVisibility(View.VISIBLE);
                 summaryMargin.setVisibility(View.GONE);
-                summaryTab.setBackgroundColor(Color.parseColor("#ad00bcd4"));
-                impactTab.setBackgroundColor(Color.parseColor("#009688"));
+                summaryTab.setBackgroundColor(Color.parseColor("#6ccdf8"));
+                impactTab.setBackgroundColor(Color.parseColor("#0091EA"));
                 // summaryTab.animate().alpha(1.0f).setDuration(500);
                 newstxt.setText(newsCard.impact.trim());
 
@@ -192,8 +192,8 @@ public class NewscardFragment extends Fragment {
 
                 impactMargin.setVisibility(View.GONE);
                 summaryMargin.setVisibility(View.VISIBLE);
-                summaryTab.setBackgroundColor(Color.parseColor("#009688"));
-                impactTab.setBackgroundColor(Color.parseColor("#ad00bcd4"));
+                summaryTab.setBackgroundColor(Color.parseColor("#0091EA"));
+                impactTab.setBackgroundColor(Color.parseColor("#6ccdf8"));
                 //   impactTab.animate().alpha(0.0f).setDuration(500);
                 newstxt.animate();
                 newstxt.setText(newsCard.newsBody.trim());

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="#000000"
+        android:background="#1976D2"
         android:visibility="visible"
         android:layout_alignParentBottom="false"
         android:focusable="false"
@@ -60,7 +60,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="false"
 
-        android:background="#000000"
+        android:background="#ffffff"
         android:layout_marginTop="50dp">
 
         <RelativeLayout

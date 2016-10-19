@@ -65,7 +65,7 @@
                 card_view:cardCornerRadius="0dp"
                 android:layout_alignEnd="@+id/newsBody"
                 android:layout_toEndOf="@+id/summaryTab"
-                android:backgroundTint="#68bad5"
+                android:backgroundTint="#6ccdf8"
                 android:layout_alignParentBottom="false"
                 android:layout_below="@+id/summaryMargin">
 
@@ -84,7 +84,7 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="15sp"
                         tools:ignore="MissingPrefix"
-                        fontPath="fonts/HelveticaNeueMedium.ttf"
+                        fontPath="fonts/HelveticaNeueLight.ttf"
                         android:typeface="serif"
                         android:visibility="visible"
                         android:textColor="#ffffff"
@@ -106,7 +106,7 @@
                 android:animateLayoutChanges="true"
                 android:layout_height="match_parent"
                 card_view:cardCornerRadius="0dp"
-                android:backgroundTint="#00b4f0"
+                android:backgroundTint="#0091EA"
                 android:layout_alignParentBottom="false"
                 android:layout_below="@+id/impactMargin">
 
@@ -125,7 +125,7 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="15sp"
                         tools:ignore="MissingPrefix"
-                        fontPath="fonts/HelveticaNeueMedium.ttf"
+                        fontPath="fonts/HelveticaNeueLight.ttf"
                         android:typeface="serif"
                         android:visibility="visible"
                         android:textColor="#ffffff"
@@ -151,7 +151,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00b4f0"
+    android:background="#0091EA"
     android:paddingTop="3dp">
 
                 <TextView
@@ -537,7 +537,8 @@
         android:id="@+id/blurFrame"
         android:layout_height="match_parent"
         android:clickable="false"
-        android:background="#00ffffff"></FrameLayout>
+        android:background="#00ffffff"
+        android:visibility="gone"></FrameLayout>
 
 
 

@@ -3,6 +3,7 @@ package com.app.azazte.azazte.Beans;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -42,6 +43,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     Activity activity;
     String id;
     LayoutInflater inflater;
+    WebView webView;
     private static String DASH = "-";
     private static String REBRANDLY_DOMAIN = "https://www.rebrand.ly/finup-";
 
@@ -111,11 +113,22 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
         RelativeLayout parent = (RelativeLayout) dialog.findViewById(R.id.parent);
         RelativeLayout qnaLayout = (RelativeLayout) dialog.findViewById(R.id.qnaLayout);
 
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                blur.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                webView.clearHistory();
+                webView.destroy();
+            }
+        });
+
 
         parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 blur.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                webView.clearHistory();
+                webView.destroy();
                 dialog.dismiss();
             }
         });
@@ -130,7 +143,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
 
     private void setUpWebview(Dialog dialog, String url) {
 
-        WebView webView = (WebView) dialog.findViewById(R.id.webView);
+        webView = (WebView) dialog.findViewById(R.id.webView);
         final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
@@ -139,7 +152,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webView.loadUrl(url);
-
+        webView.destroy();
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {

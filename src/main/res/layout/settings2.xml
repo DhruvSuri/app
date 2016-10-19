@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="#000000"
+        android:background="#1976D2"
         android:visibility="visible"
         android:layout_alignParentBottom="false"
         android:focusable="false"
@@ -73,33 +73,29 @@
             android:layout_marginRight="5dp"
             android:padding="10dp">
 
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/notification"
+                android:src="@drawable/bell"
+                android:scaleType="fitXY"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Notificat"
+                android:text="Notifications"
                 android:id="@+id/bellText"
-                android:layout_alignParentStart="false"
-                android:textSize="11dp"
+                android:textSize="10dp"
+                android:gravity="center_horizontal"
                 android:textColor="#44b3f9"
-                android:visibility="visible" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true">
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:id="@+id/notification"
-                    android:src="@drawable/bell"
-                    android:scaleType="fitXY"
-                    android:layout_alignParentTop="false"
-                    android:layout_centerHorizontal="true"
-                    android:visibility="visible"
-                    android:layout_gravity="center" />
-            </FrameLayout>
+                android:layout_below="@+id/notification"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
@@ -212,9 +208,9 @@
                 android:visibility="visible"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_below="@+id/linearLayout"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="20dp" />
 
 
             <LinearLayout
@@ -354,7 +350,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#94e74c3c"
-            android:elevation="5dp"
             android:layout_marginTop="5dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
@@ -406,7 +401,6 @@
             android:layout_height="wrap_content"
             android:background="#a234495e"
             android:elevation="5dp"
-            android:layout_marginTop="5dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
             android:paddingLeft="10dp">
@@ -490,7 +484,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#a0e67e22"
-            android:elevation="5dp"
             android:layout_marginTop="5dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
