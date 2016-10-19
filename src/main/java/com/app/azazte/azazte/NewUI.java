@@ -106,7 +106,6 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 R.anim.fadeout);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
-        View view = getLayoutInflater().inflate(R.layout.settings, null);
 
         findViewById(R.id.notification);
         setListeners();
@@ -216,7 +215,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
 
     public void openSettings() {
-        View view = getLayoutInflater().inflate(R.layout.settings2, null);
+        View view = getLayoutInflater().inflate(R.layout.settings, null);
         final Dialog settingSheet = new Dialog(NewUI.this, R.style.leftSheet);
         settingSheet.setContentView(view);
         settingSheet.setCancelable(true);
