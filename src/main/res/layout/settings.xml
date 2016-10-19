@@ -99,7 +99,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center_horizontal"
                         android:scaleType="fitXY"
-                        android:src="@drawable/bellon"
+                        android:src="@drawable/bell"
                         android:layout_alignParentTop="false"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp" />

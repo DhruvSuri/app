@@ -4,47 +4,47 @@
     android:id="@+id/relativeLayout6"
     android:layout_marginTop="0dp"
     android:layout_marginRight="3dp"
-    android:elevation="10dp"
-    android:layout_marginLeft="4dp"
+    android:layout_marginLeft="1dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_alignParentBottom="true"
+    android:background="#6f6f6f"
     android:padding="1dp"
-    android:background="#525252">
+    android:elevation="5dp"
+    android:translationZ="3dp">
 
         <ImageView
             android:id="@+id/newsimage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="190dp"
+            android:layout_height="160dp"
             android:contentDescription="@string/action_settings"
             android:src="@drawable/placeholder"
             android:scaleType="centerCrop" />
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/headline"
-        android:background="@drawable/gradient"
-        android:layout_alignRight="@+id/newsimage"></FrameLayout>
-
-    <TextView
-        android:id="@+id/headline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13dp"
-        android:text="@string/heading"
-        fontPath="fonts/HelveticaNeue.ttf"
-        tools:ignore="MissingPrefix"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:textColor="#ffffff"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/newsimage"
         android:layout_alignBottom="@+id/newsimage"
-        android:paddingLeft="6dp"
-        android:background="#00ffffff"
-        android:layout_alignLeft="@+id/newsimage"
-        android:layout_alignRight="@+id/newsimage"
-        android:gravity="left" />
+        android:background="#56000000">
+
+        <TextView
+            android:id="@+id/headline"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="@string/heading"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            fontPath="fonts/HelveticaNeueThin.ttf"
+            tools:ignore="MissingPrefix"
+            android:textColor="#ffffff"
+            android:paddingLeft="6dp"
+            android:gravity="left"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="false"
+            android:paddingRight="6dp" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

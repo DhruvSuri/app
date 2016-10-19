@@ -65,7 +65,7 @@
                 card_view:cardCornerRadius="0dp"
                 android:layout_alignEnd="@+id/newsBody"
                 android:layout_toEndOf="@+id/summaryTab"
-                android:backgroundTint="#ad00bcd4"
+                android:backgroundTint="#68bad5"
                 android:layout_alignParentBottom="false"
                 android:layout_below="@+id/summaryMargin">
 
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:text="Impact"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textSize="12dp"
+                        android:textSize="15sp"
                         tools:ignore="MissingPrefix"
                         fontPath="fonts/HelveticaNeueMedium.ttf"
                         android:typeface="serif"
@@ -106,7 +106,7 @@
                 android:animateLayoutChanges="true"
                 android:layout_height="match_parent"
                 card_view:cardCornerRadius="0dp"
-                android:backgroundTint="#009688"
+                android:backgroundTint="#00b4f0"
                 android:layout_alignParentBottom="false"
                 android:layout_below="@+id/impactMargin">
 
@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:text="Summary"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textSize="12dp"
+                        android:textSize="15sp"
                         tools:ignore="MissingPrefix"
                         fontPath="fonts/HelveticaNeueMedium.ttf"
                         android:typeface="serif"
@@ -147,12 +147,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 card_view:cardCornerRadius="0dp"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="30dp">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#009688"
-    android:paddingTop="1dp">
+    android:background="#00b4f0"
+    android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/newstxt"
@@ -364,7 +364,7 @@
         <RelativeLayout
             android:id="@+id/bottombar"
             android:layout_width="match_parent"
-            android:layout_height="105dp"
+            android:layout_height="75dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="false"
             android:visibility="visible"

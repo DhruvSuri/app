@@ -59,61 +59,71 @@
         android:layout_marginTop="52dp">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
             android:id="@+id/notificationLay"
-            android:padding="10dp"
             android:background="#ffffff"
             android:layout_column="0"
             android:layout_columnSpan="1"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="20dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:elevation="10dp">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:id="@+id/notification"
-                android:src="@drawable/bell"
-                android:scaleType="fitXY" />
+            android:elevation="2dp"
+            android:gravity="center_horizontal"
+            android:layout_marginRight="5dp"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Notifications"
-                android:id="@+id/textView12"
-                android:layout_below="@+id/notification"
-                android:layout_alignEnd="@+id/notification"
-                android:layout_alignParentStart="true"
-                android:gravity="center_horizontal"
-                android:textSize="11dp" />
+                android:text="Notificat"
+                android:id="@+id/bellText"
+                android:layout_alignParentStart="false"
+                android:textSize="11dp"
+                android:textColor="#44b3f9"
+                android:visibility="visible" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/notification"
+                    android:src="@drawable/bell"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentTop="false"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="visible"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
             android:id="@+id/imageLay"
             android:padding="10dp"
             android:background="#ffffff"
             android:layout_column="1"
             android:layout_columnSpan="1"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="20dp"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
             android:layout_toRightOf="@+id/notificationLay"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:elevation="10dp">
+            android:elevation="2dp"
+            android:gravity="center_horizontal"
+            android:layout_marginRight="5dp">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:id="@+id/noimage"
-                android:src="@drawable/image"
+                android:src="@drawable/imageon"
                 android:scaleType="fitXY" />
 
             <TextView
@@ -121,33 +131,34 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Images"
-                android:id="@+id/textView12"
+                android:id="@+id/imageText"
                 android:gravity="center_horizontal"
                 android:textSize="11dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="false"
                 android:layout_below="@+id/noimage"
-                android:layout_alignEnd="@+id/noimage" />
+                android:layout_alignEnd="@+id/noimage"
+                android:textColor="#44b3f9" />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
             android:id="@+id/twilightLay"
             android:padding="10dp"
             android:background="#ffffff"
             android:layout_column="2"
             android:layout_columnSpan="1"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="20dp"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
             android:layout_toRightOf="@+id/imageLay"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:elevation="10dp">
+            android:elevation="2dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:id="@+id/light"
                 android:src="@drawable/lightoff"
                 android:scaleType="fitXY" />
@@ -157,13 +168,15 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Twilight mode"
-                android:id="@+id/textView12"
+                android:id="@+id/nightText"
                 android:gravity="center_horizontal"
-                android:textSize="11sp"
+                android:textSize="10dp"
                 android:layout_alignParentStart="false"
                 android:layout_alignParentTop="false"
                 android:layout_below="@+id/light"
-                android:layout_alignRight="@+id/light" />
+                android:layout_alignRight="@+id/light"
+                android:textColor="#626262"
+                android:textIsSelectable="false" />
 
         </RelativeLayout>
     </RelativeLayout>
@@ -178,7 +191,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="20dp"
         android:layout_below="@+id/header" />
 
 
@@ -216,7 +229,6 @@
             android:layout_height="wrap_content"
             android:background="#b20fa6c0"
             android:elevation="5dp"
-            android:layout_marginTop="5dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
             android:paddingLeft="10dp">
@@ -381,21 +393,12 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Support"
-        android:id="@+id/textView15"
-        android:layout_below="@+id/line2"
-        android:layout_marginLeft="20dp" />
-
-    <LinearLayout
+            <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/supportlay"
-        android:layout_below="@+id/textView15">
+        android:layout_below="@+id/line2">
 
         <RelativeLayout
             android:orientation="horizontal"
@@ -491,7 +494,8 @@
             android:layout_marginTop="5dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:paddingLeft="10dp">
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="30dp">
 
             <ImageView
                 android:layout_width="40dp"

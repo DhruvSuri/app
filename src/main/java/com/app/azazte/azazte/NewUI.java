@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -61,6 +62,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     ImageView imageView;
     ImageView topRefreshButton;
     TextView categoriesText;
+    TextView nighttxt;
+    TextView bellTxt;
+    TextView imageTxt;
     int backPressed = 0;
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
@@ -201,10 +205,12 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         if (twilightFilter.getVisibility() == View.INVISIBLE) {
             twilightFilter.setVisibility(View.VISIBLE);
             twilight.setImageResource(R.drawable.lighton);
+            nighttxt.setTextColor(Color.parseColor("#44b3f9"));
 
         } else {
             twilightFilter.setVisibility(View.INVISIBLE);
             twilight.setImageResource(R.drawable.lightoff);
+            nighttxt.setTextColor(Color.parseColor("#626262"));
         }
     }
 
@@ -221,7 +227,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         twilight = (ImageView) view.findViewById(R.id.light);
         FrameLayout shareApp = (FrameLayout) view.findViewById(R.id.shareFrame);
         final FrameLayout about = (FrameLayout) view.findViewById(R.id.aboutFrame);
-
+         bellTxt= (TextView) view.findViewById(R.id.bellText);
+         imageTxt = (TextView) view.findViewById(R.id.imageText);
+        nighttxt = (TextView) view.findViewById(R.id.nightText);
       FrameLayout privacy = (FrameLayout) view.findViewById(R.id.privacyFrame);
       FrameLayout rate = (FrameLayout) view.findViewById(R.id.rateFrame);
       FrameLayout mailUs = (FrameLayout) view.findViewById(R.id.contactFrame);
@@ -231,15 +239,20 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         FrameLayout homefilter = (FrameLayout) view.findViewById(R.id.homeFilter);
 
         if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
-            notification.setImageResource(R.drawable.bell);
+            notification.setImageResource(R.drawable.belloff);
+            bellTxt.setTextColor(Color.parseColor("#626262"));
         } else {
-            notification.setImageResource(R.drawable.bellon);
+            notification.setImageResource(R.drawable.bell);
+
+            bellTxt.setTextColor(Color.parseColor("#44b3f9"));
         }
 
         if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
             imageView.setImageResource(R.drawable.image);
+            imageTxt.setTextColor(Color.parseColor("#626262"));
         } else {
             imageView.setImageResource(R.drawable.imageon);
+            imageTxt.setTextColor(Color.parseColor("#44b3f9"));
         }
 
         close.setOnClickListener(new View.OnClickListener() {
@@ -367,6 +380,16 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 imageView.setImageResource(getImageDrawable());
+                if(imageView.getDrawable()==getResources().getDrawable(R.drawable.imageon)){
+
+                    imageTxt.setTextColor(Color.parseColor("#44b3f9"));
+
+                }
+
+                else{
+                    imageTxt.setTextColor(Color.parseColor("#626262"));
+                }
+
             }
         });
 
@@ -375,6 +398,12 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 notification.setImageResource(getNotificationDrawable());
+                if(notification.getDrawable()==getResources().getDrawable(R.drawable.bell)){
+                    bellTxt.setTextColor(Color.parseColor("#44b3f9"));
+                }
+                else {
+                    bellTxt.setTextColor(Color.parseColor("#626262"));
+                }
             }
         });
 
@@ -391,16 +420,17 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     public int getNotificationDrawable() {
         if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
             PrefManager.getInstance().setNotificationOn();
-            return R.drawable.bellon;
+            return R.drawable.bell;
         } else {
             PrefManager.getInstance().setNotificationOff();
-            return R.drawable.bell;
+            return R.drawable.belloff;
         }
     }
 
     public int getImageDrawable() {
         if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
             PrefManager.getInstance().setImageOn();
+
             return R.drawable.imageon;
         } else {
             PrefManager.getInstance().setImageOff();
