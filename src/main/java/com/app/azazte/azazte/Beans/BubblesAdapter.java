@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.app.azazte.azazte.R;
+import com.app.azazte.azazte.Utils.AzazteUtils;
 import com.app.azazte.azazte.Utils.BlurBuilder;
 import com.bumptech.glide.Glide;
 
@@ -60,11 +61,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.bubble_icon, parent, false);
-
-        MyViewHolder holder = new MyViewHolder(itemView);
-
-
-        return holder;
+        return new MyViewHolder(itemView);
     }
 
     @Override
@@ -75,7 +72,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
                 .load(REBRANDLY_DOMAIN + tokens.get(position).toUpperCase())
                 .placeholder(R.drawable.placeholder) // can also be a drawable
                 .crossFade()
-                .into(holder.bubbles);
+                .into(holder.bubble);
         //holder.bubbles.setBackgroundResource(drawable);
     }
 
@@ -85,14 +82,14 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageButton bubbles;
+        public ImageButton bubble;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-            bubbles = (ImageButton) itemView.findViewById(R.id.bubbleIcon);
-            bubbles.setOnClickListener(this);
-
+            bubble = (ImageButton) itemView.findViewById(R.id.bubbleIcon);
+            bubble.getLayoutParams().height = AzazteUtils.getInstance().getBubbleHeight();
+            bubble.getLayoutParams().width = AzazteUtils.getInstance().getBubbleWidth();
+            bubble.setOnClickListener(this);
         }
 
         @Override

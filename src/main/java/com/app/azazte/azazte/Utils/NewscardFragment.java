@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,7 +32,6 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
-import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
@@ -125,11 +123,12 @@ public class NewscardFragment extends Fragment {
 
 
         final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
+        image.getLayoutParams().height = AzazteUtils.getInstance().getImageViewHeight();
+        image.setScaleType(ImageView.ScaleType.FIT_XY);
 
-        try {
-            setImageDisplayHeight(image, null);
-        } catch (Exception ignored) {
-        }
+        View bubbleBottomBar = inflate.findViewById(R.id.bottombar);
+        bubbleBottomBar.getLayoutParams().height = AzazteUtils.getInstance().getBubbleHeight();
+        image.setScaleType(ImageView.ScaleType.FIT_XY);
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
