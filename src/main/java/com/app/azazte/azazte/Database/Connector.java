@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.app.azazte.azazte.Beans.Bubble;
+import com.app.azazte.azazte.Beans.Disease;
 import com.app.azazte.azazte.Beans.NewsCard;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class Connector extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL("create table news (id text primary key, imageUrl text,memoryImageUrl text,newsHeading text,newsContent text, newsSourceUrl text,newsSourceName text,date text,createdTimeEpoch text,place text,category text,isBookmarked integer,author text,impact text,impactLabel text,sentiment integer)");
         db.execSQL("create table bubble (id text primary key, storyId text,key text,value text)");
+        db.execSQL("create table disease (id text primary key, symptom text,cure text,name text)");
     }
 
     @Override
@@ -59,6 +61,7 @@ public class Connector extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS news");
         db.execSQL("DROP TABLE IF EXISTS bubble");
+        db.execSQL("DROP TABLE IF EXISTS med");
         onCreate(db);
     }
 
@@ -186,6 +189,41 @@ public class Connector extends SQLiteOpenHelper {
         contentValues.put(BUBBLE_VALUE, bubble.getAnswer());
         db.insert("bubble", null, contentValues);
         return true;
+    }
+
+    public boolean insertDisease(Disease disease) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("cure", disease.getCure());
+        contentValues.put("name", disease.getName());
+        contentValues.put("symptom", disease.getSymptom());
+        db.insert("disease", null, contentValues);
+        return true;
+    }
+
+    public ArrayList<Disease> getAllDiseases() {
+        ArrayList<Disease> array_list = new ArrayList<Disease>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from disease", null);
+        res.moveToFirst();
+        Disease disease;
+        while (res.isAfterLast() == false) {
+            disease = fillDisease(res);
+            array_list.add(disease);
+            res.moveToNext();
+        }
+        res.close();
+        return array_list;
+    }
+
+    private Disease fillDisease(Cursor res) {
+        Disease disease = new Disease();
+        disease.setCure(res.getString(res.getColumnIndex("cure")));
+        disease.setName(res.getString(res.getColumnIndex("name")));
+        disease.setSymptom(res.getString(res.getColumnIndex("symptom")));
+
+        return disease;
     }
 
 
