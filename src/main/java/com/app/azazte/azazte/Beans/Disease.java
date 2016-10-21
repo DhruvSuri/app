@@ -8,12 +8,11 @@ public class Disease {
     private String symptom;
     private String cure;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public Disease(){}
+    public Disease(String name,String symptom,String cure){
+        this.name = name;
+        this.symptom = symptom;
+        this.cure = cure;
     }
 
     public String getName() {
