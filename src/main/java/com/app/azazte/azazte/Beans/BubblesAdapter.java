@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.app.azazte.azazte.R;
+import com.app.azazte.azazte.Utils.AzazteUtils;
 import com.app.azazte.azazte.Utils.BlurBuilder;
 import com.bumptech.glide.Glide;
 
@@ -60,11 +62,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.bubble_icon, parent, false);
-
-        MyViewHolder holder = new MyViewHolder(itemView);
-
-
-        return holder;
+        return new MyViewHolder(itemView);
     }
 
     @Override
@@ -75,7 +73,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
                 .load(REBRANDLY_DOMAIN + tokens.get(position).toUpperCase())
                 .placeholder(R.drawable.bubbleplaceholder) // can also be a drawable
                 .crossFade()
-                .into(holder.bubbles);
+                .into(holder.bubble);
         //holder.bubbles.setBackgroundResource(drawable);
     }
 
@@ -85,14 +83,14 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageButton bubbles;
+        public ImageButton bubble;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-            bubbles = (ImageButton) itemView.findViewById(R.id.bubbleIcon);
-            bubbles.setOnClickListener(this);
-
+            bubble = (ImageButton) itemView.findViewById(R.id.bubbleIcon);
+            bubble.getLayoutParams().height = AzazteUtils.getInstance().getBubbleHeight();
+            bubble.getLayoutParams().width = AzazteUtils.getInstance().getBubbleWidth();
+            bubble.setOnClickListener(this);
         }
 
         @Override
@@ -103,11 +101,15 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
 
 
     public void showquestiondialog(String url) {
+        final Dialog dialog = new Dialog(context, R.style.dialog);
+        dialog.setContentView(R.layout.questiondialog);
+        setUpWebview(dialog, url);
+
         Bitmap map = takeScreenShot(activity);
         Bitmap blurmap = BlurBuilder.blur(activity, map);
         final Drawable draw = new BitmapDrawable(getResources(), blurmap);
-        final Dialog dialog = new Dialog(context, R.style.dialog);
-        dialog.setContentView(R.layout.questiondialog);
+
+
         final FrameLayout blur = (FrameLayout) inflate.findViewById(R.id.blurFrame);
         RelativeLayout webLayout = (RelativeLayout) dialog.findViewById(R.id.webLayout);
         RelativeLayout parent = (RelativeLayout) dialog.findViewById(R.id.parent);
@@ -133,7 +135,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
             }
         });
 
-        setUpWebview(dialog, url);
+
         webLayout.setVisibility(View.VISIBLE);
         dialog.show();
         blur.setBackground(draw);
@@ -146,13 +148,19 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
         webView = (WebView) dialog.findViewById(R.id.webView);
         final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress);
         webView.getSettings().setJavaScriptEnabled(true);
+        if (Build.VERSION.SDK_INT >= 19) {
+            // chromium, enable hardware acceleration
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        } else {
+            // older android version, disable hardware acceleration
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
         webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setAppCacheEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webView.loadUrl(url);
-        webView.destroy();
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
