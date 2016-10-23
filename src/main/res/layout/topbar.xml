@@ -2,12 +2,12 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:id="@+id/topBar"
-    android:background="#d2000000"
+    android:background="@color/topBarColor"
     android:visibility="visible"
     android:layout_alignParentBottom="false"
     android:focusable="false"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:elevation="5dp"
+    android:elevation="10dp"
     android:translationZ="5dp">
 
     <ImageView
@@ -40,8 +40,8 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_toLeftOf="@+id/settings"
-        android:layout_toStartOf="@+id/settings"
+        android:layout_toLeftOf="@+id/home"
+        android:layout_toStartOf="@+id/home"
         android:visibility="visible"
         android:layout_marginRight="20dp" />
 
@@ -58,8 +58,8 @@
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:id="@+id/settings"
-        android:src="@drawable/notification"
+        android:id="@+id/home"
+        android:src="@drawable/home"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:padding="2dp"
@@ -85,7 +85,7 @@
         android:layout_height="match_parent"
         android:layout_toEndOf="@+id/refreshfilter"
         android:layout_alignParentTop="true"
-        android:id="@+id/settingfilter"></FrameLayout>
+        android:id="@+id/homeFilter"></FrameLayout>
 
 
 </RelativeLayout>

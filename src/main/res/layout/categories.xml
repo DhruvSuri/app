@@ -8,13 +8,12 @@
     android:layout_gravity=""
     android:contextClickable="false"
     android:orientation="vertical"
-    android:touchscreenBlocksFocus="true"
-    android:background="#b9ff1100">
+    android:touchscreenBlocksFocus="true">
     <RelativeLayout android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="#1976D2"
+        android:background="@color/topBarColor"
         android:visibility="visible"
         android:layout_alignParentBottom="false"
         android:focusable="false"

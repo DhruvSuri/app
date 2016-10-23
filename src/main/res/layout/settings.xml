@@ -14,7 +14,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:elevation="10dp"
         android:translationZ="5dp"
-        android:background="#db1939">
+        android:background="@color/topBarColor">
 
         <ImageView
             android:layout_width="25dp"

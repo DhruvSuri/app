@@ -27,7 +27,7 @@
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="false"
-        android:background="#46d07777"
+        android:background="#62d07777"
         android:visibility="invisible"
         android:clickable="false" >
 

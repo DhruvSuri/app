@@ -73,7 +73,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
         //int drawable = getResources().getIdentifier(channel.toLowerCase(), "drawable", context.getPackageName());
         Glide.with(this.context)
                 .load(REBRANDLY_DOMAIN + tokens.get(position).toUpperCase())
-                .placeholder(R.drawable.placeholder) // can also be a drawable
+                .placeholder(R.drawable.bubbleplaceholder) // can also be a drawable
                 .crossFade()
                 .into(holder.bubbles);
         //holder.bubbles.setBackgroundResource(drawable);

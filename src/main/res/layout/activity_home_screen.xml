@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="#db1939"
+        android:background="@color/topBarColor"
         android:visibility="visible"
         android:layout_alignParentBottom="false"
         android:focusable="false"
@@ -19,12 +19,13 @@
         android:translationZ="5dp">
 
         <ImageView
-            android:layout_width="25dp"
+            android:layout_width="30dp"
             android:layout_height="25dp"
             android:id="@+id/back"
-            android:src="@drawable/ic_menu"
+            android:src="@drawable/uplogo"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,11 +34,12 @@
             android:text="Finup"
             android:id="@+id/categoriesTextMenu"
             android:textColor="#ffffff"
-            android:textSize="15sp"
+            android:textSize="18dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/back"
-            android:layout_alignParentBottom="false" />
+            android:layout_alignParentBottom="false"
+            android:textStyle="bold" />
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -48,6 +50,13 @@
             android:padding="2dp"
             android:layout_marginRight="10dp"
             android:visibility="visible" />
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:id="@+id/settingsClick"></FrameLayout>
 
 
     </RelativeLayout>
@@ -63,4 +72,13 @@
 
 
     </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/nightUI"
+        android:layout_height="match_parent"
+        android:background="#62d07777"
+        android:visibility="invisible">
+
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

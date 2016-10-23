@@ -1,11 +1,16 @@
 package com.app.azazte.azazte;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -26,7 +31,14 @@ public class HomeScreen extends AppCompatActivity {
     ArrayList<NewsCard> allNews;
     NewsCard headCard;
     Picasso picasso;
+    public RelativeLayout twilightFilter;
+    public ImageView twilight;
     RelativeLayout topBar;
+    ImageView notification;
+    ImageView imageView;
+    TextView nighttxt;
+    TextView bellTxt;
+    TextView imageTxt;
 
 
     @Override
@@ -35,7 +47,8 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         topBar = (RelativeLayout) findViewById(R.id.topBar);
-
+        FrameLayout settings = (FrameLayout) findViewById(R.id.settingsClick);
+        twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
         ImageView headerImage = (ImageView) findViewById(R.id.headerImage);
         TextView heading = (TextView) findViewById(R.id.headline);
         FrameLayout headClick = (FrameLayout) findViewById(R.id.clickFrame);
@@ -44,6 +57,13 @@ public class HomeScreen extends AppCompatActivity {
         allNews.remove(0);
         setUpHead(headerImage, heading, headClick);
         setupRV();
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettings();
+
+            }
+        });
     }
 
     private void setupRV() {
@@ -137,14 +157,239 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
-    public void showTopBar() {
-        if (topBar.getVisibility() == View.GONE) {
-            topBar.setVisibility(View.VISIBLE);
 
+
+    public void openSettings() {
+        View view = getLayoutInflater().inflate(R.layout.settings, null);
+        final Dialog settingSheet = new Dialog(HomeScreen.this, R.style.leftSheet);
+        settingSheet.setContentView(view);
+        settingSheet.setCancelable(true);
+        settingSheet.show();
+        settingSheet.getWindow().setGravity(Gravity.RIGHT);
+        notification = (ImageView) view.findViewById(R.id.notification);
+        imageView = (ImageView) view.findViewById(R.id.noimage);
+        twilight = (ImageView) view.findViewById(R.id.light);
+        FrameLayout shareApp = (FrameLayout) view.findViewById(R.id.shareFrame);
+        final FrameLayout about = (FrameLayout) view.findViewById(R.id.aboutFrame);
+        bellTxt = (TextView) view.findViewById(R.id.bellText);
+        imageTxt = (TextView) view.findViewById(R.id.imageText);
+        nighttxt = (TextView) view.findViewById(R.id.nightText);
+        FrameLayout privacy = (FrameLayout) view.findViewById(R.id.privacyFrame);
+        FrameLayout rate = (FrameLayout) view.findViewById(R.id.rateFrame);
+        FrameLayout mailUs = (FrameLayout) view.findViewById(R.id.contactFrame);
+        FrameLayout write = (FrameLayout) view.findViewById(R.id.writeFrame);
+        FrameLayout feedback = (FrameLayout) view.findViewById(R.id.feedbackFrame);
+        FrameLayout close = (FrameLayout) view.findViewById(R.id.close);
+        FrameLayout homefilter = (FrameLayout) view.findViewById(R.id.homeFilter);
+
+        if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
+            notification.setImageResource(R.drawable.belloff);
+            bellTxt.setTextColor(Color.parseColor("#626262"));
+        } else {
+            notification.setImageResource(R.drawable.bell);
+
+            bellTxt.setTextColor(Color.parseColor("#44b3f9"));
+        }
+
+        if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
+            imageView.setImageResource(R.drawable.image);
+            imageTxt.setTextColor(Color.parseColor("#626262"));
+        } else {
+            imageView.setImageResource(R.drawable.imageon);
+            imageTxt.setTextColor(Color.parseColor("#44b3f9"));
+        }
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingSheet.dismiss();
+            }
+        });
+
+        homefilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(),
+                        HomeScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
+
+        settingSheet.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                // categoriesText.setVisibility(View.VISIBLE);
+                //  topRefreshButton.setVisibility(View.VISIBLE);
+                //  categoriesButton.setImageResource(R.drawable.ic_menu);
+                //  settings.setImageResource(R.drawable.ic_settings);
+
+            }
+        });
+
+
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getBaseContext(), AzazteWebView.class);
+                intent.putExtra("url", getString(R.string.privacy));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), AzazteWebView.class);
+                intent.putExtra("url", getString(R.string.about_us));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+
+            }
+        });
+
+
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rate = new Intent(Intent.ACTION_VIEW);
+                rate.setData(Uri.parse("market://details?id=" + getPackageName()));
+                startActivity(rate);
+            }
+        });
+
+
+        shareApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareAppIntent = new Intent();
+                shareAppIntent.setAction(Intent.ACTION_SEND);
+                shareAppIntent.putExtra(Intent.EXTRA_TEXT, "Need to manage your finances but the technicalities make you sweat ?\n Finup : Decoding business, finance and technology in 30 second reads.\n" +
+                        "Download finup: https://goo.gl/BjupvI");
+                shareAppIntent.setType("text/plain");
+                startActivity(Intent.createChooser(shareAppIntent, "Spread A Word"));
+            }
+        });
+
+
+        write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), AzazteWebView.class);
+                intent.putExtra("url", getString(R.string.write_us));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+
+            }
+        });
+
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), AzazteWebView.class);
+                intent.putExtra("url", getString(R.string.feedback_url));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+
+            }
+        });
+
+
+        mailUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setType("plain/text");
+                sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"notifications@azazte.com"});
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(sendIntent);
+
+
+            }
+        });
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setImageResource(getImageDrawable());
+                if (imageView.getDrawable() == getResources().getDrawable(R.drawable.imageon)) {
+
+                    imageTxt.setTextColor(Color.parseColor("#44b3f9"));
+
+                } else {
+                    imageTxt.setTextColor(Color.parseColor("#626262"));
+                }
+
+            }
+        });
+
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notification.setImageResource(getNotificationDrawable());
+                if (notification.getDrawable() == getResources().getDrawable(R.drawable.bell)) {
+                    bellTxt.setTextColor(Color.parseColor("#44b3f9"));
+                } else {
+                    bellTxt.setTextColor(Color.parseColor("#626262"));
+                }
+            }
+        });
+
+        twilight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                twilightMode();
+            }
+        });
+
+
+    }
+
+    public int getNotificationDrawable() {
+        if (PrefManager.getInstance().getNotificationState().equals(PrefManager.NOTIFICATION_STATE_OFF)) {
+            PrefManager.getInstance().setNotificationOn();
+            return R.drawable.bell;
+        } else {
+            PrefManager.getInstance().setNotificationOff();
+            return R.drawable.belloff;
+        }
+    }
+
+    public int getImageDrawable() {
+        if (PrefManager.getInstance().getImageState().equals(PrefManager.IMAGE_STATE_OFF)) {
+            PrefManager.getInstance().setImageOn();
+
+            return R.drawable.imageon;
+        } else {
+            PrefManager.getInstance().setImageOff();
+            return R.drawable.image;
+        }
+    }
+
+
+    public void twilightMode() {
+        if (twilightFilter.getVisibility() == View.INVISIBLE) {
+            twilightFilter.setVisibility(View.VISIBLE);
+            twilight.setImageResource(R.drawable.lighton);
+            nighttxt.setTextColor(Color.parseColor("#44b3f9"));
 
         } else {
-
-            topBar.setVisibility(View.GONE);
+            twilightFilter.setVisibility(View.INVISIBLE);
+            twilight.setImageResource(R.drawable.lightoff);
+            nighttxt.setTextColor(Color.parseColor("#626262"));
         }
     }
 

@@ -132,11 +132,9 @@ public class NewscardFragment extends Fragment {
         }
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
-        final TextView impactText = (TextView) inflate.findViewById(R.id.impact);
         final ImageView bookmarkView = (ImageView) inflate.findViewById(R.id.bookmark);
         shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
         brand = (RelativeLayout) inflate.findViewById(R.id.brand);
-        View impactLayout = inflate.findViewById(R.id.linearLayout13);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
         setImageIntoView(picasso, image, newsCard.imageUrl);
         newshead.setText(newsCard.newsHead.trim());
@@ -153,14 +151,14 @@ public class NewscardFragment extends Fragment {
         date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
 
         author.setText(newsCard.author.trim());
-        if (newsCard.impactLabel != null) {
-            impactLabel.setText(newsCard.impactLabel);
-        }
-        if (newsCard.impact.isEmpty()) {
-            hideImpact(impactLayout, impactText);
-        } else {
-            impactText.setText(newsCard.impact.trim());
-        }
+    //  if (newsCard.impactLabel != null) {
+    //      impactLabel.setText(newsCard.impactLabel);
+    //  }
+    //  if (newsCard.impact.isEmpty()) {
+    //      hideImpact(impactLayout, impactText);
+    //  } else {
+    //      impactText.setText(newsCard.impact.trim());
+    //  }
 
         if (newsCard.isBookmarked == 1) {
             bookmarkView.setVisibility(View.VISIBLE);
@@ -168,7 +166,7 @@ public class NewscardFragment extends Fragment {
             bookmarkView.setVisibility(View.INVISIBLE);
         }
 
-        hideBrand();
+     //   hideBrand();
 
 
         impactTab.setOnClickListener(new View.OnClickListener() {
@@ -254,20 +252,7 @@ public class NewscardFragment extends Fragment {
             }
         });
 
-        impactText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((NewUI) getActivity()).showTopBar();
 
-            }
-        });
-
-        impactLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((NewUI) getActivity()).showTopBar();
-            }
-        });
 
 
         setupBubbleListener(inflate);
@@ -398,7 +383,7 @@ public class NewscardFragment extends Fragment {
         //Glide.with(this).load(imageUrl).into(imageView);
         Glide.with(this)
                 .load(imageUrl)
-                .placeholder(R.drawable.placeholder) // can also be a drawable
+                .placeholder(R.drawable.placeholder2) // can also be a drawable
                 .crossFade()
                 .into(imageView);
     }
