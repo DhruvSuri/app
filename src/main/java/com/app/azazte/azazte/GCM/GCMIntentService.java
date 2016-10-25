@@ -19,7 +19,6 @@ import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -80,7 +79,7 @@ public class GCMIntentService extends IntentService {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(ID, notificationObject.getId());
+        intent.putExtra("notificationId", notificationObject.getId());
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 intent, 0);
         MixPanelUtils.track(MixPanelUtils.NOTIFICATION);

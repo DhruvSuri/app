@@ -32,8 +32,6 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
-import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -55,11 +53,11 @@ public class NewscardFragment extends Fragment {
     BubblesAdapter myadapter;
     ImageButton shareButton;
     RelativeLayout brand;
+    ImageView imageView;
     private View inflateHolder;
 
 
     private OnFragmentInteractionListener mListener;
-    Picasso picasso;
 
     public NewscardFragment(NewsCard newsCard, Context applicationContext) {
         this.newsCard = newsCard;
@@ -75,6 +73,12 @@ public class NewscardFragment extends Fragment {
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        imageView.setImageDrawable(null);
     }
 
     @Override
@@ -122,20 +126,21 @@ public class NewscardFragment extends Fragment {
         final FrameLayout summaryMargin = (FrameLayout) inflate.findViewById(R.id.summaryMargin);
 
 
-        final ImageView image = (ImageView) inflate.findViewById(R.id.imageView2);
-        image.getLayoutParams().height = AzazteUtils.getInstance().getImageViewHeight();
-        image.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView = (ImageView) inflate.findViewById(R.id.imageView2);
+        imageView.getLayoutParams().height = AzazteUtils.getInstance().getImageViewHeight();
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         View bubbleBottomBar = inflate.findViewById(R.id.bottombar);
         bubbleBottomBar.getLayoutParams().height = AzazteUtils.getInstance().getBubbleHeight();
-        image.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         final ImageView bookmarkView = (ImageView) inflate.findViewById(R.id.bookmark);
         shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
+        shareButton.setVisibility(View.GONE);
         brand = (RelativeLayout) inflate.findViewById(R.id.brand);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
-        setImageIntoView(picasso, image, newsCard.imageUrl);
+        AzazteUtils.getInstance().setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.placeholder2);
         newshead.setText(newsCard.newsHead.trim());
         newstxt.setText(newsCard.newsBody.trim());
         newsSource.setText(newsCard.newsSourceName.trim());
@@ -150,14 +155,14 @@ public class NewscardFragment extends Fragment {
         date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
 
         author.setText(newsCard.author.trim());
-    //  if (newsCard.impactLabel != null) {
-    //      impactLabel.setText(newsCard.impactLabel);
-    //  }
-    //  if (newsCard.impact.isEmpty()) {
-    //      hideImpact(impactLayout, impactText);
-    //  } else {
-    //      impactText.setText(newsCard.impact.trim());
-    //  }
+        //  if (newsCard.impactLabel != null) {
+        //      impactLabel.setText(newsCard.impactLabel);
+        //  }
+        //  if (newsCard.impact.isEmpty()) {
+        //      hideImpact(impactLayout, impactText);
+        //  } else {
+        //      impactText.setText(newsCard.impact.trim());
+        //  }
 
         if (newsCard.isBookmarked == 1) {
             bookmarkView.setVisibility(View.VISIBLE);
@@ -165,7 +170,7 @@ public class NewscardFragment extends Fragment {
             bookmarkView.setVisibility(View.INVISIBLE);
         }
 
-     //   hideBrand();
+        //   hideBrand();
 
 
         impactTab.setOnClickListener(new View.OnClickListener() {
@@ -250,8 +255,6 @@ public class NewscardFragment extends Fragment {
 
             }
         });
-
-
 
 
         setupBubbleListener(inflate);
@@ -376,15 +379,9 @@ public class NewscardFragment extends Fragment {
     }
 
 
-    private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
+    private void setImageIntoView(ImageView imageView, String imageUrl) {
 
 
-        //Glide.with(this).load(imageUrl).into(imageView);
-        Glide.with(this)
-                .load(imageUrl)
-                .placeholder(R.drawable.placeholder2) // can also be a drawable
-                .crossFade()
-                .into(imageView);
     }
 
 

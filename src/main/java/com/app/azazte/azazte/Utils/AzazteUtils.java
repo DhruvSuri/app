@@ -3,6 +3,11 @@ package com.app.azazte.azazte.Utils;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 /**
  * Created by home on 16/10/16.
@@ -13,6 +18,8 @@ public class AzazteUtils {
     private static Integer imageViewHeight;
     private static Integer bubbleHeight;
     private static Integer bubbleWidth;
+    private static String CHANNEL_LINK_DOMAIN = "http://aws.azazte.com/service/rest/bubble/redirect?storyId=%s&channelName=%s";
+    private static String CHANNEL_IMAGE_DOMAIN = "http://aws.azazte.com/images/%s";
 
     private AzazteUtils() {
     }
@@ -43,8 +50,24 @@ public class AzazteUtils {
         context.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int height = metrics.heightPixels;
         int width = metrics.widthPixels;
-        imageViewHeight = (int)(height*0.37);
-        bubbleHeight = (int)(height*0.13);
-        bubbleWidth = (int) (bubbleHeight *1.4);
+        imageViewHeight = (int) (height * 0.37);
+        bubbleHeight = (int) (height * 0.13);
+        bubbleWidth = (int) (bubbleHeight * 1.4);
+    }
+
+    public String getBubbleLinkURL(String id, String channel) {
+        return String.format(CHANNEL_LINK_DOMAIN, id, channel);
+    }
+
+    public String getBubbleChannelURL(String channel) {
+        return String.format(CHANNEL_IMAGE_DOMAIN, channel);
+    }
+
+    public void setImageIntoView(Context context, ImageView imageView, String imageUrl, int placeholder) {
+        Glide.with(context)
+                .load(imageUrl).asBitmap().format(DecodeFormat.PREFER_RGB_565)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(placeholder) // can also be a drawable
+                .into(imageView);
     }
 }

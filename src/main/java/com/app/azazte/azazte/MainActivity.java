@@ -30,7 +30,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class MainActivity extends AppCompatActivity {
 
     public static String emailAddress = "";
-    String id;
+    public static String id;
 
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String id = this.getIntent().getStringExtra("id");
+        id = this.getIntent().getStringExtra("notificationId");
         setContentView(R.layout.activity_main);
         // animate();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -67,15 +67,18 @@ public class MainActivity extends AppCompatActivity {
         ApiExecutor.getInstance().fetchBubbles();
 
         init();
-        this.id = id;
     }
 
 
     private void startSplashScreen() {
 
-
         Intent intent = new Intent(getApplicationContext(),
                 HomeScreen.class);
+        if (this.id != null) {
+            intent = new Intent(getApplicationContext(),
+                    NewUI.class);
+            intent.putExtra("id", this.id);
+        }
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         MainActivity.this.finish();

@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.app.azazte.azazte.Beans.HomeScreenAdapter;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
-import com.bumptech.glide.Glide;
+import com.app.azazte.azazte.Utils.AzazteUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -135,7 +135,7 @@ public class HomeScreen extends AppCompatActivity {
         if (allNews.size() == 0) {
             return;
         }
-        setImageIntoView(picasso, headerImage, headCard.imageUrl);
+        AzazteUtils.getInstance().setImageIntoView(this.getApplicationContext(), headerImage, headCard.imageUrl, R.drawable.placeholder2);
         heading.setText(headCard.newsHead);
         headerImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,14 +150,6 @@ public class HomeScreen extends AppCompatActivity {
 
 
     }
-
-    private void setImageIntoView(Picasso picasso, ImageView imageView, String imageUrl) {
-
-        Glide.with(this).load(imageUrl).into(imageView);
-
-    }
-
-
 
     public void openSettings() {
         View view = getLayoutInflater().inflate(R.layout.settings, null);

@@ -26,7 +26,7 @@ import android.widget.RelativeLayout;
 import com.app.azazte.azazte.R;
 import com.app.azazte.azazte.Utils.AzazteUtils;
 import com.app.azazte.azazte.Utils.BlurBuilder;
-import com.bumptech.glide.Glide;
+import com.app.azazte.azazte.Utils.MixPanelUtils;
 
 import java.util.List;
 
@@ -46,8 +46,6 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     String id;
     LayoutInflater inflater;
     WebView webView;
-    private static String DASH = "-";
-    private static String REBRANDLY_DOMAIN = "https://www.rebrand.ly/finup-";
 
 
     public BubblesAdapter(List<String> tokens, String id, Context context, FragmentActivity activity, View inflate) {
@@ -68,13 +66,8 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        //int drawable = getResources().getIdentifier(channel.toLowerCase(), "drawable", context.getPackageName());
-        Glide.with(this.context)
-                .load(REBRANDLY_DOMAIN + tokens.get(position).toUpperCase())
-                .placeholder(R.drawable.bubbleplaceholder) // can also be a drawable
-                .crossFade()
-                .into(holder.bubble);
-        //holder.bubbles.setBackgroundResource(drawable);
+        AzazteUtils.getInstance().setImageIntoView(this.context, holder.bubble, AzazteUtils.getInstance().getBubbleChannelURL(tokens.get(position).toUpperCase()), R.drawable.bubbleplaceholder);
+
     }
 
     @Override
@@ -95,7 +88,10 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
 
         @Override
         public void onClick(View v) {
-            showquestiondialog(REBRANDLY_DOMAIN + tokens.get(getPosition()).toUpperCase() + DASH + id);
+            MixPanelUtils.track("BUBBLE");
+            MixPanelUtils.track("BUBBLE" + tokens.get(getPosition()).toUpperCase());
+
+            showquestiondialog(AzazteUtils.getInstance().getBubbleLinkURL(id, tokens.get(getPosition()).toUpperCase()));
         }
     }
 
