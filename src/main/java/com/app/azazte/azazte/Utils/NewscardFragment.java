@@ -5,19 +5,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -117,7 +113,6 @@ public class NewscardFragment extends Fragment {
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
         TextView impactLabel = (TextView) inflate.findViewById(R.id.textView18);
-
         //imapct tabs
 
         final RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.impactTabs);
@@ -155,9 +150,9 @@ public class NewscardFragment extends Fragment {
         date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
 
         author.setText(newsCard.author.trim());
-        //  if (newsCard.impactLabel != null) {
-        //      impactLabel.setText(newsCard.impactLabel);
-        //  }
+          if (newsCard.impactLabel != null) {
+              impactLabel.setText(newsCard.impactLabel);
+          }
         //  if (newsCard.impact.isEmpty()) {
         //      hideImpact(impactLayout, impactText);
         //  } else {
@@ -296,33 +291,6 @@ public class NewscardFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    private void setImageDisplayHeight(ImageView image, Integer textHeight) {
-        Display d = ((WindowManager) this.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-
-        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            d.getRealMetrics(realDisplayMetrics);
-        }
-
-        int realHeight = realDisplayMetrics.heightPixels;
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        d.getMetrics(displayMetrics);
-
-        int displayHeight = displayMetrics.heightPixels;
-
-        //int spaceAvailableForImage = displayHeight - textHeight;
-        //image.getLayoutParams().height = (spaceAvailableForImage * 70)/100;
-
-        int ratio = (realHeight - displayHeight) * 100 / realHeight;
-        if (ratio > 4) {
-            int realImageHeight = image.getLayoutParams().height;
-            int reduction = (realImageHeight * ratio) / 100;
-            image.getLayoutParams().height = realImageHeight - reduction;
-            //Toaster.toast("reduced percentage : " + ratio + " and reduced height " + reduction);
         }
     }
 
