@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         Window window = getWindow();
-        window.setFormat(PixelFormat.RGBA_8888);
+        window.setFormat(PixelFormat.RGB_565);
     }
 
     @Override

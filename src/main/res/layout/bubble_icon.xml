@@ -7,7 +7,7 @@
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:id="@+id/bubbleIcon"
-        android:background="@drawable/info"
+        android:background="@drawable/bubbleplaceholder"
         android:layout_marginTop="1dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
