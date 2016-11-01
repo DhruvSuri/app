@@ -5,7 +5,7 @@
 
     <ImageButton
         android:layout_width="100dp"
-        android:layout_height="match_parent"
+        android:layout_height="60dp"
         android:id="@+id/bubbleIcon"
         android:background="@drawable/bubbleplaceholder"
         android:layout_marginTop="1dp"

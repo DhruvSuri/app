@@ -265,6 +265,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
 
+
                 Intent intent = new Intent(getApplicationContext(),
                         HomeScreen.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

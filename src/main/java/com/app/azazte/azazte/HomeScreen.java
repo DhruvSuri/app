@@ -25,6 +25,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import xdroid.toaster.Toaster;
+
 public class HomeScreen extends AppCompatActivity {
 
     HomeScreenAdapter myadapter;
@@ -39,7 +41,7 @@ public class HomeScreen extends AppCompatActivity {
     TextView nighttxt;
     TextView bellTxt;
     TextView imageTxt;
-
+    int back = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -385,5 +387,20 @@ public class HomeScreen extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(back>1){
+            Toaster.toast("Press again to exit");
+            back++;
+            moveTaskToBack(true);
+        }
 
+    }
+
+    @Override
+    protected void onResume() {
+        back=0;
+        super.onResume();
+    }
 }

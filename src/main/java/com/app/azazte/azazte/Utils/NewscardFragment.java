@@ -11,7 +11,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -28,6 +33,8 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
+
+import junit.framework.Test;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -107,12 +114,15 @@ public class NewscardFragment extends Fragment {
     public void inflateView(final View inflate) {
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
 
+        FrameLayout bookmarkFrame = (FrameLayout) inflate.findViewById(R.id.bookmarkFrame);
+
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
-        TextView impactLabel = (TextView) inflate.findViewById(R.id.textView18);
+        TextView impactLabel = (TextView) inflate.findViewById(R.id.impactLabel);
+
         //imapct tabs
 
         final RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.impactTabs);
@@ -150,14 +160,10 @@ public class NewscardFragment extends Fragment {
         date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
 
         author.setText(newsCard.author.trim());
-          if (newsCard.impactLabel != null) {
-              impactLabel.setText(newsCard.impactLabel);
-          }
-        //  if (newsCard.impact.isEmpty()) {
-        //      hideImpact(impactLayout, impactText);
-        //  } else {
-        //      impactText.setText(newsCard.impact.trim());
-        //  }
+        if (newsCard.impactLabel != null) {
+            impactLabel.setText(newsCard.impactLabel);
+        }
+
 
         if (newsCard.isBookmarked == 1) {
             bookmarkView.setVisibility(View.VISIBLE);
@@ -173,9 +179,8 @@ public class NewscardFragment extends Fragment {
             public void onClick(View v) {
                 impactMargin.setVisibility(View.VISIBLE);
                 summaryMargin.setVisibility(View.GONE);
-                summaryTab.setBackgroundColor(Color.parseColor("#6ccdf8"));
-                impactTab.setBackgroundColor(Color.parseColor("#0091EA"));
-                // summaryTab.animate().alpha(1.0f).setDuration(500);
+                summaryTab.setBackgroundColor(Color.parseColor("#26C6DA"));
+                impactTab.setBackgroundColor(Color.parseColor("#42A5F5"));
                 newstxt.setText(newsCard.impact.trim());
 
 
@@ -189,10 +194,9 @@ public class NewscardFragment extends Fragment {
 
                 impactMargin.setVisibility(View.GONE);
                 summaryMargin.setVisibility(View.VISIBLE);
-                summaryTab.setBackgroundColor(Color.parseColor("#0091EA"));
-                impactTab.setBackgroundColor(Color.parseColor("#6ccdf8"));
+                summaryTab.setBackgroundColor(Color.parseColor("#42A5F5"));
+                impactTab.setBackgroundColor(Color.parseColor("#26C6DA"));
                 //   impactTab.animate().alpha(0.0f).setDuration(500);
-                newstxt.animate();
                 newstxt.setText(newsCard.newsBody.trim());
 
 
@@ -200,23 +204,46 @@ public class NewscardFragment extends Fragment {
         });
 
 
-        newshead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if (newsCard.isBookmarked == 0) {
-                    Connector.getInstance().setBookmarked(newsCard.id);
-                    newsCard.isBookmarked = 1;
-                    bookmarkView.setVisibility(View.VISIBLE);
-                    Toaster.toast("Added to your Library");
-                } else {
-                    Connector.getInstance().unsetBookmarked(newsCard.id);
-                    newsCard.isBookmarked = 0;
-                    bookmarkView.setVisibility(View.INVISIBLE);
-                    Toaster.toast("Removed from your Library");
+        bookmarkFrame.setOnTouchListener(new View.OnTouchListener() {
+            private GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    if (newsCard.isBookmarked == 0) {
+                        Connector.getInstance().setBookmarked(newsCard.id);
+                        newsCard.isBookmarked = 1;
+                        bookmarkView.setVisibility(View.VISIBLE);
+                        Toaster.toast("Added to your Library");
+                    } else {
+                        Connector.getInstance().unsetBookmarked(newsCard.id);
+                        newsCard.isBookmarked = 0;
+                        bookmarkView.setVisibility(View.INVISIBLE);
+                        Toaster.toast("Removed from your Library");
+                    }
+
+
+                    return super.onDoubleTap(e);
                 }
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return false;
+                }
+
+                @Override
+                public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                    return false;
+                }
+            });
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                gestureDetector.onTouchEvent(event);
+                return true;
             }
         });
+
+
 
 
         moreAt.setOnClickListener(new View.OnClickListener() {
