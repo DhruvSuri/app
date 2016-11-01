@@ -36,7 +36,7 @@ android {
         applicationId "com.app.azazte.azazte"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 18
+        versionCode 20
         versionName "3.2"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
@@ -74,9 +74,6 @@ dependencies {
     compile 'com.shamanland:xdroid-toaster:0.0.5'
     compile 'com.android.support:support-v4:23.+'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile 'com.bartoszlipinski.flippablestackview:library:1.2.1'
-    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'com.google.android.gms:play-services-identity:8.4.0'
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
