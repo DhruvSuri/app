@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -320,33 +318,6 @@ public class NewscardFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    private void setImageDisplayHeight(ImageView image, Integer textHeight) {
-        Display d = ((WindowManager) this.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-
-        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            d.getRealMetrics(realDisplayMetrics);
-        }
-
-        int realHeight = realDisplayMetrics.heightPixels;
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        d.getMetrics(displayMetrics);
-
-        int displayHeight = displayMetrics.heightPixels;
-
-        //int spaceAvailableForImage = displayHeight - textHeight;
-        //image.getLayoutParams().height = (spaceAvailableForImage * 70)/100;
-
-        int ratio = (realHeight - displayHeight) * 100 / realHeight;
-        if (ratio > 4) {
-            int realImageHeight = image.getLayoutParams().height;
-            int reduction = (realImageHeight * ratio) / 100;
-            image.getLayoutParams().height = realImageHeight - reduction;
-            //Toaster.toast("reduced percentage : " + ratio + " and reduced height " + reduction);
         }
     }
 
