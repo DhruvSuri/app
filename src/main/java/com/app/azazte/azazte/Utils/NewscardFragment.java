@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -124,11 +125,14 @@ public class NewscardFragment extends Fragment {
         TextView impactLabel = (TextView) inflate.findViewById(R.id.impactLabel);
 
         //imapct tabs
-
+        final RelativeLayout tabLayout = (RelativeLayout) inflate.findViewById(R.id.tabLayout);
         final RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.impactTabs);
         final RelativeLayout summaryTab = (RelativeLayout) inflate.findViewById(R.id.summaryTabs);
         final FrameLayout impactMargin = (FrameLayout) inflate.findViewById(R.id.impactMargin);
         final FrameLayout summaryMargin = (FrameLayout) inflate.findViewById(R.id.summaryMargin);
+        final FrameLayout bodyMargin = (FrameLayout) inflate.findViewById(R.id.bodyMargin);
+        final View line = (View) inflate.findViewById(R.id.line);
+
 
 
         imageView = (ImageView) inflate.findViewById(R.id.imageView2);
@@ -159,8 +163,20 @@ public class NewscardFragment extends Fragment {
 
         date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
 
+
+        if(newsCard.impact.trim().length() != 0){
+
+            tabLayout.setVisibility(View.VISIBLE);
+            bodyMargin.setVisibility(View.VISIBLE);
+            line.setVisibility(View.VISIBLE);
+
+        }
+
+
         author.setText(newsCard.author.trim());
+
         if (newsCard.impactLabel != null) {
+
             impactLabel.setText(newsCard.impactLabel);
         }
 
@@ -179,8 +195,8 @@ public class NewscardFragment extends Fragment {
             public void onClick(View v) {
                 impactMargin.setVisibility(View.VISIBLE);
                 summaryMargin.setVisibility(View.GONE);
-                summaryTab.setBackgroundColor(Color.parseColor("#26C6DA"));
-                impactTab.setBackgroundColor(Color.parseColor("#42A5F5"));
+                summaryTab.setBackgroundColor(getResources().getColor(R.color.secondaryTab));
+                impactTab.setBackgroundColor(getResources().getColor(R.color.tabColor));
                 newstxt.setText(newsCard.impact.trim());
 
 
@@ -194,8 +210,8 @@ public class NewscardFragment extends Fragment {
 
                 impactMargin.setVisibility(View.GONE);
                 summaryMargin.setVisibility(View.VISIBLE);
-                summaryTab.setBackgroundColor(Color.parseColor("#42A5F5"));
-                impactTab.setBackgroundColor(Color.parseColor("#26C6DA"));
+                summaryTab.setBackgroundColor(getResources().getColor(R.color.tabColor));
+                impactTab.setBackgroundColor(getResources().getColor(R.color.secondaryTab));
                 //   impactTab.animate().alpha(0.0f).setDuration(500);
                 newstxt.setText(newsCard.newsBody.trim());
 

@@ -65,7 +65,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="3dp">
+            android:padding="3dp"
+            android:background="#ffffff">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -82,7 +83,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="98dp"
                     android:id="@+id/imageView13"
-                    android:src="@drawable/mon"
+                    android:src="@drawable/world"
                     android:scaleType="fitXY"
                     android:layout_alignEnd="@+id/space" />
 
@@ -90,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="MONEY"
+                    android:text="WORLD"
 
                     android:textStyle="bold"
                     android:id="@+id/textView38"
@@ -126,7 +127,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="98dp"
                     android:id="@+id/imageView15"
-                    android:src="@drawable/world"
+                    android:src="@drawable/mon"
                     android:scaleType="fitXY"
                     android:layout_alignEnd="@+id/space" />
 
@@ -134,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="WORLD"
+                    android:text="MONEY"
                     android:id="@+id/textView40"
                     android:layout_alignParentTop="false"
                     android:layout_centerInParent="true"
@@ -168,7 +169,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="98dp"
                     android:id="@+id/imageView14"
-                    android:src="@drawable/la"
+                    android:src="@drawable/sports"
                     android:scaleType="fitXY"
                     android:layout_alignEnd="@+id/space" />
 
@@ -176,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="LAW"
+                    android:text="SPORTS"
                     android:id="@+id/textView39"
 
                     android:textStyle="bold"
@@ -252,7 +253,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="98dp"
                     android:id="@+id/imageView9"
-                    android:src="@drawable/fin"
+                    android:src="@drawable/politics"
                     android:scaleType="fitXY"
                     android:layout_alignEnd="@+id/space" />
 
@@ -260,7 +261,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="FINANCE"
+                    android:text="POLITICS"
                     android:id="@+id/textView36"
 
                     android:textStyle="bold"
@@ -345,7 +346,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="TECHNOLOGY"
+                    android:text="STARTUP"
                     android:id="@+id/textView41"
 
                     android:textStyle="bold"
@@ -419,7 +420,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="98dp"
                     android:id="@+id/imageView7"
-                    android:src="@drawable/eco"
+                    android:src="@drawable/india"
                     android:scaleType="fitXY"
                     android:layout_alignEnd="@+id/space" />
 
@@ -429,7 +430,7 @@
 
                     android:textStyle="bold"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="ECONOMY"
+                    android:text="CURRENT AFFAIRS"
                     android:id="@+id/textView13"
                     android:layout_alignParentTop="false"
                     android:layout_centerInParent="true"

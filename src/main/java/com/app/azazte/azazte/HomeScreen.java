@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.app.azazte.azazte.Beans.HomeScreenAdapter;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
+import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.app.azazte.azazte.Utils.AzazteUtils;
 import com.squareup.picasso.Picasso;
 
@@ -42,12 +44,14 @@ public class HomeScreen extends AppCompatActivity {
     TextView bellTxt;
     TextView imageTxt;
     int back = 0;
+    private SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         FrameLayout settings = (FrameLayout) findViewById(R.id.settingsClick);
         twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
@@ -66,6 +70,38 @@ public class HomeScreen extends AppCompatActivity {
 
             }
         });
+        refreshfilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh();
+
+            }
+        });
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                swipeRefresh.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefresh.setRefreshing(true);
+
+                        refresh();
+                    }
+                });
+
+            }
+        });
+
+
+
+    }
+
+    private void refresh() {
+        Toaster.toast("Hold on! refreshing");
+        ApiExecutor.getInstance().getNews(null, swipeRefresh);
+
     }
 
     private void setupRV() {
@@ -390,7 +426,7 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(back>1){
+        if (back > 1) {
             Toaster.toast("Press again to exit");
             back++;
             moveTaskToBack(true);
@@ -400,7 +436,7 @@ public class HomeScreen extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        back=0;
+        back = 0;
         super.onResume();
     }
 }

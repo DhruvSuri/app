@@ -94,6 +94,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         super.onCreate(savedInstanceState);
         final PackageManager pm = getPackageManager();
 
+
         instance = this;
         String categoryName;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -192,7 +193,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() == 0) {
-                    refresh();
+                   // refresh();
                 } else {
                     viewPager.setCurrentItem(0, true);
                 }
@@ -598,8 +599,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
-                    topRefreshButton.setImageResource(R.drawable.refresh);
+                    topRefreshButton.setVisibility(View.INVISIBLE);
                 } else {
+                    topRefreshButton.setVisibility(View.VISIBLE);
                     topRefreshButton.setImageResource(R.drawable.top);
                 }
             }
