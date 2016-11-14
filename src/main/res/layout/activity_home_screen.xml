@@ -17,6 +17,18 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:elevation="10dp"
         android:translationZ="5dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/top_refresh"
+            android:src="@drawable/refresh"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@+id/settingsClick"
+            android:visibility="visible"
+            android:layout_marginRight="20dp" />
 
         <ImageView
             android:layout_width="30dp"
@@ -54,24 +66,39 @@
         <FrameLayout
             android:layout_width="50dp"
             android:layout_height="match_parent"
+            android:layout_alignParentTop="false"
+            android:id="@+id/refreshfilter"
+            android:layout_toStartOf="@+id/settingsClick"></FrameLayout>
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="false"
             android:layout_alignParentRight="true"
             android:id="@+id/settingsClick"></FrameLayout>
 
 
     </RelativeLayout>
-
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeRefresh"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nScrollView"
         android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
+
         android:layout_height="match_parent"
         android:background="@drawable/doodle">
 
-<include layout="@layout/homerecyclerview"></include>
+
+
+
+        <include layout="@layout/homerecyclerview"></include>
 
 
     </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

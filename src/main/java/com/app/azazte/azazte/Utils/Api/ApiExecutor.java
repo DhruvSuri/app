@@ -61,7 +61,11 @@ public class ApiExecutor {
                 if (newsCardWrapper.newsCardList.size() > 0) {
                     List<NewsCard> newsCardList = newsCardWrapper.newsCardList;
                     Connector.getInstance().saveNewsInDb(newsCardList);
+                    Toaster.toast("News are up-to-date");
+
                     EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
+                    if(swipe!=null)
+                    swipe.setRefreshing(false);
                 }
             }
 
@@ -69,10 +73,9 @@ public class ApiExecutor {
             public void onFailure(Call<NewsCardWrapper> call, Throwable t) {
                 Toaster.toast("Failed to fetch news");
                 EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
-//                if (swipe != null) {
-//                    swipe.setRefreshing(false);
-//                }
-//                MainActivity.setRefreshActionButtonState(false);
+              if (swipe != null) {
+                  swipe.setRefreshing(false);
+              }
             }
         });
     }
