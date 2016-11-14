@@ -28,6 +28,10 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.crashlytics.android.Crashlytics;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,6 +44,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import io.fabric.sdk.android.Fabric;
 import xdroid.toaster.Toaster;
 
 public class NewscardFragment extends Fragment {
@@ -85,7 +90,7 @@ public class NewscardFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Fabric.with(this.getContext(), new Crashlytics());
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         inflateHolder = inflate;
         //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
@@ -135,7 +140,7 @@ public class NewscardFragment extends Fragment {
         shareButton.setVisibility(View.GONE);
         brand = (RelativeLayout) inflate.findViewById(R.id.brand);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
-        AzazteUtils.getInstance().setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.placeholder2);
+        setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.placeholder2);
         newshead.setText(newsCard.newsHead.trim());
         newstxt.setText(newsCard.newsBody.trim());
         newsSource.setText(newsCard.newsSourceName.trim());
@@ -150,9 +155,9 @@ public class NewscardFragment extends Fragment {
         date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
 
         author.setText(newsCard.author.trim());
-          if (newsCard.impactLabel != null) {
-              impactLabel.setText(newsCard.impactLabel);
-          }
+        if (newsCard.impactLabel != null) {
+            impactLabel.setText(newsCard.impactLabel);
+        }
         //  if (newsCard.impact.isEmpty()) {
         //      hideImpact(impactLayout, impactText);
         //  } else {
@@ -262,6 +267,16 @@ public class NewscardFragment extends Fragment {
         //setupbubblelistners(inflateHolder, bubbleList);
     }
 
+    public void setImageIntoView(Context context, ImageView imageView, String imageUrl, int placeholder) {
+        Glide.with(context)
+                .load(imageUrl).asBitmap().format(DecodeFormat.PREFER_RGB_565)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .placeholder(placeholder)
+                .override(AzazteUtils.getInstance().getImageViewWidth(), AzazteUtils.getInstance().getImageViewHeight())
+                .into(imageView);
+    }
+
     private void setupBubbleListener(View inflate) {
 
         ArrayList<Bubble> bubbles = Connector.getInstance().getBubbles(newsCard.id);
@@ -345,13 +360,6 @@ public class NewscardFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
-    private void setImageIntoView(ImageView imageView, String imageUrl) {
-
-
-    }
-
 
     @Override
     public void onResume() {

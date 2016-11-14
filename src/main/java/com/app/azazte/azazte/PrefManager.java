@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PrefManager {
+    private static final String NOTIFICATION_ID = "NOTIFICATION_ID";
     private static PrefManager instance;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -79,4 +80,12 @@ public class PrefManager {
     }
 
 
+    public void saveNotificationId(String id) {
+        editor.putString(id, NOTIFICATION_ID);
+        editor.commit();
+    }
+
+    public String getNotificationId() {
+        return pref.getString(NOTIFICATION_ID, "0");
+    }
 }

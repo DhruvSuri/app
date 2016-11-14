@@ -25,6 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         ApiExecutor.getInstance().fetchBubbles();
 
         init();
+
+        Fabric.with(this,new Crashlytics());
     }
 
 

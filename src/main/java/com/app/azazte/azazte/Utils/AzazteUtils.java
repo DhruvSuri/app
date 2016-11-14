@@ -16,6 +16,7 @@ public class AzazteUtils {
     private static AzazteUtils instance = new AzazteUtils();
     private AppCompatActivity context;
     private static Integer imageViewHeight;
+    private static Integer imageViewWidth;
     private static Integer bubbleHeight;
     private static Integer bubbleWidth;
     private static String CHANNEL_LINK_DOMAIN = "http://aws.azazte.com/service/rest/bubble/redirect?storyId=%s&channelName=%s";
@@ -40,6 +41,10 @@ public class AzazteUtils {
         return imageViewHeight;
     }
 
+    public Integer getImageViewWidth(){
+        return imageViewWidth;
+    }
+
     public void intialize(AppCompatActivity context) {
         this.context = context;
         getDimensions();
@@ -48,10 +53,12 @@ public class AzazteUtils {
     public void getDimensions() {
         DisplayMetrics metrics = new DisplayMetrics();
         context.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int height = metrics.heightPixels;
-        int width = metrics.widthPixels;
-        imageViewHeight = (int) (height * 0.37);
-        bubbleHeight = (int) (height * 0.13);
+        int screenHeight = metrics.heightPixels;
+        int screenWidth = metrics.widthPixels;
+        imageViewHeight = (int) (screenHeight * 0.37);
+        imageViewWidth = (int) screenWidth;
+
+        bubbleHeight = (int) (screenHeight * 0.13);
         bubbleWidth = (int) (bubbleHeight * 1.4);
     }
 
@@ -66,7 +73,8 @@ public class AzazteUtils {
     public void setImageIntoView(Context context, ImageView imageView, String imageUrl, int placeholder) {
         Glide.with(context)
                 .load(imageUrl).asBitmap().format(DecodeFormat.PREFER_RGB_565)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .placeholder(placeholder) // can also be a drawable
                 .into(imageView);
     }

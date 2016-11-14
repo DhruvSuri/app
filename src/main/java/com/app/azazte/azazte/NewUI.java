@@ -33,6 +33,7 @@ import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.app.azazte.azazte.Utils.NewscardFragment;
 import com.app.azazte.azazte.Utils.TemplateFragment;
 import com.app.azazte.azazte.animation.DepthTransform;
+import com.crashlytics.android.Crashlytics;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,6 +42,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import xdroid.toaster.Toaster;
 
@@ -92,6 +94,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         final PackageManager pm = getPackageManager();
 
         instance = this;
@@ -110,7 +113,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         findViewById(R.id.notification);
         setListeners();
         int category = getIntent().getIntExtra("category", 0);
-        int newsPostion = getNewsPosition(this.getIntent().getStringExtra("id"), category);
+        String id = PrefManager.getInstance().getNotificationId();
+        int newsPostion = getNewsPosition(id, category);
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         if (category == 0) {
             categoryName = "All News";
@@ -142,6 +146,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     }
 
     private int getNewsPosition(String id, Integer category) {
+        if (id == null) {
+            id = "";
+        }
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNewsByCategory(category);
         int position = 0;
         for (NewsCard news : allNews) {
@@ -725,7 +732,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     @Override
     protected void onResume() {
-       // backPressed = 0;
+        // backPressed = 0;
         super.onResume();
     }
 
@@ -734,10 +741,10 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         if (viewPager.getCurrentItem() > 0) {
             viewPager.setCurrentItem(0);
         } else {
-           // Toaster.toast("press again to exit");
+            // Toaster.toast("press again to exit");
 
-                // moveTaskToBack(true);
-                finish();
+            // moveTaskToBack(true);
+            finish();
 
         }
 
