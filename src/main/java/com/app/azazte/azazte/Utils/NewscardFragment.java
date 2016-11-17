@@ -269,10 +269,10 @@ public class NewscardFragment extends Fragment {
 
     public void setImageIntoView(Context context, ImageView imageView, String imageUrl, int placeholder) {
         Glide.with(context)
-                .load(imageUrl).asBitmap().format(DecodeFormat.PREFER_RGB_565)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .skipMemoryCache(true)
-                .placeholder(placeholder)
+//                .placeholder(placeholder)
                 .override(AzazteUtils.getInstance().getImageViewWidth(), AzazteUtils.getInstance().getImageViewHeight())
                 .into(imageView);
     }

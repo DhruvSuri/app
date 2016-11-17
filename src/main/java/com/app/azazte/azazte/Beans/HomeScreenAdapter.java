@@ -15,8 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.azazte.azazte.NewUI;
+import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -86,8 +89,8 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
                     NewUI.class);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            intent.putExtra("id", newsCard.id);
-            intent.putExtra("category",category);
+            PrefManager.getInstance().saveNewsCardId(newsCard.id);
+            intent.putExtra("category", category);
             intent.putExtra("categoryChosenString", categoryName);
             context.startActivity(intent);
 
@@ -98,8 +101,9 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
         Glide.with(context)
                 .load(imageUrl)
-                .placeholder(R.drawable.placeholder2) // can also be a drawable
-                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .skipMemoryCache(true)
+//                .placeholder(R.drawable.placeholder2) // can also be a drawable
                 .into(imageView);
 
     }

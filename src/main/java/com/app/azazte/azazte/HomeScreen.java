@@ -131,7 +131,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
 
-    private void setUpHead(ImageView headerImage, TextView heading, FrameLayout headClick) {
+    private void setUpHead(final ImageView headerImage, TextView heading, FrameLayout headClick) {
         if (allNews.size() == 0) {
             return;
         }
@@ -143,7 +143,7 @@ public class HomeScreen extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),
                         NewUI.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("id", headCard.id);
+                PrefManager.getInstance().saveNewsCardId(headCard.id);
                 startActivity(intent);
             }
         });
