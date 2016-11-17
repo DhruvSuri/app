@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PrefManager {
-    private static final String NOTIFICATION_ID = "NOTIFICATION_ID";
+    private static final String NEWS_CARD_ID = "NEWS_CARD_ID";
     private static PrefManager instance;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -20,7 +20,7 @@ public class PrefManager {
     int PRIVATE_MODE = 0;
 
     // Shared preferences file name
-    private static final String PREF_NAME = "finup-intro";
+    private static final String PREF_NAME = "finup";
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
@@ -80,12 +80,17 @@ public class PrefManager {
     }
 
 
-    public void saveNotificationId(String id) {
-        editor.putString(id, NOTIFICATION_ID);
+    public void saveNewsCardId(String id) {
+        editor.putString(NEWS_CARD_ID, id);
         editor.commit();
     }
 
-    public String getNotificationId() {
-        return pref.getString(NOTIFICATION_ID, "0");
+    public void unsetNewsCardId() {
+        editor.putString(NEWS_CARD_ID, "null");
+        editor.commit();
+    }
+
+    public String getNewsCardId() {
+        return pref.getString(NEWS_CARD_ID, "null");
     }
 }

@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        id = this.getIntent().getStringExtra("notificationId");
+        Fabric.with(this, new Crashlytics());
+        //id = this.getIntent().getStringExtra("notificationId");
         setContentView(R.layout.activity_main);
         // animate();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -68,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
         ApiExecutor.getInstance().fetchBubbles();
 
         init();
-
-        Fabric.with(this,new Crashlytics());
     }
 
 
@@ -77,31 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(),
                 HomeScreen.class);
-        if (this.id != null) {
-            intent = new Intent(getApplicationContext(),
-                    NewUI.class);
-            intent.putExtra("id", this.id);
+        if (PrefManager.getInstance().getNewsCardId() != null) {
+            if (!PrefManager.getInstance().getNewsCardId().equals("null")) {
+                intent = new Intent(getApplicationContext(),
+                        NewUI.class);
+            }
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         MainActivity.this.finish();
-
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//          // Intent intent = new Intent(getApplicationContext(),
-//          //         NewUI.class);
-//          //     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//          //     intent.putExtra("id", id);
-//          //     startActivity(intent);
-////                Intent intent = new Intent(getApplicationContext(),
-////                     HomeScreen.class);
-////                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-////                startActivity(intent);
-////                MainActivity.this.finish();
-//            }
-//        }, 2000);
-
     }
 
     private void animate() {

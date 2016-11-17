@@ -47,7 +47,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import xdroid.toaster.Toaster;
 
 
-public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
+public class                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
 
     public static Integer categoryChosen;
     public static String categoryChosenString;
@@ -113,8 +113,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         findViewById(R.id.notification);
         setListeners();
         int category = getIntent().getIntExtra("category", 0);
-        String id = PrefManager.getInstance().getNotificationId();
+        String id = PrefManager.getInstance().getNewsCardId();
         int newsPostion = getNewsPosition(id, category);
+        PrefManager.getInstance().unsetNewsCardId();
         TextView categoriesText = (TextView) findViewById(R.id.categoriesTextMenu);
         if (category == 0) {
             categoryName = "All News";
@@ -147,7 +148,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     private int getNewsPosition(String id, Integer category) {
         if (id == null) {
-            id = "";
+            return 0;
         }
         ArrayList<NewsCard> allNews = Connector.getInstance().getAllNewsByCategory(category);
         int position = 0;

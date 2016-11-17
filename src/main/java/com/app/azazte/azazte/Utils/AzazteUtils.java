@@ -72,9 +72,9 @@ public class AzazteUtils {
 
     public void setImageIntoView(Context context, ImageView imageView, String imageUrl, int placeholder) {
         Glide.with(context)
-                .load(imageUrl).asBitmap().format(DecodeFormat.PREFER_RGB_565)
+                .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
+                .skipMemoryCache(false)
                 .placeholder(placeholder) // can also be a drawable
                 .into(imageView);
     }
