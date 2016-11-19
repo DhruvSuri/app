@@ -47,7 +47,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import xdroid.toaster.Toaster;
 
 
-public class                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
+public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragmentInteractionListener {
 
     public static Integer categoryChosen;
     public static String categoryChosenString;
@@ -630,7 +630,9 @@ public class                                                                    
                 addEndLayoutToFragmentList(adapter, R.layout.emptylibrary);
             }
             for (NewsCard newsCard : allBookmarks) {
-                adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
+                NewscardFragment newscardFragment = new NewscardFragment();
+                newscardFragment.newsCard = newsCard;
+                adapter.addFrag(newscardFragment);
             }
             return;
         }
@@ -647,7 +649,9 @@ public class                                                                    
                     cardCategory = 0;
                 }
                 if (category == cardCategory || category == 0) {
-                    adapter.addFrag(new NewscardFragment(newsCard, this.getApplicationContext()));
+                    NewscardFragment newscardFragment = new NewscardFragment();
+                    newscardFragment.newsCard = newsCard;
+                    adapter.addFrag(newscardFragment);
                     break;
                 }
             }

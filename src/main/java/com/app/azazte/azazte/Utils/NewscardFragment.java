@@ -50,7 +50,7 @@ import xdroid.toaster.Toaster;
 public class NewscardFragment extends Fragment {
 
     private static final String TWITTER = "TWITTER";
-    NewsCard newsCard;
+    public NewsCard newsCard;
     BubblesAdapter myadapter;
     ImageButton shareButton;
     RelativeLayout brand;
@@ -60,8 +60,12 @@ public class NewscardFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public NewscardFragment(NewsCard newsCard, Context applicationContext) {
-        this.newsCard = newsCard;
+//    public NewscardFragment(NewsCard newsCard, Context applicationContext) {
+//        this.newsCard = newsCard;
+//    }
+
+    public NewscardFragment() {
+
     }
 
     @Override
@@ -270,9 +274,9 @@ public class NewscardFragment extends Fragment {
     public void setImageIntoView(Context context, ImageView imageView, String imageUrl, int placeholder) {
         Glide.with(context)
                 .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .skipMemoryCache(true)
-//                .placeholder(placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(false)
+                .placeholder(placeholder)
                 .override(AzazteUtils.getInstance().getImageViewWidth(), AzazteUtils.getInstance().getImageViewHeight())
                 .into(imageView);
     }

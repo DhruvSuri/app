@@ -101,9 +101,9 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
         Glide.with(context)
                 .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .skipMemoryCache(true)
-//                .placeholder(R.drawable.placeholder2) // can also be a drawable
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(false)
+                .placeholder(R.drawable.placeholder2) // can also be a drawable
                 .into(imageView);
 
     }
