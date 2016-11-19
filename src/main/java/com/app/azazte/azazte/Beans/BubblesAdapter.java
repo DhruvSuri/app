@@ -11,10 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.support.customtabs.CustomTabsClient;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.customtabs.CustomTabsServiceConnection;
-import android.support.customtabs.CustomTabsSession;
+
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -104,12 +101,12 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
     private void customTab(String url) {
 
 
-        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        //CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 // set toolbar color and/or setting custom actions before invoking build()
 // Once ready, call CustomTabsIntent.Builder.build() to create a CustomTabsIntent
-        CustomTabsIntent customTabsIntent = builder.build();
+      //  CustomTabsIntent customTabsIntent = builder.build();
         // and launch the desired Url with CustomTabsIntent.launchUrl()
-        customTabsIntent.launchUrl(activity, Uri.parse(url));
+       // customTabsIntent.launchUrl(activity, Uri.parse(url));
     }
 
 

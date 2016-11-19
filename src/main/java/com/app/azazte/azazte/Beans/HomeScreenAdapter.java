@@ -98,7 +98,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
         Glide.with(context)
                 .load(imageUrl)
-                .placeholder(R.drawable.placeholder2) // can also be a drawable
+                .placeholder(R.drawable.placeholder) // can also be a drawable
                 .crossFade()
                 .into(imageView);
 
