@@ -69,6 +69,9 @@ Life is simple and so is Azazte!</string>
     <string name="categories">Categories</string>
     <string name="heading">Right to cancel the property dead if builder\n fails to deliver in three months</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
 
 

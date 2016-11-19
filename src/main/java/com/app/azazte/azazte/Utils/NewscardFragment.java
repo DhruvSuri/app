@@ -3,8 +3,6 @@ package com.app.azazte.azazte.Utils;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +10,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -39,8 +34,6 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.crashlytics.android.Crashlytics;
 
-import junit.framework.Test;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -61,11 +54,11 @@ public class NewscardFragment extends Fragment {
     public NewsCard newsCard;
     BubblesAdapter myadapter;
     ImageButton shareButton;
-    RelativeLayout brand;
     ImageView imageView;
+    RelativeLayout newsContent;
+    RelativeLayout shareLayout;
+    ImageView bookmarkView;
     private View inflateHolder;
-
-
     private OnFragmentInteractionListener mListener;
 
 //    public NewscardFragment(NewsCard newsCard, Context applicationContext) {
@@ -105,16 +98,19 @@ public class NewscardFragment extends Fragment {
         Fabric.with(this.getContext(), new Crashlytics());
         final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
         inflateHolder = inflate;
-        //final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
+        //final View shareInflate = inflater.inflate(R.layout.shareLayout, null);
 
         inflateView(inflate);
 
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 showBrand();
                 shareBitmap(inflate, newsCard.id);
                 shareButton.setClickable(false);
+
                 hideBrand();
             }
         });
@@ -124,6 +120,9 @@ public class NewscardFragment extends Fragment {
     public void inflateView(final View inflate) {
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
 
+        newsContent = (RelativeLayout) inflate.findViewById(R.id.newsContent);
+        shareLayout = (RelativeLayout) inflate.findViewById(R.id.shareLayout);
+
         FrameLayout bookmarkFrame = (FrameLayout) inflate.findViewById(R.id.bookmarkFrame);
 
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
@@ -132,6 +131,15 @@ public class NewscardFragment extends Fragment {
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
         TextView author = (TextView) inflate.findViewById(R.id.author);
         TextView impactLabel = (TextView) inflate.findViewById(R.id.impactLabel);
+
+
+        //for sharing
+
+        TextView shareNewsTxt = (TextView) inflate.findViewById(R.id.shareNewstxt);
+        TextView shareImpactTxt = (TextView) inflate.findViewById(R.id.shareImpacttxt);
+        TextView shareImpactLabel = (TextView) inflate.findViewById(R.id.shareImpactLabel);
+        View shareImpactBody = inflate.findViewById(R.id.shareImpactBody);
+
 
         //imapct tabs
         final RelativeLayout tabLayout = (RelativeLayout) inflate.findViewById(R.id.tabLayout);
@@ -143,7 +151,6 @@ public class NewscardFragment extends Fragment {
         final View line = (View) inflate.findViewById(R.id.line);
 
 
-
         imageView = (ImageView) inflate.findViewById(R.id.imageView2);
         imageView.getLayoutParams().height = AzazteUtils.getInstance().getImageViewHeight();
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -153,14 +160,14 @@ public class NewscardFragment extends Fragment {
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
-        final ImageView bookmarkView = (ImageView) inflate.findViewById(R.id.bookmark);
+        bookmarkView = (ImageView) inflate.findViewById(R.id.bookmark);
         shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
-        shareButton.setVisibility(View.GONE);
-        brand = (RelativeLayout) inflate.findViewById(R.id.brand);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
         setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.placeholder2);
         newshead.setText(newsCard.newsHead.trim());
         newstxt.setText(newsCard.newsBody.trim());
+        shareNewsTxt.setText(newsCard.newsBody.trim());
+        shareImpactTxt.setText(newsCard.impact.trim());
         newsSource.setText(newsCard.newsSourceName.trim());
 
         long time = 0;
@@ -173,8 +180,9 @@ public class NewscardFragment extends Fragment {
         date.setText(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL));
 
 
-        if(newsCard.impact.trim().length() != 0){
+        if (newsCard.impact.trim().length() != 0) {
 
+            shareImpactBody.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.VISIBLE);
             bodyMargin.setVisibility(View.VISIBLE);
             line.setVisibility(View.VISIBLE);
@@ -187,6 +195,7 @@ public class NewscardFragment extends Fragment {
         if (newsCard.impactLabel != null) {
 
             impactLabel.setText(newsCard.impactLabel);
+            shareImpactLabel.setText(newsCard.impactLabel);
         }
 
 
@@ -229,7 +238,6 @@ public class NewscardFragment extends Fragment {
         });
 
 
-
         bookmarkFrame.setOnTouchListener(new View.OnTouchListener() {
             private GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
                 @Override
@@ -267,8 +275,6 @@ public class NewscardFragment extends Fragment {
                 return true;
             }
         });
-
-
 
 
         moreAt.setOnClickListener(new View.OnClickListener() {
@@ -415,13 +421,23 @@ public class NewscardFragment extends Fragment {
     }
 
     public void showBrand() {
+        newsContent.setVisibility(View.INVISIBLE);
+        bookmarkView.setVisibility(View.INVISIBLE);
         shareButton.setVisibility(View.INVISIBLE);
-        brand.setVisibility(View.VISIBLE);
+        shareLayout.setVisibility(View.VISIBLE);
+
     }
 
     public void hideBrand() {
+        bookmarkView.setVisibility(View.VISIBLE);
+        newsContent.setVisibility(View.VISIBLE);
         shareButton.setVisibility(View.VISIBLE);
-        brand.setVisibility(View.INVISIBLE);
+        shareLayout.setVisibility(View.INVISIBLE);
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 
 

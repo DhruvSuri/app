@@ -1,133 +1,435 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="#f9f9f9">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f9f9"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/shareLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+
+
+        android:alpha="20"
+        android:padding="2dp"
+        android:visibility="visible">
+
+
+        <RelativeLayout
+            android:id="@+id/stack2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:layout_above="@+id/brand">
+
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/shareNewsBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                card_view:cardCornerRadius="0dp"
+                android:layout_marginBottom="2dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/shareNewstxt"
+                        fontPath="fonts/HelveticaNeueLight.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="false"
+                        android:layout_alignParentTop="false"
+                        android:animateLayoutChanges="true"
+                        android:background="#ffffff"
+                        android:letterSpacing="0.06"
+                        android:lineSpacingExtra="3dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp"
+                        android:singleLine="false"
+                        android:text="@string/newsinfo"
+                        android:textColor="#000000"
+                        android:textIsSelectable="false"
+                        android:textSize="12dp"
+                        tools:ignore="MissingPrefix"
+                        android:layout_below="@+id/shareTab"
+                        android:layout_marginBottom="-2dp" />
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/tabColor"
+                        android:visibility="visible"
+                        android:layout_below="@+id/shareTab"
+                        android:layout_marginRight="10dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/shareTab">
+
+                        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/summaryTab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:animateLayoutChanges="false"
+                            android:backgroundTint="@color/tabColor"
+                            android:visibility="visible"
+                            card_view:cardCornerRadius="1dp">
+
+                            <RelativeLayout
+                                android:id="@+id/summaryTabs"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:clickable="false">
+
+
+                                <TextView
+                                    android:id="@+id/textView18"
+                                    fontPath="fonts/HelveticaNeueLight.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:text="Summary"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:textColor="#ffffff"
+                                    android:textSize="12dp"
+                                    android:typeface="serif"
+                                    android:visibility="visible"
+                                    tools:ignore="MissingPrefix"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginBottom="2dp"
+                                    android:layout_marginTop="2dp" />
+
+
+                            </RelativeLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/shareImpactBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shareNewsBody"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                card_view:cardCornerRadius="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/shareImpacttxt"
+                        fontPath="fonts/HelveticaNeueLight.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="false"
+                        android:animateLayoutChanges="true"
+                        android:background="#ffffff"
+                        android:letterSpacing="0.06"
+                        android:lineSpacingExtra="3dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp"
+                        android:singleLine="false"
+                        android:text="@string/newsinfo"
+                        android:textColor="#000000"
+                        android:textIsSelectable="false"
+                        android:textSize="12dp"
+                        tools:ignore="MissingPrefix"
+                        android:layout_below="@+id/shareTab2" />
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/shareTab2"
+                        android:background="@color/tabColor"
+                        android:visibility="visible"
+                        android:layout_marginRight="10dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/shareTab2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible">
+
+                        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/newsImpactTab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/newsBody"
+                            android:layout_alignParentLeft="false"
+                            android:layout_alignParentRight="false"
+                            android:layout_gravity="center"
+                            android:layout_toRightOf="@+id/summaryTab"
+                            android:animateLayoutChanges="true"
+                            android:backgroundTint="@color/secondaryTab"
+                            android:visibility="visible"
+                            card_view:cardCornerRadius="1dp">
+
+                            <RelativeLayout
+                                android:id="@+id/impactTabs"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:clickable="false"
+                                android:visibility="visible">
+
+
+                                <TextView
+                                    android:id="@+id/shareImpactLabel"
+                                    fontPath="fonts/HelveticaNeueLight.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="2dp"
+                                    android:text="share"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:textColor="#ffffff"
+                                    android:textSize="12dp"
+                                    android:typeface="serif"
+                                    android:visibility="visible"
+                                    tools:ignore="MissingPrefix"
+                                    android:layout_marginBottom="2dp"
+                                    android:layout_centerVertical="true" />
+
+
+                            </RelativeLayout>
+
+                        </android.support.v7.widget.CardView>
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/brand"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="false"
+            android:visibility="visible"
+            android:background="#dedede">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/relativeLayout2"
+                android:id="@+id/relativeLayout3"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView3"
+                    android:src="@drawable/logo"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="10dp" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView4"
+                    android:src="@drawable/playstore"
+                    android:layout_alignParentEnd="false"
+                    android:layout_toEndOf="@+id/imageView3"
+                    android:layout_marginRight="5dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="false"
+                android:id="@+id/relativeLayout2"
+                android:layout_toRightOf="@+id/relativeLayout"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Explore more \nfrom Bubbles"
+                    android:id="@+id/textView"
+                    android:textSize="10dp"
+                    android:layout_centerInParent="true"
+                    android:textColor="#545454" />
+
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/bubbleIcon"
+                    android:background="@drawable/twitter"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:translationZ="5dp"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/relativeLayout">
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/newsContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+
+
         android:alpha="20"
-
-
         android:padding="2dp"
-        android:layout_below="@+id/header">
+        android:visibility="visible">
 
 
         <RelativeLayout
             android:id="@+id/stack"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/imageView2"
-            android:layout_above="@+id/bottombar">
+            android:layout_above="@+id/bottombar"
+            android:layout_below="@+id/imageView2">
 
 
             <RelativeLayout
+                android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/tabLayout"
                 android:visibility="gone">
 
                 <FrameLayout
+                    android:id="@+id/summaryMargin"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/summaryTab"
-                    android:id="@+id/summaryMargin"
                     android:visibility="visible"></FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/impactMargin"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_alignParentTop="true"
-                    android:id="@+id/impactMargin"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
                     android:layout_alignRight="@+id/summaryTab"
                     android:visibility="gone" />
 
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/newsImpactTab"
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:animateLayoutChanges="true"
-                    card_view:cardCornerRadius="3dp"
                     android:layout_alignEnd="@+id/newsBody"
-                    android:backgroundTint="@color/secondaryTab"
-                    android:layout_toRightOf="@+id/summaryTab"
-                    android:layout_below="@+id/summaryMargin"
                     android:layout_alignParentLeft="false"
                     android:layout_alignParentRight="false"
-                    android:visibility="visible">
+                    android:layout_below="@+id/summaryMargin"
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@+id/summaryTab"
+                    android:animateLayoutChanges="true"
+                    android:backgroundTint="@color/secondaryTab"
+                    android:visibility="visible"
+                    card_view:cardCornerRadius="3dp">
 
                     <RelativeLayout
+                        android:id="@+id/impactTabs"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:clickable="false"
-                        android:id="@+id/impactTabs">
+                        android:clickable="false">
 
 
                         <TextView
                             android:id="@+id/impactLabel"
+                            fontPath="fonts/HelveticaNeueLight.ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Impact"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textSize="15sp"
-                            tools:ignore="MissingPrefix"
-                            fontPath="fonts/HelveticaNeueLight.ttf"
-                            android:typeface="serif"
-                            android:visibility="visible"
-                            android:textColor="#ffffff"
                             android:layout_alignParentStart="true"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp" />
+                            android:layout_marginTop="5dp"
+                            android:text="Impact"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp"
+                            android:typeface="serif"
+                            android:visibility="visible"
+                            tools:ignore="MissingPrefix" />
 
 
                     </RelativeLayout>
 
                 </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/summaryTab"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:animateLayoutChanges="false"
                     android:layout_height="match_parent"
-                    card_view:cardCornerRadius="3dp"
+                    android:layout_below="@+id/impactMargin"
+                    android:layout_gravity="center"
+                    android:animateLayoutChanges="false"
                     android:backgroundTint="@color/tabColor"
-                    android:layout_below="@+id/impactMargin">
+                    card_view:cardCornerRadius="3dp">
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
                         android:id="@+id/summaryTabs"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:clickable="false">
 
 
                         <TextView
                             android:id="@+id/textView18"
+                            fontPath="fonts/HelveticaNeueLight.ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Summary"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textSize="15sp"
-                            tools:ignore="MissingPrefix"
-                            fontPath="fonts/HelveticaNeueLight.ttf"
-                            android:typeface="serif"
-                            android:visibility="visible"
-                            android:textColor="#ffffff"
                             android:layout_alignParentStart="true"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp" />
-
+                            android:layout_marginTop="5dp"
+                            android:text="Summary"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp"
+                            android:typeface="serif"
+                            android:visibility="visible"
+                            tools:ignore="MissingPrefix" />
 
 
                     </RelativeLayout>
@@ -135,15 +437,15 @@
                 </android.support.v7.widget.CardView>
             </RelativeLayout>
 
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/newsBody"
-                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                card_view:cardCornerRadius="0dp"
+                android:layout_below="@+id/bodyMargin"
+                android:layout_gravity="center"
                 android:visibility="visible"
-                android:layout_below="@+id/bodyMargin">
+                card_view:cardCornerRadius="0dp">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -151,42 +453,42 @@
 
                     <TextView
                         android:id="@+id/newstxt"
+                        fontPath="fonts/HelveticaNeueLight.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:animateLayoutChanges="true"
-                        android:lineSpacingExtra="3dp"
+                        android:background="#ffffff"
+                        android:letterSpacing="0.06"
+                        android:lineSpacingExtra="4dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:paddingTop="5dp"
                         android:singleLine="false"
                         android:text="@string/newsinfo"
-                        fontPath="fonts/HelveticaNeueLight.ttf"
                         android:textColor="#000000"
                         android:textIsSelectable="false"
-                        android:textSize="15dp"
-                        tools:ignore="MissingPrefix"
-                        android:letterSpacing="0.06"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentTop="true"
-                        android:background="#ffffff" />
+                        android:textSize="14dp"
+                        tools:ignore="MissingPrefix" />
 
-                    <View android:background="@color/tabColor"
-                        android:layout_width = "match_parent"
-                        android:layout_height="4dp"
+                    <View
                         android:id="@+id/line"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:background="@color/tabColor"
                         android:visibility="invisible" />
 
                 </RelativeLayout>
 
 
-
             </android.support.v7.widget.CardView>
 
             <FrameLayout
+                android:id="@+id/bodyMargin"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:id="@+id/bodyMargin"
                 android:visibility="gone"></FrameLayout>
 
 
@@ -198,113 +500,22 @@
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="false"
+            android:gravity="center_horizontal"
             android:visibility="visible"
-            android:gravity="center_horizontal">
+            android:background="#f6f6f6">
 
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/bubbles_rv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:elevation="2dp"
                 android:scrollbars="none"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="visible"
-                android:elevation="2dp" />
+                android:visibility="visible" />
 
         </RelativeLayout>
 
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/shareLayout"
-        android:layout_below="@+id/header"
-        android:layout_marginTop="2dp"
-        android:visibility="gone"
-        android:layout_alignBottom="@+id/newsContent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/contentLayout"
-            android:layout_below="@+id/summary"
-            android:paddingTop="3dp"
-            android:background="#11b9da"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/newsinfo"
-                android:id="@+id/shareNewTxt"
-                android:background="#ffffff"
-                android:padding="5dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:id="@+id/summary"
-            android:background="#11b9da"
-            android:padding="5dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_alignEnd="@+id/contentLayout"
-            android:layout_alignStart="@+id/contentLayout">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Summary"
-                android:id="@+id/shareSummary"
-                android:textColor="#ffffff"
-                android:textSize="16dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/impactLay"
-            android:paddingTop="3dp"
-            android:background="#11b9da"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_below="@+id/impactShareTab"
-            android:layout_alignParentBottom="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/newsinfo"
-                android:id="@+id/shareImpacttxt"
-                android:background="#ffffff"
-                android:padding="5dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:id="@+id/impactShareTab"
-            android:background="#11b9da"
-            android:padding="5dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_below="@+id/contentLayout"
-            android:layout_alignEnd="@+id/contentLayout"
-            android:layout_alignStart="@+id/contentLayout">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Impact"
-                android:id="@+id/shareImpact"
-                android:textColor="#ffffff"
-                android:textSize="16dp" />
-        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -316,8 +527,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginRight="2dp">
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp">
 
 
         <ImageView
@@ -329,30 +540,30 @@
             android:visibility="visible" />
 
         <FrameLayout
+            android:id="@+id/gradient"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/grad3"
-            android:id="@+id/gradient"></FrameLayout>
+            android:background="@drawable/grad3"></FrameLayout>
 
         <TextView
             android:id="@+id/headtxt"
+            fontPath="fonts/HelveticaNeueMedium.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="false"
+            android:layout_centerInParent="true"
             android:gravity="center_horizontal"
             android:outlineProvider="paddedBounds"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:text="Right to cancel the property dead if builder fails to deliver in three months"
             android:textAlignment="center"
-            fontPath="fonts/HelveticaNeueMedium.ttf"
-            tools:ignore="MissingPrefix"
 
             android:textColor="#ffffff"
             android:textSize="22sp"
             android:textStyle="bold"
 
-            android:layout_centerInParent="true" />
+            tools:ignore="MissingPrefix" />
 
         <TextView
             android:id="@+id/moreAt"
@@ -387,12 +598,12 @@
             android:visibility="gone"></TextView>
 
         <RelativeLayout
+            android:id="@+id/authorDate_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
             android:layout_below="@+id/headtxt"
-            android:id="@+id/authorDate_layout">
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/author"
@@ -436,54 +647,50 @@
         </RelativeLayout>
 
         <ImageView
+            android:id="@+id/bookmark"
             android:layout_width="25dp"
             android:layout_height="22dp"
-            android:id="@+id/bookmark"
-            android:src="@drawable/librarystamp"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/newsSource"
             android:layout_alignParentEnd="true"
+            android:layout_below="@+id/newsSource"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/librarystamp" />
+
+        <FrameLayout
+            android:id="@+id/bookmarkFrame"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_alignParentTop="true"
+            android:background="#00ffffff"
+            android:clickable="false"
+            android:visibility="visible" />
 
         <ImageButton
             android:id="@+id/shareNews"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_alignEnd="@+id/bookmark"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25dp"
             android:background="#00ffffff"
             android:contentDescription="share"
             android:cropToPadding="false"
             android:padding="2dp"
             android:scaleType="fitXY"
             android:src="@drawable/share2"
-            android:visibility="visible"
-            android:layout_alignParentBottom="true"
-            android:layout_alignEnd="@+id/bookmark"
-            android:layout_marginBottom="25dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/brand"></RelativeLayout>
+            android:visibility="visible" />
 
 
     </RelativeLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:id="@+id/blurFrame"
-        android:layout_height="match_parent"
-        android:clickable="false"
-        android:background="#00ffffff"
-        android:visibility="visible"></FrameLayout>
 
     <FrameLayout
+        android:id="@+id/blurFrame"
         android:layout_width="match_parent"
-        android:id="@+id/bookmarkFrame"
         android:layout_height="match_parent"
-        android:clickable="false"
         android:background="#00ffffff"
-        android:visibility="visible"
-        android:layout_above="@+id/newsContent" />
+        android:clickable="false"
+        android:visibility="gone"></FrameLayout>
 
 
 </RelativeLayout>

@@ -173,7 +173,7 @@ public class HomeScreen extends AppCompatActivity {
         if (allNews.size() == 0) {
             return;
         }
-        AzazteUtils.getInstance().setImageIntoView(this.getApplicationContext(), headerImage, headCard.imageUrl, R.drawable.placeholder2);
+        AzazteUtils.getInstance().setImageIntoView(this.getApplicationContext(), headerImage, headCard.imageUrl, R.drawable.placeholder);
         heading.setText(headCard.newsHead);
         headerImage.setOnClickListener(new View.OnClickListener() {
             @Override
