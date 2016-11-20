@@ -148,6 +148,8 @@ public class NewscardFragment extends Fragment {
         final FrameLayout impactMargin = (FrameLayout) inflate.findViewById(R.id.impactMargin);
         final FrameLayout summaryMargin = (FrameLayout) inflate.findViewById(R.id.summaryMargin);
         final FrameLayout bodyMargin = (FrameLayout) inflate.findViewById(R.id.bodyMargin);
+        final FrameLayout impactClick = (FrameLayout) inflate.findViewById(R.id.impactClick);
+        final FrameLayout summaryClick = (FrameLayout) inflate.findViewById(R.id.summaryClick);
         final View line = (View) inflate.findViewById(R.id.line);
 
 
@@ -163,7 +165,7 @@ public class NewscardFragment extends Fragment {
         bookmarkView = (ImageView) inflate.findViewById(R.id.bookmark);
         shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
-        setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.bubbleplaceholder);
+        setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.placeholder);
         newshead.setText(newsCard.newsHead.trim());
         newstxt.setText(newsCard.newsBody.trim());
         shareNewsTxt.setText(newsCard.newsBody.trim());
@@ -208,7 +210,9 @@ public class NewscardFragment extends Fragment {
         //   hideBrand();
 
 
-        impactTab.setOnClickListener(new View.OnClickListener() {
+
+
+        impactClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 impactMargin.setVisibility(View.VISIBLE);
@@ -222,7 +226,7 @@ public class NewscardFragment extends Fragment {
         });
 
 
-        summaryTab.setOnClickListener(new View.OnClickListener() {
+        summaryClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -260,7 +264,7 @@ public class NewscardFragment extends Fragment {
 
                 @Override
                 public boolean onSingleTapUp(MotionEvent e) {
-                    return false;
+                    return true;
                 }
 
                 @Override

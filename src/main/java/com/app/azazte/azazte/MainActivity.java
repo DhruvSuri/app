@@ -87,18 +87,7 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.finish();
     }
 
-    private void animate() {
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        anim.reset();
-        LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
-        l.clearAnimation();
-        l.startAnimation(anim);
-        anim = AnimationUtils.loadAnimation(this, R.anim.translate);
-        anim.reset();
-        RelativeLayout logo = (RelativeLayout) findViewById(R.id.logo);
-        logo.clearAnimation();
-        logo.startAnimation(anim);
-    }
+
 
 
     private void init() {

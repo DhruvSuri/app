@@ -45,6 +45,7 @@ public class HomeScreen extends AppCompatActivity {
     TextView imageTxt;
     int back = 0;
     private SwipeRefreshLayout swipeRefresh;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ public class HomeScreen extends AppCompatActivity {
                         swipeRefresh.setRefreshing(true);
 
                         refresh();
+                        recyclerView.notifyAll();
                     }
                 });
 
@@ -107,7 +109,7 @@ public class HomeScreen extends AppCompatActivity {
     private void setupRV() {
 
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.all_rv);
+    recyclerView = (RecyclerView) findViewById(R.id.all_rv);
         RecyclerView businessRv = (RecyclerView) findViewById(R.id.business_rv);
         RecyclerView financeRv = (RecyclerView) findViewById(R.id.fin_rv);
         RecyclerView worldRv = (RecyclerView) findViewById(R.id.world_rv);

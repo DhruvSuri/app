@@ -1,34 +1,50 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/lin_lay"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    android:orientation="vertical"
-    android:background="@drawable/doodle">
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/logo"
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5"
+        android:src="@drawable/splash"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:scaleType="centerCrop" />
 
-        <ProgressBar android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="#68a7cb"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/imageView8"
-            android:layout_marginTop="20dp" />
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView8"
+        android:src="@drawable/logo"
+        android:scaleType="fitXY"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageView8"
-            android:src="@drawable/logo"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:scaleType="fitXY" />
-    </RelativeLayout>
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#68a7cb"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageView8"
+        android:id="@+id/progressBar3" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Discover More From News"
+        android:id="@+id/textView6"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:textColor="#434343"
+        android:textStyle="bold|italic" />
+
+</RelativeLayout>

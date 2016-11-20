@@ -14,11 +14,11 @@
 
         <ImageView
             android:id="@+id/newsimage"
-            android:layout_width="180dp"
-            android:layout_height="160dp"
+            android:layout_width="175dp"
+            android:layout_height="150dp"
             android:contentDescription="@string/action_settings"
             android:src="@drawable/placeholder"
-            android:scaleType="center" />
+            android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,9 +30,9 @@
 
         <TextView
             android:id="@+id/headline"
-            android:layout_width="190dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="15dp"
             android:text="@string/heading"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"

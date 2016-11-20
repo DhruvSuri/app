@@ -40,7 +40,7 @@
             android:text="Business"
             android:id="@+id/textView8"
             android:textSize="19dp"
-            android:textColor="#6f6f6f"
+            android:textColor="@color/homeTxt"
             android:layout_marginLeft="8dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -85,7 +85,7 @@
             android:text="Economy"
             android:id="@+id/textView8"
             android:textSize="19dp"
-            android:textColor="#6f6f6f"
+            android:textColor="@color/homeTxt"
             android:layout_marginLeft="8dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -131,7 +131,7 @@
             android:text="World"
             android:id="@+id/textView8"
             android:textSize="19dp"
-            android:textColor="#6f6f6f"
+            android:textColor="@color/homeTxt"
             android:layout_marginLeft="8dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -175,7 +175,7 @@
             android:text="Money"
             android:id="@+id/textView8"
             android:textSize="19dp"
-            android:textColor="#6f6f6f"
+            android:textColor="@color/homeTxt"
             android:layout_marginLeft="8dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -219,7 +219,7 @@
             android:text="Finance"
             android:id="@+id/textView8"
             android:textSize="19dp"
-            android:textColor="#6f6f6f"
+            android:textColor="@color/homeTxt"
             android:layout_marginLeft="8dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -263,7 +263,7 @@
             android:text="Law"
             android:id="@+id/textView8"
             android:textSize="19dp"
-            android:textColor="#6f6f6f"
+            android:textColor="@color/homeTxt"
             android:layout_marginLeft="8dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -308,7 +308,7 @@
             android:text="Technology"
             android:id="@+id/textView8"
             android:textSize="19dp"
-            android:textColor="#6f6f6f"
+            android:textColor="@color/homeTxt"
             android:layout_marginLeft="8dp" />
 
         <android.support.v7.widget.RecyclerView
@@ -350,7 +350,7 @@
         android:paddingLeft="4dp"
         android:paddingTop="4dp"
         android:paddingRight="4dp"
-        android:background="#ffffff">
+        android:background="@color/homeScreen">
 
         <ImageView
             android:id="@+id/headerImage"
