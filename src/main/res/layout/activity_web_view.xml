@@ -46,6 +46,6 @@
         android:layout_alignParentEnd="false"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        app:backgroundTint="@color/bg_screen3" />
+        app:backgroundTint="@color/colorPrimary" />
 
 </RelativeLayout>

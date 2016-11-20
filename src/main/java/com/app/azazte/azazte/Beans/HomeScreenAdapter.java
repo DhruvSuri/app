@@ -103,7 +103,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
                 .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(false)
-                .placeholder(R.drawable.placeholder2) // can also be a drawable
+                .placeholder(R.drawable.placeholder) // can also be a drawable
                 .into(imageView);
 
     }

@@ -9,37 +9,4 @@
     <color name="topBarColor">#e5455a64</color>
     <color name="tabColor">#455a64</color>
     <color name="secondaryTab">#607d8b</color>
-
-
-    <color name="bg_screen1">#00a381</color>
-    <color name="bg_screen2">#e69e0025</color>
-    <color name="bg_screen3">#ffffff</color>
-
-
-    <!-- dots inactive colors -->
-    <color name="dot_dark_screen1">#787878</color>
-    <color name="dot_dark_screen2">#787878</color>
-    <color name="dot_dark_screen3">#787878</color>
-
-
-    <!-- dots active colors -->
-    <color name="dot_light_screen1">#02d9ac</color>
-    <color name="dot_light_screen2">#e6dc0134</color>
-    <color name="dot_light_screen3">#e604c9e7</color>
-
-
-    <array name="array_dot_active">
-        <item>@color/dot_light_screen1</item>
-        <item>@color/dot_light_screen2</item>
-        <item>@color/dot_light_screen3</item>
-
-    </array>
-
-    <array name="array_dot_inactive">
-        <item>@color/dot_dark_screen1</item>
-        <item>@color/dot_dark_screen2</item>
-        <item>@color/dot_dark_screen3</item>
-
-    </array>
-
 </resources>

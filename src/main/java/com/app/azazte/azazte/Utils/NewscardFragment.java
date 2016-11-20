@@ -163,7 +163,7 @@ public class NewscardFragment extends Fragment {
         bookmarkView = (ImageView) inflate.findViewById(R.id.bookmark);
         shareButton = (ImageButton) inflate.findViewById(R.id.shareNews);
         MixPanelUtils.trackNews(newsCard.newsHead.trim());
-        setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.placeholder2);
+        setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.bubbleplaceholder);
         newshead.setText(newsCard.newsHead.trim());
         newstxt.setText(newsCard.newsBody.trim());
         shareNewsTxt.setText(newsCard.newsBody.trim());
@@ -433,11 +433,6 @@ public class NewscardFragment extends Fragment {
         newsContent.setVisibility(View.VISIBLE);
         shareButton.setVisibility(View.VISIBLE);
         shareLayout.setVisibility(View.INVISIBLE);
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
 
