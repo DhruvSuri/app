@@ -12,10 +12,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -714,7 +716,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     }
 
 
-    static class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();
 
@@ -735,6 +737,27 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         public void addFrag(Fragment fragment) {
             mFragmentList.add(fragment);
             //mFragmentTitleList.add(newsCard);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+
+            RelativeLayout r1 = (RelativeLayout)((NewscardFragment) object).getActivity().findViewById(R.id.newsContent);
+            r1.removeAllViews();
+            RelativeLayout r2 = (RelativeLayout)((NewscardFragment) object).getActivity().findViewById(R.id.header);
+            r2.removeAllViews();
+            RelativeLayout r3 = (RelativeLayout)((NewscardFragment) object).getActivity().findViewById(R.id.shareLayout);
+            r3.removeAllViews();
+            RelativeLayout r4 = (RelativeLayout)((NewscardFragment) object).getActivity().findViewById(R.id.shareTab);
+            r4.removeAllViews();
+            RelativeLayout r5 = (RelativeLayout)((NewscardFragment) object).getActivity().findViewById(R.id.shareTab2);
+            r5.removeAllViews();
+            RelativeLayout r6 = (RelativeLayout)((NewscardFragment) object).getActivity().findViewById(R.id.relativeLayout3);
+            r6.removeAllViews();
+            RelativeLayout r7 = (RelativeLayout)((NewscardFragment) object).getActivity().findViewById(R.id.tabLayout);
+            r7.removeAllViews();
+            System.gc();
+            super.destroyItem(container, position, object);
         }
     }
 
