@@ -11,11 +11,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -201,7 +203,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() == 0) {
-                   // refresh();
+                    // refresh();
                 } else {
                     viewPager.setCurrentItem(0, true);
                 }
@@ -714,7 +716,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     }
 
 
-    static class ViewPagerAdapter extends FragmentPagerAdapter {
+    class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();
 
@@ -735,6 +737,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         public void addFrag(Fragment fragment) {
             mFragmentList.add(fragment);
             //mFragmentTitleList.add(newsCard);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
         }
     }
 
