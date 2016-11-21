@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ApiExecutor.getInstance().getNews(MainActivity.emailAddress, null);
         ApiExecutor.getInstance().fetchBubbles();
-
         init();
     }
 
