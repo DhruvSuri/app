@@ -143,8 +143,8 @@ public class NewscardFragment extends Fragment {
 
         //imapct tabs
         final RelativeLayout tabLayout = (RelativeLayout) inflate.findViewById(R.id.tabLayout);
-        final RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.impactTabs);
-        final RelativeLayout summaryTab = (RelativeLayout) inflate.findViewById(R.id.summaryTabs);
+        final RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.newsImpactTabs);
+        final RelativeLayout summaryTab = (RelativeLayout) inflate.findViewById(R.id.newsSummaryTabs);
         final FrameLayout impactMargin = (FrameLayout) inflate.findViewById(R.id.impactMargin);
         final FrameLayout summaryMargin = (FrameLayout) inflate.findViewById(R.id.summaryMargin);
         final FrameLayout bodyMargin = (FrameLayout) inflate.findViewById(R.id.bodyMargin);

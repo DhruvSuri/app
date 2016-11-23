@@ -11,9 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/header"
+
+
         android:alpha="20"
         android:padding="2dp"
-        android:visibility="visible">
+        android:visibility="invisible">
 
 
         <RelativeLayout
@@ -31,8 +33,7 @@
                 android:layout_gravity="center"
                 android:visibility="visible"
                 card_view:cardCornerRadius="0dp"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp">
+                android:layout_marginBottom="2dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -82,6 +83,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:animateLayoutChanges="false"
+                            android:backgroundTint="@color/tabColor"
                             android:visibility="visible"
                             card_view:cardCornerRadius="1dp">
 
@@ -89,8 +91,7 @@
                                 android:id="@+id/summaryTabs"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:clickable="false"
-                                android:background="@color/tabColor">
+                                android:clickable="false">
 
 
                                 <TextView
@@ -184,6 +185,7 @@
                             android:layout_gravity="center"
                             android:layout_toRightOf="@+id/summaryTab"
                             android:animateLayoutChanges="true"
+                            android:backgroundTint="@color/secondaryTab"
                             android:visibility="visible"
                             card_view:cardCornerRadius="1dp">
 
@@ -192,8 +194,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:clickable="false"
-                                android:visibility="visible"
-                                android:background="@color/secondaryTab">
+                                android:visibility="visible">
 
 
                                 <TextView
@@ -485,7 +486,7 @@
         android:alpha="20"
         android:padding="2dp"
         android:visibility="visible"
-        android:translationZ="2dp">
+        android:elevation="5dp">
 
 
         <RelativeLayout
@@ -502,133 +503,14 @@
                 android:layout_height="32dp"
                 android:visibility="visible" />
 
-            <RelativeLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible">
-
-                <FrameLayout
-                    android:id="@+id/summaryMargin"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/summaryTab"
-                    android:visibility="visible"></FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/impactMargin"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignRight="@+id/summaryTab"
-                    android:visibility="gone" />
-
-                <RelativeLayout
-                    android:id="@+id/newsImpactTab"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignEnd="@+id/newsBody"
-                    android:layout_alignParentLeft="false"
-                    android:layout_alignParentRight="false"
-                    android:layout_below="@+id/summaryMargin"
-                    android:layout_gravity="center"
-                    android:layout_toRightOf="@+id/summaryTab"
-                    android:animateLayoutChanges="true"
-                    android:visibility="visible"
-                    >
-
-                    <RelativeLayout
-                        android:id="@+id/newsImpactTabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clickable="false"
-                        android:background="@color/secondaryTab">
-
-
-                        <TextView
-                            android:id="@+id/impactLabel"
-                            fontPath="fonts/HelveticaNeueLight.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Impact"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="#ffffff"
-                            android:textSize="15sp"
-                            android:typeface="serif"
-                            android:visibility="visible"
-                            tools:ignore="MissingPrefix" />
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/impactClick"></FrameLayout>
-
-
-                    </RelativeLayout>
-
-           </RelativeLayout>
-
-             <RelativeLayout
-                    android:id="@+id/summaryTab"
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/impactMargin"
-                    android:layout_gravity="center"
-                    android:animateLayoutChanges="false"
-                   >
-
-                    <RelativeLayout
-                        android:id="@+id/newsSummaryTabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clickable="false"
-                        android:background="@color/tabColor">
-
-
-                        <TextView
-                            android:id="@+id/textView18"
-                            fontPath="fonts/HelveticaNeueLight.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Summary"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="#ffffff"
-                            android:textSize="15sp"
-                            android:typeface="serif"
-                            android:visibility="visible"
-                            tools:ignore="MissingPrefix" />
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignRight="@+id/textView18"
-                            android:layout_alignEnd="@+id/textView18"
-                            android:id="@+id/summaryClick"
-                            android:layout_marginLeft="5dp"></FrameLayout>
-
-
-                    </RelativeLayout>
-
-        </RelativeLayout>
-            </RelativeLayout>
-
-           <RelativeLayout
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/newsBody"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:visibility="visible"
-
+                card_view:cardCornerRadius="0dp"
+                android:translationZ="1dp"
                 android:layout_below="@+id/bodyMargin">
 
                 <RelativeLayout
@@ -668,6 +550,131 @@
                 </RelativeLayout>
 
 
+            </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <FrameLayout
+                    android:id="@+id/summaryMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/summaryTab"
+                    android:visibility="visible"></FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/impactMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/summaryTab"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/newsImpactTab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignEnd="@+id/newsBody"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentRight="false"
+                    android:layout_below="@+id/summaryMargin"
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@+id/summaryTab"
+                    android:animateLayoutChanges="true"
+                    android:backgroundTint="@color/secondaryTab"
+                    android:visibility="visible"
+                    card_view:cardCornerRadius="3dp"
+                    android:elevation="5dp"
+                    android:translationZ="1dp">
+
+                    <RelativeLayout
+                        android:id="@+id/newsImpactTabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="false"
+                        android:elevation="2dp">
+
+
+                        <TextView
+                            android:id="@+id/impactLabel"
+                            fontPath="fonts/HelveticaNeueLight.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Impact"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp"
+                            android:typeface="serif"
+                            android:visibility="visible"
+                            tools:ignore="MissingPrefix" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/impactClick"></FrameLayout>
+
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/summaryTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/impactMargin"
+                    android:layout_gravity="center"
+                    android:animateLayoutChanges="false"
+                    android:backgroundTint="@color/tabColor"
+                    card_view:cardCornerRadius="3dp"
+                    android:translationZ="1dp"
+                    android:elevation="5dp">
+
+                    <RelativeLayout
+                        android:id="@+id/newsSummaryTabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="false">
+
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            fontPath="fonts/HelveticaNeueLight.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Summary"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp"
+                            android:typeface="serif"
+                            android:visibility="visible"
+                            tools:ignore="MissingPrefix" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignRight="@+id/textView18"
+                            android:layout_alignEnd="@+id/textView18"
+                            android:id="@+id/summaryClick"
+                            android:layout_marginLeft="5dp"></FrameLayout>
+
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
             </RelativeLayout>
 
 
@@ -688,7 +695,7 @@
                 android:id="@+id/bubbles_rv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:elevation="0dp"
+                android:elevation="2dp"
                 android:scrollbars="none"
                 android:visibility="visible" />
 
