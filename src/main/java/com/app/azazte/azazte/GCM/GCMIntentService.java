@@ -16,6 +16,7 @@ import com.app.azazte.azazte.MainActivity;
 import com.app.azazte.azazte.PrefManager;
 import com.app.azazte.azazte.R;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
 
@@ -65,7 +66,12 @@ public class GCMIntentService extends IntentService {
                     recieved_message = intent.getStringExtra("message");
                     // Not sent from mixpanel, you can do whatever you'd like
                 }
-                sendNotification(recieved_message);
+                try {
+                    sendNotification(recieved_message);
+                } catch (Exception ignored) {
+                    Crashlytics.log(1, "notification", recieved_message);
+                }
+
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
@@ -89,7 +95,7 @@ public class GCMIntentService extends IntentService {
         notiStyle.setSummaryText(msg);
         try {
             String imageUrl = notificationObject.getImageUrl();
-            if (imageUrl == null){
+            if (imageUrl == null) {
                 throw new Exception("Image not found");
             }
             Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
