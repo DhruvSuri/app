@@ -51,7 +51,6 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         FrameLayout settings = (FrameLayout) findViewById(R.id.settingsClick);
@@ -79,22 +78,6 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                swipeRefresh.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefresh.setRefreshing(true);
-
-                        refresh();
-                        recyclerView.notifyAll();
-                    }
-                });
-
-            }
-        });
 
 
 

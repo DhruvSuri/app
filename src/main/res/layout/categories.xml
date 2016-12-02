@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/topBar"
-        android:background="@color/topBarColor"
+        android:background="#595959"
         android:visibility="visible"
         android:layout_alignParentBottom="false"
         android:focusable="false"

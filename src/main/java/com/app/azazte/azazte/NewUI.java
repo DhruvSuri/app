@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.azazte.azazte.Beans.NewsCard;
+import com.app.azazte.azazte.Beans.ShakeDetector;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.MessageEvent;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
@@ -69,6 +72,9 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     TextView nighttxt;
     TextView bellTxt;
     TextView imageTxt;
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
     int backPressed = 0;
     private ViewPagerAdapter adapter;
     private ViewPager viewPager;
@@ -112,6 +118,28 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
                 R.anim.fadeout);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
+
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+            @Override
+            public void onShake(int count) {
+				/*
+				 * The following method, "handleShakeEvent(count):" is a stub //
+				 * method you would use to setup whatever you want done once the
+				 * device has been shook.
+				 */
+
+               int randomNum = 1 + (int)(Math.random() * 30);
+                viewPager.setCurrentItem(randomNum);
+            }
+        });
+
+
 
         findViewById(R.id.notification);
         setListeners();
@@ -698,6 +726,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     protected void onRestart() {
         // TODO Auto-generated method stub
         super.onRestart();
+
     }
 
     public void reboot() {
@@ -749,6 +778,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     protected void onResume() {
         // backPressed = 0;
         super.onResume();
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
@@ -763,6 +793,13 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
         }
 
+    }
+
+    @Override
+    public void onPause() {
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
     }
 
 }

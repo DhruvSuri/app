@@ -3,6 +3,8 @@ package com.app.azazte.azazte.Utils;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,7 @@ import com.app.azazte.azazte.AzazteWebView;
 import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.BubblesAdapter;
 import com.app.azazte.azazte.Beans.NewsCard;
+import com.app.azazte.azazte.Beans.ShakeDetector;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
@@ -60,6 +63,7 @@ public class NewscardFragment extends Fragment {
     ImageView bookmarkView;
     private View inflateHolder;
     private OnFragmentInteractionListener mListener;
+
 
 //    public NewscardFragment(NewsCard newsCard, Context applicationContext) {
 //        this.newsCard = newsCard;
