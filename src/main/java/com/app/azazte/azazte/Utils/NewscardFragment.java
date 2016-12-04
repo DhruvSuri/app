@@ -159,11 +159,11 @@ public class NewscardFragment extends Fragment {
 
         imageView = (ImageView) inflate.findViewById(R.id.imageView2);
         imageView.getLayoutParams().height = AzazteUtils.getInstance().getImageViewHeight();
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         View bubbleBottomBar = inflate.findViewById(R.id.bottombar);
         bubbleBottomBar.getLayoutParams().height = AzazteUtils.getInstance().getBubbleHeight();
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
         bookmarkView = (ImageView) inflate.findViewById(R.id.bookmark);
