@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/imageView5"
-        android:src="@drawable/doodle"
+        android:src="@drawable/splash"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
         android:layout_alignParentTop="true"
@@ -45,6 +45,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:textColor="#434343"
-        android:textStyle="bold|italic" />
+        android:visibility="invisible" />
 
 </RelativeLayout>

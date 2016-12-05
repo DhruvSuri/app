@@ -2,16 +2,18 @@ package com.app.azazte.azazte.Utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,14 +29,11 @@ import com.app.azazte.azazte.AzazteWebView;
 import com.app.azazte.azazte.Beans.Bubble;
 import com.app.azazte.azazte.Beans.BubblesAdapter;
 import com.app.azazte.azazte.Beans.NewsCard;
-import com.app.azazte.azazte.Beans.ShakeDetector;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DecodeFormat;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.crashlytics.android.Crashlytics;
 
 import org.greenrobot.eventbus.EventBus;
@@ -51,7 +50,7 @@ import java.util.StringTokenizer;
 import io.fabric.sdk.android.Fabric;
 import xdroid.toaster.Toaster;
 
-public class NewscardFragment extends Fragment {
+public class NewscardFragment extends Fragment  {
 
     private static final String TWITTER = "TWITTER";
     public NewsCard newsCard;
@@ -60,8 +59,11 @@ public class NewscardFragment extends Fragment {
     ImageView imageView;
     RelativeLayout newsContent;
     RelativeLayout shareLayout;
+    FrameLayout bodyMargin;
     ImageView bookmarkView;
+    RelativeLayout brand;
     private View inflateHolder;
+    View inflate;
     private OnFragmentInteractionListener mListener;
 
 
@@ -100,9 +102,10 @@ public class NewscardFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         Fabric.with(this.getContext(), new Crashlytics());
-        final View inflate = inflater.inflate(R.layout.fragment_newscard, null);
+
+        inflate = inflater.inflate(R.layout.fragment_newscard, null);
         inflateHolder = inflate;
-        //final View shareInflate = inflater.inflate(R.layout.shareLayout, null);
+      //  final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
 
         inflateView(inflate);
 
@@ -110,26 +113,26 @@ public class NewscardFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-
-                showBrand();
+                shareLayout.setVisibility(View.VISIBLE);
                 shareBitmap(inflate, newsCard.id);
                 shareButton.setClickable(false);
+                shareLayout.setVisibility(View.INVISIBLE);
 
-                hideBrand();
+
             }
         });
         return inflate;
     }
 
+
+
     public void inflateView(final View inflate) {
         TextView newshead = (TextView) inflate.findViewById(R.id.headtxt);
-
         newsContent = (RelativeLayout) inflate.findViewById(R.id.newsContent);
-        shareLayout = (RelativeLayout) inflate.findViewById(R.id.shareLayout);
-
+        shareLayout = (RelativeLayout) inflate.findViewById(R.id.ShareLayout);
         FrameLayout bookmarkFrame = (FrameLayout) inflate.findViewById(R.id.bookmarkFrame);
-
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
+        final TextView shareNewstxt = (TextView) inflate.findViewById(R.id.shareNewsText);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
         TextView moreAt = (TextView) inflate.findViewById(R.id.moreAt);
@@ -137,26 +140,18 @@ public class NewscardFragment extends Fragment {
         TextView impactLabel = (TextView) inflate.findViewById(R.id.impactLabel);
 
 
-        //for sharing
-
-        TextView shareNewsTxt = (TextView) inflate.findViewById(R.id.shareNewstxt);
-        TextView shareImpactTxt = (TextView) inflate.findViewById(R.id.shareImpacttxt);
-        TextView shareImpactLabel = (TextView) inflate.findViewById(R.id.shareImpactLabel);
-        View shareImpactBody = inflate.findViewById(R.id.shareImpactBody);
-
 
         //imapct tabs
         final RelativeLayout tabLayout = (RelativeLayout) inflate.findViewById(R.id.tabLayout);
         final RelativeLayout impactTab = (RelativeLayout) inflate.findViewById(R.id.newsImpactTabs);
         final RelativeLayout summaryTab = (RelativeLayout) inflate.findViewById(R.id.newsSummaryTabs);
+        brand = (RelativeLayout) inflate.findViewById(R.id.brand);
         final FrameLayout impactMargin = (FrameLayout) inflate.findViewById(R.id.impactMargin);
         final FrameLayout summaryMargin = (FrameLayout) inflate.findViewById(R.id.summaryMargin);
-        final FrameLayout bodyMargin = (FrameLayout) inflate.findViewById(R.id.bodyMargin);
+        bodyMargin = (FrameLayout) inflate.findViewById(R.id.bodyMargin);
         final FrameLayout impactClick = (FrameLayout) inflate.findViewById(R.id.impactClick);
         final FrameLayout summaryClick = (FrameLayout) inflate.findViewById(R.id.summaryClick);
         final View line = (View) inflate.findViewById(R.id.line);
-
-
         imageView = (ImageView) inflate.findViewById(R.id.imageView2);
         imageView.getLayoutParams().height = AzazteUtils.getInstance().getImageViewHeight();
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -172,8 +167,7 @@ public class NewscardFragment extends Fragment {
         setImageIntoView(this.getContext(), imageView, newsCard.imageUrl, R.drawable.placeholder);
         newshead.setText(newsCard.newsHead.trim());
         newstxt.setText(newsCard.newsBody.trim());
-        shareNewsTxt.setText(newsCard.newsBody.trim());
-        shareImpactTxt.setText(newsCard.impact.trim());
+        shareNewstxt.setText(newsCard.newsBody.trim());
         newsSource.setText(newsCard.newsSourceName.trim());
 
         long time = 0;
@@ -188,9 +182,8 @@ public class NewscardFragment extends Fragment {
 
         if (newsCard.impact.trim().length() != 0) {
 
-            shareImpactBody.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.VISIBLE);
-            bodyMargin.setVisibility(View.VISIBLE);
+            // bodyMargin.setVisibility(View.VISIBLE);
             line.setVisibility(View.VISIBLE);
 
         }
@@ -201,7 +194,7 @@ public class NewscardFragment extends Fragment {
         if (newsCard.impactLabel != null) {
 
             impactLabel.setText(newsCard.impactLabel);
-            shareImpactLabel.setText(newsCard.impactLabel);
+
         }
 
 
@@ -214,8 +207,6 @@ public class NewscardFragment extends Fragment {
         //   hideBrand();
 
 
-
-
         impactClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,6 +215,7 @@ public class NewscardFragment extends Fragment {
                 summaryTab.setBackgroundColor(getResources().getColor(R.color.secondaryTab));
                 impactTab.setBackgroundColor(getResources().getColor(R.color.tabColor));
                 newstxt.setText(newsCard.impact.trim());
+                shareNewstxt.setText(newsCard.impact.trim());
 
 
             }
@@ -240,6 +232,7 @@ public class NewscardFragment extends Fragment {
                 impactTab.setBackgroundColor(getResources().getColor(R.color.secondaryTab));
                 //   impactTab.animate().alpha(0.0f).setDuration(500);
                 newstxt.setText(newsCard.newsBody.trim());
+                shareNewstxt.setText(newsCard.newsBody.trim());
 
 
             }
@@ -352,11 +345,16 @@ public class NewscardFragment extends Fragment {
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager sharelayoutManager
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView bubbles_rv = (RecyclerView) inflate.findViewById(R.id.bubbles_rv);
+        RecyclerView share_bubbles_rv = (RecyclerView) inflate.findViewById(R.id.share_bubbles_rv);
         bubbles_rv.setLayoutManager(layoutManager);
+        share_bubbles_rv.setLayoutManager(sharelayoutManager);
         myadapter = new BubblesAdapter(tokens, newsCard.id, getContext(), getActivity(), inflate);
         bubbles_rv.setItemAnimator(new DefaultItemAnimator());
         bubbles_rv.setAdapter(myadapter);
+        share_bubbles_rv.setAdapter(myadapter);
     }
 
 
@@ -369,10 +367,15 @@ public class NewscardFragment extends Fragment {
 
     private void shareBitmap(View view, String fileName) {
         try {
+
             view.setDrawingCacheEnabled(true);
             view.buildDrawingCache(true);
             view.setDrawingCacheEnabled(true);
-            Bitmap bitmap = view.getDrawingCache();
+            Bitmap bitmap = Bitmap.createBitmap( view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+            view.draw(canvas);
+           // Bitmap bitmap = view.getDrawingCache();
             File file = new File(getContext().getCacheDir(), fileName + ".png");
             FileOutputStream fOut = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
@@ -383,9 +386,10 @@ public class NewscardFragment extends Fragment {
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-            intent.putExtra(Intent.EXTRA_TEXT, "Know the impact of business, economy and finance on YOU . All In 30 seconds! ?\n" +
+            intent.putExtra(Intent.EXTRA_TEXT, "Discover news and related content from your favorite social channels\n" +
                     "Download finup: http://bit.ly/29Gnkgl");
             intent.setType("image/png");
+
             startActivity(Intent.createChooser(intent, "finup"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -414,30 +418,20 @@ public class NewscardFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
+        //   bodyMargin.setVisibility(View.VISIBLE);
+        shareLayout.setVisibility(View.INVISIBLE);
         shareButton.setClickable(true);
     }
 
-    public void showBrand() {
-        newsContent.setVisibility(View.INVISIBLE);
-        bookmarkView.setVisibility(View.INVISIBLE);
-        shareButton.setVisibility(View.INVISIBLE);
-        shareLayout.setVisibility(View.VISIBLE);
 
-    }
 
-    public void hideBrand() {
-        bookmarkView.setVisibility(View.VISIBLE);
-        newsContent.setVisibility(View.VISIBLE);
-        shareButton.setVisibility(View.VISIBLE);
-        shareLayout.setVisibility(View.INVISIBLE);
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 
 

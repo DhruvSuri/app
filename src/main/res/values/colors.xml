@@ -7,8 +7,8 @@
     <color name="navigationBarColor">#ffffff</color>
     <color name="colorAccent">#2e2e2e</color>
     <color name="topBarColor">#da595959</color>
-    <color name="tabColor">#ffffff</color>
-    <color name="secondaryTab">#e4e4e4</color>
+    <color name="tabColor">#d5d5d5</color>
+    <color name="secondaryTab">#f8f8f8</color>
     <color name="homeScreen">#e4e4e4</color>
     <color name="homeTxt">#515151</color>
 </resources>
