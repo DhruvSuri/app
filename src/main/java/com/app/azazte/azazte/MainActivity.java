@@ -24,6 +24,10 @@ import com.crashlytics.android.Crashlytics;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.w3c.dom.CharacterData;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -95,27 +99,8 @@ public class MainActivity extends AppCompatActivity {
         PrefManager.init(this);
         MixPanelUtils.fetchRegistrationId();
         MixPanelUtils.track("Logged into main activity");
-        extractEmailAddress();
+        //extractEmailAddress();
         AzazteUtils.getInstance().intialize(this);
-    }
-
-    private void extractEmailAddress() {
-        try {
-            emailAddress = "";
-            Account[] accounts = AccountManager.get(getApplicationContext()).getAccounts();
-            for (Account account : accounts) {
-                if (account.name.contains(".com")) {
-                    emailAddress = emailAddress + account.name.replaceAll("gmail.com", "g");
-                }
-            }
-            MixPanelUtils.setEmail(emailAddress);
-            Crashlytics.setUserIdentifier(emailAddress);
-            if (emailAddress.length() >= 40) {
-                emailAddress = emailAddress.substring(0, 39);
-            }
-        } catch (Exception e) {
-            emailAddress = "SoSorryNotFound ";
-        }
     }
 
 
