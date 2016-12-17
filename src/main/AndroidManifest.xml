@@ -97,7 +97,12 @@
             android:name="com.parse.push.gcm_sender_id"
             android:value="id:527444607031" />
 
-        <activity android:name=".NewUI" />
+        <activity
+            android:name=".NewUI" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.app.azazte.azazte.HomeScreen" />
+        </activity>
         <activity android:name=".HomeScreen"></activity>
     </application>
 

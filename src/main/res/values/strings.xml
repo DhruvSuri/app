@@ -62,10 +62,10 @@ Life is simple and so is Azazte!</string>
     <string name="title_activity_tools">Tools</string>
 
 
-    <string name="feedback_url">http://app.azazte.com/feedback.html</string>
-    <string name="about_us">http://app.azazte.com</string>
-    <string name="write_us">http://app.azazte.com/write.html</string>
-    <string name="privacy">http://app.azazte.com/privacy.html</string>
+    <string name="feedback_url">http://finup.in/feedback.html</string>
+    <string name="about_us">http://finup.in</string>
+    <string name="write_us">http://finup.in/write.html</string>
+    <string name="privacy">http://finup.in/privacy.html</string>
     <string name="categories">Categories</string>
     <string name="heading">Right to cancel the property dead if builder\n fails to deliver in three months</string>
 

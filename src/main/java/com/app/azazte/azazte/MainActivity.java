@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         if (PrefManager.getInstance().getNewsCardId() != null) {
             if (!PrefManager.getInstance().getNewsCardId().equals("null")) {
                 intent = new Intent(getApplicationContext(),
-                        NewUI.class);
+                        HomeScreen.class);
             }
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

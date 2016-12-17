@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -198,11 +199,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         homeFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(),
-                        HomeScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
+                NavUtils.navigateUpFromSameTask(NewUI.this);
+            //   Intent intent = new Intent(getApplicationContext(),
+            //           HomeScreen.class);
+            //   intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            //   startActivity(intent);
             }
         });
 
@@ -515,22 +516,22 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
 
-        economy.setOnClickListener(new View.OnClickListener() {
+        business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //setupViewPager(1);
                 categoryChosen = 1;
-                categoryChosenString = "Economy";
+                categoryChosenString = "Business";
                 reboot();
             }
         });
 
-        business.setOnClickListener(new View.OnClickListener() {
+        economy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //setupViewPager(2);
                 categoryChosen = 2;
-                categoryChosenString = "Business";
+                categoryChosenString = "Current Affairs";
                 reboot();
             }
         });
@@ -540,7 +541,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(4);
                 categoryChosen = 3;
-                categoryChosenString = "Finance";
+                categoryChosenString = "Politics";
                 reboot();
             }
         });
@@ -550,7 +551,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 4;
-                categoryChosenString = "Money";
+                categoryChosenString = "World";
                 reboot();
             }
         });
@@ -560,7 +561,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 5;
-                categoryChosenString = "World";
+                categoryChosenString = "Entertainment";
                 reboot();
             }
         });
@@ -570,7 +571,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 6;
-                categoryChosenString = "Law";
+                categoryChosenString = "Sports";
                 reboot();
             }
         });
@@ -580,7 +581,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(5);
                 categoryChosen = 7;
-                categoryChosenString = "Technology";
+                categoryChosenString = "Startup";
                 reboot();
             }
         });
@@ -615,6 +616,8 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
             @Override
             public void onPageSelected(int position) {
+                topBar.setVisibility(View.INVISIBLE);
+
                 if (position == 0) {
                     topRefreshButton.setVisibility(View.INVISIBLE);
                 } else {
@@ -760,19 +763,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
 
     }
 
-    @Override
-    public void onBackPressed() {
-        if (viewPager.getCurrentItem() > 0) {
-            viewPager.setCurrentItem(0);
-        } else {
-            // Toaster.toast("press again to exit");
 
-            // moveTaskToBack(true);
-            finish();
-
-        }
-
-    }
 
 
 
