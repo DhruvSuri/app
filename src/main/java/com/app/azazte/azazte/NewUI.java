@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -39,6 +40,9 @@ import com.app.azazte.azazte.Utils.NewscardFragment;
 import com.app.azazte.azazte.Utils.TemplateFragment;
 import com.app.azazte.azazte.animation.DepthTransform;
 import com.crashlytics.android.Crashlytics;
+
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -198,11 +202,11 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         homeFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(),
-                        HomeScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
+                NavUtils.navigateUpFromSameTask(NewUI.this);
+            //    Intent intent = new Intent(getApplicationContext(),
+            //            HomeScreen.class);
+            //    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            //    startActivity(intent);
             }
         });
 
@@ -515,22 +519,22 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             }
         });
 
-        economy.setOnClickListener(new View.OnClickListener() {
+        business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //setupViewPager(1);
                 categoryChosen = 1;
-                categoryChosenString = "Economy";
+                categoryChosenString = "Business";
                 reboot();
             }
         });
 
-        business.setOnClickListener(new View.OnClickListener() {
+        economy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //setupViewPager(2);
                 categoryChosen = 2;
-                categoryChosenString = "Business";
+                categoryChosenString = "Current Affairs";
                 reboot();
             }
         });
@@ -540,7 +544,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(4);
                 categoryChosen = 3;
-                categoryChosenString = "Finance";
+                categoryChosenString = "Politics";
                 reboot();
             }
         });
@@ -550,7 +554,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 4;
-                categoryChosenString = "Money";
+                categoryChosenString = "World";
                 reboot();
             }
         });
@@ -560,7 +564,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 5;
-                categoryChosenString = "World";
+                categoryChosenString = "Entertainment";
                 reboot();
             }
         });
@@ -570,7 +574,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 6;
-                categoryChosenString = "Law";
+                categoryChosenString = "Sports";
                 reboot();
             }
         });
@@ -580,7 +584,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(5);
                 categoryChosen = 7;
-                categoryChosenString = "Technology";
+                categoryChosenString = "Startup";
                 reboot();
             }
         });
@@ -721,6 +725,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
         // Unregister
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+        unregisterManagers();
     }
 
 
@@ -757,22 +762,32 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
     protected void onResume() {
         // backPressed = 0;
         super.onResume();
+        checkForCrashes();
 
     }
+
 
     @Override
-    public void onBackPressed() {
-        if (viewPager.getCurrentItem() > 0) {
-            viewPager.setCurrentItem(0);
-        } else {
-            // Toaster.toast("press again to exit");
-
-            // moveTaskToBack(true);
-            finish();
-
-        }
-
+    public void onPause() {
+        super.onPause();
+        unregisterManagers();
     }
+
+
+
+    private void checkForCrashes() {
+        CrashManager.register(this);
+    }
+
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        //UpdateManager.register(this);
+    }
+
+    private void unregisterManagers() {
+        UpdateManager.unregister();
+    }
+
 
 
 

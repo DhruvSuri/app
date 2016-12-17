@@ -21,6 +21,9 @@ import com.app.azazte.azazte.Utils.AzazteUtils;
 import com.app.azazte.azazte.Utils.MixPanelUtils;
 import com.crashlytics.android.Crashlytics;
 
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         if (PrefManager.getInstance().getNewsCardId() != null) {
             if (!PrefManager.getInstance().getNewsCardId().equals("null")) {
                 intent = new Intent(getApplicationContext(),
-                        NewUI.class);
+                        HomeScreen.class);
             }
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -97,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         MixPanelUtils.track("Logged into main activity");
         extractEmailAddress();
         AzazteUtils.getInstance().intialize(this);
+        //hockey app updates
+        checkForUpdates();
     }
 
     private void extractEmailAddress() {
@@ -122,6 +127,38 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+
+    private void checkForCrashes() {
+        CrashManager.register(this);
+    }
+
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        UpdateManager.register(this);
+    }
+
+    private void unregisterManagers() {
+        UpdateManager.unregister();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // ... your own onResume implementation
+        checkForCrashes();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterManagers();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterManagers();
     }
 
 }

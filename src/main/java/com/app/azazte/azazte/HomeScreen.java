@@ -25,6 +25,9 @@ import com.app.azazte.azazte.Utils.Api.ApiExecutor;
 import com.app.azazte.azazte.Utils.AzazteUtils;
 import com.squareup.picasso.Picasso;
 
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
+
 import java.util.ArrayList;
 
 import xdroid.toaster.Toaster;
@@ -408,20 +411,38 @@ public class HomeScreen extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if (back > 1) {
-            Toaster.toast("Press again to exit");
-            back++;
-            moveTaskToBack(true);
-        }
 
-    }
 
     @Override
     protected void onResume() {
         back = 0;
         super.onResume();
+        checkForCrashes();
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterManagers();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterManagers();
+    }
+
+    private void checkForCrashes() {
+        CrashManager.register(this);
+    }
+
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        UpdateManager.register(this);
+    }
+
+    private void unregisterManagers() {
+        UpdateManager.unregister();
+    }
+
 }
+

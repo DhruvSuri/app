@@ -85,7 +85,7 @@
         <meta-data
             android:name="com.mixpanel.android.MPConfig.AutoShowMixpanelUpdates"
             android:value="true" />
-
+        <meta-data android:name="net.hockeyapp.android.appIdentifier" android:value="${HOCKEYAPP_APP_ID}" />
         <activity
             android:name="com.mixpanel.android.surveys.SurveyActivity"
             android:theme="@style/com_mixpanel_android_SurveyActivityTheme" />
@@ -97,7 +97,12 @@
             android:name="com.parse.push.gcm_sender_id"
             android:value="id:527444607031" />
 
-        <activity android:name=".NewUI" />
+        <activity
+            android:name=".NewUI" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.app.azazte.azazte.HomeScreen" />
+        </activity>
         <activity android:name=".HomeScreen"></activity>
     </application>
 
