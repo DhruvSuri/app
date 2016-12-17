@@ -121,12 +121,12 @@ public class HomeScreen extends AppCompatActivity {
         businessRv.setItemAnimator(new DefaultItemAnimator());
         businessRv.setAdapter(myadapter);
 
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 3), 3, "Finance", this);
+        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 3), 3, "Politics", this);
         financeRv.setLayoutManager(gridLayoutManager2);
         financeRv.setItemAnimator(new DefaultItemAnimator());
         financeRv.setAdapter(myadapter);
 
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 1), 1, "Economy", this);
+        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 1), 1, "Current Affairs", this);
         ecoRv.setLayoutManager(gridLayoutManager3);
         ecoRv.setItemAnimator(new DefaultItemAnimator());
         ecoRv.setAdapter(myadapter);
@@ -137,12 +137,12 @@ public class HomeScreen extends AppCompatActivity {
         worldRv.setAdapter(myadapter);
 
 
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 7), 7, "Technology", this);
+        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 7), 7, "Startup", this);
         techRv.setLayoutManager(gridLayoutManager5);
         techRv.setItemAnimator(new DefaultItemAnimator());
         techRv.setAdapter(myadapter);
 
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 6), 6, "Law", this);
+        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 6), 6, "Sports", this);
         lawRv.setLayoutManager(gridLayoutManager6);
         lawRv.setItemAnimator(new DefaultItemAnimator());
         lawRv.setAdapter(myadapter);

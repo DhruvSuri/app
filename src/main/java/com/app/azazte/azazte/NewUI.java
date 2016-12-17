@@ -520,7 +520,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(1);
                 categoryChosen = 1;
-                categoryChosenString = "Economy";
+                categoryChosenString = "Current Affairs";
                 reboot();
             }
         });
@@ -540,7 +540,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(4);
                 categoryChosen = 3;
-                categoryChosenString = "Finance";
+                categoryChosenString = "Politics";
                 reboot();
             }
         });
@@ -550,7 +550,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 4;
-                categoryChosenString = "Money";
+                categoryChosenString = "World";
                 reboot();
             }
         });
@@ -560,7 +560,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 5;
-                categoryChosenString = "World";
+                categoryChosenString = "Money";
                 reboot();
             }
         });
@@ -570,7 +570,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(3);
                 categoryChosen = 6;
-                categoryChosenString = "Law";
+                categoryChosenString = "Sports";
                 reboot();
             }
         });
@@ -580,7 +580,7 @@ public class NewUI extends AppCompatActivity implements NewscardFragment.OnFragm
             public void onClick(View v) {
                 //setupViewPager(5);
                 categoryChosen = 7;
-                categoryChosenString = "Technology";
+                categoryChosenString = "Startup";
                 reboot();
             }
         });

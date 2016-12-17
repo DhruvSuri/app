@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         MainActivity.this.finish();
+
     }
 
 
