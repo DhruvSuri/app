@@ -13,8 +13,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -51,6 +53,12 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        if (PrefManager.getInstance().isFirstTimeLaunch()) {
+            showOverLay();
+            PrefManager.getInstance().setFirstTimeLaunch(false);
+        }
+
         FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         FrameLayout settings = (FrameLayout) findViewById(R.id.settingsClick);
@@ -423,5 +431,18 @@ public class HomeScreen extends AppCompatActivity {
     protected void onResume() {
         back = 0;
         super.onResume();
+    }
+    public void showOverLay() {
+        final Dialog dialog = new Dialog(this, R.style.dialog);
+        dialog.setContentView(R.layout.privacy);
+        Button accept = (Button) dialog.findViewById(R.id.accept);
+        dialog.show();
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
     }
 }
