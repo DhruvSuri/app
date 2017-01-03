@@ -110,7 +110,7 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
 
 
     public void showquestiondialog(String url) {
-        final Dialog dialog = new Dialog(context, R.style.dialog);
+        final Dialog dialog = new Dialog(context, R.style.bubble);
         dialog.setContentView(R.layout.questiondialog);
         setUpWebview(dialog, url);
 

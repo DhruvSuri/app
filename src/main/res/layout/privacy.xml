@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
+    android:background="#ffffff"
+    android:padding="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,44 +14,146 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Privacy Policy"
+            android:text="Privacy and Terms"
             android:id="@+id/textView"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
-            android:textColor="#000" />
+            android:textColor="#2196f3"
+            android:textSize="27sp" />
 
         <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/scrollView"
             android:layout_below="@+id/textView"
-            android:layout_marginBottom="60dp">
+            android:layout_marginBottom="60dp"
+            android:scrollIndicators="none">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Azazte Tech Private Limited (“Finup”, “We”, “Us”, “Our”) owns / powers / manages the website www.finup.in (website) and Finup: Discover More from News (&apos;App&apos;). Our App Finup is a contextual discovery platform for exploring the latest news and trends from social media channels across the web. Provides news related content from YouTube, twitter, quora, LinkedIn and more on a single tap.  Azazte Tech Private Limited respects the privacy of its users (“You”, “Your”, “User”) and is committed to protect it in all respects. By using Azazte Tech Private Limited’ website, App or its services, you consent to collection, storage, and use of the personal information provided by you (including any changes thereto as provided by you) for any of the services that we offer. To avail certain sites / services on our websites and app, users are required to provide certain information that may include but not limited to :- a) your name, b) email address, c) physical address d) mobile no. etc., and / or your occupation, interests, and the like. The Information as supplied by the users enables us to improve our sites and provide you the most user-friendly experience, and better services. We take appropriate security measures to protect against unauthorized access to or unauthorized alteration, disclosure or destruction of data. These include internal reviews of our data collection, storage and processing practices and security measures, including appropriate encryption and physical security measures to guard against unauthorized access to systems where we store personal data. All information gathered on app is securely stored within the company controlled database. The database is stored on servers secured behind a firewall; access to the servers is password-protected and is strictly limited. However, as effective as our security measures are, no security system is impenetrable. We cannot guarantee the security of our database, nor can we guarantee that information you supply will not be intercepted while being transmitted to us over the Internet.  We reserve the right, at any time, to add to, change, update, or modify this Privacy Policy so please review it frequently. If We do, then We will post these changes on this page. In all cases, use of information We collect is subject to the Privacy Policy in effect at the time such information is collected.  We use Our best efforts to use information in aggregate form (so that no individual user is identified) for the following purposes: To build up marketing profiles; To aid strategic development, data collection and business analytics; To manage our relationship with advertisers and partners; To audit usage of the App; and To enhance user experience in relation to the App (“collectively, “Permitted Use”). We reserve the right to disclose Personal Information if required to do so by law or if we believe that it is necessary to do so to protect and defend the rights, property or personal safety of InShorts, the App, or Our Users.  We use third-party advertising companies to serve ads when you visit our Web site or App. These companies may use information (not including your name, address, email address or telep`hone number) about your visits to this and other Web sites in order to provide advertisements about goods and services of interest to you. Any complaints or concerns with regards to content or to report any abuse of laws or breach of these terms or any request may be taken up with the designated grievance officer as mentioned below via post or by sending an email to dhruv@finup.in "
-                android:id="@+id/textView9"
-                android:layout_below="@+id/textView"
-                android:layout_centerHorizontal="true"
-                android:padding="15dp"
-                android:textColor="#6f6f6f"
-                android:textSize="15sp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="By choosing “I agree” below you agree to Finup’s Privacy and Terms. "
+                    android:id="@+id/textView9"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#6a6a6a" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="You also agree to our Privacy Policy, which describes how we process your information, including these key points: "
+                    android:id="@+id/textView11"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#6a6a6a" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Data we process when you use Finup : "
+                    android:id="@+id/textView12"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="1. When you use Finup services to do things like reading a news, we store the information of which articles you have read. We process information about that activity – including information like the video you watched, device IDs, IP addresses, cookie data, and location.. "
+                    android:id="@+id/textView15"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#6a6a6a" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Why we process it :"
+                    android:id="@+id/textView16"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="We process this data for the purposes described in our policy, including to: "
+                    android:id="@+id/textView17"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#6a6a6a" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="1.Help our services deliver more useful, customized content such as more relevant news piece; \n 2. Improve the quality of our services and develop new ones;3. Deliver personalized ads, on sites and apps that partner with Finup;3. Improve security by protecting against fraud and abuse;4. and Conduct analytics and measurement to understand how our services are used. "
+                    android:id="@+id/textView19"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#6a6a6a" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Combining data :"
+                    android:id="@+id/textView20"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#000" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="We also combine data among our services and across your devices for these purposes. For example, we may show you ads based on information from your topics of interest while reading.
+"
+                    android:id="@+id/textView121"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="#6a6a6a" />
+            </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Accept"
-            android:theme="@style/AppTheme.Button"
-            android:id="@+id/accept"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="#2196f3"
-            android:textColor="#ffffff" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="5dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cancel"
+                android:theme="@style/AppTheme.Button"
+                android:id="@+id/cancel"
+                android:backgroundTint="#dedede"
+                android:textColor="#000"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="20dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accept"
+                android:theme="@style/AppTheme.Button"
+                android:id="@+id/accept"
+                android:backgroundTint="#2196f3"
+                android:textColor="#ffffff"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </LinearLayout>
 
     </RelativeLayout>
 </LinearLayout>

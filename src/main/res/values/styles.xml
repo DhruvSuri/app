@@ -49,6 +49,15 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowAnimationStyle">@style/rightAnim</item>
     </style>
+    <style name="bubble" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@style/dialog.animation</item>
+    </style>
     <style name="rightAnim">
         <item name="android:windowEnterAnimation">@anim/left</item>
         <item name="android:windowExitAnimation">@anim/right</item>

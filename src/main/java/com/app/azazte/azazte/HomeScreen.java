@@ -433,14 +433,23 @@ public class HomeScreen extends AppCompatActivity {
         super.onResume();
     }
     public void showOverLay() {
-        final Dialog dialog = new Dialog(this, R.style.dialog);
+        final Dialog dialog = new Dialog(this, R.style.bubble);
         dialog.setContentView(R.layout.privacy);
         Button accept = (Button) dialog.findViewById(R.id.accept);
+        Button cancel = (Button) dialog.findViewById(R.id.cancel);
         dialog.show();
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                PrefManager.getInstance().setFirstTimeLaunch(true);
 
             }
         });
