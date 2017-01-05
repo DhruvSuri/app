@@ -13,6 +13,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -435,6 +436,10 @@ public class HomeScreen extends AppCompatActivity {
     public void showOverLay() {
         final Dialog dialog = new Dialog(this, R.style.bubble);
         dialog.setContentView(R.layout.privacy);
+        WebView web = (WebView) dialog.findViewById(R.id.webView);
+        web.getSettings().setJavaScriptEnabled(true);
+
+        web.loadUrl("file:///android_asset/EULA.html");
         Button accept = (Button) dialog.findViewById(R.id.accept);
         Button cancel = (Button) dialog.findViewById(R.id.cancel);
         dialog.show();

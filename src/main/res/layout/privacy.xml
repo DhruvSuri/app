@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2e000000"
+    android:background="#5c000000"
   >
 
     <RelativeLayout
@@ -13,7 +13,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -25,7 +26,17 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
             android:textColor="#2196f3"
-            android:textSize="27sp" />
+            android:textSize="27sp"
+            android:visibility="gone" />
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/webView"
+            android:layout_below="@+id/textView"
+            android:layout_marginBottom="60dp">
+
+        </WebView>
 
         <ScrollView
             android:layout_width="wrap_content"
@@ -33,7 +44,8 @@
             android:id="@+id/scrollView"
             android:layout_below="@+id/textView"
             android:layout_marginBottom="60dp"
-            android:scrollIndicators="none">
+            android:scrollIndicators="none"
+            android:visibility="gone">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -41,24 +53,50 @@
                 android:layout_height="match_parent"
                 android:padding="6dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="By choosing “I agree” below you agree to Finup’s Privacy and Terms. "
-                    android:id="@+id/textView9"
-                    android:layout_marginBottom="2dp"
-                    android:textColor="#6a6a6a" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="You also agree to our Privacy Policy, which describes how we process your information, including these key points: "
-                    android:id="@+id/textView11"
+                    android:text="By choosing “I agree” below, you agree to Azazte Tech Private Limited (“Finup”, “We”, “Us”, “Our”) Privacy and Terms which describes how we process our users (“You”, “Your”, “User”) information, including these key points: "
+                    android:id="@+id/textView9"
                     android:layout_marginBottom="2dp"
                     android:textColor="#6a6a6a"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text=" As you use our services, we want you to be clear how we’re using information and the ways in which you can protect your privacy. "
+                        android:id="@+id/textView11"
+                        android:layout_marginBottom="2dp"
+                        android:textColor="#6a6a6a"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Our Privacy Policy explains: "
+                    android:id="@+id/textView21"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="1. What information we collect &amp; Why \n2. How we use that information \n \nYour privacy matters to Finup, so please do take the time to get to know our practices – and if you have any questions contact us at hello@finup.in. "
+                    android:id="@+id/textView22"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,7 +106,7 @@
                     android:id="@+id/textView12"
                     android:layout_marginBottom="2dp"
                     android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
