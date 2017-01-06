@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.azazte.azazte">
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -43,7 +47,6 @@
                 <category android:name="com.app.azazte.azazte.GCM" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".Campaign.CampaignReceiver"
             android:enabled="true"
@@ -97,13 +100,12 @@
             android:name="com.parse.push.gcm_sender_id"
             android:value="id:527444607031" />
 
-        <activity
-            android:name=".NewUI" >
+        <activity android:name=".NewUI">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app.azazte.azazte.HomeScreen" />
         </activity>
-        <activity android:name=".HomeScreen"></activity>
+        <activity android:name=".HomeScreen" />
     </application>
 
 </manifest>

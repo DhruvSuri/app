@@ -436,10 +436,18 @@ public class HomeScreen extends AppCompatActivity {
     public void showOverLay() {
         final Dialog dialog = new Dialog(this, R.style.bubble);
         dialog.setContentView(R.layout.privacy);
-        WebView web = (WebView) dialog.findViewById(R.id.webView);
-        web.getSettings().setJavaScriptEnabled(true);
+        TextView privacy = (TextView) dialog.findViewById(R.id.privacy);
 
-        web.loadUrl("file:///android_asset/EULA.html");
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url ="http://www.finup.in/privacy.html";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
         Button accept = (Button) dialog.findViewById(R.id.accept);
         Button cancel = (Button) dialog.findViewById(R.id.cancel);
         dialog.show();
