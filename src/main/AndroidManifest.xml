@@ -106,6 +106,7 @@
                 android:value="com.app.azazte.azazte.HomeScreen" />
         </activity>
         <activity android:name=".HomeScreen" />
+        <activity android:name=".NewHomeScreen"></activity>
     </application>
 
 </manifest>

@@ -113,11 +113,10 @@ public class NewscardFragment extends Fragment  {
             @Override
             public void onClick(View view) {
 
-                shareLayout.setVisibility(View.VISIBLE);
-                shareBitmap(inflate, newsCard.id);
-                shareButton.setClickable(false);
-                shareLayout.setVisibility(View.INVISIBLE);
-
+               shareLayout.setVisibility(View.VISIBLE);
+               shareBitmap(inflate, newsCard.id);
+               shareButton.setClickable(false);
+               shareLayout.setVisibility(View.INVISIBLE);
 
             }
         });
@@ -132,6 +131,7 @@ public class NewscardFragment extends Fragment  {
         shareLayout = (RelativeLayout) inflate.findViewById(R.id.ShareLayout);
         FrameLayout bookmarkFrame = (FrameLayout) inflate.findViewById(R.id.bookmarkFrame);
         final TextView newstxt = (TextView) inflate.findViewById(R.id.newstxt);
+      //  final TextView impacttxt = (TextView) inflate.findViewById(R.id.impacttxt);
         final TextView shareNewstxt = (TextView) inflate.findViewById(R.id.shareNewsText);
         TextView newsSource = (TextView) inflate.findViewById(R.id.newsSource);
         TextView date = (TextView) inflate.findViewById(R.id.dateText);
@@ -169,6 +169,7 @@ public class NewscardFragment extends Fragment  {
         newstxt.setText(newsCard.newsBody.trim());
         shareNewstxt.setText(newsCard.newsBody.trim());
         newsSource.setText(newsCard.newsSourceName.trim());
+      //  impacttxt.setText(newsCard.impact);
 
         long time = 0;
         if (newsCard.createdTimeEpoch == null) {
@@ -185,6 +186,7 @@ public class NewscardFragment extends Fragment  {
             tabLayout.setVisibility(View.VISIBLE);
             // bodyMargin.setVisibility(View.VISIBLE);
             line.setVisibility(View.VISIBLE);
+           // impacttxt.setText(newsCard.impact);
 
         }
 

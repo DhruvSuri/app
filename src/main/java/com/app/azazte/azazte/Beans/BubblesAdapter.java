@@ -9,7 +9,9 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -92,128 +94,132 @@ public class BubblesAdapter extends RecyclerView.Adapter<BubblesAdapter.MyViewHo
             MixPanelUtils.track("BUBBLE" + tokens.get(getPosition()).toUpperCase());
 
             try {
-                showquestiondialog(AzazteUtils.getInstance().getBubbleLinkURL(id, tokens.get(getPosition()).toUpperCase()));
-            } catch (Exception ignored) {}
+                customTab(AzazteUtils.getInstance().getBubbleLinkURL(id, tokens.get(getPosition()).toUpperCase()));
+            } catch (Exception ignored) {
+            }
         }
     }
 
     private void customTab(String url) {
 
 
-        //CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-// set toolbar color and/or setting custom actions before invoking build()
-// Once ready, call CustomTabsIntent.Builder.build() to create a CustomTabsIntent
-        //  CustomTabsIntent customTabsIntent = builder.build();
-        // and launch the desired Url with CustomTabsIntent.launchUrl()
-        // customTabsIntent.launchUrl(activity, Uri.parse(url));
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+          //set toolbar color and/or setting custom actions before invoking build()
+         // Once ready, call CustomTabsIntent.Builder.build() to create a CustomTabsIntent
+        CustomTabsIntent customTabsIntent = builder.build();
+        //and launch the desired Url with CustomTabsIntent.launchUrl()
+        customTabsIntent.launchUrl(activity, Uri.parse(url));
     }
 
 
     public void showquestiondialog(String url) {
-        final Dialog dialog = new Dialog(context, R.style.bubble);
-        dialog.setContentView(R.layout.questiondialog);
-        setUpWebview(dialog, url);
+        //    final Dialog dialog = new Dialog(context, R.style.bubble);
+        //    dialog.setContentView(R.layout.questiondialog);
+        //  //  setUpWebview(dialog, url);
 
-        Bitmap map = takeScreenShot(activity);
-        Bitmap blurmap = BlurBuilder.blur(activity, map);
-        final Drawable draw = new BitmapDrawable(getResources(), blurmap);
-
-
-        final FrameLayout blur = (FrameLayout) inflate.findViewById(R.id.blurFrame);
-        RelativeLayout webLayout = (RelativeLayout) dialog.findViewById(R.id.webLayout);
-        RelativeLayout parent = (RelativeLayout) dialog.findViewById(R.id.parent);
-        RelativeLayout qnaLayout = (RelativeLayout) dialog.findViewById(R.id.qnaLayout);
-
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                blur.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                webView.clearHistory();
-                webView.destroy();
-            }
-        });
+        //    Bitmap map = takeScreenShot(activity);
+        //    Bitmap blurmap = BlurBuilder.blur(activity, map);
+        //    final Drawable draw = new BitmapDrawable(getResources(), blurmap);
 
 
-        parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                blur.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                webView.clearHistory();
-                webView.destroy();
-                dialog.dismiss();
-            }
-        });
+        //    final FrameLayout blur = (FrameLayout) inflate.findViewById(R.id.blurFrame);
+        //    RelativeLayout webLayout = (RelativeLayout) dialog.findViewById(R.id.webLayout);
+        //    RelativeLayout parent = (RelativeLayout) dialog.findViewById(R.id.parent);
+        //    RelativeLayout qnaLayout = (RelativeLayout) dialog.findViewById(R.id.qnaLayout);
+
+        //    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+        //        @Override
+        //        public void onDismiss(DialogInterface dialog) {
+        //            blur.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+        //            webView.clearHistory();
+        //            webView.destroy();
+        //        }
+        //    });
 
 
-        webLayout.setVisibility(View.VISIBLE);
-        dialog.show();
-        blur.setBackground(draw);
-        // parent.setBackground(draw);
+        //    parent.setOnClickListener(new View.OnClickListener() {
+        //        @Override
+        //        public void onClick(View v) {
+        //            blur.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+        //            webView.clearHistory();
+        //            webView.destroy();
+        //            dialog.dismiss();
+        //        }
+        //    });
+
+
+        //    webLayout.setVisibility(View.VISIBLE);
+        //    dialog.show();
+        //    blur.setBackground(draw);
+        //    // parent.setBackground(draw);
+        //}
+
+
+        // private void setUpWebview(Dialog dialog, String url) {
+//
+        //     webView = (WebView) dialog.findViewById(R.id.webView);
+        //     final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress);
+        //     webView.getSettings().setJavaScriptEnabled(true);
+        //     if (Build.VERSION.SDK_INT >= 19) {
+        //         // chromium, enable hardware acceleration
+        //         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        //     } else {
+        //         // older android version, disable hardware acceleration
+        //         webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        //     }
+        //     webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        //     webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        //     webView.getSettings().setAppCacheEnabled(true);
+        //     webView.getSettings().setDomStorageEnabled(true);
+        //     webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        //     webView.loadUrl(url);
+        //     webView.setWebViewClient(new WebViewClient() {
+        //         @Override
+        //         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        //             System.out.print("");
+        //         }
+//
+        //         @Override
+        //         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        //             view.loadUrl(url);
+        //             return false;
+        //         }
+//
+//
+        //         @Override
+        //         public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        //             // TODO Auto-generated method stub
+        //             super.onPageStarted(view, url, favicon);
+        //         }
+//
+        //         @Override
+        //         public void onPageFinished(WebView view, String url) {
+        //             // TODO Auto-generated method stub
+        //             super.onPageFinished(view, url);
+        //             progressBar.setVisibility(View.GONE);
+        //         }
+//
+//
+        //     });
+        // }
+
+
+        //  private static Bitmap takeScreenShot(Activity activity) {
+        //      View view = activity.getWindow().getDecorView();
+        //      view.setDrawingCacheEnabled(true);
+        //      view.buildDrawingCache();
+        //      Bitmap b1 = view.getDrawingCache();
+        //      Rect frame = new Rect();
+        //      activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        //      int statusBarHeight = frame.top;
+        //      int width = activity.getWindowManager().getDefaultDisplay().getWidth();
+        //      int height = activity.getWindowManager().getDefaultDisplay().getHeight();
+        //      Bitmap blur = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height - statusBarHeight);
+        //      view.destroyDrawingCache();
+        //      return blur;
+        //  }
+//
+
     }
-
-
-    private void setUpWebview(Dialog dialog, String url) {
-
-        webView = (WebView) dialog.findViewById(R.id.webView);
-        final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress);
-        webView.getSettings().setJavaScriptEnabled(true);
-        if (Build.VERSION.SDK_INT >= 19) {
-            // chromium, enable hardware acceleration
-            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        } else {
-            // older android version, disable hardware acceleration
-            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        }
-        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webView.getSettings().setAppCacheEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        webView.loadUrl(url);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                System.out.print("");
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return false;
-            }
-
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                // TODO Auto-generated method stub
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                // TODO Auto-generated method stub
-                super.onPageFinished(view, url);
-                progressBar.setVisibility(View.GONE);
-            }
-
-
-        });
-    }
-
-    private static Bitmap takeScreenShot(Activity activity) {
-        View view = activity.getWindow().getDecorView();
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache();
-        Bitmap b1 = view.getDrawingCache();
-        Rect frame = new Rect();
-        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-        int statusBarHeight = frame.top;
-        int width = activity.getWindowManager().getDefaultDisplay().getWidth();
-        int height = activity.getWindowManager().getDefaultDisplay().getHeight();
-        Bitmap blur = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height - statusBarHeight);
-        view.destroyDrawingCache();
-        return blur;
-    }
-
 
 }
