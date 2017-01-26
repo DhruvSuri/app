@@ -43,7 +43,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.grid_item, parent, false);
+        View itemView = inflater.inflate(R.layout.item_list, parent, false);
 
         MyViewHolder holder = new MyViewHolder(itemView);
 
@@ -55,6 +55,8 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
     public void onBindViewHolder(MyViewHolder holder, int position) {
         newsCard = allnews.get(position);
         holder.heading.setText(newsCard.newsHead.trim());
+        holder.date.setText(newsCard.date);
+        holder.source.setText(newsCard.newsSourceName);
         setImageIntoView(holder.newsImage, newsCard.imageUrl);
     }
 
@@ -66,6 +68,8 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView heading;
+        public TextView date;
+        public TextView source;
         public ImageView newsImage;
         public FrameLayout clickFrame;
 
@@ -75,6 +79,8 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
             //    clickFrame = (FrameLayout) itemView.findViewById(R.id.clickFrame);
             newsImage = (ImageView) itemView.findViewById(R.id.newsimage);
             heading = (TextView) itemView.findViewById(R.id.headline);
+            date = (TextView) itemView.findViewById(R.id.date);
+            source = (TextView) itemView.findViewById(R.id.source);
 
             newsImage.setOnClickListener(this);
             heading.setOnClickListener(this);
@@ -88,7 +94,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.My
             Intent intent = new Intent(context,
                     NewUI.class);
 
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PrefManager.getInstance().saveNewsCardId(newsCard.id);
             intent.putExtra("category", category);
             intent.putExtra("categoryChosenString", categoryName);

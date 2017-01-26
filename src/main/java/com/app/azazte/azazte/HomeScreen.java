@@ -1,23 +1,26 @@
 package com.app.azazte.azazte;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,11 +28,11 @@ import com.app.azazte.azazte.Beans.HomeScreenAdapter;
 import com.app.azazte.azazte.Beans.NewsCard;
 import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Utils.Api.ApiExecutor;
-import com.app.azazte.azazte.Utils.AzazteUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import devlight.io.library.ntb.NavigationTabBar;
 import xdroid.toaster.Toaster;
 
 public class HomeScreen extends AppCompatActivity {
@@ -49,29 +52,38 @@ public class HomeScreen extends AppCompatActivity {
     int back = 0;
     private SwipeRefreshLayout swipeRefresh;
     RecyclerView recyclerView;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        if (PrefManager.getInstance().isFirstTimeLaunch()) {
-            showOverLay();
-            PrefManager.getInstance().setFirstTimeLaunch(false);
-        }
+      if (PrefManager.getInstance().isFirstTimeLaunch()) {
+         showOverLay();
+          PrefManager.getInstance().setFirstTimeLaunch(false);
+       }
 
-        FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
+
+        context = getApplicationContext();
+         FrameLayout refreshfilter = (FrameLayout) findViewById(R.id.refreshfilter);
         topBar = (RelativeLayout) findViewById(R.id.topBar);
         FrameLayout settings = (FrameLayout) findViewById(R.id.settingsClick);
         twilightFilter = (RelativeLayout) findViewById(R.id.nightUI);
-        ImageView headerImage = (ImageView) findViewById(R.id.headerImage);
-        TextView heading = (TextView) findViewById(R.id.headline);
-        FrameLayout headClick = (FrameLayout) findViewById(R.id.clickFrame);
         allNews = Connector.getInstance().getAllNews();
         headCard = allNews.get(0);
         allNews.remove(0);
-        setUpHead(headerImage, heading, headClick);
-        setupRV();
+
+
+
+refreshfilter.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+
+        refresh();
+    }
+});
+
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,13 +91,9 @@ public class HomeScreen extends AppCompatActivity {
 
             }
         });
-        refreshfilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                refresh();
 
-            }
-        });
+        initUI();
+
 
 
 
@@ -98,90 +106,7 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
-    private void setupRV() {
 
-
-    recyclerView = (RecyclerView) findViewById(R.id.all_rv);
-        RecyclerView businessRv = (RecyclerView) findViewById(R.id.business_rv);
-        RecyclerView financeRv = (RecyclerView) findViewById(R.id.fin_rv);
-        RecyclerView worldRv = (RecyclerView) findViewById(R.id.world_rv);
-        RecyclerView techRv = (RecyclerView) findViewById(R.id.tech_rv);
-        RecyclerView ecoRv = (RecyclerView) findViewById(R.id.eco_rv);
-        RecyclerView lawRv = (RecyclerView) findViewById(R.id.law_rv);
-        RecyclerView moneyRv = (RecyclerView) findViewById(R.id.money_rv);
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
-        GridLayoutManager gridLayoutManager3 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
-        GridLayoutManager gridLayoutManager4 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
-        GridLayoutManager gridLayoutManager5 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
-        GridLayoutManager gridLayoutManager6 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
-        GridLayoutManager gridLayoutManager7 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
-
-
-        myadapter = new HomeScreenAdapter(allNews, 0, "All News", this);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(myadapter);
-
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 2), 2, "Business", this);
-        businessRv.setLayoutManager(gridLayoutManager1);
-        businessRv.setItemAnimator(new DefaultItemAnimator());
-        businessRv.setAdapter(myadapter);
-
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 3), 3, "Finance", this);
-        financeRv.setLayoutManager(gridLayoutManager2);
-        financeRv.setItemAnimator(new DefaultItemAnimator());
-        financeRv.setAdapter(myadapter);
-
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 1), 1, "Economy", this);
-        ecoRv.setLayoutManager(gridLayoutManager3);
-        ecoRv.setItemAnimator(new DefaultItemAnimator());
-        ecoRv.setAdapter(myadapter);
-
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 5), 5, "World", this);
-        worldRv.setLayoutManager(gridLayoutManager4);
-        worldRv.setItemAnimator(new DefaultItemAnimator());
-        worldRv.setAdapter(myadapter);
-
-
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 7), 7, "Technology", this);
-        techRv.setLayoutManager(gridLayoutManager5);
-        techRv.setItemAnimator(new DefaultItemAnimator());
-        techRv.setAdapter(myadapter);
-
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 6), 6, "Law", this);
-        lawRv.setLayoutManager(gridLayoutManager6);
-        lawRv.setItemAnimator(new DefaultItemAnimator());
-        lawRv.setAdapter(myadapter);
-
-        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 4), 4, "Money", this);
-        moneyRv.setLayoutManager(gridLayoutManager7);
-        moneyRv.setItemAnimator(new DefaultItemAnimator());
-        moneyRv.setAdapter(myadapter);
-    }
-
-
-    private void setUpHead(final ImageView headerImage, TextView heading, FrameLayout headClick) {
-        if (allNews.size() == 0) {
-            return;
-        }
-        AzazteUtils.getInstance().setImageIntoView(this.getApplicationContext(), headerImage, headCard.imageUrl, R.drawable.placeholder);
-        heading.setText(headCard.newsHead);
-        headerImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),
-                        NewUI.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                PrefManager.getInstance().saveNewsCardId(headCard.id);
-                startActivity(intent);
-            }
-        });
-
-
-    }
 
     public void openSettings() {
         View view = getLayoutInflater().inflate(R.layout.settings, null);
@@ -467,4 +392,188 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
     }
+
+    private void initUI() {
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
+        viewPager.setAdapter(new PagerAdapter() {
+            @Override
+            public int getCount() {
+                return 8;
+            }
+
+            @Override
+            public boolean isViewFromObject(final View view, final Object object) {
+                return view.equals(object);
+            }
+
+            @Override
+            public void destroyItem(final View container, final int position, final Object object) {
+                ((ViewPager) container).removeView((View) object);
+            }
+
+            @Override
+            public Object instantiateItem(final ViewGroup container, final int position) {
+                final View view = LayoutInflater.from(
+                        getBaseContext()).inflate(R.layout.item_vp_list, null, false);
+
+                final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new GridLayoutManager(
+                                getBaseContext(),2)
+                );
+
+              //  recyclerView.setAdapter(new RecycleAdapter());
+
+                switch (position) {
+                    case 0:
+                        myadapter = new HomeScreenAdapter(allNews, 0, "All News", getApplicationContext());
+                        break;
+                    case 1:
+                        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 1), 1, "Business", context);
+                        break;
+                    case 2:
+                        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 2), 2, "Current Affairs", context);
+                        break;
+                    case 3:
+                        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 3), 3, "Politics", context);
+                        break;
+                    case 4:
+                        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 4), 4, "World", context);
+                        break;
+                    case 5:
+                        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 5), 5, "Entertainment", context);
+                        break;
+                    case 6:
+                        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 6), 6, "Sports", context);
+                        break;
+                    case 7:
+                        myadapter = new HomeScreenAdapter(Connector.getInstance().getAllNewsByCategory(allNews, 7), 7, "Startup", context);
+                        break;
+                }
+
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(myadapter);
+                container.addView(view);
+                return view;
+            }
+        });
+
+        final String[] colors = getResources().getStringArray(R.array.default_preview);
+
+        final NavigationTabBar navigationTabBar = (NavigationTabBar) findViewById(R.id.ntb_horizontal);
+        final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.news),
+                        Color.parseColor(colors[0]))
+                        .title("All News")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.business),
+                        Color.parseColor(colors[1]))
+                        .title("Business")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.trending),
+                        Color.parseColor(colors[2]))
+                        .title("Trends")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.entertainment),
+                        Color.parseColor(colors[3]))
+                        .title("Entertainment")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.world_icon),
+                        Color.parseColor(colors[2]))
+                        .title("World")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.politics_icon),
+                        Color.parseColor(colors[1]))
+                        .title("Politics")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.sports_icon),
+                        Color.parseColor(colors[4]))
+                        .title("Sports")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.startup),
+                        Color.parseColor(colors[3]))
+                        .title("Startup")
+                        .build()
+        );
+
+
+
+        navigationTabBar.setModels(models);
+        navigationTabBar.setTitleSize(14);
+        navigationTabBar.setIconSizeFraction(0.7F);
+        navigationTabBar.setViewPager(viewPager, 0);
+
+
+
+      navigationTabBar.post(new Runnable() {
+          @Override
+          public void run() {
+              final View viewPager = findViewById(R.id.vp_horizontal_ntb);
+              ((ViewGroup.MarginLayoutParams) viewPager.getLayoutParams()).topMargin =
+                      (int) -navigationTabBar.getBadgeMargin();
+              viewPager.requestLayout();
+          }
+      });
+
+        navigationTabBar.setOnTabBarSelectedIndexListener(new NavigationTabBar.OnTabBarSelectedIndexListener() {
+            @Override
+            public void onStartTabSelected(final NavigationTabBar.Model model, final int index) {
+
+            }
+
+            @Override
+            public void onEndTabSelected(final NavigationTabBar.Model model, final int index) {
+                model.hideBadge();
+            }
+        });
+
+    // findViewById(R.id.mask).setOnClickListener(new View.OnClickListener() {
+    //     @Override
+    //     public void onClick(final View v) {
+    //         for (int i = 0; i < navigationTabBar.getModels().size(); i++) {
+    //             final NavigationTabBar.Model model = navigationTabBar.getModels().get(i);
+    //             navigationTabBar.postDelayed(new Runnable() {
+    //                 @Override
+    //                 public void run() {
+    //                     final String title = String.valueOf(new Random().nextInt(15));
+    //                     if (!model.isBadgeShowed()) {
+    //                         model.setBadgeTitle(title);
+    //                         model.showBadge();
+    //                     } else model.updateBadgeTitle(title);
+    //                 }
+    //             }, i * 100);
+    //         }
+    //     }
+    // });
+
+
+    }
+
+
+
+
 }
+

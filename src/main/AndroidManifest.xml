@@ -106,7 +106,11 @@
                 android:value="com.app.azazte.azazte.HomeScreen" />
         </activity>
         <activity android:name=".HomeScreen" />
-        <activity android:name=".NewHomeScreen"></activity>
+        <activity android:name=".NewHomeScreen" />
+        <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
 
 </manifest>

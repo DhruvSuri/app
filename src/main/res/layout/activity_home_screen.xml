@@ -6,81 +6,126 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout android:orientation="horizontal"
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_horizontal_ntb"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/topBar"
-        android:background="@color/topBarColor"
-        android:visibility="visible"
-        android:layout_alignParentBottom="false"
-        android:focusable="false"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:elevation="10dp"
-        android:translationZ="5dp">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:id="@+id/top_refresh"
-            android:src="@drawable/refresh"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toStartOf="@+id/settingsClick"
-            android:visibility="visible"
-            android:layout_marginRight="20dp" />
-
-        <ImageView
-            android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:id="@+id/back"
-            android:src="@drawable/logo"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:scaleType="fitXY" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/h"
-            android:src="@drawable/ic_settings"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="2dp"
-            android:layout_marginRight="10dp"
-            android:visibility="visible" />
-
-        <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="false"
-            android:id="@+id/refreshfilter"
-            android:layout_toStartOf="@+id/settingsClick"></FrameLayout>
-
-        <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentRight="true"
-            android:id="@+id/settingsClick"></FrameLayout>
-
-
-    </RelativeLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nScrollView"
-        android:layout_width="match_parent"
-android:layout_marginTop="50dp"
         android:layout_height="match_parent"
-        android:background="@color/homeScreen">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000">
+        <RelativeLayout android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/topBar"
+            android:background="@color/topBarColor"
+            android:visibility="visible"
+            android:layout_alignParentBottom="false"
+            android:focusable="false"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:elevation="10dp"
+            android:translationZ="5dp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/h"
+                android:src="@drawable/ic_settings"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="2dp"
+                android:layout_marginRight="10dp"
+                android:visibility="visible" />
+
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="true"
+                android:id="@+id/settingsClick"></FrameLayout>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView20"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/icon"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Finup"
+                android:id="@+id/textView24"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="23sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/refresh"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="false"
+                android:src="@drawable/refresh"
+                android:layout_toLeftOf="@+id/h"
+                android:layout_margin="15dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:id="@+id/refreshfilter"
+                android:layout_alignLeft="@+id/refresh"
+                android:layout_alignStart="@+id/refresh"
+                android:layout_toLeftOf="@+id/h"
+                android:layout_toStartOf="@+id/h" />
+
+
+        </RelativeLayout>
+        <FrameLayout
+            android:id="@+id/wrapper_ntb_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <devlight.io.library.ntb.NavigationTabBar
+                android:id="@+id/ntb_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                app:ntb_bg_color="#d4d4d4"
+                app:ntb_title_size="13sp"
+                app:ntb_badge_bg_color="#ffff0000"
+                app:ntb_badge_gravity="bottom"
+                app:ntb_badge_position="left"
+                app:ntb_badge_title_color="#737373"
+                app:ntb_badge_use_typeface="true"
+                app:ntb_badged="true"
+                app:ntb_inactive_color="#686868"
+                app:ntb_title_mode="active"
+                app:ntb_titled="true"
+                app:ntb_scaled="false"
+                app:ntb_typeface="fonts/agency.ttf"/>
+
+        </FrameLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
 
 
-
-        <include layout="@layout/homerecyclerview"></include>
-
-
-    </android.support.v4.widget.NestedScrollView>
 
 
     <RelativeLayout
@@ -92,3 +137,12 @@ android:layout_marginTop="50dp"
 
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
+
+
+
+
+
+
+
+
+

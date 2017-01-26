@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#767676</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#ffffff</color>
     <color name="colorAccent">#2e2e2e</color>
-    <color name="topBarColor">#da595959</color>
+    <color name="topBarColor">#f1e31c44</color>
     <color name="tabColor">#d5d5d5</color>
     <color name="secondaryTab">#f8f8f8</color>
     <color name="homeScreen">#e4e4e4</color>

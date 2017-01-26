@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ import com.app.azazte.azazte.Database.Connector;
 import com.app.azazte.azazte.Event.BubbleEvent;
 import com.app.azazte.azazte.NewUI;
 import com.app.azazte.azazte.R;
+import com.app.azazte.azazte.ScrollingActivity;
 import com.bumptech.glide.Glide;
 import com.crashlytics.android.Crashlytics;
 
@@ -103,9 +105,10 @@ public class NewscardFragment extends Fragment  {
                              Bundle savedInstanceState) {
         Fabric.with(this.getContext(), new Crashlytics());
 
-        inflate = inflater.inflate(R.layout.fragment_newscard, null);
+        inflate = inflater.inflate(R.layout.newlayoutcard, null);
         inflateHolder = inflate;
       //  final View shareInflate = inflater.inflate(R.layout.sharelayout, null);
+
 
         inflateView(inflate);
 
@@ -153,11 +156,11 @@ public class NewscardFragment extends Fragment  {
         final FrameLayout summaryClick = (FrameLayout) inflate.findViewById(R.id.summaryClick);
         final View line = (View) inflate.findViewById(R.id.line);
         imageView = (ImageView) inflate.findViewById(R.id.imageView2);
-        imageView.getLayoutParams().height = AzazteUtils.getInstance().getImageViewHeight();
+       // imageView.getLayoutParams().height = AzazteUtils.getInstance().getImageViewHeight();
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         View bubbleBottomBar = inflate.findViewById(R.id.bottombar);
-        bubbleBottomBar.getLayoutParams().height = AzazteUtils.getInstance().getBubbleHeight();
+       // bubbleBottomBar.getLayoutParams().height = AzazteUtils.getInstance().getBubbleHeight();
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         RelativeLayout header = (RelativeLayout) inflate.findViewById(R.id.header);
@@ -308,6 +311,7 @@ public class NewscardFragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 ((NewUI) getActivity()).showTopBar();
+
 
             }
         });

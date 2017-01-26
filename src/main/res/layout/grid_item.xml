@@ -42,7 +42,7 @@
             android:paddingLeft="6dp"
             android:gravity="left"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="false"
+
             android:paddingRight="6dp" />
     </RelativeLayout>
 
